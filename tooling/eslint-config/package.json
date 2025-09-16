@@ -1,5 +1,5 @@
 {
-  "name": "@side-kit/eslint-config",
+  "name": "@ui-guideline/eslint-config",
   "version": "0.1.0",
   "main": "./src/base.js",
   "type": "module",
@@ -41,6 +41,6 @@
     "typescript-eslint": "8.7.0"
   },
   "devDependencies": {
-    "@side-kit/typescript-config": "workspace:*"
+    "@ui-guideline/typescript-config": "workspace:*"
   }
 }

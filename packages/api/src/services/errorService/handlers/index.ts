@@ -3,8 +3,8 @@ import { ErrorMessages } from '../constants/messages';
 import { handlePrismaError } from './prismaError';
 import { handleTRPCError } from './trpcError';
 import { handleZodError } from './zodError';
-import { Prisma } from '@side-kit/db';
 import { TRPCError } from '@trpc/server';
+import { Prisma } from '@ui-guideline/db';
 import { z } from 'zod';
 
 /**

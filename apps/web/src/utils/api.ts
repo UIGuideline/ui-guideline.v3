@@ -1,4 +1,4 @@
-import { type AppRouter } from '@side-kit/api';
+import { type AppRouter } from '@ui-guideline/api';
 import { httpBatchLink, loggerLink } from '@trpc/client';
 import { createTRPCReact } from '@trpc/react-query';
 import superjson from 'superjson';
@@ -20,9 +20,9 @@ export const trpcClient = trpc.createClient({
   ],
 });
 
-export { type RouterInputs, type RouterOutputs } from '@side-kit/api';
-export * from '@side-kit/api/src/common';
-export * from '@side-kit/db/common';
+export { type RouterInputs, type RouterOutputs } from '@ui-guideline/api';
+export * from '@ui-guideline/api/src/common';
+export * from '@ui-guideline/db/common';
 
 // This entrypoint is only used for local development (Express server).
 // In production (Vercel), the API is served via /api/trpc/[trpc].ts as serverless functions

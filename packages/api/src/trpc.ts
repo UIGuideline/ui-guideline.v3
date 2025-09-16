@@ -11,9 +11,9 @@
  */
 
 import { configService } from './services/configService';
-import { prisma } from '@side-kit/db';
 import type { inferAsyncReturnType } from '@trpc/server';
 import { initTRPC } from '@trpc/server';
+import { prisma } from '@ui-guideline/db';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
 

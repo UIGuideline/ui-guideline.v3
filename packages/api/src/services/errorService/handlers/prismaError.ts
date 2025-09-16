@@ -1,7 +1,7 @@
 import { QueryErrorCode, TRPCErrorCode } from '../../../common';
 import { ErrorMessages } from '../constants/messages';
-import type { Prisma } from '@side-kit/db';
 import { TRPCError } from '@trpc/server';
+import type { Prisma } from '@ui-guideline/db';
 
 /**
  * Handles Prisma-specific errors. Translates Prisma error

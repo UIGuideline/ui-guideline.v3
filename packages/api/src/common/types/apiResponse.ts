@@ -1,5 +1,5 @@
-import type { Account, User } from '@side-kit/db';
 import type { ResponseStatus } from '../constants';
+import type { Account, User } from '@ui-guideline/db';
 
 export interface BaseResponse {
   status: ResponseStatus;
