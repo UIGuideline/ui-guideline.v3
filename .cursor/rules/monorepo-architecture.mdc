@@ -13,7 +13,7 @@ This project follows a monorepo architecture using Turborepo and PNPM workspaces
 The project is organized into separate packages to maintain clear separation of concerns:
 
 ```
-side-kit/
+ui-guideline/
 ├── apps/                   # Frontend applications
 │   ├── web/                # Vite-based web app
 │   └── nextjs/             # Next.js application
@@ -32,13 +32,13 @@ side-kit/
 
 ## Package Dependencies
 
-- Packages can depend on each other using the workspace protocol: `"@side-kit/ui": "workspace:*"`
+- Packages can depend on each other using the workspace protocol: `"@ui-guideline/api": "workspace:*"`
 - Always use the same version of shared dependencies across packages
 
 ## Scripts Execution
 
 - From the root: `pnpm dev` - Start all apps in development mode
-- For specific packages: `pnpm --filter @side-kit/web dev`
+- For specific packages: `pnpm --filter @ui-guideline/web dev`
 
 ## Deployment
 
