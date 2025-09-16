@@ -1,0 +1,26 @@
+{
+  "name": "@side-kit/db",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "author": "Serudda",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "db:generate": "pnpm with-env prisma generate",
+    "db:push": "pnpm with-env prisma db push --skip-generate --accept-data-loss",
+    "db:migrate": "pnpm with-env prisma migrate dev",
+    "dev": "pnpm with-env prisma studio --port 5556",
+    "with-env": "dotenv -e ../../.env.${NODE_ENV:-local} --"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.20.0"
+  },
+  "devDependencies": {
+    "@side-kit/typescript-config": "workspace:*",
+    "dotenv-cli": "^7.4.2",
+    "prisma": "^5.20.0",
+    "typescript": "^5.6.2"
+  }
+}

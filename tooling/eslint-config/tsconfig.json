@@ -1,0 +1,8 @@
+{
+  "extends": "@side-kit/typescript-config/base.json",
+  "include": ["."],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "moduleResolution": "bundler"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Side Kit",
+  "description": "A starter kit for Side Projects",
+  "icon": "🚀",
+  "categories": ["starter-kit", "template"],
+  "features": ["Side Projects integration", "Modern architecture", "TypeScript support", "pnpm package manager"]
+}
