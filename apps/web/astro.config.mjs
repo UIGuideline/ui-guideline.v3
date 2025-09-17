@@ -16,16 +16,6 @@ export default defineConfig({
     sitemap(),
   ],
   output: 'static',
-  typescript: {
-    configFile: './tsconfig.astro.json',
-  },
-  vite: {
-    resolve: {
-      alias: {
-        '@': '/src',
-      },
-    },
-  },
   markdown: {
     shikiConfig: {
       theme: 'github-dark',
