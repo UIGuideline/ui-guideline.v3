@@ -1,2 +1,2 @@
-export * from './Logo/Logo';
-export * from './Navbar/Navbar';
+export * from './ui/Logo/Logo';
+export * from './ui/Navbar/Navbar';

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../components/layouts/BaseLayout.astro';
+import { Accessibility } from '../../components/sections/Accessibility';
+import { Anatomy } from '../../components/sections/Anatomy';
+import { Kpis } from '../../components/sections/Kpis';
+import { Overview } from '../../components/sections/Overview';
+import { Props } from '../../components/sections/Props';
+import { Systems } from '../../components/sections/Systems';
+import { Navbar } from '../../components/ui/Navbar/Navbar';
+
+export async function getStaticPaths() {
+	return [{ params: { slug: 'calendar' } }, { params: { slug: 'button' } }, { params: { slug: 'modal' } }];
+}
+
+const { slug } = Astro.params;
+const title = slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : 'Component';
+---
+
+<BaseLayout title={`${title} - UI Guideline v3`}>
+	<div class="flex flex-col min-h-screen">
+		<Navbar client:load />
+
+		<main class="flex-1 container mx-auto px-4 py-8">
+			<div class="max-w-6xl mx-auto">
+				<div class="mb-8">
+					<h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+						{title}
+					</h1>
+					<p class="text-xl text-gray-600 dark:text-gray-300">
+						Comprehensive analysis and implementation guide for the {title.toLowerCase()} component.
+					</p>
+				</div>
+
+				<div class="space-y-12">
+					<Overview client:load componentName={title} />
+					<Anatomy client:load componentName={title} />
+					<Props client:load componentName={title} />
+					<Systems client:load componentName={title} />
+					<Kpis client:load componentName={title} />
+					<Accessibility client:load componentName={title} />
+				</div>
+			</div>
+		</main>
+
+		<footer class="border-t border-gray-200 dark:border-gray-700 py-8">
+			<div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
+				<p>&copy; 2024 UI Guideline. Built with Astro and React.</p>
+			</div>
+		</footer>
+	</div>
+</BaseLayout>

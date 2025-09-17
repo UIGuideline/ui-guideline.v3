@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../components/layouts/BaseLayout.astro';
+import { Navbar } from '../components/ui/Navbar/Navbar';
+---
+
+<BaseLayout title="Components - UI Guideline v3">
+	<div class="flex flex-col min-h-screen">
+		<Navbar client:load />
+
+		<main class="flex-1 container mx-auto px-4 py-8">
+			<div class="max-w-4xl mx-auto">
+				<h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Component Library</h1>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
+						<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Calendar</h3>
+						<p class="text-gray-600 dark:text-gray-300 mb-4">
+							Date picker and calendar components from leading design systems.
+						</p>
+						<a href="/components/calendar" class="text-blue-600 dark:text-blue-400 hover:underline"> View Details → </a>
+					</div>
+
+					<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
+						<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Button</h3>
+						<p class="text-gray-600 dark:text-gray-300 mb-4">
+							Interactive button components with various styles and states.
+						</p>
+						<a href="/components/button" class="text-blue-600 dark:text-blue-400 hover:underline"> View Details → </a>
+					</div>
+
+					<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow">
+						<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Modal</h3>
+						<p class="text-gray-600 dark:text-gray-300 mb-4">
+							Overlay dialogs and modal components for user interactions.
+						</p>
+						<a href="/components/modal" class="text-blue-600 dark:text-blue-400 hover:underline"> View Details → </a>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer class="border-t border-gray-200 dark:border-gray-700 py-8">
+			<div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
+				<p>&copy; 2025 UI Guideline. Built with Astro and React.</p>
+			</div>
+		</footer>
+	</div>
+</BaseLayout>

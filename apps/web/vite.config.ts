@@ -1,6 +1,4 @@
 import { fileURLToPath } from 'url';
-import { tanstackRouter } from '@tanstack/router-plugin/vite';
-import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 function getModulePath(moduleName: string) {
@@ -17,16 +15,12 @@ function getModulePath(moduleName: string) {
 const prismaNodeModulesPath = `${getModulePath('@prisma/client')}/node_modules`;
 
 // https://vite.dev/config/
+// This config is used for standalone Vite builds (if needed)
+// Astro handles its own Vite configuration in astro.config.mjs
 export default defineConfig({
-  plugins: [
-    tanstackRouter({
-      target: 'react',
-      autoCodeSplitting: true,
-    }),
-    react(),
-  ],
   resolve: {
     alias: {
+      '@': '/src',
       '.prisma/client/index-browser': `${prismaNodeModulesPath}/.prisma/client/index-browser.js`,
     },
   },
