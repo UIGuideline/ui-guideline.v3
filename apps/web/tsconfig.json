@@ -3,12 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
       "@ui": ["src/components/ui/index.ts"],
-      "@ui/*": ["src/components/ui/*"],
-      "@layouts/*": ["src/components/layouts/*"],
-      "@sections": ["src/components/sections/index.ts"],
-      "@sections/*": ["src/components/sections/*"]
+      "@layouts": ["src/components/layouts/index.ts"],
+      "@sections": ["src/components/sections/index.ts"]
     },
     "plugins": [{ "name": "@astrojs/ts-plugin" }]
   },
