@@ -2,14 +2,14 @@
   "name": "@ui-guideline/tailwind-config",
   "version": "0.0.1",
   "description": "Shared TailwindCSS config",
-  "main": "./src/base-presets.ts",
+  "main": "./src/tailwind.css",
   "type": "module",
+  "exports": {
+    ".": "./src/tailwind.css",
+    "./tailwind.css": "./src/tailwind.css"
+  },
   "scripts": {
     "clean": "git clean -xdf .turbo node_modules dist"
   },
-  "license": "ISC",
-  "devDependencies": {
-    "@ui-guideline/typescript-config": "workspace:*",
-    "tailwindcss": "^3.4.13"
-  }
+  "license": "ISC"
 }
