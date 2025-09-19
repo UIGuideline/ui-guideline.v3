@@ -1,41 +1,41 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
+import { BaseLayout } from '@layouts';
 import { Logo, Navbar } from '@ui';
 ---
 
 <BaseLayout title="UI Guideline v3 - The Design System of Design Systems">
-	<div class="flex flex-col min-h-screen">
-		<Navbar client:load />
+  <div class="flex flex-col min-h-screen bg-red-500">
+    <Navbar client:load />
 
-		<main class="flex-1 container mx-auto px-4 py-8">
-			<div class="text-center">
-				<Logo client:load variant="light" size="lg" appearance="complete" className="mx-auto mb-8" />
+    <main class="flex-1 container mx-auto px-4 py-8">
+      <div class="text-center">
+        <Logo client:load variant="light" size="lg" appearance="complete" className="mx-auto mb-8" />
 
-				<h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">UI Guideline v3</h1>
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">UI Guideline v3</h1>
 
-				<p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-					The Design System of Design Systems. Consolidating wisdom from 20+ leading design systems to help you build
-					better UI components faster.
-				</p>
+        <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+          The Design System of Design Systems. Consolidating wisdom from 20+ leading design systems to help you build
+          better UI components faster.
+        </p>
 
-				<div class="flex flex-col sm:flex-row gap-4 justify-center">
-					<a href="/components" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-						Browse Components
-					</a>
-					<a
-						href="/docs"
-						class="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-					>
-						Documentation
-					</a>
-				</div>
-			</div>
-		</main>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/components" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            Browse Components
+          </a>
+          <a
+            href="/docs"
+            class="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          >
+            Documentation
+          </a>
+        </div>
+      </div>
+    </main>
 
-		<footer class="border-t border-gray-200 dark:border-gray-700 py-8">
-			<div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
-				<p>&copy; 2025 UI Guideline. Built with Astro and React.</p>
-			</div>
-		</footer>
-	</div>
+    <footer class="border-t border-gray-200 dark:border-gray-700 py-8">
+      <div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
+        <p>&copy; 2025 UI Guideline. Built with Astro and React.</p>
+      </div>
+    </footer>
+  </div>
 </BaseLayout>
