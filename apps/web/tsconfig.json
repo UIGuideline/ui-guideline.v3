@@ -1,14 +1,24 @@
 {
   "extends": "@ui-guideline/typescript-config/react.json",
   "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "baseUrl": ".",
+    "strictNullChecks": true,
     "paths": {
-      "@ui": ["src/components/ui/index.ts"],
-      "@layouts": ["src/components/layouts/index.ts"],
-      "@sections": ["src/components/sections/index.ts"]
+      "@common": ["src/common"],
+      "@content": ["src/content"],
+      "@data": ["src/data"],
+      "@layouts": ["src/components/layouts"],
+      "@lib": ["src/lib"],
+      "@ui": ["src/components/ui"]
     },
-    "plugins": [{ "name": "@astrojs/ts-plugin" }]
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs", ".astro/types.d.ts"],
+  "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["node_modules", "dist"]
 }
