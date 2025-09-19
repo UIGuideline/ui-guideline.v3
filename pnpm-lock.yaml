@@ -343,11 +343,7 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
 
-  tooling/tailwind-config:
-    devDependencies:
-      tailwindcss:
-        specifier: ^4.1.12
-        version: 4.1.13
+  tooling/tailwind-config: {}
 
   tooling/typescript-config: {}
 
