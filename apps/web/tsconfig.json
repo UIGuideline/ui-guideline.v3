@@ -11,6 +11,7 @@
       "@data": ["src/data"],
       "@layouts": ["src/components/layouts"],
       "@lib": ["src/lib"],
+      "@styles": ["src/styles/main.css"],
       "@ui": ["src/components/ui"]
     },
     "plugins": [
