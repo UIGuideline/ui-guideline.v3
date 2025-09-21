@@ -17,7 +17,7 @@ if (!entry) throw new Error(`Component not found`);
 
 const basePath = `/src/content/components/${entry.id}`;
 const sections = (entry.data.sections ?? []) as SectionKey[];
-const rendered = await Promise.all(sections.map((key) => sectionRegistry[key]({ slug: entry.id, basePath })));
+const rendered = await Promise.all(sections.map((key) => sectionRegistry[key]({ slug: entry.slug, basePath })));
 ---
 
 <BaseLayout title={entry.data.title}>
