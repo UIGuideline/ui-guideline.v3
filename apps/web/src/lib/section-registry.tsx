@@ -37,8 +37,8 @@ const MDX_MAP = import.meta.glob('/src/content/components/**/**.mdx');
 const DATA_MAP = import.meta.glob('/src/content/components/**/**.{yml,yaml,json}', { import: 'default' });
 
 const CATALOGS: Record<'systems' | 'figmaKits', () => Promise<CatalogItem[]>> = {
-  systems: () => import('@data/systems.yml').then((m) => m.default as SystemItem[]),
-  figmaKits: () => import('@data/figma-kits.yml').then((m) => m.default as FigmaKitItem[]),
+  systems: () => import('/src/data/systems.yml').then((m) => m.default as SystemItem[]),
+  figmaKits: () => import('/src/data/figma-kits.yml').then((m) => m.default as FigmaKitItem[]),
 };
 
 function devWarn(msg: string, ...args: unknown[]) {
