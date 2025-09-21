@@ -1,0 +1,23 @@
+---
+import { BaseLayout } from '@layouts';
+import { sectionRegistry, type SectionKey } from '@lib';
+import { getEntry } from 'astro:content';
+
+const { slug } = Astro.params;
+const entry = await getEntry('components', slug!);
+if (!entry) throw new Error(`Component not found: ${slug}`);
+
+const basePath = `/src/content/components/${slug}`;
+const sections = (entry.data.sections ?? []) as SectionKey[];
+const rendered = await Promise.all(sections.map((key) => sectionRegistry[key]({ slug: slug!, basePath })));
+---
+
+<BaseLayout title={entry.data.title}>
+	<header class="mb-8">
+		<h1 class="text-3xl font-bold">{entry.data.title}</h1>
+		<p class="text-sm text-muted">Estado: {entry.data.status}</p>
+	</header>
+
+	{/* Render condicional en orden declarado */}
+	{rendered.map((Section) => Section && <div>{Section}</div>)}
+</BaseLayout>

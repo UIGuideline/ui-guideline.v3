@@ -1,4 +1,3 @@
-// /apps/ui-guideline/src/lib/section-registry.tsx
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { JSX } from 'react';
@@ -29,7 +28,7 @@ function joinById<T extends { id: string }, R extends Record<string, any>>(
 }
 
 export type SectionKey = 'overview' | 'accessibility' | 'anatomy' | 'figmaKits' | 'props' | 'kpis' | 'systems';
-export type LoaderCtx = { slug: string };
+export type LoaderCtx = { slug: string; basePath: string };
 export type Renderable = JSX.Element | null;
 type SectionModule = (ctx: LoaderCtx) => Promise<Renderable>;
 
