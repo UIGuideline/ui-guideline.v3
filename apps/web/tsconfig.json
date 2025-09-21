@@ -5,12 +5,14 @@
     "jsxImportSource": "react",
     "baseUrl": ".",
     "strictNullChecks": true,
+    "module": "ES2022",
     "paths": {
       "@common": ["src/common"],
       "@content": ["src/content"],
       "@data": ["src/data"],
       "@layouts": ["src/components/layouts"],
       "@lib": ["src/lib"],
+      "@sections": ["src/components/sections"],
       "@ui": ["src/components/ui"]
     },
     "plugins": [
