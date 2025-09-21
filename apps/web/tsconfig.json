@@ -1,12 +1,24 @@
 {
-  "extends": "@side-kit/typescript-config/react.json",
+  "extends": "@ui-guideline/typescript-config/react.json",
   "compilerOptions": {
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "baseUrl": ".",
+    "strictNullChecks": true,
     "paths": {
-      "~/*": ["./src/*"]
-    }
+      "@common": ["src/common"],
+      "@content": ["src/content"],
+      "@data": ["src/data"],
+      "@layouts": ["src/components/layouts"],
+      "@lib": ["src/lib"],
+      "@ui": ["src/components/ui"]
+    },
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
-  "exclude": ["node_modules"]
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,4 +1,4 @@
-import { SubscriptionFrequency, SubscriptionPlanSlug } from '@side-kit/db';
+import { SubscriptionFrequency, SubscriptionPlanSlug } from '@ui-guideline/db';
 import { z, type TypeOf } from 'zod';
 
 export const subscriptionFrequencyEnum = z.nativeEnum(SubscriptionFrequency);

@@ -1,4 +1,4 @@
-import { type SubscriptionFrequency } from '@side-kit/db';
+import { type SubscriptionFrequency } from '@ui-guideline/db';
 
 /**
  * Webhook response (Lemon Squeezy)

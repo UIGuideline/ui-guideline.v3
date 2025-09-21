@@ -1,5 +1,5 @@
 {
-  "name": "@side-kit/common",
+  "name": "@ui-guideline/common",
   "version": "0.1.0",
   "license": "MIT",
   "author": "Serudda",
@@ -12,9 +12,9 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@side-kit/db": "workspace:*",
-    "@side-kit/eslint-config": "workspace:*",
-    "@side-kit/typescript-config": "workspace:*",
+    "@ui-guideline/db": "workspace:*",
+    "@ui-guideline/eslint-config": "workspace:*",
+    "@ui-guideline/typescript-config": "workspace:*",
     "dotenv-cli": "^7.4.2",
     "typescript": "^5.6.2"
   }
