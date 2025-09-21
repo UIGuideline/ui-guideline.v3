@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "pnpm with-env astro dev",
+    "build": "pnpm with-env astro build",
     "lint": "eslint .",
-    "preview": "astro preview",
-    "astro": "astro",
+    "preview": "pnpm with-env astro preview",
+    "astro": "pnpm with-env astro",
     "with-env": "dotenv -e ../../.env.${NODE_ENV:-local} --"
   },
   "dependencies": {
