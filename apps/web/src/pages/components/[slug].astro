@@ -1,15 +1,24 @@
 ---
 import { BaseLayout } from '@layouts';
 import { sectionRegistry, type SectionKey } from '@lib';
-import { getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 
-const { slug } = Astro.params;
-const entry = await getEntry('components', slug!);
-if (!entry) throw new Error(`Component not found: ${slug}`);
+export async function getStaticPaths() {
+	const components = await getCollection('components');
+	console.log('** components **', components);
+	return components.map((component) => ({
+		params: { slug: component.slug },
+		props: { component },
+	}));
+}
 
-const basePath = `/src/content/components/${slug}`;
+const { component } = Astro.props;
+const entry = component;
+if (!entry) throw new Error(`Component not found`);
+
+const basePath = `/src/content/components/${entry.id}`;
 const sections = (entry.data.sections ?? []) as SectionKey[];
-const rendered = await Promise.all(sections.map((key) => sectionRegistry[key]({ slug: slug!, basePath })));
+const rendered = await Promise.all(sections.map((key) => sectionRegistry[key]({ slug: entry.id, basePath })));
 ---
 
 <BaseLayout title={entry.data.title}>
