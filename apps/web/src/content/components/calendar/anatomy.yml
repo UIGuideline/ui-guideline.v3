@@ -1,0 +1,19 @@
+mobile:
+  light_image_url: '/images/components/calendar/anatomy/mobile/light.png'
+  light_image_url_2x: '/images/components/calendar/anatomy/mobile/light@2x.png'
+  dark_image_url: '/images/components/calendar/anatomy/mobile/dark.png'
+  dark_image_url_2x: '/images/components/calendar/anatomy/mobile/dark@2x.png'
+
+tablet:
+  light_image_url: '/images/components/calendar/anatomy/tablet/light.png'
+  light_image_url_2x: '/images/components/calendar/anatomy/tablet/light@2x.png'
+  dark_image_url: '/images/components/calendar/anatomy/tablet/dark.png'
+  dark_image_url_2x: '/images/components/calendar/anatomy/tablet/dark@2x.png'
+
+desktop:
+  light_image_url: '/images/components/calendar/anatomy/desktop/light.png'
+  light_image_url_2x: '/images/components/calendar/anatomy/desktop/light@2x.png'
+  dark_image_url: '/images/components/calendar/anatomy/desktop/dark.png'
+  dark_image_url_2x: '/images/components/calendar/anatomy/desktop/dark@2x.png'
+
+proposed_by: ['ant-design', 'blueprint', 'polaris']
