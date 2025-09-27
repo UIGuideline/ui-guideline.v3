@@ -1,3 +1,4 @@
 export * from './api';
-export * from './loaders';
-export * from './section-registry';
+export * from './helpers';
+export * from './sectionRegistry/section-registry';
+export * from './sectionRegistry/types';

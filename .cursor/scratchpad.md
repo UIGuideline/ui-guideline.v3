@@ -124,6 +124,8 @@ apps/ui-guideline/
 
 **[PENDING] Build UI Kit & Base Components** - Create shared UI kit package with base components - Build cards, tables, badges, buttons, and other foundational components - Implement design system tokens (colors, typography, spacing) - Add accessibility features and keyboard navigation - _Success Criteria:_ UI kit is usable across the app, well-documented, and accessible
 
+**[WIP] Fix dynamic sections rendering on `components/[slug]` page** – https://linear.app/ui-guideline/ISSUE-SR-102 - Update `apps/web/src/lib/section-registry.tsx` to return component factories instead of instantiated elements - Change `apps/web/src/pages/components/[slug].astro` to render with `<Section />` instead of printing objects - Verify no linter errors and that MDX sections render correctly - _Success Criteria:_ Visiting `/components/calendar` shows real section content (Overview, Anatomy, etc.) without `[object Object]` output
+
 ## Executor Comments or Assistance Requests
 
 **Project Initialization**
@@ -133,6 +135,13 @@ apps/ui-guideline/
 - Backend: tRPC + Prisma + Supabase for authentication, analytics, and dynamic features
 - Content is the source of truth with modular sections and global catalogs
 - Need clarification on: Supabase setup details, preferred design system tokens, and initial component examples to migrate
+
+**SR-102 Implementation Notes**
+
+- Root cause: We were returning instantiated React elements from the registry and interpolating them in Astro, which coerced to string `[object Object]`.
+- Fix: The registry now returns component factories (including MDX components) and the page renders them with `<Section />`.
+- Files edited: `apps/web/src/lib/section-registry.tsx`, `apps/web/src/pages/components/[slug].astro`.
+- Please do a manual check at `/components/calendar` and confirm visual output. Once confirmed, we can mark the task as DONE.
 
 ## Lessons
 
@@ -151,3 +160,7 @@ apps/ui-guideline/
 - Astro islands provide interactivity where needed while maintaining optimal performance
 - Backend (tRPC + Prisma + Supabase) handles authentication, analytics, and dynamic features
 - Hybrid approach: static content for components, dynamic backend for user features
+
+**Rendering with Astro + React/MDX:**
+
+- When composing dynamic sections, return component factories (not instantiated elements) from registries and render with `<Section />` in Astro to avoid `[object Object]` stringification.
