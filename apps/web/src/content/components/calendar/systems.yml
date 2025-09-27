@@ -1,2 +1,31 @@
-- ds: material
-- ds: carbon
+- slug: 'ant-design'
+  name_in_system: 'Calendar'
+  component_site_url: 'https://ant.design/components/calendar'
+
+- slug: 'atlassian-design-system'
+  name_in_system: 'Calendar'
+  component_site_url: 'https://atlassian.design/components/calendar/examples'
+
+- slug: 'blueprint'
+  name_in_system: 'Date Picker'
+  component_site_url: 'https://blueprintjs.com/docs/#datetime2/date-picker3'
+
+- slug: 'mantine'
+  name_in_system: 'Calendar'
+  component_site_url: 'https://mantine.dev/dates/calendar/'
+
+- slug: 'material-ui'
+  name_in_system: 'DateCalendar'
+  component_site_url: 'https://mui.com/x/api/date-pickers/date-calendar/'
+
+- slug: 'polaris'
+  name_in_system: 'Date Picker'
+  component_site_url: 'https://polaris.shopify.com/components/selection-and-input/date-picker'
+
+- slug: 'spectrum'
+  name_in_system: 'Calendar'
+  component_site_url: 'https://react-spectrum.adobe.com/react-spectrum/Calendar.html'
+
+- slug: 'vuetify'
+  name_in_system: 'Date Picker'
+  component_site_url: 'https://vuetifyjs.com/en/components/date-pickers/'

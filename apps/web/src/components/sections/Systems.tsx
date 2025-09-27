@@ -8,6 +8,7 @@ interface SystemsProps {
 }
 
 export const Systems: React.FC<SystemsProps> = ({ componentName, data }) => {
+  console.log('Systems', data[0]);
   return (
     <section className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Systems</h2>
@@ -17,8 +18,8 @@ export const Systems: React.FC<SystemsProps> = ({ componentName, data }) => {
       </p>
       <ul>
         {data.map((item: any) => (
-          <li key={item.id}>
-            {item.name}: {item.url}
+          <li key={item.slug}>
+            {item.name}: {item.name_in_system}: {item.description}: {item.component_site_url}
           </li>
         ))}
       </ul>

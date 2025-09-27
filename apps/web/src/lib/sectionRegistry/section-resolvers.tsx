@@ -60,13 +60,13 @@ export const kpis: SectionModule = async ({ slug }) => {
  * Design Systems and Ui Libs  Section
  *------------------------------------*/
 export const systems: SectionModule = async ({ slug }) => {
-  const references = await findData<Array<{ ds: string }>>(slug, 'systems.yml');
+  const references = await findData<Array<{ slug: string }>>(slug, 'systems.yml');
   if (!references?.length) return null;
 
-  const found = await resolveDesignSystems(slug, references);
-  if (!found.length) return null;
+  const merged = await resolveDesignSystems(slug, references);
+  if (!merged.length) return null;
 
-  const Section: ComponentFactory = () => React.createElement(Systems, { componentName: slug, data: found });
+  const Section: ComponentFactory = () => React.createElement(Systems, { componentName: slug, data: merged });
   return Section;
 };
 

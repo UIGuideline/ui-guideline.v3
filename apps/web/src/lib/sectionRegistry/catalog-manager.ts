@@ -1,5 +1,5 @@
 import type { CatalogItem, FigmaKitItem, SystemItem } from './types';
-import { devWarn, joinBySlug, mergeBySlug } from './utils';
+import { devWarn, mergeBySlug } from './utils';
 
 /**
  * Catalog manager handles global data catalogs and joins them with component-specific references.
@@ -42,17 +42,25 @@ export const loadFigmaKitsCatalog = async (): Promise<FigmaKitItem[]> => {
 /**
  * Join component-specific design systems references with global catalog
  */
-export const resolveDesignSystems = async (slug: string, references: Array<{ ds: string }>): Promise<CatalogItem[]> => {
+export const resolveDesignSystems = async (
+  slug: string,
+  references: Array<{ slug: string }>,
+): Promise<Array<CatalogItem & { slug: string }>> => {
   if (!references?.length) return [];
 
   const catalog = await loadSystemsCatalog();
-  const { found, missing } = joinBySlug(references, catalog, 'ds');
+  const merged = mergeBySlug(references, catalog, 'slug');
 
-  if (missing.length) {
-    devWarn(`Missing Design Systems IDs for "${slug}":`, missing);
+  if (merged.length !== references.length) {
+    const found = merged.map((item) => item.slug);
+    const missing = references.filter((ref) => !found.includes(ref.slug));
+    devWarn(
+      `Missing Design Systems for "${slug}":`,
+      missing.map((m) => m.slug),
+    );
   }
 
-  return found;
+  return merged;
 };
 
 /**
@@ -66,7 +74,6 @@ export const resolveFigmaKits = async (
 
   const catalog = await loadFigmaKitsCatalog();
   const merged = mergeBySlug(references, catalog, 'slug');
-  console.log('resolveFigmaKits merged:', merged);
 
   if (merged.length !== references.length) {
     const found = merged.map((item) => item.slug);
