@@ -1,0 +1,18 @@
+---
+title: Calendar
+slug: calendar
+status: stable
+tags: ['date', 'input', 'scheduling']
+updatedAt: '2025-09-20'
+sections: ['overview', 'anatomy', 'props', 'kpis', 'systems', 'figmaKits', 'accessibility']
+---
+
+## Accesibilidad
+
+- Usa roles `grid`, `row`, `gridcell` para la estructura del calendario.
+- Los días deben anunciarse con `aria-label` (ej: "15 de septiembre 2025").
+- Navegación con teclado:
+  - Flechas ← ↑ → ↓ para moverse entre días.
+  - PageUp/PageDown para cambiar de mes.
+  - Shift + PageUp/PageDown para cambiar de año.
+- Siempre resaltar el día enfocado con `:focus-visible`.

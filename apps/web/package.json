@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "pnpm with-env astro dev",
+    "build": "pnpm with-env astro build",
     "lint": "eslint .",
-    "preview": "astro preview",
-    "astro": "astro",
+    "preview": "pnpm with-env astro preview",
+    "astro": "pnpm with-env astro",
     "with-env": "dotenv -e ../../.env.${NODE_ENV:-local} --"
   },
   "dependencies": {
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@rollup/plugin-yaml": "^4.1.2",
     "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
     "@ui-guideline/eslint-config": "workspace:*",
