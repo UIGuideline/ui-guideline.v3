@@ -1,5 +1,5 @@
 import type { CatalogItem, FigmaKitItem, SystemItem } from './types';
-import { devWarn, joinById } from './utils';
+import { devWarn, joinBySlug, mergeBySlug } from './utils';
 
 /**
  * Catalog manager handles global data catalogs and joins them with component-specific references.
@@ -30,7 +30,7 @@ export const loadSystemsCatalog = async (): Promise<CatalogItem[]> => {
 /**
  * Load figma kits catalog with error handling
  */
-export const loadFigmaKitsCatalog = async (): Promise<CatalogItem[]> => {
+export const loadFigmaKitsCatalog = async (): Promise<FigmaKitItem[]> => {
   try {
     return await CATALOGS.figmaKits();
   } catch (e) {
@@ -46,7 +46,7 @@ export const resolveDesignSystems = async (slug: string, references: Array<{ ds:
   if (!references?.length) return [];
 
   const catalog = await loadSystemsCatalog();
-  const { found, missing } = joinById(references, catalog, 'ds');
+  const { found, missing } = joinBySlug(references, catalog, 'ds');
 
   if (missing.length) {
     devWarn(`Missing Design Systems IDs for "${slug}":`, missing);
@@ -58,15 +58,24 @@ export const resolveDesignSystems = async (slug: string, references: Array<{ ds:
 /**
  * Join component-specific figma kits references with global catalog
  */
-export const resolveFigmaKits = async (slug: string, references: Array<{ lib: string }>): Promise<CatalogItem[]> => {
+export const resolveFigmaKits = async (
+  slug: string,
+  references: Array<{ slug: string; url: string }>,
+): Promise<Array<FigmaKitItem & { url: string }>> => {
   if (!references?.length) return [];
 
   const catalog = await loadFigmaKitsCatalog();
-  const { found, missing } = joinById(references, catalog, 'lib');
+  const merged = mergeBySlug(references, catalog, 'slug');
+  console.log('resolveFigmaKits merged:', merged);
 
-  if (missing.length) {
-    devWarn(`Missing Figma Kits IDs for "${slug}":`, missing);
+  if (merged.length !== references.length) {
+    const found = merged.map((item) => item.slug);
+    const missing = references.filter((ref) => !found.includes(ref.slug));
+    devWarn(
+      `Missing Figma Kits for "${slug}":`,
+      missing.map((m) => m.slug),
+    );
   }
 
-  return found;
+  return merged;
 };

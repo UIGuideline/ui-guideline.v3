@@ -17,8 +17,11 @@ export const FigmaKits: React.FC<FigmaKitsProps> = ({ componentName, data }) => 
       </p>
       <ul>
         {data.map((item: any) => (
-          <li key={item.id}>
-            {item.name}: {item.url}
+          <li className="flex flex-col gap-2" key={item.slug}>
+            <span>{item.name}</span>
+            <span>{item.company}</span>
+            <span>{item.description}</span>
+            <span>{item.url}</span>
           </li>
         ))}
       </ul>

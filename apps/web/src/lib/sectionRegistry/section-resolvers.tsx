@@ -74,12 +74,12 @@ export const systems: SectionModule = async ({ slug }) => {
  * Figma Kits Section
  *------------------------------------*/
 export const figmaKits: SectionModule = async ({ slug }) => {
-  const references = await findData<Array<{ lib: string }>>(slug, 'figma-kits.yml');
+  const references = await findData<Array<{ slug: string; url: string }>>(slug, 'figma-kits.yml');
   if (!references?.length) return null;
 
-  const found = await resolveFigmaKits(slug, references);
-  if (!found.length) return null;
+  const merged = await resolveFigmaKits(slug, references);
+  if (!merged.length) return null;
 
-  const Section: ComponentFactory = () => React.createElement(FigmaKits, { componentName: slug, data: found });
+  const Section: ComponentFactory = () => React.createElement(FigmaKits, { componentName: slug, data: merged });
   return Section;
 };

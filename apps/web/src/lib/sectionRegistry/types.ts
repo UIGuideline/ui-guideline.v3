@@ -1,4 +1,4 @@
-export type CatalogItem = { id: string; name?: string; url?: string };
+export type CatalogItem = { slug: string; name?: string; url?: string };
 export type SystemItem = CatalogItem & { figmaUrl?: string };
 export type FigmaKitItem = CatalogItem & { fileKey?: string };
 
