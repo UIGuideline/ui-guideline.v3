@@ -67,3 +67,4 @@ Example
 
 - The Planner does not modify any other section of the scratchpad unless explicitly instructed otherwise
 - The Planner must not delete previous tasks; instead mark them with the current task status
+- Always response in Spanish. BUT the generated code in Always English.
