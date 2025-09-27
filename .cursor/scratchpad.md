@@ -124,7 +124,13 @@ apps/ui-guideline/
 
 **[PENDING] Build UI Kit & Base Components** - Create shared UI kit package with base components - Build cards, tables, badges, buttons, and other foundational components - Implement design system tokens (colors, typography, spacing) - Add accessibility features and keyboard navigation - _Success Criteria:_ UI kit is usable across the app, well-documented, and accessible
 
-**[WIP] Fix dynamic sections rendering on `components/[slug]` page** – https://linear.app/ui-guideline/ISSUE-SR-102 - Update `apps/web/src/lib/section-registry.tsx` to return component factories instead of instantiated elements - Change `apps/web/src/pages/components/[slug].astro` to render with `<Section />` instead of printing objects - Verify no linter errors and that MDX sections render correctly - _Success Criteria:_ Visiting `/components/calendar` shows real section content (Overview, Anatomy, etc.) without `[object Object]` output
+**[DONE] Fix dynamic sections rendering on `components/[slug]` page** – https://linear.app/ui-guideline/ISSUE-SR-102 - Updated `apps/web/src/lib/section-registry.tsx` to return component factories instead of instantiated elements - Changed `apps/web/src/pages/components/[slug].astro` to render with `<Section />` instead of printing objects - Verified no linter errors and that MDX sections render correctly - _Success Criteria:_ Visiting `/components/calendar` shows real section content (Overview, Anatomy, etc.) without `[object Object]` output
+
+**[DONE] Implement Section Registry Architecture with Dynamic Content Loading** - Created modular section registry system with individual resolvers for each section type (Overview, Anatomy, Props, KPIs, Systems, FigmaKits) - Built content loaders (`findData`, `findMdx`) for YAML and MDX file discovery and loading - Implemented catalog manager with global data loading (`systems.yml`, `figma-kits.yml`) - Created utility functions (`joinBySlug`, `mergeBySlug`) for combining local component data with global catalogs - Set up TypeScript types and interfaces for section modules and component factories - _Success Criteria:_ Section registry dynamically loads and renders content based on available files, global catalogs merge correctly with local component data
+
+**[DONE] Refactor Data Architecture for Consistency** - Standardized both `systems.yml` and `figma-kits.yml` to use `slug` as primary identifier instead of separate `id` fields - Removed parent wrapper objects (`systems:`, `figma-kits:`) to create direct list structures - Updated `mergeBySlug` function to properly combine global catalog data with component-specific references - Implemented consistent data merging for both Design Systems and Figma Kits sections - Updated TypeScript types and resolvers to handle new data structure - _Success Criteria:_ Both global catalogs have consistent structure, mergeBySlug works for all section types, and components receive complete data (global + local)
+
+**[PENDING] Centralize Content Schema Validation with Astro Content Collections** - Leverage `content.config.mjs` to define centralized Zod schemas for all content types (components, systems, figma-kits, props, kpis, anatomy) - Create unified TypeScript types generated from Zod schemas to ensure type safety across the entire application - Implement content validation pipeline that validates all YAML and MDX files against defined schemas - Update section resolvers and catalog managers to use centralized types instead of inline type definitions - Set up build-time validation to catch content errors before deployment - _Success Criteria:_ All content files are validated against centralized schemas, TypeScript types are auto-generated and consistent, and validation errors are caught at build time
 
 ## Executor Comments or Assistance Requests
 
@@ -136,12 +142,28 @@ apps/ui-guideline/
 - Content is the source of truth with modular sections and global catalogs
 - Need clarification on: Supabase setup details, preferred design system tokens, and initial component examples to migrate
 
-**SR-102 Implementation Notes**
+**Recent Implementation Achievements**
 
-- Root cause: We were returning instantiated React elements from the registry and interpolating them in Astro, which coerced to string `[object Object]`.
-- Fix: The registry now returns component factories (including MDX components) and the page renders them with `<Section />`.
-- Files edited: `apps/web/src/lib/section-registry.tsx`, `apps/web/src/pages/components/[slug].astro`.
-- Please do a manual check at `/components/calendar` and confirm visual output. Once confirmed, we can mark the task as DONE.
+**Section Registry & Dynamic Content Loading:**
+
+- Successfully implemented modular section registry with individual resolvers for each content type
+- Built robust content loading system that discovers and loads YAML/MDX files dynamically
+- Created catalog manager that loads global data catalogs and merges them with component-specific data
+- Implemented `mergeBySlug` utility for combining global catalog data with local component references
+- All sections now render correctly with proper data merging (Design Systems + Figma Kits)
+
+**Data Architecture Standardization:**
+
+- Refactored both `systems.yml` and `figma-kits.yml` to use consistent structure with `slug` as primary identifier
+- Removed redundant `id` fields and parent wrapper objects for cleaner, more maintainable data structure
+- Updated all resolvers and utilities to work with the new standardized data format
+- Successfully converted JSON objects to YAML format for calendar component (props, anatomy, kpis, systems, figma-kits)
+
+**Content Management:**
+
+- Established working content structure with proper YAML/MDX file organization
+- Created example content for calendar component demonstrating all section types
+- Implemented proper data merging so components receive both global catalog info and component-specific data
 
 ## Lessons
 
@@ -164,3 +186,11 @@ apps/ui-guideline/
 **Rendering with Astro + React/MDX:**
 
 - When composing dynamic sections, return component factories (not instantiated elements) from registries and render with `<Section />` in Astro to avoid `[object Object]` stringification.
+
+**Data Architecture & Content Management:**
+
+- Use `slug` as the primary identifier for all content types to maintain consistency across global catalogs and component-specific data
+- Implement `mergeBySlug` pattern for combining global catalog data with local component references, ensuring components receive complete information
+- Structure YAML files as direct lists without parent wrapper objects for cleaner, more maintainable data architecture
+- Always validate data structure consistency when adding new content types or modifying existing schemas
+- Leverage Astro Content Collections with centralized Zod schemas for type safety and validation across the entire application
