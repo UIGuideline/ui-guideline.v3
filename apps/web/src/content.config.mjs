@@ -14,7 +14,7 @@ const props = defineCollection({
   schema: z.object({
     name: z.string(),
     description: z.string(),
-    value: z.string(),
+    value: z.union([z.string(), z.array(z.string())]),
     defaultValue: z.string().optional(),
     isRequired: z.boolean().optional(),
     usedBy: z.array(z.string()).optional(),
