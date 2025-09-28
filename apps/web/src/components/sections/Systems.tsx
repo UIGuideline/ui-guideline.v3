@@ -23,7 +23,7 @@ export const Systems = ({ componentName, data }: SystemsProps) => {
       <ul>
         {data.map((item: MergedSystemsData) => (
           <li key={item.slug}>
-            {item.slug}: {item.name_in_system}: {item.component_site_url}
+            {item.slug}: {item.nameInSystem}: {item.componentSiteUrl}
           </li>
         ))}
       </ul>

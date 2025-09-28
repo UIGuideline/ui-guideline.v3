@@ -102,8 +102,8 @@ const systems = defineCollection({
   type: 'data',
   schema: z.object({
     slug: z.string(),
-    name_in_system: z.string(),
-    component_site_url: z.string(),
+    nameInSystem: z.string(),
+    componentSiteUrl: z.string(),
   }),
 });
 
