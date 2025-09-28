@@ -1,2 +1,26 @@
-- id: frames-x
-- id: alignui
+- slug: ui-prep
+  url: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FE14zK33rL2wRIDSCgpzZf3%2FUI-Prep-Design-System-8.0---PREVIEW%3Ftype%3Ddesign%26node-id%3D2229%253A24787%26mode%3Ddesign%26t%3DPifRLPPJRGvX6e69-1'
+
+- slug: untitled-ui
+  url: 'https://embed.figma.com/design/T06aUcOseXpSG6HzgjrlLP/%E2%9D%96-PREVIEW-%E2%9D%96-Untitled-UI-%E2%80%93-PRO-VARIABLES-(v6.0)?node-id=8022-24550&embed-host=share'
+
+- slug: flowbite
+  url: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FSrvjS6Pmn04fT6ZEUa1spW%2Fflowbite-pro-figma-v2.9.0%3Ftype%3Ddesign%26node-id%3D14188%253A66955%26mode%3Ddesign%26t%3DAp1KqAuHfcM2rKuO-1'
+
+- slug: alignui
+  url: 'https://embed.figma.com/design/CpIF70IwbO1PoHM4gQbSKc/PREVIEW-%E2%9C%A6-Align-UI-%E2%9C%A6-Design-System-%5B1.0%5D?node-id=3129-3912&embed-host=shar'
+
+- slug: frames-x
+  url: 'https://embed.figma.com/design/xOzxMKy38pQj2uCKiG4LXB/Frames-X-Web-%E2%80%94-PREVIEW-2.8?node-id=2684-78592&embed-host=share'
+
+- slug: material-design
+  url: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FOan2Bvfg8ifOfcl6fvmROL%2FMaterial-3-Design-Kit-(Community)%3Ftype%3Ddesign%26node-id%3D51954%253A18122%26mode%3Ddesign%26t%3DuBXAiJvmfXEVKR5E-1'
+
+- slug: ant-design
+  url: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FUn9imx67U6jOq73fHCK7tK%2FAnt-Design-Open-Source-(Community)%3Ftype%3Ddesign%26node-id%3D1277%253A4535%26mode%3Ddesign%26t%3DvVQ9pBEiJLpeVxsv-1'
+
+- slug: disy
+  url: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FLKVW0zoPUQrH1Emc0VdFMA%2FDisy-2.0-(preview)%3Ftype%3Ddesign%26node-id%3D654%253A4928%26mode%3Ddesign%26t%3DhDVeQ65R3oAu1szc-1'
+
+- slug: tetrisly
+  url: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F4kcoCOyXVI4TIKAh60P44C%2FTetrisly-Design-System-v.1.1.0%3Ftype%3Ddesign%26node-id%3D1652%253A24414%26mode%3Ddesign%26t%3DQVJ3VtL3BJu855JE-1'

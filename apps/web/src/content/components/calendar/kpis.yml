@@ -1,46 +1,42 @@
-version: 1
-updatedAt: '2025-09-20'
+- id: adoption_design_systems # ID estable (kebab-case)
+  label: 'Design Systems con este componente'
+  description: 'Cuántos DS documentan o incluyen este componente.'
+  value: 125 # número primario a mostrar
+  unit: 'count' # count | percent | ratio | ms | s | kb | mb | string
+  format: 'integer' # integer | decimal | percent | duration | bytes | string
+  target: 20 # meta opcional
+  status: 'on_track' # on_track | at_risk | off_track | unknown
+  source:
+    name: 'Catálogo interno'
+    url: 'https://www.uiguideline.com/dataset'
+    lastChecked: '2025-09-18'
+  tags: ['adoption', 'community'] # para filtros
+  notes: 'Incluye DS públicos y privados verificados.'
+  trend:
+    direction: 'up' # up | down | flat | unknown
+    changeAbs: 2 # variación absoluta vs. período previo
+    changePct: 16.7 # variación porcentual
+    period: 'monthly' # daily | weekly | monthly | quarterly | yearly
+  breakdowns: # desgloses opcionales
+    - key: 'top_systems'
+      label: 'Top DS'
+      items:
+        - id: material
+          label: 'Material'
+          value: 1
+        - id: carbon
+          label: 'Carbon'
+          value: 1
 
-kpis:
-  - id: adoption_design_systems # ID estable (kebab-case)
-    label: 'Design Systems con este componente'
-    description: 'Cuántos DS documentan o incluyen este componente.'
-    value: 14 # número primario a mostrar
-    unit: 'count' # count | percent | ratio | ms | s | kb | mb | string
-    format: 'integer' # integer | decimal | percent | duration | bytes | string
-    target: 20 # meta opcional
-    status: 'on_track' # on_track | at_risk | off_track | unknown
-    source:
-      name: 'Catálogo interno'
-      url: 'https://www.uiguideline.com/dataset'
-      lastChecked: '2025-09-18'
-    tags: ['adoption', 'community'] # para filtros
-    notes: 'Incluye DS públicos y privados verificados.'
-    trend:
-      direction: 'up' # up | down | flat | unknown
-      changeAbs: 2 # variación absoluta vs. período previo
-      changePct: 16.7 # variación porcentual
-      period: 'monthly' # daily | weekly | monthly | quarterly | yearly
-    breakdowns: # desgloses opcionales
-      - key: 'top_systems'
-        label: 'Top DS'
-        items:
-          - id: material
-            label: 'Material'
-            value: 1
-          - id: carbon
-            label: 'Carbon'
-            value: 1
-
-  - id: perf_first_render
-    label: 'Render inicial (demo)'
-    description: 'Tiempo hasta la primera pintura del componente demo (mediana).'
-    value: 128
-    unit: 'ms'
-    format: 'duration'
-    status: 'on_track'
-    source:
-      name: 'Lighthouse CI'
-      url: 'https://github.com/serudda/ui-guideline-ci'
-      lastChecked: '2025-09-15'
-    tags: ['performance']
+- id: perf_first_render
+  label: 'Render inicial (demo)'
+  description: 'Tiempo hasta la primera pintura del componente demo (mediana).'
+  value: 128
+  unit: 'ms'
+  format: 'duration'
+  status: 'on_track'
+  source:
+    name: 'Lighthouse CI'
+    url: 'https://github.com/serudda/ui-guideline-ci'
+    lastChecked: '2025-09-15'
+  tags: ['performance']

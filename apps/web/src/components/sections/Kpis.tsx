@@ -1,13 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { KpisData } from '../../lib/types/content';
 
-import React from 'react';
-
-interface KpisProps {
+export interface KpisProps {
+  /**
+   * The name of the component
+   */
   componentName: string;
-  data: any;
+
+  /**
+   * The data for the kpis
+   */
+  data: KpisData[];
 }
 
-export const Kpis: React.FC<KpisProps> = ({ componentName, data }) => {
+export const Kpis = ({ componentName, data }: KpisProps) => {
   return (
     <section className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Key Performance Indicators</h2>
@@ -16,7 +21,7 @@ export const Kpis: React.FC<KpisProps> = ({ componentName, data }) => {
         across different platforms.
       </p>
       <ul>
-        {data.map((item: any) => (
+        {data.map((item: KpisData) => (
           <li key={item.id}>
             {item.label}: {item.value}
           </li>

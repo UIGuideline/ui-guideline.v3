@@ -1,10 +1,11 @@
-import React from 'react';
-
-interface OverviewProps {
+export interface OverviewProps {
+  /**
+   * The name of the component
+   */
   componentName: string;
 }
 
-export const Overview: React.FC<OverviewProps> = ({ componentName }) => {
+export const Overview = ({ componentName }: OverviewProps) => {
   return (
     <section className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Overview</h2>
