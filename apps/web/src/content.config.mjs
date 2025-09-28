@@ -28,29 +28,29 @@ const anatomy = defineCollection({
   schema: z.object({
     mobile: z
       .object({
-        light_image_url: z.string(),
-        light_image_url_2x: z.string(),
-        dark_image_url: z.string(),
-        dark_image_url_2x: z.string(),
+        lightImageUrl: z.string(),
+        lightImageUrl2x: z.string(),
+        darkImageUrl: z.string(),
+        darkImageUrl2x: z.string(),
       })
       .optional(),
     tablet: z
       .object({
-        light_image_url: z.string(),
-        light_image_url_2x: z.string(),
-        dark_image_url: z.string(),
-        dark_image_url_2x: z.string(),
+        lightImageUrl: z.string(),
+        lightImageUrl2x: z.string(),
+        darkImageUrl: z.string(),
+        darkImageUrl2x: z.string(),
       })
       .optional(),
     desktop: z
       .object({
-        light_image_url: z.string(),
-        light_image_url_2x: z.string(),
-        dark_image_url: z.string(),
-        dark_image_url_2x: z.string(),
+        lightImageUrl: z.string(),
+        lightImageUrl2x: z.string(),
+        darkImageUrl: z.string(),
+        darkImageUrl2x: z.string(),
       })
       .optional(),
-    proposed_by: z.array(z.string()).optional(),
+    proposedBy: z.array(z.string()).optional(),
   }),
 });
 
