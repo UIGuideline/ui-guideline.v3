@@ -1,13 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { MergedFigmaKitsData } from '../../lib/types/content';
 
-import React from 'react';
-
-interface FigmaKitsProps {
+export interface FigmaKitsProps {
+  /**
+   * The name of the component
+   */
   componentName: string;
-  data: any;
+
+  /**
+   * The data for the figma kits
+   */
+  data: MergedFigmaKitsData[];
 }
 
-export const FigmaKits: React.FC<FigmaKitsProps> = ({ componentName, data }) => {
+export const FigmaKits = ({ componentName, data }: FigmaKitsProps) => {
   return (
     <section className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Figma Kits</h2>
@@ -16,7 +21,7 @@ export const FigmaKits: React.FC<FigmaKitsProps> = ({ componentName, data }) => 
         Chakra UI, and more.
       </p>
       <ul>
-        {data.map((item: any) => (
+        {data.map((item: MergedFigmaKitsData) => (
           <li className="flex flex-col gap-2" key={item.slug}>
             <span>{item.name}</span>
             <span>{item.company}</span>

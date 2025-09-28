@@ -1,4 +1,13 @@
 import React from 'react';
+import type {
+  AnatomyData,
+  FigmaKitsData,
+  KpisData,
+  MergedFigmaKitsData,
+  MergedSystemsData,
+  PropsData,
+  SystemsData,
+} from '../types/content';
 import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
 import { findData, findMdx } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';
@@ -18,11 +27,7 @@ export const overview: SectionModule = async ({ slug }) => findMdx(slug, 'index.
  * Anatomy Section
  *------------------------------------*/
 export const anatomy: SectionModule = async ({ slug }) => {
-  const data = await findData<{
-    mobile: { light_image_url: string; light_image_url_2x: string; dark_image_url: string; dark_image_url_2x: string };
-    tablet: { light_image_url: string; light_image_url_2x: string; dark_image_url: string; dark_image_url_2x: string };
-    desktop: { light_image_url: string; light_image_url_2x: string; dark_image_url: string; dark_image_url_2x: string };
-  }>(slug, 'anatomy.yml');
+  const data = await findData<AnatomyData>(slug, 'anatomy.yml');
   if (!data) return null;
 
   const Section: ComponentFactory = () => <Anatomy componentName={slug} data={data} />;
@@ -38,7 +43,7 @@ export const accessibility: SectionModule = async ({ slug }) => findMdx(slug, 'a
  * Props Table Section
  *------------------------------------*/
 export const props: SectionModule = async ({ slug }) => {
-  const data = await findData<Array<{ name: string; description: string; value: string }>>(slug, 'props.yml');
+  const data = await findData<Array<PropsData>>(slug, 'props.yml');
   if (!data?.length) return null;
 
   const Section: ComponentFactory = () => <PropsTable componentName={slug} data={data} />;
@@ -49,7 +54,7 @@ export const props: SectionModule = async ({ slug }) => {
  * KPIs Section
  *------------------------------------*/
 export const kpis: SectionModule = async ({ slug }) => {
-  const data = await findData<Array<{ id: string; label: string; value: string | number }>>(slug, 'kpis.yml');
+  const data = await findData<Array<KpisData>>(slug, 'kpis.yml');
   if (!data?.length) return null;
 
   const Section: ComponentFactory = () => <Kpis componentName={slug} data={data} />;
@@ -60,10 +65,10 @@ export const kpis: SectionModule = async ({ slug }) => {
  * Design Systems and Ui Libs  Section
  *------------------------------------*/
 export const systems: SectionModule = async ({ slug }) => {
-  const references = await findData<Array<{ slug: string }>>(slug, 'systems.yml');
+  const references = await findData<Array<SystemsData>>(slug, 'systems.yml');
   if (!references?.length) return null;
 
-  const merged = await resolveDesignSystems(slug, references);
+  const merged = (await resolveDesignSystems(slug, references)) as MergedSystemsData[];
   if (!merged.length) return null;
 
   const Section: ComponentFactory = () => React.createElement(Systems, { componentName: slug, data: merged });
@@ -74,10 +79,10 @@ export const systems: SectionModule = async ({ slug }) => {
  * Figma Kits Section
  *------------------------------------*/
 export const figmaKits: SectionModule = async ({ slug }) => {
-  const references = await findData<Array<{ slug: string; url: string }>>(slug, 'figma-kits.yml');
+  const references = await findData<Array<FigmaKitsData>>(slug, 'figma-kits.yml');
   if (!references?.length) return null;
 
-  const merged = await resolveFigmaKits(slug, references);
+  const merged = (await resolveFigmaKits(slug, references)) as MergedFigmaKitsData[];
   if (!merged.length) return null;
 
   const Section: ComponentFactory = () => React.createElement(FigmaKits, { componentName: slug, data: merged });

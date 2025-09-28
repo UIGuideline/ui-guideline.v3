@@ -1,10 +1,11 @@
-import React from 'react';
-
-interface AccessibilityProps {
+export interface AccessibilityProps {
+  /**
+   * The name of the component
+   */
   componentName: string;
 }
 
-export const Accessibility: React.FC<AccessibilityProps> = ({ componentName }) => {
+export const Accessibility = ({ componentName }: AccessibilityProps) => {
   return (
     <section className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Accessibility</h2>
