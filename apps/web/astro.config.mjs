@@ -1,24 +1,16 @@
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
-import yaml from '@rollup/plugin-yaml';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ui-guideline.com',
-  integrations: [
-    react(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    mdx(),
-    sitemap(),
-  ],
+  integrations: [react(), mdx(), sitemap()],
   output: 'static',
   vite: {
-    plugins: [yaml()],
+    plugins: [tailwindcss()],
   },
   markdown: {
     shikiConfig: {
