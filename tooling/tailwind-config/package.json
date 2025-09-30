@@ -10,6 +10,6 @@
   "license": "ISC",
   "devDependencies": {
     "@ui-guideline/typescript-config": "workspace:*",
-    "tailwindcss": "^4.1.12"
+    "tailwindcss": "^4.1.13"
   }
 }
