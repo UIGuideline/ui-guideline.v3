@@ -130,6 +130,211 @@ apps/ui-guideline/
 
 **[DONE] Centralize Content Schema Validation with Astro Content Collections** - Leverage `content.config.mjs` to define centralized Zod schemas for all content types (components, systems, figma-kits, props, kpis, anatomy) - Create unified TypeScript types generated from Zod schemas to ensure type safety across the entire application - Implement content validation pipeline that validates all YAML and MDX files against defined schemas - Update section resolvers and catalog managers to use centralized types instead of inline type definitions - Set up build-time validation to catch content errors before deployment - _Success Criteria:_ All content files are validated against centralized schemas, TypeScript types are auto-generated and consistent, and validation errors are caught at build time
 
+**[PENDING] Build Component Detail Page Structure** - https://linear.app/ui-guideline/ISSUE-SR-106 - Install `@side-ui/table-of-contents` package (`pnpm add @side-ui/table-of-contents`) - Create `ComponentDetailLayout.astro` layout that integrates Sidebar, main content area, and optional TOC - Refactor `[slug].astro` to use the new layout with proper semantic HTML structure - Create `ComponentHeader` component for displaying component title, status, tags, and quick actions - Create `Breadcrumbs` component for contextual navigation (Home > Components > {slug}) - Populate `SideNav` dynamically from content collections to show all available components - Add SEO metadata tags and structured data for better search engine optimization - Integrate `@side-ui/table-of-contents` component with scroll spy functionality for intra-page navigation - _Success Criteria:_ Component detail pages have proper semantic structure, Sidebar/SideNav integration works correctly, navigation is functional, SEO metadata is present, TableOfContents from @side-ui works correctly, and responsive design works on mobile/tablet/desktop
+
+## Planner Analysis: Component Detail Page Structure
+
+### Current State Assessment
+
+**Existing Implementation (`[slug].astro`):**
+
+- ✅ Dynamic routing con `getStaticPaths()` funcional
+- ✅ Sistema de Section Registry completamente operativo
+- ✅ Renderizado dinámico de secciones basado en content frontmatter
+- ✅ Content Collections configuradas correctamente con MDX + YAML
+- ⚠️ Layout básico sin estructura semántica completa
+- ⚠️ Falta integración del Sidebar y SideNav
+- ⚠️ No hay navegación entre secciones (Table of Contents)
+- ⚠️ Falta metadata y SEO optimization
+
+**Componentes Disponibles:**
+
+- `Sidebar` - Componente sticky para navegación lateral
+- `SideNav` - Navegación vertical con secciones agrupadas
+- `BaseLayout` - Layout base HTML con slots
+- `TableOfContents` - Disponible vía `@side-ui/table-of-contents` (librería externa)
+- Secciones dinámicas: Overview, Anatomy, Props, KPIs, Systems, FigmaKits, Accessibility
+
+### Best Practices de Astro para Páginas de Detalle
+
+**1. Arquitectura de Layouts Jerárquica:**
+
+```
+BaseLayout.astro (HTML básico)
+  └─> MainLayout.astro (estructura de página con sidebar)
+      └─> ComponentLayout.astro (específico para componentes)
+```
+
+**2. Estructura Semántica Recomendada:**
+
+- `<header>` - Título del componente, metadata, breadcrumbs
+- `<aside>` - Sidebar con navegación (SideNav)
+- `<main>` - Contenido principal con secciones dinámicas
+- `<nav>` - Table of Contents (TOC) flotante para navegación intra-página
+
+**3. Optimizaciones de Astro:**
+
+- Usar `transition:animate` para navegación fluida (View Transitions API)
+- Aplicar `client:` directives solo cuando sea necesario (islands)
+- Aprovechar `prerender: true` para SSG
+- Implementar `getStaticPaths()` con data fetching optimizado
+
+### Propuesta de Estructura Mejorada
+
+**Layout Hierarchy:**
+
+```astro
+<!-- apps/web/src/components/layouts/ComponentDetailLayout.astro -->
+<BaseLayout>
+  <div class="flex min-h-screen">
+    <!-- Sidebar Navigation -->
+    <Sidebar>
+      <SideNav>
+        <!-- Lista dinámica de componentes -->
+      </SideNav>
+    </Sidebar>
+
+    <!-- Main Content Area -->
+    <main class="flex-1">
+      <article>
+        <header>
+          <!-- Breadcrumbs -->
+          <!-- Component Title, Status, Tags -->
+          <!-- Quick Actions (Edit, Share, etc.) -->
+        </header>
+
+        <!-- Dynamic Sections -->
+        <div class="sections">
+          {sections.map((Section) => <Section />)}
+        </div>
+      </article>
+    </main>
+
+    <!-- Table of Contents (Optional) -->
+    <aside class="toc">
+      <!-- Auto-generated from section headings -->
+    </aside>
+  </div>
+</BaseLayout>
+```
+
+**Component Detail Page (`[slug].astro`):**
+
+```astro
+---
+import { ComponentDetailLayout } from '@layouts';
+import { renderSections } from '@lib';
+import { getCollection } from 'astro:content';
+
+// Static paths generation
+export async function getStaticPaths() {
+  const components = await getCollection('components');
+  return components.map((component) => ({
+    params: { slug: component.slug },
+    props: { component },
+  }));
+}
+
+const { component } = Astro.props;
+const sections = await renderSections(component.data.sections ?? [], {
+  slug: component.slug,
+  basePath: `/src/content/components/${component.id}`,
+});
+
+// Generar TOC dinámicamente desde las secciones
+const tocItems =
+  component.data.sections?.map((key) => ({
+    id: key,
+    label: formatSectionLabel(key),
+  })) ?? [];
+---
+
+<ComponentDetailLayout title={component.data.title} status={component.data.status} toc={tocItems}>
+  {sections.map((Section) => Section && <Section />)}
+</ComponentDetailLayout>
+```
+
+### Recomendaciones Específicas
+
+**1. Crear Layout Intermedio (`ComponentDetailLayout.astro`):**
+
+- Centralizar la estructura común de todas las páginas de componente
+- Integrar Sidebar + SideNav de forma consistente
+- Manejar responsive behavior (mobile/tablet/desktop)
+- Incluir TOC opcional basado en props
+
+**2. Mejorar SEO y Metadata:**
+
+```astro
+<head>
+  <title>{component.data.title} | UI Guideline</title>
+  <meta name="description" content={component.data.description} />
+  <meta property="og:title" content={component.data.title} />
+  <!-- Structured data para componentes -->
+</head>
+```
+
+**3. Navegación Contextual:**
+
+- Breadcrumbs: Home > Components > {Category} > {ComponentName}
+- Previous/Next component navigation
+- Related components suggestions
+
+**4. Interactividad Progresiva:**
+
+```astro
+<!-- TOC con scroll spy - solo cargar cliente cuando sea visible -->
+<TableOfContents client:visible items={tocItems} />
+
+<!-- Code examples con syntax highlighting - lazy load -->
+<CodeBlock client:idle code={exampleCode} />
+```
+
+**5. Accesibilidad:**
+
+- Landmarks semánticos (`<nav>`, `<main>`, `<aside>`, `<article>`)
+- Skip links para navegación por teclado
+- ARIA labels apropiados
+- Hierarchy de headings correcta (h1 > h2 > h3)
+
+### Estructura de Archivos Propuesta
+
+```
+apps/web/src/
+├── components/
+│   ├── layouts/
+│   │   ├── BaseLayout.astro           # ✅ Ya existe
+│   │   └── ComponentDetailLayout.astro # 🆕 Crear
+│   ├── ui/
+│   │   ├── Sidebar/                    # ✅ Ya existe
+│   │   ├── SideNav/                    # ✅ Ya existe
+│   │   ├── Breadcrumbs/                # 🆕 Crear
+│   │   └── ComponentHeader/            # 🆕 Crear
+│   └── sections/                       # ✅ Ya existen
+│       ├── Overview.tsx
+│       ├── Anatomy.tsx
+│       └── ...
+├── pages/
+│   └── components/
+│       └── [slug].astro                # ⚙️ Refactorizar
+└── lib/
+    └── sectionRegistry/                # ✅ Ya existe
+
+External Dependencies:
+├── @side-ui/table-of-contents          # 📦 Instalar (pnpm add @side-ui/table-of-contents)
+```
+
+### Tareas de Implementación Propuestas
+
+1. **Instalar dependencias** - Agregar `@side-ui/table-of-contents` al proyecto web
+2. **Crear `ComponentDetailLayout.astro`** - Layout intermedio que integra Sidebar, main content area y TOC
+3. **Refactorizar `[slug].astro`** - Simplificar usando el nuevo layout y mejorar estructura semántica
+4. **Crear `ComponentHeader`** - Componente para header del componente con título, status, tags, actions
+5. **Crear `Breadcrumbs`** - Navegación contextual (Home > Components > {slug})
+6. **Implementar navegación de componentes** - Poblar SideNav dinámicamente desde content collections
+7. **Agregar SEO metadata** - Mejorar tags meta y structured data
+8. **Integrar `@side-ui/table-of-contents`** - Configurar TOC con scroll spy para navegación intra-página
+
 ## Executor Comments or Assistance Requests
 
 **Project Initialization**
