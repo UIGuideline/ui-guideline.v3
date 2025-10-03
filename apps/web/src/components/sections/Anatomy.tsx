@@ -24,19 +24,19 @@ export const Anatomy = ({ componentName, data }: AnatomyProps) => {
         {data.mobile && (
           <div>
             <h3>Mobile</h3>
-            {data.mobile.light_image_url}
+            {data.mobile.lightImageUrl}
           </div>
         )}
         {data.tablet && (
           <div>
             <h3>Tablet</h3>
-            {data.tablet.light_image_url}
+            {data.tablet.lightImageUrl}
           </div>
         )}
         {data.desktop && (
           <div>
             <h3>Desktop</h3>
-            {data.desktop.light_image_url}
+            {data.desktop.lightImageUrl}
           </div>
         )}
       </div>

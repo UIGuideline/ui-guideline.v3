@@ -17,8 +17,8 @@
     "with-env": "dotenv -e ../../.env.${NODE_ENV:-local} --"
   },
   "dependencies": {
-    "@trpc/client": "^10.45.2",
-    "@trpc/server": "^10.45.2",
+    "@trpc/client": "^11.6.0",
+    "@trpc/server": "^11.6.0",
     "@ui-guideline/db": "workspace:*",
     "cors": "^2.8.5",
     "express": "^4.21.0",
