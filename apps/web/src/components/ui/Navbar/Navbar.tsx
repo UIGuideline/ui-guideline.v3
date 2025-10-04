@@ -20,7 +20,7 @@ export const Navbar = ({ className }: NavbarProps) => {
   return (
     <nav className={classes}>
       <div className="flex items-center gap-4 w-full lg:min-w-[600px] lg:w-auto">
-        <span className="text-gray-600 text-xl">/</span>
+        <span className="text-gray-600 text-xl">LOGO</span>
       </div>
     </nav>
   );

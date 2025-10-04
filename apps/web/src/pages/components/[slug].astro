@@ -1,5 +1,5 @@
 ---
-import { BaseLayout } from '@layouts';
+import { ComponentDetailLayout } from '@layouts';
 import { renderSections, type SectionKey } from '@lib';
 import { getCollection } from 'astro:content';
 
@@ -18,24 +18,43 @@ if (!entry) throw new Error(`Component not found`);
 const basePath = `/src/content/components/${entry.id}`;
 const sections = (entry.data.sections ?? []) as SectionKey[];
 const rendered = await renderSections(sections, { slug: entry.slug, basePath });
+
+// Generate TOC from sections
+const tocItems = sections.map((key) => ({
+	id: key,
+	label: key.charAt(0).toUpperCase() + key.slice(1),
+}));
 ---
 
-<BaseLayout title={entry.data.title}>
-	<header class="mb-8">
-		<h1 class="text-3xl font-bold">{entry.data.title}</h1>
-		<p class="text-sm text-muted">Estado: {entry.data.status}</p>
+<ComponentDetailLayout
+	title={`${entry.data.title} | UI Guideline`}
+	description={`${entry.data.title} component documentation from leading design systems.`}
+	currentSlug={entry.slug}
+	toc={tocItems}
+>
+	<!-- Component Header -->
+	<header class="mb-12 pb-8 border-b border-gray-200 dark:border-gray-800">
+		<h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{entry.data.title}</h1>
+		{
+			entry.data.status && (
+				<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+					{entry.data.status}
+				</span>
+			)
+		}
 	</header>
 
-	{/* Render condicional en orden declarado */}
-	{
-		rendered.map(
-			(Section) =>
-				Section && (
-					<div>
-						{/* Section es un componente/factory */}
-						<Section />
-					</div>
-				),
-		)
-	}
-</BaseLayout>
+	<!-- Dynamic Sections -->
+	<div class="space-y-16">
+		{
+			rendered.map(
+				(Section) =>
+					Section && (
+						<section class="scroll-mt-20">
+							<Section />
+						</section>
+					),
+			)
+		}
+	</div>
+</ComponentDetailLayout>

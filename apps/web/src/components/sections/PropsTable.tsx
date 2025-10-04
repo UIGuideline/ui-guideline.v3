@@ -15,7 +15,9 @@ export interface PropsTableProps {
 export const PropsTable = ({ componentName, data = [] }: PropsTableProps) => {
   return (
     <section className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Props & API</h2>
+      <h1 id="props" className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        Props & API
+      </h1>
       <p className="text-gray-600 dark:text-gray-300">
         Complete reference of properties, methods, and configuration options available for the {componentName} component
         across different design systems.

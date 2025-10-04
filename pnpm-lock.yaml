@@ -77,9 +77,12 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.5.1
         version: 3.5.1
+      '@side-ui/button':
+        specifier: ^0.1.1
+        version: 0.1.1(@types/react@19.2.0)(react@19.2.0)(tailwind-merge@3.3.1)(tailwind-variants@3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.13))(tailwindcss@4.1.13)
       '@side-ui/table-of-contents':
-        specifier: ^0.0.0
-        version: 0.0.0(react@19.2.0)(tailwind-merge@3.3.1)(tailwind-variants@3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.13))(tailwindcss@4.1.13)
+        specifier: ^0.1.1
+        version: 0.1.1(react@19.2.0)(tailwind-merge@3.3.1)(tailwind-variants@3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.13))(tailwindcss@4.1.13)
       '@tailwindcss/vite':
         specifier: ^4.1.13
         version: 4.1.13(vite@7.1.7(@types/node@24.6.0)(jiti@2.6.0)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.8.1))
@@ -1418,6 +1421,24 @@ packages:
   '@prisma/prisma-schema-wasm@4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584':
     resolution: {integrity: sha512-JFdsnSgBPN8reDTLOI9Vh/6ccCb2aD1LbY/LWQnkcIgNo6IdpzvuM+qRVbBuA6IZP2SdqQI8Lu6RL2P8EFBQUA==}
 
+  '@radix-ui/react-compose-refs@1.1.2':
+    resolution: {integrity: sha512-z4eqJvfiNnFMHIIvXP3CY57y2WJs5g2v3X0zm9mEJkrkNv4rDxu+sg9Jh8EkXyeqBkB7SOcboo9dMVqhyrACIg==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@radix-ui/react-slot@1.2.3':
+    resolution: {integrity: sha512-aeNmHnBxbi2St0au6VBVC7JXFlhLlOnvIIlePNniyUNAClzmtAUEY8/pBiK3iHjufOlwA+c20/8jngo7xcrg8A==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
   '@rolldown/pluginutils@1.0.0-beta.27':
     resolution: {integrity: sha512-+d0F4MKMCbeVUJwG96uQ4SgAznZNSq93I3V+9NHA4OpvqG8mRCpGdKmK8l/dl02h2CCDHwW2FqilnTyDcAnqjA==}
 
@@ -1676,8 +1697,16 @@ packages:
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
 
-  '@side-ui/table-of-contents@0.0.0':
-    resolution: {integrity: sha512-HUiCM1FbYMwjcg7jzbDcJxpeLKXpZdp4tg+Z1c8D7fFBUB3zf2W004uLnH1/PNeC2+wj1mgTdSfa9PMXy+Tv1g==}
+  '@side-ui/button@0.1.1':
+    resolution: {integrity: sha512-eMHnhmKEGO0/HMINdG4ruAOvtEVjMFlFQCQmz5Hyg2pxIl0b/jnY+iiMw19d8j4vr8tHSsWFIQRIVjKqE+imFQ==}
+    peerDependencies:
+      react: ^19.1.0
+      tailwind-merge: ^3.3.1
+      tailwind-variants: ^3.1.1
+      tailwindcss: ^3.0.0 || ^4.0.0
+
+  '@side-ui/table-of-contents@0.1.1':
+    resolution: {integrity: sha512-yP/wOLm6/XN6YQ2Ug/KdBmvc7/fX4vTI9m5zCJ8KSgIhpalPMqBPHpZKOJorUFAfxQp7ntqlMiJkVSHGv35piQ==}
     peerDependencies:
       react: ^19.1.0
       tailwind-merge: ^3.3.1
@@ -6343,6 +6372,19 @@ snapshots:
 
   '@prisma/prisma-schema-wasm@4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584': {}
 
+  '@radix-ui/react-compose-refs@1.1.2(@types/react@19.2.0)(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+    optionalDependencies:
+      '@types/react': 19.2.0
+
+  '@radix-ui/react-slot@1.2.3(@types/react@19.2.0)(react@19.2.0)':
+    dependencies:
+      '@radix-ui/react-compose-refs': 1.1.2(@types/react@19.2.0)(react@19.2.0)
+      react: 19.2.0
+    optionalDependencies:
+      '@types/react': 19.2.0
+
   '@rolldown/pluginutils@1.0.0-beta.27': {}
 
   '@rolldown/pluginutils@1.0.0-beta.38': {}
@@ -6524,7 +6566,17 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
-  '@side-ui/table-of-contents@0.0.0(react@19.2.0)(tailwind-merge@3.3.1)(tailwind-variants@3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.13))(tailwindcss@4.1.13)':
+  '@side-ui/button@0.1.1(@types/react@19.2.0)(react@19.2.0)(tailwind-merge@3.3.1)(tailwind-variants@3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.13))(tailwindcss@4.1.13)':
+    dependencies:
+      '@radix-ui/react-slot': 1.2.3(@types/react@19.2.0)(react@19.2.0)
+      react: 19.2.0
+      tailwind-merge: 3.3.1
+      tailwind-variants: 3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.13)
+      tailwindcss: 4.1.13
+    transitivePeerDependencies:
+      - '@types/react'
+
+  '@side-ui/table-of-contents@0.1.1(react@19.2.0)(tailwind-merge@3.3.1)(tailwind-variants@3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.13))(tailwindcss@4.1.13)':
     dependencies:
       react: 19.2.0
       tailwind-merge: 3.3.1

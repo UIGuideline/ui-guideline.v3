@@ -15,7 +15,9 @@ export interface FigmaKitsProps {
 export const FigmaKits = ({ componentName, data }: FigmaKitsProps) => {
   return (
     <section className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Figma Kits</h2>
+      <h1 id="figma-kits" className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        Figma Kits
+      </h1>
       <p className="text-gray-600 dark:text-gray-300">
         Comparison of {componentName} implementations across leading figma kits including Material Design, Ant Design,
         Chakra UI, and more.
@@ -23,9 +25,7 @@ export const FigmaKits = ({ componentName, data }: FigmaKitsProps) => {
       <ul>
         {data.map((item: MergedFigmaKitsData) => (
           <li className="flex flex-col gap-2" key={item.slug}>
-            <span>{item.name}</span>
-            <span>{item.company}</span>
-            <span>{item.description}</span>
+            <span>{item.slug}</span>
             <span>{item.url}</span>
           </li>
         ))}

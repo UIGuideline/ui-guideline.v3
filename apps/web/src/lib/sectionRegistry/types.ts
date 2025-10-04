@@ -6,7 +6,7 @@ export enum SectionKey {
   overview = 'overview',
   accessibility = 'accessibility',
   anatomy = 'anatomy',
-  figmaKits = 'figmaKits',
+  figmaKits = 'figma-kits',
   props = 'props',
   kpis = 'kpis',
   systems = 'systems',
