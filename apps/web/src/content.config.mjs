@@ -9,6 +9,13 @@ const components = defineCollection({
   }),
 });
 
+const overview = defineCollection({
+  type: 'data',
+  schema: z.object({
+    description: z.string(),
+  }),
+});
+
 const props = defineCollection({
   type: 'data',
   schema: z.array(
@@ -51,6 +58,13 @@ const anatomy = defineCollection({
       })
       .optional(),
     proposedBy: z.array(z.string()).optional(),
+  }),
+});
+
+const accessibility = defineCollection({
+  type: 'data',
+  schema: z.object({
+    description: z.string(),
   }),
 });
 
@@ -119,9 +133,11 @@ const figmaKits = defineCollection({
 
 export const collections = {
   components,
+  overview,
   props,
   anatomy,
   kpis,
   systems,
   figmaKits,
+  accessibility,
 };
