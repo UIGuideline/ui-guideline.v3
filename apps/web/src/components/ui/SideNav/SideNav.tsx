@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Item, Link, List, Section } from './internals';
+import { Heading, Item, Link, List, Section } from './internals';
 import { tv } from 'tailwind-variants';
 
 const sideNav = tv({
@@ -34,6 +34,7 @@ export const SideNav = ({ className, children, ...props }: SideNavProps) => {
 SideNav.displayName = 'SideNav';
 
 SideNav.Item = Item;
+SideNav.Heading = Heading;
 SideNav.Link = Link;
 SideNav.List = List;
 SideNav.Section = Section;

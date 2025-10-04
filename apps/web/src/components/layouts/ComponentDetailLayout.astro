@@ -54,10 +54,11 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 			<SideBar>
 				<SideNav>
 					<SideNav.Section>
+						<SideNav.Heading>Components</SideNav.Heading>
 						<SideNav.List>
 							{
 								sortedComponents.map((component) => (
-									<SideNav.Item level={0}>
+									<SideNav.Item level={1}>
 										<SideNav.Link
 											href={`/components/${component.slug}`}
 											className={currentSlug === component.slug ? 'text-neutral-50 font-normal' : ''}
