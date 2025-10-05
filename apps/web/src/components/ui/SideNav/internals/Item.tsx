@@ -4,10 +4,11 @@ import { tv, type VariantProps } from 'tailwind-variants';
 const item = tv({
   base: [
     'cursor-pointer',
-    'transition-colors duration-100 ease-out',
-    'text-neutral-400',
+    'transition-colors duration-400 ease-out',
+    'text-gray-400',
     'font-light',
-    'border-l border-transparent hover:border-neutral-300 hover:text-neutral-50',
+    'rounded-r-sm p-2',
+    'border-l border-transparent hover:border-gray-300 hover:bg-gray-900 hover:text-gray-50',
   ],
   variants: {
     level: {
@@ -17,7 +18,7 @@ const item = tv({
       3: 'pl-9',
     },
     isActive: {
-      true: 'border-amber-200 text-neutral-50 hover:border-amber-200',
+      true: 'border-amber-200 text-gray-50 hover:border-amber-200',
     },
     defaultVariants: {
       level: 0,

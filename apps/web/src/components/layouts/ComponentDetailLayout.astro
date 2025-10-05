@@ -33,23 +33,15 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 ---
 
 <BaseLayout title={title} description={description}>
-	<!-- Skip to main content link for accessibility -->
-	<a
-		href="#main-content"
-		class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded"
-	>
-		Skip to main content
-	</a>
-
 	<!-- Top Navigation -->
-	<header class="sticky top-0 w-full border-b border-neutral-200 dark:border-neutral-800 z-40">
+	<header class="sticky top-0 w-full border-b border-gray-200 dark:border-gray-800 z-40">
 		<Navbar className="@md:max-w-[1350px] mx-auto border-dashed-wide" />
 	</header>
 
 	<div class="flex flex-col min-h-screen @md:max-w-[1350px] mx-auto border-dashed-wide">
 		<div class="flex flex-1 relative">
 			<!-- Left Sidebar - Component Navigation (Fixed Width: 384px) -->
-			<div class="hidden lg:block w-60 flex-shrink-0">
+			<div class="hidden lg:block w-64 flex-shrink-0">
 				<SideBar>
 					<SideNav>
 						<SideNav.Section>
@@ -92,29 +84,3 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 		</div>
 	</div>
 </BaseLayout>
-
-<style>
-	/* Skip link styles */
-	.sr-only {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border-width: 0;
-	}
-
-	.focus\:not-sr-only:focus {
-		position: static;
-		width: auto;
-		height: auto;
-		padding: 0.5rem 1rem;
-		margin: 0;
-		overflow: visible;
-		clip: auto;
-		white-space: normal;
-	}
-</style>

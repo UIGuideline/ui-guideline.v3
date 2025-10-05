@@ -2,7 +2,7 @@ import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const heading = tv({
-  base: ['text-neutral-400'],
+  base: ['text-gray-600'],
 });
 
 export type HeadingProps = React.ComponentPropsWithoutRef<'h2'> &

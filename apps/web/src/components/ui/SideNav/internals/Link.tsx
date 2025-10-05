@@ -5,9 +5,9 @@ const link = tv({
   base: [
     'cursor-pointer',
     'transition-colors duration-100 ease-out',
-    'text-neutral-400',
+    'text-gray-400',
     'font-light',
-    'hover:text-neutral-50',
+    'hover:text-gray-50',
   ],
 });
 

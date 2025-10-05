@@ -26,7 +26,7 @@
 
 /* Dark mode variables */
 .dark {
-  --dashed-border-color: var(--color-neutral-800);
+  --dashed-border-color: var(--color-gray-800);
 }
 
 /* Custom dashed border utility */
@@ -51,5 +51,5 @@
   background-image:
     linear-gradient(to bottom, var(--dashed-border-color) 40%, transparent 40%),
     linear-gradient(to bottom, var(--dashed-border-color) 40%, transparent 40%),
-    linear-gradient(to bottom, black, black);
+    linear-gradient(to bottom, var(--color-gray-950), var(--color-gray-950));
 }
