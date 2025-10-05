@@ -7,7 +7,7 @@ const item = tv({
     'transition-colors duration-400 ease-out',
     'text-gray-400',
     'font-light',
-    'rounded-r-sm p-2',
+    'rounded-r-sm p-1.5',
     'border-l border-transparent hover:border-gray-300 hover:bg-gray-900 hover:text-gray-50',
   ],
   variants: {
