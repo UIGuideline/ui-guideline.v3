@@ -23,3 +23,33 @@
   --color-primary-800: var(--primary-800);
   --color-primary-900: var(--primary-900);
 }
+
+/* Dark mode variables */
+.dark {
+  --dashed-border-color: var(--color-neutral-800);
+}
+
+/* Custom dashed border utility */
+.border-dashed-wide {
+  background-image:
+    linear-gradient(to bottom, var(--dashed-border-color) 40%, transparent 40%),
+    linear-gradient(to bottom, var(--dashed-border-color) 40%, transparent 40%),
+    linear-gradient(to bottom, white, white);
+  background-size:
+    1px 20px,
+    1px 20px,
+    100% 100%;
+  background-position:
+    left top,
+    right top,
+    center;
+  background-repeat: repeat-y, repeat-y, no-repeat;
+}
+
+/* Dark mode background for border-dashed-wide */
+.dark .border-dashed-wide {
+  background-image:
+    linear-gradient(to bottom, var(--dashed-border-color) 40%, transparent 40%),
+    linear-gradient(to bottom, var(--dashed-border-color) 40%, transparent 40%),
+    linear-gradient(to bottom, black, black);
+}

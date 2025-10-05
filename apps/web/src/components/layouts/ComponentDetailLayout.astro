@@ -27,8 +27,6 @@ export interface Props {
 
 const { title, description, currentSlug, toc } = Astro.props;
 
-console.log(toc);
-
 // Get all components for navigation
 const allComponents = await getCollection('components');
 const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare(b.data.title));
@@ -43,50 +41,54 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 		Skip to main content
 	</a>
 
-	<div class="flex flex-col min-h-screen">
-		<!-- Top Navigation -->
-		<header class="sticky top-0 z-40 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-			<Navbar client:load />
-		</header>
+	<!-- Top Navigation -->
+	<header class="sticky top-0 w-full border-b border-neutral-200 dark:border-neutral-800 z-40">
+		<Navbar className="@md:max-w-[1350px] mx-auto border-dashed-wide" />
+	</header>
 
+	<div class="flex flex-col min-h-screen @md:max-w-[1350px] mx-auto border-dashed-wide">
 		<div class="flex flex-1 relative">
-			<!-- Left Sidebar - Component Navigation -->
-			<SideBar>
-				<SideNav>
-					<SideNav.Section>
-						<SideNav.Heading>Components</SideNav.Heading>
-						<SideNav.List>
-							{
-								sortedComponents.map((component) => (
-									<SideNav.Item level={1}>
-										<SideNav.Link
-											href={`/components/${component.slug}`}
-											className={currentSlug === component.slug ? 'text-neutral-50 font-normal' : ''}
-										>
-											{component.data.title}
-										</SideNav.Link>
-									</SideNav.Item>
-								))
-							}
-						</SideNav.List>
-					</SideNav.Section>
-				</SideNav>
-			</SideBar>
+			<!-- Left Sidebar - Component Navigation (Fixed Width: 384px) -->
+			<div class="hidden lg:block w-60 flex-shrink-0">
+				<SideBar>
+					<SideNav>
+						<SideNav.Section>
+							<SideNav.Heading>Components</SideNav.Heading>
+							<SideNav.List>
+								{
+									sortedComponents.map((component) => (
+										<SideNav.Item level={1}>
+											<SideNav.Link
+												href={`/components/${component.slug}`}
+												className={currentSlug === component.slug ? 'text-neutral-50 font-normal' : ''}
+											>
+												{component.data.title}
+											</SideNav.Link>
+										</SideNav.Item>
+									))
+								}
+							</SideNav.List>
+						</SideNav.Section>
+					</SideNav>
+				</SideBar>
+			</div>
 
-			<!-- Main Content Area -->
-			<main id="main-content" class="flex-1 w-full max-w-[1400px] mx-auto px-6 py-8 lg:px-12 lg:py-12" role="main">
+			<!-- Main Content Area (Flexible) -->
+			<main id="main-content" class="flex-1 min-w-0 px-6 py-8 lg:px-12 lg:py-12" role="main">
 				<article class="max-w-none">
 					<slot />
 				</article>
 			</main>
 
-			<!-- Right Sidebar - Table of Contents -->
-			<aside
-				class="hidden xl:block sticky top-14.25 right-0 w-64 h-fit max-h-[calc(100dvh-var(--spacing)*14.25)] overflow-y-auto p-6"
-				aria-label="Table of contents"
-			>
-				<TableOfContent client:load items={toc} className="sticky top-0 h-screen" />
-			</aside>
+			<!-- Right Sidebar - Table of Contents (Fixed Width: 384px) -->
+			<div class="hidden xl:block w-60 flex-shrink-0">
+				<aside
+					class="sticky top-12 right-0 h-fit max-h-[calc(100dvh-var(--spacing)*14.25)] overflow-y-auto p-6"
+					aria-label="Table of contents"
+				>
+					<TableOfContent client:load items={toc} className="sticky top-0 h-screen" />
+				</aside>
+			</div>
 		</div>
 	</div>
 </BaseLayout>

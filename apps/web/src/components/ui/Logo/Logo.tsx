@@ -76,7 +76,7 @@ export const Logo = ({ className, arialLabel = 'Logo', variant, size, appearance
   const rootClasses = container({ className });
   const svgClasses = logoStyles({ variant, size, appearance });
 
-  const svgs: Record<LogoAppearanceType, JSX.Element> = {
+  const svgs: Record<LogoAppearanceType, React.ReactNode> = {
     [LogoAppearance.symbol]: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 24" fill="none" className={svgClasses}>
         <path

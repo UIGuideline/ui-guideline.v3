@@ -1,7 +1,12 @@
+import { Logo, LogoAppearance, LogoSize, LogoVariant } from '../Logo/Logo';
 import { tv } from 'tailwind-variants';
 
-const container = tv({
-  base: ['flex items-center justify-between p-6 px-8 gap-2 lg:gap-4'],
+const header = tv({
+  base: [''],
+});
+
+const nav = tv({
+  base: ['flex items-center justify-between p-2 px-6'],
 });
 
 export interface NavbarProps {
@@ -15,13 +20,16 @@ export interface NavbarProps {
  * Component to display the navbar.
  */
 export const Navbar = ({ className }: NavbarProps) => {
-  const classes = container({ className });
+  const classes = {
+    header: header({ className }),
+    nav: nav({ className }),
+  };
 
   return (
-    <nav className={classes}>
-      <div className="flex items-center gap-4 w-full lg:min-w-[600px] lg:w-auto">
-        <span className="text-gray-600 text-xl">LOGO</span>
-      </div>
-    </nav>
+    <header className={classes.header}>
+      <nav className={classes.nav}>
+        <Logo variant={LogoVariant.light} size={LogoSize.sm} appearance={LogoAppearance.symbol} />
+      </nav>
+    </header>
   );
 };
