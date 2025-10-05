@@ -2,7 +2,7 @@ import { Logo, LogoAppearance, LogoSize, LogoVariant } from '../Logo/Logo';
 import { tv } from 'tailwind-variants';
 
 const nav = tv({
-  base: ['flex items-center justify-between p-2 px-3'],
+  base: ['flex items-center justify-between p-3 px-4'],
 });
 
 export interface NavbarProps {
@@ -22,7 +22,7 @@ export const Navbar = ({ className }: NavbarProps) => {
 
   return (
     <nav className={classes.nav}>
-      <Logo variant={LogoVariant.light} size={LogoSize.sm} appearance={LogoAppearance.symbol} />
+      <Logo variant={LogoVariant.light} size={LogoSize.sm} appearance={LogoAppearance.complete} />
     </nav>
   );
 };
