@@ -1,17 +1,19 @@
 import React from 'react';
 import type {
+  AccessibilityData,
   AnatomyData,
   FigmaKitsData,
   KpisData,
   MergedFigmaKitsData,
   MergedSystemsData,
+  OverviewData,
   PropsData,
   SystemsData,
 } from '../types/content';
 import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
-import { findData, findMdx } from './content-loader';
+import { findData } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';
-import { Anatomy, FigmaKits, Kpis, PropsTable, Systems } from '@sections';
+import { Accessibility, Anatomy, FigmaKits, Kpis, Overview, PropsTable, Systems } from '@sections';
 
 /**
  * Individual section resolvers for each component section type.
@@ -21,7 +23,14 @@ import { Anatomy, FigmaKits, Kpis, PropsTable, Systems } from '@sections';
 /*------------------------------------*
  * Overview Section
  *------------------------------------*/
-export const overview: SectionModule = async ({ slug }) => findMdx(slug, 'index.mdx');
+// export const overview: SectionModule = async ({ slug }) => findMdx(slug, 'index.mdx');
+export const overview: SectionModule = async ({ slug }) => {
+  const data = await findData<OverviewData>(slug, 'overview.yml');
+  if (!data) return null;
+
+  const Section: ComponentFactory = () => <Overview componentName={slug} data={data} />;
+  return Section;
+};
 
 /*------------------------------------*
  * Anatomy Section
@@ -37,13 +46,20 @@ export const anatomy: SectionModule = async ({ slug }) => {
 /*------------------------------------*
  * Accessibility Section
  *------------------------------------*/
-export const accessibility: SectionModule = async ({ slug }) => findMdx(slug, 'accessibility.mdx');
+// export const accessibility: SectionModule = async ({ slug }) => findMdx(slug, 'accessibility.mdx');
+export const accessibility: SectionModule = async ({ slug }) => {
+  const data = await findData<AccessibilityData>(slug, 'accessibility.yml');
+  if (!data) return null;
+
+  const Section: ComponentFactory = () => <Accessibility componentName={slug} data={data} />;
+  return Section;
+};
 
 /*------------------------------------*
  * Props Table Section
  *------------------------------------*/
 export const props: SectionModule = async ({ slug }) => {
-  const data = await findData<Array<PropsData>>(slug, 'props.yml');
+  const data = await findData<PropsData>(slug, 'props.yml');
   if (!data?.length) return null;
 
   const Section: ComponentFactory = () => <PropsTable componentName={slug} data={data} />;
