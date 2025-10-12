@@ -1,6 +1,7 @@
 ---
 import { BaseLayout } from '@layouts';
-import { Navbar, SideBar, SideNav, TableOfContent } from '@ui';
+import { ComponentTableOfContents } from '@sections';
+import { Navbar, SideBar, SideNav } from '@ui';
 import { getCollection } from 'astro:content';
 
 export interface Props {
@@ -78,7 +79,7 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 					class="sticky top-12 right-0 h-fit max-h-[calc(100dvh-var(--spacing)*14.25)] overflow-y-auto p-6"
 					aria-label="Table of contents"
 				>
-					<TableOfContent client:load items={toc} className="sticky top-0 h-screen" />
+					<ComponentTableOfContents client:load items={toc} className="sticky top-0 h-screen" />
 				</aside>
 			</div>
 		</div>
