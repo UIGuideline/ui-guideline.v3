@@ -8,6 +8,7 @@
     "module": "ES2022",
     "paths": {
       "@common": ["src/common"],
+      "@composed": ["src/components/composed"],
       "@content": ["src/content"],
       "@data": ["src/data"],
       "@layouts": ["src/components/layouts"],
