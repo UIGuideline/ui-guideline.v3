@@ -1,1 +1,1 @@
-export * from './ComponentTableOfContents';
+export * from './ComponentDetailTOC';

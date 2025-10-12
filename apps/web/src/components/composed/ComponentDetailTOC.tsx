@@ -6,7 +6,7 @@ interface TocItem {
   level?: 0 | 1 | 2 | 3;
 }
 
-export interface ComponentTableOfContentsProps {
+export interface ComponentDetailTOCProps {
   /**
    * Array of table of contents items to display.
    */
@@ -19,12 +19,12 @@ export interface ComponentTableOfContentsProps {
 }
 
 /**
- * ComponentTableOfContents - Wrapper component for component documentation pages.
+ * ComponentDetailTOC - Table of Contents for component detail/documentation pages.
  *
  * This component wraps the base TableOfContents UI component with domain-specific logic
  * for creating table of contents for component documentation pages.
  */
-export const ComponentTableOfContents = ({ items = [], className }: ComponentTableOfContentsProps) => {
+export const ComponentDetailTOC = ({ items = [], className }: ComponentDetailTOCProps) => {
   if (!items.length) return null;
 
   return (
