@@ -1,6 +1,6 @@
 ---
 import { ComponentDetailLayout } from '@layouts';
-import { renderSections, type SectionKey } from '@lib';
+import { camelToKebab, renderSections, type SectionKey } from '@lib';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -21,7 +21,7 @@ const rendered = await renderSections(sections, { slug: entry.slug, basePath });
 
 // Generate TOC from sections
 const tocItems = sections.map((key) => ({
-	id: key,
+	id: camelToKebab(key),
 	label: key.charAt(0).toUpperCase() + key.slice(1),
 }));
 ---
