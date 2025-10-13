@@ -36,7 +36,6 @@ export const TableOfContents = ({ className, children, scrollSpy, ...props }: Ta
   const spiedId = useScrollSpy(scrollSpy);
 
   React.useEffect(() => {
-    console.log('spiedId', spiedId);
     if (spiedId) setActiveId(`#${spiedId}`);
   }, [spiedId]);
 
