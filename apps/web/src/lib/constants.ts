@@ -25,9 +25,19 @@ export const ROUTES = {
  */
 export const ASSET_PATHS = {
   /**
+   * Base path for assets
+   */
+  ROOT: '/assets/',
+
+  /**
    * Base path for component thumbnails
    */
-  COMPONENT_THUMBNAILS: '/thumbnails/components',
+  COMPONENT_THUMBNAILS: '/thumbnails/',
+
+  /**
+   * Base path for component anatomy
+   */
+  COMPONENT_ANATOMY: '/anatomy/',
 } as const;
 
 /**
