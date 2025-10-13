@@ -1,10 +1,14 @@
 {
-  "name": "@side-kit/eslint-config",
+  "name": "@ui-guideline/eslint-config",
   "version": "0.1.0",
   "main": "./src/base.js",
+  "types": "./src/types.d.ts",
   "type": "module",
   "exports": {
-    ".": "./src/base.js",
+    ".": {
+      "types": "./src/types.d.ts",
+      "default": "./src/base.js"
+    },
     "./react": "./src/react.js"
   },
   "scripts": {
@@ -20,8 +24,8 @@
     "@types/eslint": "^9.6.1",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint__js": "^8.42.3",
-    "@typescript-eslint/eslint-plugin": "^8.7.0",
-    "@typescript-eslint/parser": "^8.7.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
     "add": "^2.0.6",
     "astro-eslint-parser": "^1.0.3",
     "eslint": "^9.11.1",
@@ -38,9 +42,9 @@
     "eslint-plugin-turbo": "^2.1.3",
     "globals": "^15.15.0",
     "typescript": "^5.6.2",
-    "typescript-eslint": "8.7.0"
+    "typescript-eslint": "^8.15.0"
   },
   "devDependencies": {
-    "@side-kit/typescript-config": "workspace:*"
+    "@ui-guideline/typescript-config": "workspace:*"
   }
 }

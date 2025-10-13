@@ -23,7 +23,7 @@ const config = {
   importOrder: [
     '',
     '^(react/(.*)$)|^(react$)|^(react-native(.*)$)',
-    '^@side-kit/(.*)$',
+    '^@ui-guideline/(.*)$',
     '^~/components/(.*)$',
     '^~/styles/(.*)$',
     '^~/utils/(.*)$',

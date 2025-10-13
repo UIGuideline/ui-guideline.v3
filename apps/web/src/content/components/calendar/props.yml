@@ -1,0 +1,62 @@
+- name: defaultDate
+  description: Initial date or range of dates that will be selected.
+  value: ['Date', 'string', 'list of Dates']
+  defaultValue: ''
+  isRequired: false
+  usedBy: ['mantine', 'polaris', 'atlassian-design-system']
+
+- name: defaultMonth
+  description: The default month displayed.
+  value: 'number'
+  defaultValue: ''
+  isRequired: false
+  usedBy: ['atlassian-design-system']
+
+- name: defaultYear
+  description: The default year displayed.
+  value: 'number'
+  defaultValue: ''
+  isRequired: false
+  usedBy: ['atlassian-design-system']
+
+- name: disableDatesBefore
+  description: Disable selecting dates before this date.
+  value: 'Date'
+  defaultValue: ''
+  isRequired: false
+  usedBy: ['material-ui', 'polaris']
+
+- name: disableDatesAfter
+  description: Disable selecting dates after this date.
+  value: 'Date'
+  defaultValue: ''
+  isRequired: false
+  usedBy: ['material-ui', 'polaris']
+
+- name: disabledDate
+  description: Specify the date or dates that cannot be selected.
+  value: ['Date', 'string', 'list of Dates']
+  defaultValue: ''
+  isRequired: false
+  usedBy: ['ant-design', 'atlassian-design-system']
+
+- name: onDateChange
+  description: Called every time the date changes.
+  value: 'function'
+  defaultValue: ''
+  isRequired: false
+  usedBy: ['mantine', 'ant-design']
+
+- name: onMonthChange
+  description: Called every time month is changed.
+  value: 'function'
+  defaultValue: ''
+  isRequired: false
+  usedBy: ['mantine', 'material-ui', 'polaris']
+
+- name: onYearChange
+  description: Called every time the year is changed.
+  value: 'function'
+  defaultValue: ''
+  isRequired: false
+  usedBy: ['mantine', 'material-ui', 'polaris']

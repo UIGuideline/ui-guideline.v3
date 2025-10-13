@@ -1,5 +1,5 @@
 {
-  "extends": "@side-kit/typescript-config/internal-package.json",
+  "extends": "@ui-guideline/typescript-config/internal-package.json",
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "Bundler",

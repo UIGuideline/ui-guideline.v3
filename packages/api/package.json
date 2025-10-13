@@ -1,5 +1,5 @@
 {
-  "name": "@side-kit/api",
+  "name": "@ui-guideline/api",
   "version": "0.1.0",
   "main": "src/index.ts",
   "license": "MIT",
@@ -17,9 +17,9 @@
     "with-env": "dotenv -e ../../.env.${NODE_ENV:-local} --"
   },
   "dependencies": {
-    "@side-kit/db": "workspace:*",
-    "@trpc/client": "^10.45.2",
-    "@trpc/server": "^10.45.2",
+    "@trpc/client": "^11.6.0",
+    "@trpc/server": "^11.6.0",
+    "@ui-guideline/db": "workspace:*",
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "superjson": "1.9.1",
@@ -27,10 +27,10 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@side-kit/eslint-config": "workspace:*",
-    "@side-kit/typescript-config": "workspace:*",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@ui-guideline/eslint-config": "workspace:*",
+    "@ui-guideline/typescript-config": "workspace:*",
     "dotenv-cli": "^7.4.2",
     "eslint": "^9.11.1",
     "ts-node": "^10.9.2",

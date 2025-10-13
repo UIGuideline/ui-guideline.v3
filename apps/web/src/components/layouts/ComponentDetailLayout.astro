@@ -1,0 +1,89 @@
+---
+import { ComponentDetailTOC } from '@composed';
+import { BaseLayout } from '@layouts';
+import { ROUTES } from '@lib';
+import { Navbar, SideBar, SideNav } from '@ui';
+import { getCollection } from 'astro:content';
+
+export interface Props {
+	/**
+	 * The title of the page.
+	 */
+	title: string;
+
+	/**
+	 * The description of the page for SEO.
+	 */
+	description?: string;
+
+	/**
+	 * The current component slug for active state.
+	 */
+	currentSlug?: string;
+
+	/**
+	 * Optional Table of Contents items.
+	 */
+	toc?: Array<{ id: string; label: string }>;
+}
+
+const { title, description, currentSlug, toc } = Astro.props;
+
+// Get all components for navigation
+const allComponents = await getCollection('components');
+const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<BaseLayout title={title} description={description}>
+	<!-- Top Navigation -->
+	<header class="sticky top-0 w-full border-b border-gray-200 dark:border-gray-800 z-40">
+		<Navbar className="@md:max-w-[1350px] mx-auto border-dashed-wide" />
+	</header>
+
+	<div class="flex flex-col min-h-screen @md:max-w-[1350px] mx-auto border-dashed-wide">
+		<div class="flex flex-1 relative">
+			<!-- Left Sidebar - Component Navigation (Fixed Width: 384px) -->
+			<div class="hidden lg:block w-64 flex-shrink-0">
+				<SideBar>
+					<SideNav>
+						<SideNav.Section>
+							<SideNav.Heading>COMPONENTS</SideNav.Heading>
+							<SideNav.List>
+								{
+									sortedComponents.map((component) => (
+										<SideNav.Item>
+											<SideNav.Link
+												href={`${ROUTES.COMPONENTS}/${component.data.slug}`}
+												level={1}
+												isActive={currentSlug === component.data.slug}
+											>
+												{component.data.title}
+											</SideNav.Link>
+										</SideNav.Item>
+									))
+								}
+							</SideNav.List>
+						</SideNav.Section>
+					</SideNav>
+				</SideBar>
+			</div>
+
+			<!-- Main Content Area (Flexible) -->
+			<main id="main-content" class="flex-1 min-w-0 px-6 py-8 lg:px-12 lg:py-12" role="main">
+				<article class="max-w-none">
+					<slot />
+				</article>
+			</main>
+
+			<!-- Right Sidebar - Table of Contents (Fixed Width: 384px) -->
+			<div class="hidden xl:block w-60 flex-shrink-0">
+				<aside
+					class="sticky top-12 right-0 h-fit max-h-[calc(100dvh-var(--spacing)*14.25)] overflow-y-auto p-6"
+					aria-label="Table of contents"
+				>
+					<ComponentDetailTOC client:load items={toc} className="sticky top-0 h-screen" />
+				</aside>
+			</div>
+		</div>
+	</div>
+</BaseLayout>

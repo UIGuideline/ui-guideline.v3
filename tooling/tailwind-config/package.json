@@ -1,5 +1,5 @@
 {
-  "name": "@side-kit/tailwind-config",
+  "name": "@ui-guideline/tailwind-config",
   "version": "0.0.1",
   "description": "Shared TailwindCSS config",
   "main": "./src/base-presets.ts",
@@ -9,7 +9,7 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@side-kit/typescript-config": "workspace:*",
-    "tailwindcss": "^3.4.13"
+    "@ui-guideline/typescript-config": "workspace:*",
+    "tailwindcss": "^4.1.13"
   }
 }

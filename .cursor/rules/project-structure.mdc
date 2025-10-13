@@ -13,13 +13,12 @@ This is a monorepo for the Starter Kit to create Side Projects applications stru
 - [apps/](mdc:apps) - Contains frontend applications:
 
   - [apps/web/](mdc:apps/web) - Main web application
-  - [apps/nextjs/](mdc:apps/nextjs) - Next.js frontend
 
 - [packages/](mdc:packages) - Shared packages and libraries:
 
   - [packages/api/](mdc:packages/api) - API integration and services
+  - [packages/common/](mdc:packages/common) - Common and shareable resources (utils, constants, types, etc)
   - [packages/db/](mdc:packages/db) - Database layer with Prisma
-  - [packages/ui/](mdc:packages/ui) - Shared local UI components
 
 - [tooling/](mdc:tooling) - Global shared configurations:
   - [tooling/eslint-config/](mdc:tooling/eslint-config) - ESLint configuration

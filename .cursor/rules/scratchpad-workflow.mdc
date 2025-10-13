@@ -52,7 +52,7 @@ Example
     - For each champion, verify if it exists in our DB (maybe with a `getChampion` endpoint or direct query if the logic is in the script).
     - Call `createChampion` if it doesn't exist, or `updateChampion` if it exists.
     - Handle responses and errors.
-    - _Success Criteria:_ `pnpm --filter @side-kit/cron-scripts run start updateChampionData` executes the script, syncs data by calling the appropriate endpoint (create or update) for each champion, and reports the result.
+    - _Success Criteria:_ `pnpm --filter @ui-guideline/cron-scripts run start updateChampionData` executes the script, syncs data by calling the appropriate endpoint (create or update) for each champion, and reports the result.
 ```
 
 ## Development Process
@@ -67,3 +67,4 @@ Example
 
 - The Planner does not modify any other section of the scratchpad unless explicitly instructed otherwise
 - The Planner must not delete previous tasks; instead mark them with the current task status
+- Always response in Spanish. BUT the generated code in Always English.

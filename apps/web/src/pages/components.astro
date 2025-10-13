@@ -1,0 +1,50 @@
+---
+import { ComponentDetailLayout } from '@layouts';
+import { getComponentThumbnailUrl } from '@lib';
+import { ComponentCard } from '@ui';
+import { getCollection } from 'astro:content';
+
+// Get all components for the grid
+const allComponents = await getCollection('components');
+const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+// Map components data for rendering
+const componentsWithDescriptions = sortedComponents.map((component) => ({
+	title: component.data.title,
+	slug: component.data.slug,
+	description: component.data.description,
+	status: component.data.status,
+	thumbnailUrl: getComponentThumbnailUrl(component.data.slug),
+}));
+---
+
+<ComponentDetailLayout
+	title="Components - UI Guideline v3"
+	description="Browse our comprehensive library of UI components"
+>
+	<div class="space-y-8">
+		<!-- Header -->
+		<div class="space-y-4">
+			<h1 class="text-4xl font-bold text-gray-900 dark:text-white">Component Library</h1>
+			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl">
+				Here you can find all the components available in the library. We are working on adding more components.
+			</p>
+		</div>
+
+		<!-- Components Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{
+				componentsWithDescriptions.map((component) => (
+					<ComponentCard
+						client:load
+						title={component.title}
+						description={component.description}
+						slug={component.slug}
+						thumbnailUrl={component.thumbnailUrl}
+						status={component.status}
+					/>
+				))
+			}
+		</div>
+	</div>
+</ComponentDetailLayout>

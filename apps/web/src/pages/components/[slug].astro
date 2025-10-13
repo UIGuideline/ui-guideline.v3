@@ -1,0 +1,60 @@
+---
+import { ComponentDetailLayout } from '@layouts';
+import { camelToKebab, camelToTitleCase, CONTENT_PATHS, renderSections, type SectionKey } from '@lib';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const components = await getCollection('components');
+	return components.map((component) => ({
+		params: { slug: component.data.slug },
+		props: { component },
+	}));
+}
+
+const { component } = Astro.props;
+const entry = component;
+if (!entry) throw new Error(`Component not found`);
+
+const basePath = `${CONTENT_PATHS.COMPONENTS}/${entry.id}`;
+const sections = (entry.data.sections ?? []) as SectionKey[];
+const rendered = await renderSections(sections, { slug: entry.data.slug, basePath });
+
+// Generate TOC from sections
+const tocItems = sections.map((key) => ({
+	id: camelToKebab(key),
+	label: camelToTitleCase(key),
+}));
+---
+
+<ComponentDetailLayout
+	title={`${entry.data.title} | UI Guideline`}
+	description={`${entry.data.title} component documentation from leading design systems.`}
+	currentSlug={entry.data.slug}
+	toc={tocItems}
+>
+	<!-- Component Header -->
+	<header class="mb-12 pb-8 border-b border-gray-200 dark:border-gray-800">
+		<h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{entry.data.title}</h2>
+		{
+			entry.data.status && (
+				<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+					{entry.data.status}
+				</span>
+			)
+		}
+	</header>
+
+	<!-- Dynamic Sections -->
+	<div class="space-y-16">
+		{
+			rendered.map(
+				(Section) =>
+					Section && (
+						<section class="scroll-mt-20">
+							<Section />
+						</section>
+					),
+			)
+		}
+	</div>
+</ComponentDetailLayout>

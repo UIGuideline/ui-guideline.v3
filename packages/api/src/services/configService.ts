@@ -1,5 +1,5 @@
-import type { Config } from '@side-kit/db';
-import * as db from '@side-kit/db';
+import type { Config } from '@ui-guideline/db';
+import * as db from '@ui-guideline/db';
 
 // Destructure prisma from the DB module for compatibility
 const { prisma } = db;
