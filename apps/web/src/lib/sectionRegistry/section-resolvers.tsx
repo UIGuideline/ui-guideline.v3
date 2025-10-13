@@ -24,11 +24,11 @@ import { Accessibility, Anatomy, FigmaKits, Kpis, Overview, PropsTable, Systems 
  * Overview Section
  *------------------------------------*/
 // export const overview: SectionModule = async ({ slug }) => findMdx(slug, 'index.mdx');
-export const overview: SectionModule = async ({ slug }) => {
+export const overview: SectionModule = async ({ slug, title }) => {
   const data = await findData<OverviewData>(slug, 'overview.yml');
   if (!data) return null;
 
-  const Section: ComponentFactory = () => <Overview componentName={slug} data={data} />;
+  const Section: ComponentFactory = () => <Overview componentName={title ?? slug} data={data} />;
   return Section;
 };
 
@@ -39,7 +39,7 @@ export const anatomy: SectionModule = async ({ slug }) => {
   const data = await findData<AnatomyData>(slug, 'anatomy.yml');
   if (!data) return null;
 
-  const Section: ComponentFactory = () => <Anatomy componentName={slug} data={data} />;
+  const Section: ComponentFactory = () => <Anatomy desktop={data.desktop} tablet={data.tablet} mobile={data.mobile} />;
   return Section;
 };
 

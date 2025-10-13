@@ -14,15 +14,12 @@ export interface OverviewProps {
 
 export const Overview = ({ componentName, data }: OverviewProps) => {
   return (
-    <section className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-      <h1 id="overview" className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-        Overview
-      </h1>
-      <p className="text-gray-600 dark:text-gray-300">
-        The {componentName} component is a fundamental UI element used across multiple design systems. This section
-        provides a comprehensive overview of its purpose, usage patterns, and key characteristics.
-      </p>
-      {data.description}
+    <section id="overview" className="flex flex-col gap-2">
+      <div className="flex items-center gap-4">
+        <h1 className="text-4xl text-gray-900 dark:text-white">{componentName}</h1>
+      </div>
+
+      <p className="max-w-xl text-lg text-gray-600 dark:text-gray-400">{data.description}</p>
     </section>
   );
 };
