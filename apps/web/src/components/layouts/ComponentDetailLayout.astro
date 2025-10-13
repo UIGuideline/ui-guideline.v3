@@ -46,6 +46,19 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 			<div class="hidden lg:block w-64 flex-shrink-0">
 				<SideBar>
 					<SideNav>
+						<!-- Sección: SECTIONS con link a galería de componentes -->
+						<SideNav.Section>
+							<SideNav.Heading>SECTIONS</SideNav.Heading>
+							<SideNav.List>
+								<SideNav.Item>
+									<SideNav.Link href={ROUTES.COMPONENTS} level={1} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
+										Components
+									</SideNav.Link>
+								</SideNav.Item>
+							</SideNav.List>
+						</SideNav.Section>
+
+						<!-- Sección: COMPONENTS con lista de componentes individuales -->
 						<SideNav.Section>
 							<SideNav.Heading>COMPONENTS</SideNav.Heading>
 							<SideNav.List>
