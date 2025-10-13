@@ -29,3 +29,14 @@ export const ASSET_PATHS = {
    */
   COMPONENT_THUMBNAILS: '/thumbnails/components',
 } as const;
+
+/**
+ * Content Paths
+ * Centralized content directory paths
+ */
+export const CONTENT_PATHS = {
+  /**
+   * Base path for components content directory
+   */
+  COMPONENTS: '/src/content/components',
+} as const;

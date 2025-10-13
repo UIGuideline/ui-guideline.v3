@@ -1,6 +1,6 @@
 ---
 import { ComponentDetailLayout } from '@layouts';
-import { camelToKebab, camelToTitleCase, renderSections, type SectionKey } from '@lib';
+import { camelToKebab, camelToTitleCase, CONTENT_PATHS, renderSections, type SectionKey } from '@lib';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -15,7 +15,7 @@ const { component } = Astro.props;
 const entry = component;
 if (!entry) throw new Error(`Component not found`);
 
-const basePath = `/src/content/components/${entry.id}`;
+const basePath = `${CONTENT_PATHS.COMPONENTS}/${entry.id}`;
 const sections = (entry.data.sections ?? []) as SectionKey[];
 const rendered = await renderSections(sections, { slug: entry.data.slug, basePath });
 
