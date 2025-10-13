@@ -19,7 +19,7 @@ const link = tv({
       3: 'pl-9',
     },
     isActive: {
-      true: 'border-amber-200 text-gray-50 hover:border-amber-200',
+      true: 'border-amber-200 text-gray-50 hover:border-amber-200 font-semibold',
     },
   },
   defaultVariants: {
