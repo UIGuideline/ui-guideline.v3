@@ -1,7 +1,0 @@
-title: Button
-slug: button
-description: 'The Button component is used to trigger actions, submit forms, and navigate. It comes in various styles and states to match different use cases and contexts.'
-status: stable
-tags: ['button', 'action', 'interaction']
-updatedAt: '2025-09-20'
-sections: ['overview', 'anatomy', 'props', 'kpis', 'systems', 'figmaKits', 'accessibility']
