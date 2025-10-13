@@ -1,3 +1,5 @@
+import { ASSET_PATHS } from './constants';
+
 /**
  * Normalize a path.
  *
@@ -34,4 +36,16 @@ export const camelToTitleCase = (str: string): string => {
   // Add space before capital letters and capitalize first letter
   const withSpaces = str.replace(/([a-z0-9])([A-Z])/g, '$1 $2');
   return withSpaces.charAt(0).toUpperCase() + withSpaces.slice(1);
+};
+
+/**
+ * Get the thumbnail URL for a component based on its slug.
+ *
+ * @function
+ * @param {string} slug - The component slug.
+ * @returns {string} The thumbnail URL path.
+ * @example getComponentThumbnailUrl('button') // '/thumbnails/components/button.svg'
+ */
+export const getComponentThumbnailUrl = (slug: string): string => {
+  return `${ASSET_PATHS.COMPONENT_THUMBNAILS}/${slug}.svg`;
 };

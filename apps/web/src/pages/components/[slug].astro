@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 export async function getStaticPaths() {
 	const components = await getCollection('components');
 	return components.map((component) => ({
-		params: { slug: component.slug },
+		params: { slug: component.data.slug },
 		props: { component },
 	}));
 }
@@ -17,7 +17,7 @@ if (!entry) throw new Error(`Component not found`);
 
 const basePath = `/src/content/components/${entry.id}`;
 const sections = (entry.data.sections ?? []) as SectionKey[];
-const rendered = await renderSections(sections, { slug: entry.slug, basePath });
+const rendered = await renderSections(sections, { slug: entry.data.slug, basePath });
 
 // Generate TOC from sections
 const tocItems = sections.map((key) => ({
@@ -29,7 +29,7 @@ const tocItems = sections.map((key) => ({
 <ComponentDetailLayout
 	title={`${entry.data.title} | UI Guideline`}
 	description={`${entry.data.title} component documentation from leading design systems.`}
-	currentSlug={entry.slug}
+	currentSlug={entry.data.slug}
 	toc={tocItems}
 >
 	<!-- Component Header -->

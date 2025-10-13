@@ -1,10 +1,15 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const components = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/_meta.yml', base: './src/content/components' }),
   schema: z.object({
     title: z.string(),
+    slug: z.string(),
+    description: z.string(),
     status: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    updatedAt: z.string().optional(),
     sections: z.array(z.string()).optional(),
   }),
 });

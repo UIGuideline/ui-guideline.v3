@@ -1,6 +1,7 @@
 ---
 import { ComponentDetailTOC } from '@composed';
 import { BaseLayout } from '@layouts';
+import { ROUTES } from '@lib';
 import { Navbar, SideBar, SideNav } from '@ui';
 import { getCollection } from 'astro:content';
 
@@ -52,9 +53,9 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 									sortedComponents.map((component) => (
 										<SideNav.Item>
 											<SideNav.Link
-												href={`/components/${component.slug}`}
+												href={`${ROUTES.COMPONENTS}/${component.data.slug}`}
 												level={1}
-												isActive={currentSlug === component.slug}
+												isActive={currentSlug === component.data.slug}
 											>
 												{component.data.title}
 											</SideNav.Link>
