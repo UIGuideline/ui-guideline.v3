@@ -6,6 +6,7 @@
  */
 
 export * from './catalog-manager';
+export * from './client-sections';
 export * from './content-loader';
 export * from './section-registry';
 export * from './types';

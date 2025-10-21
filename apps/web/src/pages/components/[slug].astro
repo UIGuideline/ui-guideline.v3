@@ -1,6 +1,17 @@
 ---
 import { ComponentDetailLayout } from '@layouts';
-import { camelToKebab, camelToTitleCase, CONTENT_PATHS, renderSections, type SectionKey } from '@lib';
+import type { PropsData } from '@lib';
+import {
+	camelToKebab,
+	camelToTitleCase,
+	CLIENT_SECTIONS_CONFIG,
+	CONTENT_PATHS,
+	findData,
+	isClientSection,
+	renderSections,
+	SectionKey,
+} from '@lib';
+import { Props } from '@sections';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -17,13 +28,28 @@ if (!entry) throw new Error(`Component not found`);
 
 const basePath = `${CONTENT_PATHS.COMPONENTS}/${entry.id}`;
 const sections = (entry.data.sections ?? []) as SectionKey[];
-const rendered = await renderSections(sections, {
+
+// Pre-load data for sections that need client-side hydration
+const clientSectionData: Partial<Record<SectionKey, unknown>> = {};
+for (const sectionKey of sections) {
+	if (isClientSection(sectionKey)) {
+		const config = CLIENT_SECTIONS_CONFIG[sectionKey as keyof typeof CLIENT_SECTIONS_CONFIG];
+		const data = await findData(entry.data.slug, config.dataFile);
+		if (data) {
+			clientSectionData[sectionKey] = data;
+		}
+	}
+}
+
+// Render server-side sections (excluding client-hydrated ones)
+const serverSections = sections.filter((s) => !isClientSection(s));
+const rendered = await renderSections(serverSections, {
 	slug: entry.data.slug,
 	basePath,
 	title: entry.data.title,
 });
 
-// Generate TOC from sections
+// Generate TOC from all sections
 const tocItems = sections.map((key) => ({
 	id: camelToKebab(key),
 	label: camelToTitleCase(key),
@@ -39,14 +65,32 @@ const tocItems = sections.map((key) => ({
 	<!-- Dynamic Sections -->
 	<div class="space-y-16">
 		{
-			rendered.map(
-				(Section) =>
-					Section && (
+			sections.map((sectionKey) => {
+				// Client-side hydrated sections (must use imported components directly)
+				if (sectionKey === SectionKey.props) {
+					const data = clientSectionData[sectionKey] as PropsData;
+					if (!data) return null;
+
+					return (
 						<section class="scroll-mt-20">
-							<Section />
+							<Props data={data} client:load />
 						</section>
-					),
-			)
+					);
+				}
+
+				// Server-side rendered sections
+				const renderedIndex = serverSections.indexOf(sectionKey);
+				if (renderedIndex === -1) return null;
+
+				const Section = rendered[renderedIndex];
+				if (!Section) return null;
+
+				return (
+					<section class="scroll-mt-20">
+						<Section />
+					</section>
+				);
+			})
 		}
 	</div>
 </ComponentDetailLayout>
