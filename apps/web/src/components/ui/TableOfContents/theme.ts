@@ -4,7 +4,7 @@ export const item = tv({
   base: [
     'cursor-pointer',
     'transition-colors duration-100 ease-out',
-    'text-gray-400',
+    'text-gray-400 text-sm',
     'font-light',
     'border-l border-transparent hover:border-gray-300 hover:text-gray-50',
   ],
