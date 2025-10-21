@@ -20,7 +20,7 @@ import { SectionKey } from './types';
  */
 export const CLIENT_SECTIONS_CONFIG = {
   [SectionKey.props]: {
-    dataFile: 'props.yml' as const,
+    dataFile: 'props.yml',
   },
 } as const;
 
