@@ -74,7 +74,9 @@ export const PropsTable = ({ className, data = [] }: PropsTableProps) => {
       <Table.Body>
         {data.map((prop, index) => {
           const formattedValue = formatValue(prop.value);
-          const defaultValue = prop.defaultValue ?? '-';
+          // Using || instead of ?? to treat empty strings as falsy
+          // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+          const defaultValue = prop.defaultValue || '-';
 
           return (
             <Table.Row key={index} className="border-t border-gray-200 dark:border-gray-800 h-11">
