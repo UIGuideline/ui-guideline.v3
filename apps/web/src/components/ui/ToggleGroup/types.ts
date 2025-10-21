@@ -6,14 +6,6 @@ export enum ItemSize {
 
 /* ------------------------------------------------------------ */
 
-export enum ItemVariant {
-  neutral = 'neutral',
-  danger = 'danger',
-  success = 'success',
-}
-
-/* ------------------------------------------------------------ */
-
 export enum ToggleGroupSelection {
   single = 'single',
   multiple = 'multiple',
