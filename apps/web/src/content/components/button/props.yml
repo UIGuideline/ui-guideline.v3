@@ -1,62 +1,199 @@
-- name: defaultDate
-  description: Initial date or range of dates that will be selected.
-  value: ['Date', 'string', 'list of Dates']
-  defaultValue: ''
+- name: size
+  description: Changes the size of the button, giving it more or less padding.
+  value: ['sm', 'md', 'lg', 'xl']
+  defaultValue: 'md'
+  exampleValue: ['sm', 'lg']
   isRequired: false
-  usedBy: ['mantine', 'polaris', 'atlassian-design-system']
+  usedBy:
+    [
+      'ant-design',
+      'base-web',
+      'carbon-design',
+      'chakra-ui',
+      'elastic',
+      'microsoft-fluent-3',
+      'garden-zendesk',
+      'mantine',
+      'material-ui',
+      'gitlab-design-system',
+      'pluralsight-design-system',
+      'polaris',
+      'primer',
+      'vuetify',
+    ]
 
-- name: defaultMonth
-  description: The default month displayed.
-  value: 'number'
-  defaultValue: ''
+- name: variant
+  description: The color of the component. It supports those theme colors that makes sense for this component.
+  value: ['primary', 'accent', 'secondary', 'destructive']
+  defaultValue: 'primary'
+  exampleValue: ['accent', 'destructive']
   isRequired: false
-  usedBy: ['atlassian-design-system']
+  usedBy:
+    [
+      'angular-material',
+      'elastic-ui',
+      'mantine',
+      'material-ui',
+      'vuetify',
+      'atlassian-design-system',
+      'fluent2',
+      'pluralsight-design-system',
+      'base',
+      'carbon-design-system',
+      'ant-design',
+      'garden',
+    ]
 
-- name: defaultYear
-  description: The default year displayed.
-  value: 'number'
-  defaultValue: ''
+- name: appearance
+  description: The shape of the component. It determines the importance in the hierarchy. The contained button commands the most attention
+  value: ['contained', 'outlined', 'ghost']
+  defaultValue: 'contained'
+  exampleValue: ['outlined', 'ghost']
   isRequired: false
-  usedBy: ['atlassian-design-system']
+  usedBy:
+    [
+      'chakra-ui',
+      'material-ui',
+      'pajamas',
+      'polaris',
+      'primer',
+      'spectrum',
+      'vuetify',
+      'atlassian-design-system',
+      'fluent2',
+      'pluralsight-design-system',
+      'ant-design',
+      'blueprint',
+      'garden',
+    ]
 
-- name: disableDatesBefore
-  description: Disable selecting dates before this date.
-  value: 'Date'
-  defaultValue: ''
+- name: isDisabled
+  description: Disables the button, disallowing user interaction.
+  value: 'boolean'
+  defaultValue: 'false'
+  exampleValue: 'true'
   isRequired: false
-  usedBy: ['material-ui', 'polaris']
+  usedBy:
+    [
+      'angular-material',
+      'ant-design',
+      'base',
+      'blueprint',
+      'carbon-design-system',
+      'mantine',
+      'material-design',
+      'material-ui',
+      'pajamas',
+      'pluralsight-design-system',
+      'polaris',
+      'vuetify',
+    ]
 
-- name: disableDatesAfter
-  description: Disable selecting dates after this date.
-  value: 'Date'
-  defaultValue: ''
+- name: isLoading
+  description: Force disables the button and changes the icon to a loading spinner.
+  value: 'boolean'
+  defaultValue: 'false'
+  exampleValue: 'true'
   isRequired: false
-  usedBy: ['material-ui', 'polaris']
+  usedBy:
+    [
+      'ant-design',
+      'blueprint',
+      'mantine',
+      'gitlab-design-system',
+      'pluralsight-design-system',
+      'polaris',
+      'vuetify',
+      'base',
+      'chakra-ui',
+      'elastic-ui',
+    ]
 
-- name: disabledDate
-  description: Specify the date or dates that cannot be selected.
-  value: ['Date', 'string', 'list of Dates']
-  defaultValue: ''
+- name: isFullWidth
+  description: Allows the button to grow to the width of its container.
+  value: 'boolean'
+  defaultValue: 'false'
+  exampleValue: 'true'
   isRequired: false
-  usedBy: ['ant-design', 'atlassian-design-system']
+  usedBy: ['elastic-ui', 'mantine', 'material-ui', 'polaris', 'ant-design', 'pajamas', 'vuetify']
 
-- name: onDateChange
-  description: Called every time the date changes.
+- name: startIcon
+  description: Icon to display before the Label
+  value: ['svg', 'component']
+  defaultValue: ''
+  exampleValue: '<ChevronLeft />'
+  isRequired: false
+  usedBy:
+    [
+      'chakra-ui',
+      'ant-design',
+      'blueprint',
+      'fluent2',
+      'pajamas',
+      'pluralsight-design-system',
+      'polaris',
+      'atlassian-design-system',
+      'carbon-design',
+      'elastic-ui',
+      'material-design',
+      'material-ui',
+      'primer-design-system',
+    ]
+
+- name: endIcon
+  description: Icon to display after the Label
+  value: ['svg', 'component']
+  defaultValue: ''
+  exampleValue: '<ChevronRight />'
+  isRequired: false
+  usedBy:
+    [
+      'ant-design',
+      'blueprint',
+      'fluent2',
+      'pajamas',
+      'pluralsight-design-system',
+      'polaris',
+      'chakra-ui',
+      'atlassian-design-system',
+      'carbon-design',
+      'elastic-ui',
+      'material-ui',
+      'primer-design-system',
+    ]
+
+- name: type
+  description: HTML type attribute of button. This prop has no effect on anchor button; it only affects Button.
+  value: ['button', 'reset', 'submit']
+  defaultValue: 'button'
+  exampleValue: ['submit', 'reset']
+  isRequired: false
+
+- name: href
+  description: Designates the component as an anchor and applies the href attribute.
+  value: 'string'
+  defaultValue: ''
+  exampleValue: 'https://example.com'
+  isRequired: false
+  usedBy:
+    [
+      'ant-design',
+      'atlassian-design-system',
+      'carbon-design',
+      'elastic-ui',
+      'material-design',
+      'material-ui',
+      'pluralsight-design-system',
+      'spectrum',
+      'vuetify',
+      'pajamas',
+      'polaris',
+    ]
+
+- name: onClick
+  description: Callback fired when the component is clicked.
   value: 'function'
   defaultValue: ''
+  exampleValue: '() => handleClick()'
   isRequired: false
-  usedBy: ['mantine', 'ant-design']
-
-- name: onMonthChange
-  description: Called every time month is changed.
-  value: 'function'
-  defaultValue: ''
-  isRequired: false
-  usedBy: ['mantine', 'material-ui', 'polaris']
-
-- name: onYearChange
-  description: Called every time the year is changed.
-  value: 'function'
-  defaultValue: ''
-  isRequired: false
-  usedBy: ['mantine', 'material-ui', 'polaris']
+  usedBy: ['ant-design', 'atlassian-design-system', 'base-web', 'blueprint', 'carbon-design', 'polaris']

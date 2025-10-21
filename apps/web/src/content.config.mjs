@@ -29,6 +29,7 @@ const props = defineCollection({
       description: z.string(),
       value: z.union([z.string(), z.array(z.string())]),
       defaultValue: z.string().optional(),
+      exampleValue: z.union([z.string(), z.array(z.string())]).optional(),
       isRequired: z.boolean().optional(),
       usedBy: z.array(z.string()).optional(),
     }),

@@ -13,7 +13,7 @@ import type {
 import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
 import { findData } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';
-import { Accessibility, Anatomy, FigmaKits, Kpis, Overview, PropsTable, Systems } from '@sections';
+import { Accessibility, Anatomy, FigmaKits, Kpis, Overview, Props, Systems } from '@sections';
 
 /**
  * Individual section resolvers for each component section type.
@@ -44,6 +44,17 @@ export const anatomy: SectionModule = async ({ slug }) => {
 };
 
 /*------------------------------------*
+ * Props Table Section
+ *------------------------------------*/
+export const props: SectionModule = async ({ slug }) => {
+  const data = await findData<PropsData>(slug, 'props.yml');
+  if (!data?.length) return null;
+
+  const Section: ComponentFactory = () => <Props data={data} />;
+  return Section;
+};
+
+/*------------------------------------*
  * Accessibility Section
  *------------------------------------*/
 // export const accessibility: SectionModule = async ({ slug }) => findMdx(slug, 'accessibility.mdx');
@@ -52,17 +63,6 @@ export const accessibility: SectionModule = async ({ slug }) => {
   if (!data) return null;
 
   const Section: ComponentFactory = () => <Accessibility componentName={slug} data={data} />;
-  return Section;
-};
-
-/*------------------------------------*
- * Props Table Section
- *------------------------------------*/
-export const props: SectionModule = async ({ slug }) => {
-  const data = await findData<PropsData>(slug, 'props.yml');
-  if (!data?.length) return null;
-
-  const Section: ComponentFactory = () => <PropsTable componentName={slug} data={data} />;
   return Section;
 };
 
