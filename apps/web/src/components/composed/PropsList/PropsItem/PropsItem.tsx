@@ -31,11 +31,11 @@ const nameContainer = tv({
 });
 
 const name = tv({
-  base: [],
+  base: ['text-sm'],
   variants: {
     isExpanded: {
       true: 'text-blue-600 dark:text-blue-400',
-      false: '',
+      false: 'text-neutral-50',
     },
   },
 });
@@ -84,6 +84,10 @@ const tag = tv({
   defaultVariants: {
     variant: TagVariant.default,
   },
+});
+
+const exampleTag = tv({
+  base: ['bg-gray-200/50 dark:bg-gray-800/40 px-1 text-xs text-neutral-50'],
 });
 
 type PropItem = PropsData[number];
@@ -150,6 +154,7 @@ export const PropsItem = ({ className, property, defaultExpanded = false }: Prop
     description: description({ isExpanded }),
     icon: icon({ isExpanded }),
     tag: (variant: TagVariantType) => tag({ variant }),
+    exampleTag: exampleTag(),
   };
 
   const handleClick = () => {
@@ -189,23 +194,21 @@ export const PropsItem = ({ className, property, defaultExpanded = false }: Prop
         <div className="flex flex-col gap-2">
           {/* TYPE */}
           <div className="flex items-center gap-2">
-            <div className="text-sm font-semibold">Type:</div>
+            <div className="text-sm text-neutral-50 font-semibold">Type:</div>
             <code className={classes.tag(TagVariant.accent)}>{formatValue(property?.value)}</code>
           </div>
 
           {/* DEFAULT VALUE */}
           <div className="flex items-center gap-2">
-            <div className="text-sm font-semibold">Default:</div>
+            <div className="text-sm text-neutral-50 font-semibold">Default:</div>
             <code className={classes.tag(TagVariant.default)}>{defaultValue}</code>
           </div>
 
           {/* EXAMPLE VALUES */}
           {property?.exampleValue && (
             <div className="flex items-center gap-2">
-              <div className="text-sm font-semibold">Examples:</div>
-              <div className="flex items-center gap-3">
-                {renderExamples(property.exampleValue, classes.tag(TagVariant.example))}
-              </div>
+              <div className="text-sm text-neutral-50 font-semibold">Examples:</div>
+              <div className="flex items-center gap-3">{renderExamples(property.exampleValue, classes.exampleTag)}</div>
             </div>
           )}
         </div>
