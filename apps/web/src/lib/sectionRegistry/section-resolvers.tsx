@@ -44,6 +44,17 @@ export const anatomy: SectionModule = async ({ slug }) => {
 };
 
 /*------------------------------------*
+ * Props Table Section
+ *------------------------------------*/
+export const props: SectionModule = async ({ slug }) => {
+  const data = await findData<PropsData>(slug, 'props.yml');
+  if (!data?.length) return null;
+
+  const Section: ComponentFactory = () => <Props data={data} />;
+  return Section;
+};
+
+/*------------------------------------*
  * Accessibility Section
  *------------------------------------*/
 // export const accessibility: SectionModule = async ({ slug }) => findMdx(slug, 'accessibility.mdx');
@@ -52,17 +63,6 @@ export const accessibility: SectionModule = async ({ slug }) => {
   if (!data) return null;
 
   const Section: ComponentFactory = () => <Accessibility componentName={slug} data={data} />;
-  return Section;
-};
-
-/*------------------------------------*
- * Props Table Section
- *------------------------------------*/
-export const props: SectionModule = async ({ slug }) => {
-  const data = await findData<PropsData>(slug, 'props.yml');
-  if (!data?.length) return null;
-
-  const Section: ComponentFactory = () => <Props data={data} />;
   return Section;
 };
 
