@@ -3,5 +3,5 @@ export * from './Anatomy';
 export * from './FigmaKits';
 export * from './Kpis';
 export * from './Overview';
-export * from './PropsTable';
+export * from './Props';
 export * from './Systems';
