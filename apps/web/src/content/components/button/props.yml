@@ -2,6 +2,7 @@
   description: Changes the size of the button, giving it more or less padding.
   value: ['sm', 'md', 'lg', 'xl']
   defaultValue: 'md'
+  exampleValue: ['sm', 'lg']
   isRequired: false
   usedBy:
     [
@@ -25,6 +26,7 @@
   description: The color of the component. It supports those theme colors that makes sense for this component.
   value: ['primary', 'accent', 'secondary', 'destructive']
   defaultValue: 'primary'
+  exampleValue: ['accent', 'destructive']
   isRequired: false
   usedBy:
     [
@@ -46,6 +48,7 @@
   description: The shape of the component. It determines the importance in the hierarchy. The contained button commands the most attention
   value: ['contained', 'outlined', 'ghost']
   defaultValue: 'contained'
+  exampleValue: ['outlined', 'ghost']
   isRequired: false
   usedBy:
     [
@@ -68,6 +71,7 @@
   description: Disables the button, disallowing user interaction.
   value: 'boolean'
   defaultValue: 'false'
+  exampleValue: 'true'
   isRequired: false
   usedBy:
     [
@@ -89,6 +93,7 @@
   description: Force disables the button and changes the icon to a loading spinner.
   value: 'boolean'
   defaultValue: 'false'
+  exampleValue: 'true'
   isRequired: false
   usedBy:
     [
@@ -108,6 +113,7 @@
   description: Allows the button to grow to the width of its container.
   value: 'boolean'
   defaultValue: 'false'
+  exampleValue: 'true'
   isRequired: false
   usedBy: ['elastic-ui', 'mantine', 'material-ui', 'polaris', 'ant-design', 'pajamas', 'vuetify']
 
@@ -115,6 +121,7 @@
   description: Icon to display before the Label
   value: ['svg', 'component']
   defaultValue: ''
+  exampleValue: '<ChevronLeft />'
   isRequired: false
   usedBy:
     [
@@ -137,6 +144,7 @@
   description: Icon to display after the Label
   value: ['svg', 'component']
   defaultValue: ''
+  exampleValue: '<ChevronRight />'
   isRequired: false
   usedBy:
     [
@@ -158,12 +166,14 @@
   description: HTML type attribute of button. This prop has no effect on anchor button; it only affects Button.
   value: ['button', 'reset', 'submit']
   defaultValue: 'button'
+  exampleValue: ['submit', 'reset']
   isRequired: false
 
 - name: href
   description: Designates the component as an anchor and applies the href attribute.
   value: 'string'
   defaultValue: ''
+  exampleValue: 'https://example.com'
   isRequired: false
   usedBy:
     [
@@ -184,5 +194,6 @@
   description: Callback fired when the component is clicked.
   value: 'function'
   defaultValue: ''
+  exampleValue: '() => handleClick()'
   isRequired: false
   usedBy: ['ant-design', 'atlassian-design-system', 'base-web', 'blueprint', 'carbon-design', 'polaris']

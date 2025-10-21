@@ -2,6 +2,7 @@
   description: Initial date or range of dates that will be selected.
   value: ['Date', 'string', 'list of Dates']
   defaultValue: ''
+  exampleValue: ['2024-01-15', 'new Date()']
   isRequired: false
   usedBy: ['mantine', 'polaris', 'atlassian-design-system']
 
@@ -9,6 +10,7 @@
   description: The default month displayed.
   value: 'number'
   defaultValue: ''
+  exampleValue: '6'
   isRequired: false
   usedBy: ['atlassian-design-system']
 
@@ -16,6 +18,7 @@
   description: The default year displayed.
   value: 'number'
   defaultValue: ''
+  exampleValue: '2024'
   isRequired: false
   usedBy: ['atlassian-design-system']
 
@@ -23,6 +26,7 @@
   description: Disable selecting dates before this date.
   value: 'Date'
   defaultValue: ''
+  exampleValue: 'new Date(2024, 0, 1)'
   isRequired: false
   usedBy: ['material-ui', 'polaris']
 
@@ -30,6 +34,7 @@
   description: Disable selecting dates after this date.
   value: 'Date'
   defaultValue: ''
+  exampleValue: 'new Date(2024, 11, 31)'
   isRequired: false
   usedBy: ['material-ui', 'polaris']
 
@@ -37,6 +42,7 @@
   description: Specify the date or dates that cannot be selected.
   value: ['Date', 'string', 'list of Dates']
   defaultValue: ''
+  exampleValue: ['2024-12-25', '2024-01-01']
   isRequired: false
   usedBy: ['ant-design', 'atlassian-design-system']
 
@@ -44,6 +50,7 @@
   description: Called every time the date changes.
   value: 'function'
   defaultValue: ''
+  exampleValue: '(date) => setSelectedDate(date)'
   isRequired: false
   usedBy: ['mantine', 'ant-design']
 
@@ -51,6 +58,7 @@
   description: Called every time month is changed.
   value: 'function'
   defaultValue: ''
+  exampleValue: '(month) => setCurrentMonth(month)'
   isRequired: false
   usedBy: ['mantine', 'material-ui', 'polaris']
 
@@ -58,5 +66,6 @@
   description: Called every time the year is changed.
   value: 'function'
   defaultValue: ''
+  exampleValue: '(year) => setCurrentYear(year)'
   isRequired: false
   usedBy: ['mantine', 'material-ui', 'polaris']
