@@ -5,3 +5,4 @@ export * from './SideNav/SideNav';
 export * from './Sidebar/Sidebar';
 export * from './Table/Table';
 export * from './TableOfContents';
+export * from './ToggleGroup';

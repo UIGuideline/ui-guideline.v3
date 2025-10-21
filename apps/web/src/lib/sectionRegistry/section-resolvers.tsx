@@ -13,7 +13,7 @@ import type {
 import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
 import { findData } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';
-import { Accessibility, Anatomy, FigmaKits, Kpis, Overview, PropsTable, Systems } from '@sections';
+import { Accessibility, Anatomy, FigmaKits, Kpis, Overview, Props, Systems } from '@sections';
 
 /**
  * Individual section resolvers for each component section type.
@@ -62,7 +62,7 @@ export const props: SectionModule = async ({ slug }) => {
   const data = await findData<PropsData>(slug, 'props.yml');
   if (!data?.length) return null;
 
-  const Section: ComponentFactory = () => <PropsTable componentName={slug} data={data} />;
+  const Section: ComponentFactory = () => <Props data={data} />;
   return Section;
 };
 
