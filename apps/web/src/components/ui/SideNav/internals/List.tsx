@@ -2,7 +2,7 @@ import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const list = tv({
-  base: ['flex flex-col border-l border-muted-foreground'],
+  base: ['flex flex-col'],
 });
 
 export type ListProps = React.HTMLAttributes<HTMLUListElement> &
