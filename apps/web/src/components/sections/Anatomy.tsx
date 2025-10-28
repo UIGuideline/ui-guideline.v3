@@ -3,7 +3,7 @@ import { ASSET_PATHS } from '@lib';
 import { tv } from 'tailwind-variants';
 
 const container = tv({
-  base: 'overflow-hidden border border-gray-800 rounded-lg',
+  base: 'overflow-hidden border border-border rounded-lg',
 });
 
 const content = tv({
