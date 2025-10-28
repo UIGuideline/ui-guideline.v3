@@ -48,7 +48,7 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 					<SideNav>
 						<!-- Section - SECTIONS -->
 						<SideNav.Section>
-							<SideNav.Heading>SECTIONS</SideNav.Heading>
+							<SideNav.Heading>Sections</SideNav.Heading>
 							<SideNav.List>
 								<SideNav.Item>
 									<SideNav.Link href={ROUTES.COMPONENTS} level={1} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
@@ -60,7 +60,7 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 
 						<!-- Section: COMPONENTS -->
 						<SideNav.Section>
-							<SideNav.Heading>COMPONENTS</SideNav.Heading>
+							<SideNav.Heading>Components</SideNav.Heading>
 							<SideNav.List>
 								{
 									sortedComponents.map((component) => (
