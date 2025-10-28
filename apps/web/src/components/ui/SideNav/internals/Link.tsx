@@ -2,32 +2,17 @@ import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const link = tv({
-  base: [
-    'group relative flex items-center border-l gap-2 px-3.5 py-1 text-sm transition-colors ml-[2px] hover:text-foreground font-semibold  text-foreground',
-  ],
+  base: ['group relative flex items-center gap-2', 'text-sm font-semibold', 'transition-colors', 'border-l'],
   variants: {
     level: {
-      0: '',
-      1: 'pl-3',
-      2: 'pl-6',
-      3: 'pl-9',
+      0: 'ml-0 px-2 pb-3 border-transparent text-foreground',
+      1: 'ml-3 px-4 py-1 border-border hover:border-muted-foreground/50 hover:bg-muted/50 text-muted-foreground hover:text-foreground',
+      2: 'ml-2 px-6 py-1',
     },
     isActive: {
       true: '',
     },
   },
-  compoundVariants: [
-    {
-      level: 0,
-      isActive: true,
-      class: 'border-transparent',
-    },
-    {
-      level: [1, 2, 3],
-      isActive: false,
-      class: 'border-border hover:border-muted-foreground/50 hover:bg-muted/50',
-    },
-  ],
   defaultVariants: {
     level: 0,
     isActive: false,

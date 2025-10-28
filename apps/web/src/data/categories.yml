@@ -1,0 +1,15 @@
+- slug: 'buttons'
+  name: 'Buttons'
+  description: 'Buttons are used to trigger actions, submit forms, and navigate.'
+
+- slug: 'data-display'
+  name: 'Data Display'
+  description: 'Data display components are used to display data in a visual way.'
+
+- slug: 'feedback'
+  name: 'Feedback'
+  description: 'Feedback components are used to provide feedback to the user.'
+
+- slug: 'navigation'
+  name: 'Navigation'
+  description: 'Navigation components are used to navigate through the application.'
