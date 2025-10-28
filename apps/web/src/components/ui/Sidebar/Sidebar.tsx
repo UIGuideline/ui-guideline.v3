@@ -3,7 +3,10 @@ import { tv } from 'tailwind-variants';
 
 const sideBar = tv({
   base: [
-    'sticky top-14.25 bottom-0 left-0 h-full max-h-[calc(100dvh-(var(--spacing)*14.25))] overflow-y-auto pl-6 pt-6',
+    'sticky top-14.25 bottom-0 left-0',
+    'h-full max-h-[calc(100dvh-(var(--spacing)*14.25))] pl-6 pt-6',
+    'overflow-y-auto',
+    'border-r border-border',
   ],
 });
 

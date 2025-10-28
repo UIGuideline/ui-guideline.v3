@@ -124,7 +124,7 @@ export const Anatomy = ({
 
   return (
     <section className="flex flex-col gap-3">
-      <h1 id="anatomy" className="text-2xl text-gray-200 ml-1">
+      <h1 id="anatomy" className="text-xl font-bold m-0">
         Anatomy
       </h1>
       <div aria-label={ariaLabel} className={classes.container}>
