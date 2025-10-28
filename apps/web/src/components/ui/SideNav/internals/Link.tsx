@@ -3,7 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 const link = tv({
   base: [
-    'group relative flex items-center gap-2 px-3.5 py-1 text-sm transition-colors ml-[2px] hover:text-foreground hover:border-muted-foreground/50 font-semibold  text-foreground',
+    'group relative flex items-center border-l gap-2 px-3.5 py-1 text-sm transition-colors ml-[2px] hover:text-foreground font-semibold  text-foreground',
   ],
   variants: {
     level: {
@@ -13,9 +13,21 @@ const link = tv({
       3: 'pl-9',
     },
     isActive: {
-      true: 'border-amber-200 text-gray-50 hover:border-amber-200 font-semibold',
+      true: '',
     },
   },
+  compoundVariants: [
+    {
+      level: 0,
+      isActive: true,
+      class: 'border-transparent',
+    },
+    {
+      level: [1, 2, 3],
+      isActive: false,
+      class: 'border-border hover:border-muted-foreground/50 hover:bg-muted/50',
+    },
+  ],
   defaultVariants: {
     level: 0,
     isActive: false,

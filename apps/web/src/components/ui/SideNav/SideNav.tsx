@@ -3,7 +3,7 @@ import { Heading, Item, Link, List, Section } from './internals';
 import { tv } from 'tailwind-variants';
 
 const sideNav = tv({
-  base: ['flex flex-col gap-8 muted-foreground'],
+  base: ['flex flex-col gap-6 muted-foreground'],
 });
 
 interface SideNavProps extends React.HTMLAttributes<HTMLElement> {

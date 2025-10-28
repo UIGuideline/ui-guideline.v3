@@ -48,11 +48,31 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 					<SideNav>
 						<!-- Section - SECTIONS -->
 						<SideNav.Section>
-							<SideNav.Heading>Sections</SideNav.Heading>
+							<SideNav.Heading>Getting started</SideNav.Heading>
 							<SideNav.List>
 								<SideNav.Item>
 									<SideNav.Link href={ROUTES.COMPONENTS} level={1} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
+										Introduction
+									</SideNav.Link>
+								</SideNav.Item>
+								<SideNav.Item>
+									<SideNav.Link href={ROUTES.COMPONENTS} level={1} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
 										Components
+									</SideNav.Link>
+								</SideNav.Item>
+								<SideNav.Item>
+									<SideNav.Link href={ROUTES.COMPONENTS} level={1} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
+										MCP Server
+									</SideNav.Link>
+								</SideNav.Item>
+								<SideNav.Item>
+									<SideNav.Link href={ROUTES.COMPONENTS} level={1} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
+										llms.txt
+									</SideNav.Link>
+								</SideNav.Item>
+								<SideNav.Item>
+									<SideNav.Link href={ROUTES.COMPONENTS} level={1} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
+										Story
 									</SideNav.Link>
 								</SideNav.Item>
 							</SideNav.List>

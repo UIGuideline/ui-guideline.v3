@@ -29,7 +29,7 @@ export const SideBar = ({ className, children, ...props }: SideBarProps) => {
   const classes = sideBar({ className });
 
   return (
-    <aside className={classes} {...props}>
+    <aside className={classes} aria-label="Sidebar" {...props}>
       {children}
     </aside>
   );
