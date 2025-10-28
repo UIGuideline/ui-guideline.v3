@@ -16,10 +16,10 @@ export const Overview = ({ componentName, data }: OverviewProps) => {
   return (
     <section id="overview" className="flex flex-col gap-2">
       <div className="flex items-center gap-4">
-        <h1 className="text-4xl text-gray-900 dark:text-white">{componentName}</h1>
+        <h1 className="text-3xl font-bold m-0">{componentName}</h1>
       </div>
 
-      <p className="max-w-xl text-lg text-gray-600 dark:text-gray-400">{data.description}</p>
+      <p className="text-base text-muted-foreground max-w-2xl">{data.description}</p>
     </section>
   );
 };

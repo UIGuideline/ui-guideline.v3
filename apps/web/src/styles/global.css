@@ -1,7 +1,15 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @source '../../node_modules/@side-ui';
 
+/* Font smoothing for better text rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 :root {
+  /* Primary colors */
   --primary-100: oklch(92.785% 0.0398 298.23);
   --primary-200: oklch(85.589% 0.0812 297.3);
   --primary-300: oklch(78.75% 0.1204 294.83);
@@ -14,6 +22,11 @@
 }
 
 @theme {
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+
+  /* Primary colors */
   --color-primary-100: var(--primary-100);
   --color-primary-200: var(--primary-200);
   --color-primary-300: var(--primary-300);
@@ -23,11 +36,29 @@
   --color-primary-700: var(--primary-700);
   --color-primary-800: var(--primary-800);
   --color-primary-900: var(--primary-900);
-}
 
-/* Dark mode variables */
-.dark {
-  --dashed-border-color: var(--color-gray-800);
+  /* shadcn/ui variables */
+  --color-background: var(--color-zinc-950);
+  --color-foreground: var(--color-zinc-50);
+  --color-card: var(--color-zinc-950);
+  --color-card-foreground: var(--color-zinc-50);
+  --color-popover: var(--color-zinc-950);
+  --color-popover-foreground: var(--color-zinc-50);
+  --primary: var(--color-blue-600);
+  --color-primary-foreground: var(--color-white);
+  --color-secondary: var(--color-zinc-800);
+  --color-secondary-foreground: var(--color-zinc-50);
+  --color-muted: var(--color-zinc-900);
+  --color-muted-foreground: var(--color-zinc-500);
+  --color-accent: var(--color-zinc-900);
+  --color-accent-foreground: var(--color-zinc-50);
+  --color-destructive: var(--color-red-600);
+  --color-destructive-foreground: var(--color-white);
+  --color-border: var(--color-zinc-800);
+  --color-input: var(--color-zinc-800);
+  --color-ring: var(--color-zinc-600);
+
+  --dashed-border-color: var(--color-zinc-800);
 }
 
 /* Custom dashed border utility */
@@ -35,7 +66,7 @@
   background-image:
     linear-gradient(to bottom, var(--dashed-border-color) 40%, transparent 40%),
     linear-gradient(to bottom, var(--dashed-border-color) 40%, transparent 40%),
-    linear-gradient(to bottom, white, white);
+    linear-gradient(to bottom, var(--color-background), var(--color-background));
   background-size:
     1px 20px,
     1px 20px,
@@ -45,12 +76,4 @@
     right top,
     center;
   background-repeat: repeat-y, repeat-y, no-repeat;
-}
-
-/* Dark mode background for border-dashed-wide */
-.dark .border-dashed-wide {
-  background-image:
-    linear-gradient(to bottom, var(--dashed-border-color) 40%, transparent 40%),
-    linear-gradient(to bottom, var(--dashed-border-color) 40%, transparent 40%),
-    linear-gradient(to bottom, var(--color-gray-950), var(--color-gray-950));
 }
