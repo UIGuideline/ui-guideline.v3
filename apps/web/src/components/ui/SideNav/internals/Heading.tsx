@@ -3,7 +3,10 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 const heading = tv({
   base: [
-    'group flex items-center tracking-widest gap-2 px-0 py-2.5 text-xs transition-colors font-mono text-muted-foreground uppercase',
+    'group flex items-center gap-2',
+    'px-0 py-2.5',
+    'tracking-widest text-xs font-mono text-muted-foreground uppercase',
+    'transition-colors',
   ],
 });
 
