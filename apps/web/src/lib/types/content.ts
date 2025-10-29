@@ -1,5 +1,8 @@
 import type { CollectionEntry } from 'astro:content';
 
+// Re-export Zod-inferred types from data schemas
+export type { Category, FigmaKitItem, SystemItem } from '../schemas/data-schemas';
+
 // Types derived from Astro Collections
 export type OverviewEntry = CollectionEntry<'overview'>;
 export type PropsEntry = CollectionEntry<'props'>;
