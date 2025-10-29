@@ -5,9 +5,14 @@ const link = tv({
   base: ['group relative flex items-center gap-2', 'text-sm font-semibold', 'transition-colors', 'border-l'],
   variants: {
     level: {
-      0: 'ml-0 px-2 pb-3 border-transparent text-foreground',
-      1: 'ml-3 px-4 py-1 border-border hover:border-muted-foreground/50 hover:bg-muted/50 text-muted-foreground hover:text-foreground',
-      2: 'ml-2 px-6 py-1',
+      0: ['ml-0 px-2 pb-2', 'border-transparent', 'text-foreground hover:text-zinc-300'],
+      1: [
+        'ml-3 px-4 py-1',
+        'border-border',
+        'hover:border-muted-foreground/50 hover:bg-muted/50',
+        'text-muted-foreground hover:text-foreground',
+      ],
+      2: ['ml-2 px-6 py-1', 'border-border', 'text-muted-foreground'],
     },
     isActive: {
       true: '',
@@ -41,7 +46,7 @@ export const Link = ({ className, href, level = 0, isActive = false, children, .
   const classes = link({ level, isActive, className });
 
   return (
-    <a className={classes} href={href} {...props}>
+    <a className={classes} href={href} data-level={level} {...props}>
       {children}
     </a>
   );
