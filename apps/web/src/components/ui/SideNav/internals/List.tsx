@@ -2,7 +2,7 @@ import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const list = tv({
-  base: ['flex flex-col'],
+  base: ['flex flex-col [&_[data-level="0"]]:mt-4 [&_:first-child]:mt-0'],
 });
 
 export type ListProps = React.HTMLAttributes<HTMLUListElement> &
