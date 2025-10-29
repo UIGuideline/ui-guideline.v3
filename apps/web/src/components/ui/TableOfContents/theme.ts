@@ -4,9 +4,9 @@ export const item = tv({
   base: [
     'cursor-pointer',
     'transition-colors duration-100 ease-out',
-    'text-gray-400 text-sm',
+    'text-muted-foreground text-sm',
     'font-light',
-    'border-l border-transparent hover:border-gray-300 hover:text-gray-50',
+    'border-l border-transparent hover:border-border hover:text-foreground',
   ],
   variants: {
     level: {
@@ -16,7 +16,7 @@ export const item = tv({
       3: 'pl-9',
     },
     isActive: {
-      true: 'border-amber-200 text-gray-50 hover:border-amber-200',
+      true: 'border-amber-200 text-foreground hover:border-amber-200',
     },
     defaultVariants: {
       level: 0,

@@ -2,7 +2,11 @@ import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const heading = tv({
-  base: ['text-gray-600 font-mono text-sm'],
+  base: [
+    'group flex items-center gap-2',
+    'tracking-widest text-xs font-mono text-zinc-600 uppercase',
+    'transition-colors',
+  ],
 });
 
 export type HeadingProps = React.ComponentPropsWithoutRef<'h2'> &

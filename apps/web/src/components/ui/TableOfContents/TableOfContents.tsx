@@ -43,7 +43,7 @@ export const TableOfContents = ({ className, children, scrollSpy, ...props }: Ta
 
   return (
     <TableOfContentsContext.Provider value={contextValue} {...props}>
-      <aside className={classes} {...props}>
+      <aside className={classes} aria-label="Table of contents" {...props}>
         {children}
       </aside>
     </TableOfContentsContext.Provider>

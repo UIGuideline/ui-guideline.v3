@@ -2,7 +2,7 @@ import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const section = tv({
-  base: ['flex flex-col gap-2 mb-4'],
+  base: ['flex flex-col gap-1'],
 });
 
 export type SectionProps = React.HTMLAttributes<HTMLDivElement> &

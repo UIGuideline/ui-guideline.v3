@@ -11,7 +11,7 @@ import type {
   SystemsData,
 } from '../types/content';
 import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
-import { findData } from './content-loader';
+import { loadContent } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';
 import { Accessibility, Anatomy, FigmaKits, Kpis, Overview, Props, Systems } from '@sections';
 
@@ -23,9 +23,9 @@ import { Accessibility, Anatomy, FigmaKits, Kpis, Overview, Props, Systems } fro
 /*------------------------------------*
  * Overview Section
  *------------------------------------*/
-// export const overview: SectionModule = async ({ slug }) => findMdx(slug, 'index.mdx');
+// export const overview: SectionModule = async ({ slug }) => loadContentMdx(slug, 'index.mdx');
 export const overview: SectionModule = async ({ slug, title }) => {
-  const data = await findData<OverviewData>(slug, 'overview.yml');
+  const data = await loadContent<OverviewData>(slug, 'overview.yml');
   if (!data) return null;
 
   const Section: ComponentFactory = () => <Overview componentName={title ?? slug} data={data} />;
@@ -36,7 +36,7 @@ export const overview: SectionModule = async ({ slug, title }) => {
  * Anatomy Section
  *------------------------------------*/
 export const anatomy: SectionModule = async ({ slug }) => {
-  const data = await findData<AnatomyData>(slug, 'anatomy.yml');
+  const data = await loadContent<AnatomyData>(slug, 'anatomy.yml');
   if (!data) return null;
 
   const Section: ComponentFactory = () => <Anatomy desktop={data.desktop} tablet={data.tablet} mobile={data.mobile} />;
@@ -47,7 +47,7 @@ export const anatomy: SectionModule = async ({ slug }) => {
  * Props Table Section
  *------------------------------------*/
 export const props: SectionModule = async ({ slug }) => {
-  const data = await findData<PropsData>(slug, 'props.yml');
+  const data = await loadContent<PropsData>(slug, 'props.yml');
   if (!data?.length) return null;
 
   const Section: ComponentFactory = () => <Props data={data} />;
@@ -57,9 +57,9 @@ export const props: SectionModule = async ({ slug }) => {
 /*------------------------------------*
  * Accessibility Section
  *------------------------------------*/
-// export const accessibility: SectionModule = async ({ slug }) => findMdx(slug, 'accessibility.mdx');
+// export const accessibility: SectionModule = async ({ slug }) => loadContentMdx(slug, 'accessibility.mdx');
 export const accessibility: SectionModule = async ({ slug }) => {
-  const data = await findData<AccessibilityData>(slug, 'accessibility.yml');
+  const data = await loadContent<AccessibilityData>(slug, 'accessibility.yml');
   if (!data) return null;
 
   const Section: ComponentFactory = () => <Accessibility componentName={slug} data={data} />;
@@ -70,7 +70,7 @@ export const accessibility: SectionModule = async ({ slug }) => {
  * KPIs Section
  *------------------------------------*/
 export const kpis: SectionModule = async ({ slug }) => {
-  const data = await findData<Array<KpisData>>(slug, 'kpis.yml');
+  const data = await loadContent<Array<KpisData>>(slug, 'kpis.yml');
   if (!data?.length) return null;
 
   const Section: ComponentFactory = () => <Kpis componentName={slug} data={data} />;
@@ -78,10 +78,10 @@ export const kpis: SectionModule = async ({ slug }) => {
 };
 
 /*------------------------------------*
- * Design Systems and Ui Libs  Section
+ * Design Systems and Ui Libs Section
  *------------------------------------*/
 export const systems: SectionModule = async ({ slug }) => {
-  const references = await findData<Array<SystemsData>>(slug, 'systems.yml');
+  const references = await loadContent<Array<SystemsData>>(slug, 'systems.yml');
   if (!references?.length) return null;
 
   const merged = (await resolveDesignSystems(slug, references)) as MergedSystemsData[];
@@ -95,7 +95,7 @@ export const systems: SectionModule = async ({ slug }) => {
  * Figma Kits Section
  *------------------------------------*/
 export const figmaKits: SectionModule = async ({ slug }) => {
-  const references = await findData<Array<FigmaKitsData>>(slug, 'figma-kits.yml');
+  const references = await loadContent<Array<FigmaKitsData>>(slug, 'figma-kits.yml');
   if (!references?.length) return null;
 
   const merged = (await resolveFigmaKits(slug, references)) as MergedFigmaKitsData[];
