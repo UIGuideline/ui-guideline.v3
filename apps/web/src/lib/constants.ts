@@ -14,6 +14,11 @@ export const ROUTES = {
   COMPONENTS: '/components',
 
   /**
+   * llms.txt base route
+   */
+  LLMS_TXT: '/llms.txt',
+
+  /**
    * Docs base route
    */
   DOCS: '/docs',

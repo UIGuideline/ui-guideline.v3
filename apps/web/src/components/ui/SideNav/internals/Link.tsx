@@ -2,15 +2,15 @@ import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const link = tv({
-  base: ['relative flex items-center gap-2', 'text-sm font-semibold', 'transition-colors'],
+  base: ['relative flex items-center gap-2', 'text-sm', 'transition-colors'],
   variants: {
     level: {
-      0: ['text-foreground group-hover:text-zinc-300'],
-      1: ['text-muted-foreground group-hover:text-foreground'],
-      2: ['text-muted-foreground'],
+      0: ['text-foreground group-hover:text-zinc-300 font-semibold'],
+      1: ['text-muted-foreground group-hover:text-foreground font-medium'],
+      2: ['text-muted-foreground font-medium'],
     },
     isActive: {
-      true: '',
+      true: 'text-foreground',
     },
   },
   defaultVariants: {
@@ -35,6 +35,11 @@ export type LinkProps = React.ComponentPropsWithoutRef<'a'> &
      * The depth of the item in the tree.
      */
     level?: 0 | 1 | 2;
+
+    /**
+     * Whether the link is active.
+     */
+    isActive?: boolean;
   };
 
 export const Link = ({ className, href, level = 0, isActive = false, children, ...props }: LinkProps) => {
