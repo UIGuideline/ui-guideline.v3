@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+import React, { cloneElement, isValidElement } from 'react';
 import { ASSET_PATHS } from './constants';
 
 /**
@@ -48,4 +50,29 @@ export const camelToTitleCase = (str: string): string => {
  */
 export const getComponentThumbnailUrl = (slug: string): string => {
   return `${ASSET_PATHS.COMPONENT_THUMBNAILS}/${slug}.svg`;
+};
+
+/**
+ * Recursively clones a React element and its children, injecting additional
+ * props.
+ *
+ * @param element - The React element to clone.
+ * @param props - The props to inject into the element and its children.
+ * @returns The cloned element with the injected props.
+ */
+type Props = Record<string, unknown>;
+export const cloneElementWithProps = (element: ReactNode, props: Props): ReactNode => {
+  if (!isValidElement(element)) return element;
+
+  const newProps = { ...(element.props as Record<string, unknown>), ...props };
+
+  return cloneElement(
+    element,
+    newProps,
+    ((element.props as Record<string, unknown>)?.children as ReactNode)
+      ? React.Children.map((element.props as Record<string, unknown>)?.children as ReactNode, (child) =>
+          cloneElementWithProps(child, props),
+        )
+      : null,
+  );
 };

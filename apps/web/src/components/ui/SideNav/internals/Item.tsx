@@ -1,15 +1,38 @@
 import * as React from 'react';
+import { tv, type VariantProps } from 'tailwind-variants';
 
-export type ItemProps = React.ComponentPropsWithoutRef<'li'> & {
-  /**
-   * The children of the item.
-   */
-  children: React.ReactNode;
-};
+const item = tv({
+  base: ['border-l group'],
+  variants: {
+    level: {
+      0: ['ml-0 px-2 pb-2', 'border-transparent'],
+      1: ['ml-3 px-4 py-1', 'border-border', 'hover:border-muted-foreground/50 hover:bg-muted/50'],
+      2: ['ml-2 px-6 py-1', 'border-border'],
+    },
+  },
+  defaultVariants: {
+    level: 0,
+  },
+});
 
-export const Item = React.forwardRef<HTMLLIElement, ItemProps>(({ className, children, ...props }, ref) => {
+export type ItemProps = React.ComponentPropsWithoutRef<'li'> &
+  VariantProps<typeof item> & {
+    /**
+     * The children of the item.
+     */
+    children: React.ReactNode;
+
+    /**
+     * The depth of the item in the tree.
+     */
+    level?: 0 | 1 | 2;
+  };
+
+export const Item = React.forwardRef<HTMLLIElement, ItemProps>(({ className, level = 0, children, ...props }, ref) => {
+  const classes = item({ level, className });
+
   return (
-    <li ref={ref} className={className} {...props}>
+    <li ref={ref} className={classes} data-level={level} {...props}>
       {children}
     </li>
   );
