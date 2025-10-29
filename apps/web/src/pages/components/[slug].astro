@@ -6,8 +6,8 @@ import {
 	camelToTitleCase,
 	CLIENT_SECTIONS_CONFIG,
 	CONTENT_PATHS,
-	findData,
 	isClientSection,
+	loadContent,
 	renderSections,
 	SectionKey,
 } from '@lib';
@@ -34,7 +34,7 @@ const clientSectionData: Partial<Record<SectionKey, unknown>> = {};
 for (const sectionKey of sections) {
 	if (isClientSection(sectionKey)) {
 		const config = CLIENT_SECTIONS_CONFIG[sectionKey as keyof typeof CLIENT_SECTIONS_CONFIG];
-		const data = await findData(entry.data.slug, config.dataFile);
+		const data = await loadContent(entry.data.slug, config.dataFile);
 		if (data) {
 			clientSectionData[sectionKey] = data;
 		}

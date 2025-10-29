@@ -1,26 +1,20 @@
+import { loadData } from './content-loader';
 import type { CatalogItem, FigmaKitItem, SystemItem } from './types';
 import { devWarn, mergeBySlug } from './utils';
 
 /**
  * Catalog manager handles global data catalogs and joins them with component-specific references.
- * Provides resilient loading with graceful fallbacks.
+ * Uses centralized data loader with caching for optimal performance.
  */
 
 /**
- * Global catalogs used to enrich per-component references.
- * Keep I/O on demand and resilient to failures.
+ * Load design systems catalog from /src/data/systems.yml
+ * @returns Array of design system items or empty array on error
  */
-const CATALOGS: Record<'systems' | 'figmaKits', () => Promise<CatalogItem[]>> = {
-  systems: () => import('/src/data/systems.yml').then((m) => m.default as SystemItem[]),
-  figmaKits: () => import('/src/data/figma-kits.yml').then((m) => m.default as FigmaKitItem[]),
-};
-
-/**
- * Load design systems catalog with error handling
- */
-export const loadSystemsCatalog = async (): Promise<CatalogItem[]> => {
+export const loadSystemsCatalog = async (): Promise<SystemItem[]> => {
   try {
-    return await CATALOGS.systems();
+    const data = await loadData('systems.yml');
+    return data ?? [];
   } catch (e) {
     devWarn('Could not load design-systems catalog', e);
     return [];
@@ -28,11 +22,13 @@ export const loadSystemsCatalog = async (): Promise<CatalogItem[]> => {
 };
 
 /**
- * Load figma kits catalog with error handling
+ * Load Figma kits catalog from /src/data/figma-kits.yml
+ * @returns Array of Figma kit items or empty array on error
  */
 export const loadFigmaKitsCatalog = async (): Promise<FigmaKitItem[]> => {
   try {
-    return await CATALOGS.figmaKits();
+    const data = await loadData('figma-kits.yml');
+    return data ?? [];
   } catch (e) {
     devWarn('Could not load figma-kits catalog', e);
     return [];

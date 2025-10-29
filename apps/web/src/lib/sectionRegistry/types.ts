@@ -1,6 +1,8 @@
+// Re-export Zod-inferred types from data schemas
+export type { FigmaKitItem, SystemItem } from '../schemas/data-schemas';
+
+// Base catalog item type (for legacy compatibility)
 export type CatalogItem = { slug: string; name?: string; url?: string };
-export type SystemItem = CatalogItem & { figmaUrl?: string };
-export type FigmaKitItem = CatalogItem & { fileKey?: string };
 
 export enum SectionKey {
   overview = 'overview',
