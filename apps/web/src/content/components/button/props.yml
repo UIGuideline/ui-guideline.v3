@@ -1,6 +1,6 @@
 - name: size
   description: Changes the size of the button, giving it more or less padding.
-  value: ['sm', 'md', 'lg', 'xl']
+  value: ['sm', 'md', 'lg']
   defaultValue: 'md'
   exampleValue: ['sm', 'lg']
   isRequired: false
