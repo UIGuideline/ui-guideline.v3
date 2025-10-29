@@ -75,7 +75,7 @@ sortedCategories.forEach((category) => {
 <BaseLayout title={title} description={description}>
 	<!-- Top Navigation -->
 	<header class="sticky top-0 w-full border-b border-border z-40">
-		<Navbar className="@md:max-w-[1350px] mx-auto border-dashed-wide" />
+		<Navbar className="@md:max-w-[1350px] mx-auto border-x border-border backdrop-blur-sm bg-background/90" />
 	</header>
 
 	<div class="flex flex-col min-h-screen @md:max-w-[1350px] mx-auto border-dashed-wide">
@@ -86,35 +86,30 @@ sortedCategories.forEach((category) => {
 					<SideNav>
 						<!-- Section - SECTIONS -->
 						<SideNav.Section>
-							<SideNav.Heading>Getting started</SideNav.Heading>
+							<SideNav.Heading className="mb-4">Getting started</SideNav.Heading>
 							<SideNav.List>
-								<SideNav.Item level={0}>
-									<SideNav.Link level={0} href={ROUTES.COMPONENTS} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
-										Sections
-									</SideNav.Link>
-								</SideNav.Item>
-								<SideNav.Item level={1}>
-									<SideNav.Link level={1} href={ROUTES.COMPONENTS} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
+								<SideNav.Item level={1} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
+									<SideNav.Link level={1} href={ROUTES.LLMS_TXT} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
 										Introduction
 									</SideNav.Link>
 								</SideNav.Item>
-								<SideNav.Item level={1}>
+								<SideNav.Item level={1} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
 									<SideNav.Link level={1} href={ROUTES.COMPONENTS} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
 										Components
 									</SideNav.Link>
 								</SideNav.Item>
-								<SideNav.Item level={1}>
-									<SideNav.Link level={1} href={ROUTES.COMPONENTS} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
+								<SideNav.Item level={1} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
+									<SideNav.Link level={1} href={ROUTES.LLMS_TXT} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
 										MCP Server
 									</SideNav.Link>
 								</SideNav.Item>
-								<SideNav.Item level={1}>
-									<SideNav.Link level={1} href={ROUTES.COMPONENTS} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
+								<SideNav.Item level={1} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
+									<SideNav.Link level={1} href={ROUTES.LLMS_TXT} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
 										llms.txt
 									</SideNav.Link>
 								</SideNav.Item>
-								<SideNav.Item level={1}>
-									<SideNav.Link level={1} href={ROUTES.COMPONENTS} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
+								<SideNav.Item level={1} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
+									<SideNav.Link level={1} href={ROUTES.LLMS_TXT} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
 										Story
 									</SideNav.Link>
 								</SideNav.Item>
@@ -144,7 +139,7 @@ sortedCategories.forEach((category) => {
 
 												{/* Components in Category */}
 												{componentsInCategory.map((component) => (
-													<SideNav.Item level={1}>
+													<SideNav.Item level={1} isActive={currentSlug === component.data.slug}>
 														<SideNav.Link
 															level={1}
 															href={`${ROUTES.COMPONENTS}/${component.data.slug}`}

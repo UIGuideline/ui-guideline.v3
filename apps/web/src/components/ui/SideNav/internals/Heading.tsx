@@ -4,8 +4,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 const heading = tv({
   base: [
     'group flex items-center gap-2',
-    'px-0 py-2.5',
-    'tracking-widest text-xs font-mono text-muted-foreground uppercase',
+    'tracking-widest text-xs font-mono text-zinc-600 uppercase',
     'transition-colors',
   ],
 });
