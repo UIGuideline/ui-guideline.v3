@@ -15,6 +15,7 @@
     "@astrojs/mdx": "^4.3.5",
     "@astrojs/react": "^4.3.1",
     "@astrojs/sitemap": "^3.5.1",
+    "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@side-ui/button": "^0.1.1",
     "@side-ui/table-of-contents": "^0.1.1",
