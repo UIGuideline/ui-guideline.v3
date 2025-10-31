@@ -1,6 +1,6 @@
 ---
 import { ComponentDetailLayout } from '@layouts';
-import type { PropsData } from '@lib';
+import type { AnatomyData, PropsData } from '@lib';
 import {
 	camelToKebab,
 	camelToTitleCase,
@@ -11,7 +11,7 @@ import {
 	renderSections,
 	SectionKey,
 } from '@lib';
-import { Props } from '@sections';
+import { Anatomy, Props } from '@sections';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -74,6 +74,17 @@ const tocItems = sections.map((key) => ({
 					return (
 						<section class="scroll-mt-20">
 							<Props data={data} client:load />
+						</section>
+					);
+				}
+
+				if (sectionKey === SectionKey.anatomy) {
+					const data = clientSectionData[sectionKey] as AnatomyData;
+					if (!data) return null;
+
+					return (
+						<section class="scroll-mt-20">
+							<Anatomy data={data} client:load />
 						</section>
 					);
 				}
