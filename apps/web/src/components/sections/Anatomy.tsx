@@ -37,57 +37,17 @@ interface AnatomyProps {
   className?: string;
 
   /**
-   * The URL of the image to be displayed on mobile devices.
+   * The data for the anatomy.
    */
-  mobile?: AnatomyData['mobile'];
-
-  /**
-   * The URL of the image to be displayed on tablet devices.
-   */
-  tablet?: AnatomyData['tablet'];
-
-  /**
-   * The URL of the image to be displayed on desktop devices.
-   */
-  desktop?: AnatomyData['desktop'];
-
-  /**
-   * The alt text to display for the image.
-   */
-  altText?: string;
-
-  /**
-   * The aria-label to apply to the component.
-   */
-  ariaLabel?: string;
-
-  /**
-   * The component slug.
-   */
-  componentSlug?: string;
-
-  /**
-   * Whether the Card is loading, show a skeleton.
-   */
-  isLoading?: boolean;
-
-  /**
-   * Whether the Card is locked.
-   */
-  hasLock?: boolean;
+  data: AnatomyData;
 }
 
 /**
  * This component is used to render a card with the systems and UI libraries.
  */
-export const Anatomy = ({
-  className,
-  altText = 'Anatomy',
-  ariaLabel = 'Anatomy',
-  desktop,
-  mobile,
-  tablet,
-}: AnatomyProps) => {
+export const Anatomy = ({ className, data }: AnatomyProps) => {
+  const { mobile, tablet, desktop } = data;
+
   const classes = {
     container: container({ className }),
     content: content(),
@@ -132,7 +92,7 @@ export const Anatomy = ({
         <source media="(width >= 1024px)" srcSet={srcSetDesktop} />
 
         {/* TODO: add a default picture in case the Anatomy images doesn't exist */}
-        <img src={srcSetDesktop} alt={altText} className={classes.image} />
+        <img src={srcSetDesktop} alt="Anatomy" className={classes.image} />
       </picture>
     );
   };
@@ -142,7 +102,7 @@ export const Anatomy = ({
       <h1 id="anatomy" className="text-xl font-bold m-0">
         Anatomy
       </h1>
-      <div aria-label={ariaLabel} className={classes.container}>
+      <div aria-label="Anatomy" className={classes.container}>
         <Tabs className="w-full px-4 pt-1 pb-4" defaultValue={activeTab} onValueChange={handleTabChange}>
           <Tabs.List>
             <Tabs.Trigger value={AnatomyTab.base}>Base Anatomy</Tabs.Trigger>

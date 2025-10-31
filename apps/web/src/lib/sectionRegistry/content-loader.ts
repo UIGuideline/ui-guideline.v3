@@ -28,9 +28,6 @@ const DATA_MAP = import.meta.glob('/src/data/**/**.{yml,yaml,json}', { import: '
  * @param slug - Component slug (e.g., 'button', 'calendar')
  * @param filename - MDX filename (e.g., 'index.mdx', 'accessibility.mdx')
  * @returns MDX component factory or null if not found
- *
- * @example
- * const Overview = await loadContentMdx('button', 'index.mdx');
  */
 export const loadContentMdx = async (slug: string, filename: string): Promise<Renderable> => {
   const expected = normalize(`${CONTENT_ROOT}/${slug}/${filename}`);
@@ -60,10 +57,6 @@ export const loadContentMdx = async (slug: string, filename: string): Promise<Re
  * @param slug - Component slug (e.g., 'button', 'calendar')
  * @param filename - Data filename (e.g., 'props.yml', 'anatomy.yml')
  * @returns Parsed data or null if not found
- *
- * @example
- * const props = await loadContent<PropsData>('button', 'props.yml');
- * const anatomy = await loadContent<AnatomyData>('calendar', 'anatomy.yml');
  */
 export const loadContent = async <T = unknown>(slug: string, filename: string): Promise<T | null> => {
   const expected = normalize(`${CONTENT_ROOT}/${slug}/${filename}`);
@@ -94,16 +87,6 @@ export const loadContent = async <T = unknown>(slug: string, filename: string): 
  *
  * @param filename - Data filename (must be registered in dataSchemas)
  * @returns Validated and typed data or null if not found
- *
- * @example
- * // Type automatically inferred as Category[]
- * const categories = await loadData('categories.yml');
- *
- * // Type automatically inferred as SystemItem[]
- * const systems = await loadData('systems.yml');
- *
- * // TypeScript error - not a registered filename
- * const invalid = await loadData('unknown.yml'); // ❌
  */
 export const loadData = async <T extends DataFileName>(filename: T): Promise<InferDataType<T> | null> => {
   const expected = normalize(`/src/data/${filename}`);
