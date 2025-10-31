@@ -46,7 +46,7 @@ interface AnatomyProps {
  * This component is used to render a card with the systems and UI libraries.
  */
 export const Anatomy = ({ className, data }: AnatomyProps) => {
-  const { mobile, tablet, desktop } = data;
+  const { baseAnatomy, codeAnatomy, designAnatomy } = data;
 
   const classes = {
     container: container({ className }),
@@ -63,38 +63,31 @@ export const Anatomy = ({ className, data }: AnatomyProps) => {
     setActiveTab(value as AnatomyTab);
   };
 
-  const renderImage = () => {
-    const getImageUrl = (imgData: AnatomyData['mobile']): string => {
-      return ASSET_PATHS.ROOT.concat(imgData?.darkImageUrl ?? '');
-    };
+  const getAnatomyDataByTab = (tab: AnatomyTab) => {
+    switch (tab) {
+      case AnatomyTab.base:
+        return baseAnatomy;
+      case AnatomyTab.code:
+        return codeAnatomy;
+      case AnatomyTab.design:
+        return designAnatomy;
+      default:
+        return baseAnatomy;
+    }
+  };
 
-    const getImageSrcSet = (imgData: AnatomyData['mobile']): string => {
-      const imageUrl = getImageUrl(imgData);
-      let image2xUrl = '';
+  const renderImage = (tab: AnatomyTab) => {
+    const anatomyData = getAnatomyDataByTab(tab);
 
-      image2xUrl = ASSET_PATHS.ROOT.concat(imgData?.darkImageUrl2x ?? '');
+    if (!anatomyData) {
+      return null;
+    }
 
-      return `${imageUrl}, ${image2xUrl} 2x`;
-    };
+    const imageUrl = ASSET_PATHS.ROOT.concat(anatomyData.darkImageUrl);
+    const imageUrl2x = ASSET_PATHS.ROOT.concat(anatomyData.darkImageUrl2x);
+    const srcSet = `${imageUrl}, ${imageUrl2x} 2x`;
 
-    const srcSetMobile = mobile && getImageSrcSet(mobile);
-    const srcSetTablet = tablet && getImageSrcSet(tablet);
-    const srcSetDesktop = desktop && getImageSrcSet(desktop);
-
-    /** Picture Breakpoints
-     * 768px is the breakpoint for isMobile or md: in tailwindCSS
-     * 1024px is the breakpoint lg: in tailwindCSS
-     */
-    return (
-      <picture className="z-20 flex justify-center items-center">
-        <source media="(width <= 768px)" srcSet={srcSetMobile} />
-        <source media="(768px < width < 1024px)" srcSet={srcSetTablet} />
-        <source media="(width >= 1024px)" srcSet={srcSetDesktop} />
-
-        {/* TODO: add a default picture in case the Anatomy images doesn't exist */}
-        <img src={srcSetDesktop} alt="Anatomy" className={classes.image} />
-      </picture>
-    );
+    return <img src={imageUrl} srcSet={srcSet} alt={`${tab} anatomy`} className={classes.image} />;
   };
 
   return (
@@ -111,17 +104,17 @@ export const Anatomy = ({ className, data }: AnatomyProps) => {
           </Tabs.List>
           <Tabs.Content value={AnatomyTab.base}>
             <div className={classes.content}>
-              <div className={classes.imageContainer}>{renderImage()}</div>
+              <div className={classes.imageContainer}>{renderImage(AnatomyTab.base)}</div>
             </div>
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.code}>
             <div className={classes.content}>
-              <div className={classes.imageContainer}>CODE</div>
+              <div className={classes.imageContainer}>{renderImage(AnatomyTab.code)}</div>
             </div>
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.design}>
             <div className={classes.content}>
-              <div className={classes.imageContainer}>DESIGN</div>
+              <div className={classes.imageContainer}>{renderImage(AnatomyTab.design)}</div>
             </div>
           </Tabs.Content>
         </Tabs>
