@@ -23,7 +23,7 @@ export interface IconProps extends React.HTMLAttributes<SVGSVGElement>, VariantP
   onClick?: React.MouseEventHandler<SVGSVGElement>;
 }
 
-export const Icon = ({ icon = IconCatalog.eye, className, onClick, ...props }: IconProps) => {
+export const Icon = ({ icon = IconCatalog.checkCircle, className, onClick, ...props }: IconProps) => {
   const classes = root({ className });
 
   return (
