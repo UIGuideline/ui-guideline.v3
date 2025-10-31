@@ -77,7 +77,7 @@ const tocItems = sections.map((key) => ({
 						</section>
 					);
 				}
-
+				// TODO: Refactor this validation to avoid list every section here
 				if (sectionKey === SectionKey.anatomy) {
 					const data = clientSectionData[sectionKey] as AnatomyData;
 					if (!data) return null;
