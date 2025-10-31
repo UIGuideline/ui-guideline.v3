@@ -40,26 +40,20 @@ const props = defineCollection({
 const anatomy = defineCollection({
   type: 'data',
   schema: z.object({
-    mobile: z
+    baseAnatomy: z
       .object({
-        lightImageUrl: z.string(),
-        lightImageUrl2x: z.string(),
         darkImageUrl: z.string(),
         darkImageUrl2x: z.string(),
       })
       .optional(),
-    tablet: z
+    codeAnatomy: z
       .object({
-        lightImageUrl: z.string(),
-        lightImageUrl2x: z.string(),
         darkImageUrl: z.string(),
         darkImageUrl2x: z.string(),
       })
       .optional(),
-    desktop: z
+    designAnatomy: z
       .object({
-        lightImageUrl: z.string(),
-        lightImageUrl2x: z.string(),
         darkImageUrl: z.string(),
         darkImageUrl2x: z.string(),
       })

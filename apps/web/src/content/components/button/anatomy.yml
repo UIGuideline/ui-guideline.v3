@@ -1,19 +1,13 @@
-mobile:
-  lightImageUrl: '/components/button/anatomy/mobile/light.png'
-  lightImageUrl2x: '/components/button/anatomy/mobile/light@2x.png'
-  darkImageUrl: '/components/button/anatomy/mobile/dark.png'
-  darkImageUrl2x: '/components/button/anatomy/mobile/dark@2x.png'
+baseAnatomy:
+  darkImageUrl: '/components/button/anatomy/base-anatomy/dark.png'
+  darkImageUrl2x: '/components/button/anatomy/base-anatomy/dark@2x.png'
 
-tablet:
-  lightImageUrl: '/components/button/anatomy/tablet/light.png'
-  lightImageUrl2x: '/components/button/anatomy/tablet/light@2x.png'
-  darkImageUrl: '/components/button/anatomy/tablet/dark.png'
-  darkImageUrl2x: '/components/button/anatomy/tablet/dark@2x.png'
+codeAnatomy:
+  darkImageUrl: '/components/button/anatomy/code-anatomy/dark.png'
+  darkImageUrl2x: '/components/button/anatomy/code-anatomy/dark@2x.png'
 
-desktop:
-  lightImageUrl: '/components/button/anatomy/desktop/light.png'
-  lightImageUrl2x: '/components/button/anatomy/desktop/light@2x.png'
-  darkImageUrl: '/components/button/anatomy/desktop/dark.png'
-  darkImageUrl2x: '/components/button/anatomy/desktop/dark@2x.png'
+designAnatomy:
+  darkImageUrl: '/components/button/anatomy/design-anatomy/dark.png'
+  darkImageUrl2x: '/components/button/anatomy/design-anatomy/dark@2x.png'
 
 proposedBy: ['ant-design', 'blueprint', 'polaris']
