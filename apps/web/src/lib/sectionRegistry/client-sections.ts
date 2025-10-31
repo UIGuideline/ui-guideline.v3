@@ -22,6 +22,9 @@ export const CLIENT_SECTIONS_CONFIG = {
   [SectionKey.props]: {
     dataFile: 'props.yml',
   },
+  [SectionKey.anatomy]: {
+    dataFile: 'anatomy.yml',
+  },
 } as const;
 
 /**
