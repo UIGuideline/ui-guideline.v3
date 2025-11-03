@@ -132,6 +132,8 @@ apps/ui-guideline/
 
 **[DONE] Build Component Detail Page Structure** - https://linear.app/ui-guideline/ISSUE-SR-106 - Install `@side-ui/table-of-contents` package (`pnpm add @side-ui/table-of-contents`) - Create `ComponentDetailLayout.astro` layout that integrates Sidebar, main content area, and optional TOC - Refactor `[slug].astro` to use the new layout with proper semantic HTML structure - Create `ComponentHeader` component for displaying component title, status, tags, and quick actions - Create `Breadcrumbs` component for contextual navigation (Home > Components > {slug}) - Populate `SideNav` dynamically from content collections to show all available components - Add SEO metadata tags and structured data for better search engine optimization - Integrate `@side-ui/table-of-contents` component with scroll spy functionality for intra-page navigation - _Success Criteria:_ Component detail pages have proper semantic structure, Sidebar/SideNav integration works correctly, navigation is functional, SEO metadata is present, TableOfContents from @side-ui works correctly, and responsive design works on mobile/tablet/desktop
 
+**[DONE] POC: Copy Image and Text Button (SR-118)** - https://linear.app/lol-assistant/issue/SR-118 - Completar investigación de Clipboard API y evaluar alternativas (API nativa con fallbacks graduales elegida) - Crear estructura completa del componente `CopyWithImage` con tipos TypeScript, hook `useCopyWithImage`, y componente UI con tailwind-variants - Implementar estrategia de fallback gradual (imagen+texto → solo imagen → solo texto → error) - Integrar componente en sección `Anatomy` con botones en cada tab (base, code, design) - Crear documentación completa: `CLIPBOARD_API_RESEARCH.md`, `TESTING_GUIDE.md`, y `README.md` del componente - _Success Criteria:_ Componente implementado y funcional, integrado en Anatomy, documentación completa, guía de testing creada para validación manual en diferentes navegadores, funcionalidad viable usando API nativa en Chrome/Edge
+
 ## Planner Analysis: Component Detail Page Structure
 
 ## Executor Comments or Assistance Requests
@@ -167,6 +169,27 @@ apps/ui-guideline/
 - Created example content for calendar component demonstrating all section types
 - Implemented proper data merging so components receive both global catalog info and component-specific data
 
+**POC: Copy Image and Text Button (SR-118) - COMPLETADO:**
+
+- ✅ **Investigación Completada**: Clipboard API nativa ES VIABLE para copiar imagen + texto simultáneamente
+- ✅ **Navegadores con soporte completo**: Chrome 76+, Edge 90+ (Chromium)
+- ✅ **Navegadores con soporte parcial**: Firefox 87+ (requiere permisos), Safari 13.1+ (restricciones de seguridad)
+- ✅ **Estrategia implementada**: API nativa con fallbacks graduales (imagen+texto → solo imagen → solo texto → error)
+- ✅ **Librerías evaluadas**: clipboard.js (solo texto, no viable), clipboard-polyfill (limitada para imágenes)
+- ✅ **Decisión ejecutada**: Implementado con API nativa pura, sin dependencias externas
+- ✅ **Componente creado**: `CopyWithImage` en `apps/web/src/components/ui/CopyWithImage/`
+  - `types.ts`: Enums y tipos TypeScript (CopyStatus, CopyMode, CopyResult, CopyOptions)
+  - `hooks/useCopyWithImage.ts`: Hook con lógica de copiado y fallbacks
+  - `CopyWithImage.tsx`: Componente UI con tailwind-variants, estados visuales e iconos de lucide-react
+  - `index.ts`: Exports del módulo
+- ✅ **Integración**: Agregado en `Anatomy.tsx` con botones en cada tab (base, code, design)
+- ✅ **Documentación creada**:
+  - `CLIPBOARD_API_RESEARCH.md`: Investigación completa y decisiones técnicas
+  - `TESTING_GUIDE.md`: Guía completa de testing para validación manual
+  - `CopyWithImage/README.md`: Documentación de API, ejemplos, limitaciones, y best practices
+- ✅ **Exportación**: Agregado al `@ui` index para uso en toda la aplicación
+- 📝 **Pendiente validación manual**: Testing en navegadores reales (guía provista en TESTING_GUIDE.md)
+
 ## Lessons
 
 **Monorepo Best Practices:**
@@ -196,3 +219,61 @@ apps/ui-guideline/
 - Structure YAML files as direct lists without parent wrapper objects for cleaner, more maintainable data architecture
 - Always validate data structure consistency when adding new content types or modifying existing schemas
 - Leverage Astro Content Collections with centralized Zod schemas for type safety and validation across the entire application
+
+**Clipboard API & Browser Compatibility (POC SR-118):**
+
+- Clipboard API con `ClipboardItem` ES VIABLE para copiar imagen + texto en navegadores modernos (Chrome 76+, Edge 90+)
+- Implementar estrategia de fallbacks graduales es CRÍTICO para buena UX: intentar imagen+texto → solo imagen → solo texto → error
+- No se necesitan librerías externas para funcionalidad básica; API nativa suficiente para POC
+- Firefox y Safari tienen soporte parcial; requiere testing manual para validar comportamiento real
+- Importantes consideraciones: CORS para imágenes, permisos del navegador, y detección de capacidades
+- Para POC, priorizar funcionalidad en navegador objetivo principal (Chrome/Cursor) sobre compatibilidad universal
+- Testing manual es esencial; comportamiento varía significativamente entre navegadores y aplicaciones de destino
+
+### Plan B: CopyGroup Component - Dos Botones Separados (SR-118) ✅
+
+**Fecha**: 2025-10-31  
+**Estado**: Completado
+
+**Problema**: Después del testing manual del POC, se descubrió que copiar imagen + texto juntos funciona técnicamente, pero tiene comportamiento inconsistente entre aplicaciones:
+
+- ChatGPT y Slack: ✅ Reciben ambos
+- Cursor: ⚠️ Solo imagen (pierde texto)
+- Figma: ❌ No acepta del clipboard
+
+**Solución**: Implementar dos botones separados con mensaje educativo
+
+```
+[📷 Copy Image]  [📝 Copy Prompt]
+💡 Copy both for better AI context
+```
+
+**Archivos Modificados/Creados**:
+
+1. ✅ `apps/web/src/components/ui/CopyWithImage/types.ts` - Agregado tipo `CopyStrategy`
+2. ✅ `apps/web/src/components/ui/CopyWithImage/CopyWithImage.tsx` - Agregada prop `mode?: 'both' | 'imageOnly' | 'textOnly'`
+3. ✅ `apps/web/src/components/ui/CopyGroup/CopyGroup.tsx` - Nuevo componente wrapper (~170 líneas)
+4. ✅ `apps/web/src/components/ui/CopyGroup/README.md` - Documentación completa (~400 líneas)
+5. ✅ `apps/web/src/components/ui/CopyGroup/index.ts` - Exports
+6. ✅ `apps/web/src/components/ui/index.ts` - Export de CopyGroup agregado
+7. ✅ `apps/web/src/components/sections/Anatomy.tsx` - Integrado CopyGroup (reemplaza CopyWithImage)
+8. ✅ `apps/web/POC_SUMMARY.md` - Actualizado con Plan B y resultados
+9. ✅ `apps/web/CLIPBOARD_API_RESEARCH.md` - Agregada sección Plan B con decisión
+10. ✅ `apps/web/src/components/ui/CopyWithImage/README.md` - Documentada prop `mode`
+
+**Testing**: ✅ Build exitoso sin errores, bundle size +~1.5KB (aceptable)
+
+**Razón de la Decisión**:
+
+- Honestidad > Magia: No prometer lo que no podemos garantizar
+- Claridad > Conveniencia: Usuario sabe exactamente qué está copiando
+- Funciona siempre > Funciona a veces: Compatible con TODAS las apps
+- Predecible > Sorpresivo: Sin comportamientos inesperados
+
+**Preparado para el Futuro**: El componente `CopyWithImage` con `mode="both"` sigue disponible para cuando apps mejoren su soporte. Solo requiere cambiar `<CopyGroup />` por `<CopyWithImage mode="both" />` en Anatomy.tsx.
+
+**Lecciones Aprendidas**:
+
+- Testing real ≠ Testing teórico: La API funciona, pero las apps no cooperan
+- UX over Tech: A veces la solución "técnicamente inferior" es mejor UX
+- Diseñar para la realidad actual, no para el mundo ideal
