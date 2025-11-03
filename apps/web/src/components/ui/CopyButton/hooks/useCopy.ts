@@ -10,7 +10,7 @@ import { CopyMode, CopyStatus } from '../types';
  * 2. 'imageOnly': Copy only the image
  * 3. 'textOnly': Copy only the text
  */
-export const useCopyWithImage = () => {
+export const useCopy = () => {
   const [status, setStatus] = useState<CopyStatus>(CopyStatus.idle);
   const [lastResult, setLastResult] = useState<CopyResult | null>(null);
   // Initialize as true to avoid hydration mismatch, will be updated on client
