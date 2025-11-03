@@ -6,7 +6,6 @@ export enum CopyStatus {
   copying = 'copying',
   success = 'success',
   error = 'error',
-  unsupported = 'unsupported',
 }
 
 /**

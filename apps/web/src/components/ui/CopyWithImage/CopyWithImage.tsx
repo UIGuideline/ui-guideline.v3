@@ -11,7 +11,7 @@ const button = tv({
     'text-sm font-medium',
     'rounded-md',
     'transition-all duration-200',
-    'focus:outline-none focus:ring-2 focus:ring-offset-2',
+    'focus:outline-none',
     'disabled:opacity-50 disabled:cursor-not-allowed',
   ],
   variants: {
@@ -47,6 +47,48 @@ const button = tv({
   },
 });
 
+const FEEDBACK_DURATION = 2000;
+
+// Status-to-icon mapping
+const STATUS_ICONS = {
+  [CopyStatus.success]: Check,
+  [CopyStatus.error]: X,
+  [CopyStatus.idle]: Copy,
+  [CopyStatus.copying]: Copy,
+} as const;
+
+// Status-to-label mapping with mode-specific messages
+const STATUS_LABELS: Record<CopyStatus, Record<CopyMode, string>> = {
+  [CopyStatus.idle]: {
+    [CopyMode.imageOnly]: 'Copy Image',
+    [CopyMode.textOnly]: 'Copy Text',
+    [CopyMode.both]: 'Copy Image & Text',
+  },
+  [CopyStatus.copying]: {
+    [CopyMode.imageOnly]: 'Copying Image...',
+    [CopyMode.textOnly]: 'Copying Text...',
+    [CopyMode.both]: 'Copying...',
+  },
+  [CopyStatus.success]: {
+    [CopyMode.imageOnly]: 'Image copied!',
+    [CopyMode.textOnly]: 'Text copied!',
+    [CopyMode.both]: 'Copied!',
+  },
+  [CopyStatus.error]: {
+    [CopyMode.imageOnly]: 'Failed',
+    [CopyMode.textOnly]: 'Failed',
+    [CopyMode.both]: 'Failed',
+  },
+};
+
+/**
+ * Get the appropriate label for the current status and mode
+ */
+const getStatusLabel = (status: CopyStatus, mode: CopyMode): string => {
+  const labels = STATUS_LABELS[status];
+  return labels[mode];
+};
+
 export interface CopyWithImageProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'>,
     VariantProps<typeof button> {
@@ -79,51 +121,26 @@ export interface CopyWithImageProps
 export const CopyWithImage = React.forwardRef<HTMLButtonElement, CopyWithImageProps>(
   ({ imageUrl, text, className, variant, size, mode = CopyMode.imageOnly, onCopyComplete, ...props }, ref) => {
     const { copy, reset, status, lastResult } = useCopyWithImage();
-    const [displayMessage, setDisplayMessage] = React.useState<string>('');
 
-    const FEEDBACK_DURATION = 2000;
+    // Determine current mode (use lastResult mode if available, otherwise use prop mode)
+    const currentMode = lastResult?.mode ?? mode;
 
-    // Default labels
-    const defaultLabels = {
-      idle: 'Copy Image',
-      copying: 'Copying...',
-      success: 'Copied!',
-      error: 'Failed',
-      unsupported: 'Not supported',
-    };
+    // Get label based on status and mode
+    const label = React.useMemo(() => getStatusLabel(status, currentMode), [status, currentMode]);
+
+    // Get icon component based on status
+    const Icon = STATUS_ICONS[status];
 
     // Reset status after success
     React.useEffect(() => {
       if (status === CopyStatus.success) {
         const timer = setTimeout(() => {
           reset();
-          setDisplayMessage('');
         }, FEEDBACK_DURATION);
 
         return () => clearTimeout(timer);
       }
     }, [status, reset]);
-
-    // Update display message based on status and result
-    React.useEffect(() => {
-      if (status === CopyStatus.idle) {
-        setDisplayMessage(defaultLabels.idle);
-      } else if (status === CopyStatus.copying) {
-        setDisplayMessage(defaultLabels.copying);
-      } else if (status === CopyStatus.success && lastResult) {
-        if (lastResult.mode === CopyMode.both) {
-          setDisplayMessage(defaultLabels.success);
-        } else if (lastResult.mode === CopyMode.imageOnly) {
-          setDisplayMessage('Image copied!');
-        } else if (lastResult.mode === CopyMode.textOnly) {
-          setDisplayMessage('Text copied!');
-        }
-      } else if (status === CopyStatus.error) {
-        setDisplayMessage(defaultLabels.error);
-      } else if (status === CopyStatus.unsupported) {
-        setDisplayMessage(defaultLabels.unsupported);
-      }
-    }, [status, lastResult, defaultLabels]);
 
     const handleClick = async () => {
       const result = await copy({
@@ -139,17 +156,8 @@ export const CopyWithImage = React.forwardRef<HTMLButtonElement, CopyWithImagePr
 
     return (
       <button ref={ref} className={classes} onClick={handleClick} {...props}>
-        {/* Icon */}
-        {status === CopyStatus.success ? (
-          <Check className="w-4 h-4" />
-        ) : status === CopyStatus.error || status === CopyStatus.unsupported ? (
-          <X className="w-4 h-4" />
-        ) : (
-          <Copy className="w-4 h-4" />
-        )}
-
-        {/* Label */}
-        <span>{displayMessage}</span>
+        <Icon className="w-4 h-4" />
+        <span>{label}</span>
       </button>
     );
   },
