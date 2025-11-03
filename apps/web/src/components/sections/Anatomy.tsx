@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { AnatomyData } from '@lib';
 import { ASSET_PATHS } from '@lib';
-import { CopyWithImage, Tabs } from '@ui';
+import { CopyButton, Tabs } from '@ui';
 import { tv } from 'tailwind-variants';
 
 enum AnatomyTab {
@@ -114,7 +114,7 @@ export const Anatomy = ({ className, data }: AnatomyProps) => {
           <Tabs.Content value={AnatomyTab.base}>
             <div className={classes.content}>
               <div className={classes.copyButton}>
-                <CopyWithImage imageUrl={getImageUrl(AnatomyTab.base)} />
+                <CopyButton imageUrl={getImageUrl(AnatomyTab.base)} />
               </div>
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.base)}</div>
             </div>
@@ -122,7 +122,7 @@ export const Anatomy = ({ className, data }: AnatomyProps) => {
           <Tabs.Content value={AnatomyTab.code}>
             <div className={classes.content}>
               <div className={classes.copyButton}>
-                <CopyWithImage imageUrl={getImageUrl(AnatomyTab.code)} />
+                <CopyButton imageUrl={getImageUrl(AnatomyTab.code)} />
               </div>
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.code)}</div>
             </div>
@@ -130,7 +130,7 @@ export const Anatomy = ({ className, data }: AnatomyProps) => {
           <Tabs.Content value={AnatomyTab.design}>
             <div className={classes.content}>
               <div className={classes.copyButton}>
-                <CopyWithImage imageUrl={getImageUrl(AnatomyTab.design)} />
+                <CopyButton imageUrl={getImageUrl(AnatomyTab.design)} />
               </div>
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.design)}</div>
             </div>

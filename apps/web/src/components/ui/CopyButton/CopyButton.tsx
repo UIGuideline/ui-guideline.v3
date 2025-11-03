@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useCopyWithImage } from './hooks/useCopyWithImage';
+import { useCopy } from './hooks/useCopy';
 import { CopyMode, CopyStatus } from './types';
 import { Check, Copy, X } from 'lucide-react';
 import { tv, type VariantProps } from 'tailwind-variants';
@@ -89,7 +89,7 @@ const getStatusLabel = (status: CopyStatus, mode: CopyMode): string => {
   return labels[mode];
 };
 
-export interface CopyWithImageProps
+export interface CopyButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'>,
     VariantProps<typeof button> {
   /**
@@ -118,9 +118,9 @@ export interface CopyWithImageProps
   onCopyComplete?: (success: boolean, mode: CopyMode) => void;
 }
 
-export const CopyWithImage = React.forwardRef<HTMLButtonElement, CopyWithImageProps>(
+export const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
   ({ imageUrl, text, className, variant, size, mode = CopyMode.imageOnly, onCopyComplete, ...props }, ref) => {
-    const { copy, reset, status, lastResult } = useCopyWithImage();
+    const { copy, reset, status, lastResult } = useCopy();
 
     // Determine current mode (use lastResult mode if available, otherwise use prop mode)
     const currentMode = lastResult?.mode ?? mode;
@@ -163,4 +163,4 @@ export const CopyWithImage = React.forwardRef<HTMLButtonElement, CopyWithImagePr
   },
 );
 
-CopyWithImage.displayName = 'CopyWithImage';
+CopyButton.displayName = 'CopyButton';
