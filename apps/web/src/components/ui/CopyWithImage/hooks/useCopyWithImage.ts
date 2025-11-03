@@ -248,7 +248,7 @@ export const useCopyWithImage = () => {
 
       // Check clipboard support
       if (!isSupported) {
-        setStatus(CopyStatus.unsupported);
+        setStatus(CopyStatus.error);
         const result: CopyResult = {
           success: false,
           mode: undefined,
