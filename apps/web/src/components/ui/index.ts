@@ -1,5 +1,5 @@
 export * from './ComponentCard/ComponentCard';
-export * from './CopyWithImage/CopyWithImage';
+export * from './CopyButton/CopyButton';
 export * from './Logo/Logo';
 export * from './Navbar/Navbar';
 export * from './Navigation';
