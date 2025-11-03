@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { AnatomyData } from '@lib';
 import { ASSET_PATHS } from '@lib';
-import { Tabs } from '@ui';
+import { CopyWithImage, Tabs } from '@ui';
 import { tv } from 'tailwind-variants';
 
 enum AnatomyTab {
@@ -20,6 +20,10 @@ const content = tv({
 
 const floatTag = tv({
   base: 'absolute bottom-2 left-2 z-20',
+});
+
+const copyButton = tv({
+  base: 'absolute top-3 right-3 z-20',
 });
 
 const imageContainer = tv({
@@ -52,6 +56,7 @@ export const Anatomy = ({ className, data }: AnatomyProps) => {
     container: container({ className }),
     content: content(),
     floatTag: floatTag(),
+    copyButton: copyButton(),
     imageContainer: imageContainer(),
     image: image(),
   };
@@ -79,15 +84,19 @@ export const Anatomy = ({ className, data }: AnatomyProps) => {
   const renderImage = (tab: AnatomyTab) => {
     const anatomyData = getAnatomyDataByTab(tab);
 
-    if (!anatomyData) {
-      return null;
-    }
+    if (!anatomyData) return null;
 
     const imageUrl = ASSET_PATHS.ROOT.concat(anatomyData.darkImageUrl);
     const imageUrl2x = ASSET_PATHS.ROOT.concat(anatomyData.darkImageUrl2x);
     const srcSet = `${imageUrl}, ${imageUrl2x} 2x`;
 
     return <img src={imageUrl} srcSet={srcSet} alt={`${tab} anatomy`} className={classes.image} />;
+  };
+
+  const getImageUrl = (tab: AnatomyTab): string => {
+    const anatomyData = getAnatomyDataByTab(tab);
+    if (!anatomyData) return '';
+    return ASSET_PATHS.ROOT.concat(anatomyData.darkImageUrl);
   };
 
   return (
@@ -104,16 +113,25 @@ export const Anatomy = ({ className, data }: AnatomyProps) => {
           </Tabs.List>
           <Tabs.Content value={AnatomyTab.base}>
             <div className={classes.content}>
+              <div className={classes.copyButton}>
+                <CopyWithImage imageUrl={getImageUrl(AnatomyTab.base)} />
+              </div>
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.base)}</div>
             </div>
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.code}>
             <div className={classes.content}>
+              <div className={classes.copyButton}>
+                <CopyWithImage imageUrl={getImageUrl(AnatomyTab.code)} />
+              </div>
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.code)}</div>
             </div>
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.design}>
             <div className={classes.content}>
+              <div className={classes.copyButton}>
+                <CopyWithImage imageUrl={getImageUrl(AnatomyTab.design)} />
+              </div>
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.design)}</div>
             </div>
           </Tabs.Content>
