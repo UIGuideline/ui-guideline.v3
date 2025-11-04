@@ -2,6 +2,7 @@ import React from 'react';
 import type {
   AccessibilityData,
   AnatomyData,
+  DesignLayersData,
   FigmaKitsData,
   KpisData,
   MergedFigmaKitsData,
@@ -37,9 +38,10 @@ export const overview: SectionModule = async ({ slug, title }) => {
  *------------------------------------*/
 export const anatomy: SectionModule = async ({ slug }) => {
   const data = await loadContent<AnatomyData>(slug, 'anatomy.yml');
-  if (!data) return null;
+  const designLayers = await loadContent<DesignLayersData>(slug, 'design-layers.yml');
+  if (!data || !designLayers) return null;
 
-  const Section: ComponentFactory = () => <Anatomy desktop={data.desktop} tablet={data.tablet} mobile={data.mobile} />;
+  const Section: ComponentFactory = () => <Anatomy data={data} designLayers={designLayers} />;
   return Section;
 };
 

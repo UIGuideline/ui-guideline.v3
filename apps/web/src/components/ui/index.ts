@@ -8,3 +8,4 @@ export * from './Sidebar/Sidebar';
 export * from './Table/Table';
 export * from './TableOfContents';
 export * from './ToggleGroup';
+export * from './Tree';

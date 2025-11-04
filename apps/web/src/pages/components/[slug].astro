@@ -35,9 +35,8 @@ for (const sectionKey of sections) {
 	if (isClientSection(sectionKey)) {
 		const config = CLIENT_SECTIONS_CONFIG[sectionKey as keyof typeof CLIENT_SECTIONS_CONFIG];
 		const data = await loadContent(entry.data.slug, config.dataFile);
-		if (data) {
-			clientSectionData[sectionKey] = data;
-		}
+
+		if (data) clientSectionData[sectionKey] = data;
 	}
 }
 
@@ -65,7 +64,7 @@ const tocItems = sections.map((key) => ({
 	<!-- Dynamic Sections -->
 	<div class="space-y-8">
 		{
-			sections.map((sectionKey) => {
+			sections.map(async (sectionKey) => {
 				// Client-side hydrated sections (must use imported components directly)
 				if (sectionKey === SectionKey.props) {
 					const data = clientSectionData[sectionKey] as PropsData;
@@ -80,11 +79,13 @@ const tocItems = sections.map((key) => ({
 				// TODO: Refactor this validation to avoid list every section here
 				if (sectionKey === SectionKey.anatomy) {
 					const data = clientSectionData[sectionKey] as AnatomyData;
-					if (!data) return null;
+					const designLayers = await loadContent(entry.data.slug, 'design-layers.yml');
+
+					if (!data || !designLayers) return null;
 
 					return (
 						<section class="scroll-mt-20">
-							<Anatomy data={data} client:load />
+							<Anatomy data={data} designLayers={designLayers} client:load />
 						</section>
 					);
 				}
