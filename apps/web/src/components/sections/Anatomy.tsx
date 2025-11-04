@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { FigmaTreeNode } from '@composed';
+import { FigmaTree } from '@composed';
 import type { AnatomyData, DesignLayersData } from '@lib';
 import { ASSET_PATHS } from '@lib';
-import { CopyButton, Tabs, Tree } from '@ui';
+import { CopyButton, Tabs } from '@ui';
 import { tv } from 'tailwind-variants';
 
 enum AnatomyTab {
@@ -142,11 +142,7 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
             </div>
             {designLayers && (
               <div className="p-4">
-                <Tree data={designLayers.layers}>
-                  {designLayers.layers.map((layer) => (
-                    <FigmaTreeNode key={layer.name} node={layer} level={0} />
-                  ))}
-                </Tree>
+                <FigmaTree data={designLayers.layers} />
               </div>
             )}
           </Tabs.Content>
