@@ -62,6 +62,28 @@ const anatomy = defineCollection({
   }),
 });
 
+/**
+ * Design Layers Collection
+ * Uses recursive schema for nested layer structure
+ */
+const baseLayerSchema = z.object({
+  type: z.string(),
+  name: z.string(),
+  description: z.string().optional(),
+  defaultOpen: z.boolean().optional(),
+});
+
+const layerSchema: any = baseLayerSchema.extend({
+  children: z.lazy(() => z.array(layerSchema)).optional(),
+});
+
+const designLayers = defineCollection({
+  type: 'data',
+  schema: z.object({
+    layers: z.array(layerSchema),
+  }) as any,
+});
+
 const accessibility = defineCollection({
   type: 'data',
   schema: z.object({
@@ -141,4 +163,16 @@ export const collections = {
   systems,
   figmaKits,
   accessibility,
+  designLayers,
+};
+
+/**
+ * Exported types for design layers
+ */
+export type Layer = z.infer<typeof baseLayerSchema> & {
+  children?: Layer[];
+};
+
+export type DesignLayers = {
+  layers: Layer[];
 };
