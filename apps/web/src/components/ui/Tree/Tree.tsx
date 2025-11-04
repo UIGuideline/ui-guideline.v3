@@ -1,9 +1,8 @@
-import { TreeNode } from './TreeNode';
 import type { TreeNodeData } from './types';
 import { tv } from 'tailwind-variants';
 
 const container = tv({
-  base: ['w-full', 'bg-white dark:bg-slate-900', 'border border-slate-200 dark:border-slate-700', 'rounded-lg', 'p-3'],
+  base: ['w-full', 'bg-slate-900', 'border border-slate-700', 'rounded-lg', 'p-3'],
 });
 
 export interface TreeProps {
@@ -16,12 +15,17 @@ export interface TreeProps {
    * Optional CSS class name.
    */
   className?: string;
+
+  /**
+   * What to render inside the tree.
+   */
+  children: React.ReactNode;
 }
 
 /**
  * Tree component for displaying hierarchical data structures.
  */
-export const Tree = ({ data, className }: TreeProps) => {
+export const Tree = ({ data, className, children }: TreeProps) => {
   const classes = {
     container: container({ className }),
   };
@@ -36,9 +40,7 @@ export const Tree = ({ data, className }: TreeProps) => {
 
   return (
     <div className={classes.container} role="tree">
-      {data.map((node, index) => (
-        <TreeNode key={`${node.name}-${index}`} node={node} level={0} />
-      ))}
+      {children}
     </div>
   );
 };

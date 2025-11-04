@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { getIconForType } from './figmaIcons';
 import type { TreeNodeData } from './types';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { tv } from 'tailwind-variants';
@@ -52,22 +51,39 @@ export interface TreeNodeProps {
    * Nesting level (for indentation).
    */
   level?: number;
+
+  /**
+   * Icon to display for this node.
+   * Can be any React element (component instance, SVG, etc.)
+   */
+  icon?: React.ReactNode;
+
+  /**
+   * Optional function to render an icon based on the node.
+   * This allows dynamic icon selection. If provided, takes precedence over the `icon` prop.
+   *
+   * @param node - The current tree node
+   * @returns A React element to render as the icon
+   */
+  renderIcon?: (node: TreeNodeData) => React.ReactNode;
 }
 
 /**
- * TreeNode component that renders a single node in the tree.
+ * Generic TreeNode component that renders a single node in the tree.
  * Handles both folder nodes (with children) and file nodes (without children).
+ *
+ * This is a generic component that can be used for any tree structure.
+ * For Figma-specific trees, consider using FigmaTreeNode instead.
  */
-export const TreeNode = ({ node, level = 0 }: TreeNodeProps) => {
+export const TreeNode = ({ node, level = 0, icon, renderIcon }: TreeNodeProps) => {
   const hasChildren = node.children && node.children.length > 0;
   const [isOpen, setIsOpen] = useState(node.defaultOpen ?? false);
 
-  const Icon = getIconForType(node.type);
+  // Determine which icon to render
+  const nodeIcon = renderIcon ? renderIcon(node) : icon;
 
   const handleToggle = () => {
-    if (hasChildren) {
-      setIsOpen(!isOpen);
-    }
+    if (hasChildren) setIsOpen(!isOpen);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -112,9 +128,7 @@ export const TreeNode = ({ node, level = 0 }: TreeNodeProps) => {
         </div>
 
         {/* Icon based on element type */}
-        <div className={classes.startIcon}>
-          <Icon size={16} />
-        </div>
+        {nodeIcon && <div className={classes.startIcon}>{nodeIcon}</div>}
 
         {/* Node name */}
         <span className={classes.label}>{node.name}</span>
@@ -125,7 +139,13 @@ export const TreeNode = ({ node, level = 0 }: TreeNodeProps) => {
         <div className={classes.children}>
           <div className={classes.childrenList}>
             {node.children!.map((child, index) => (
-              <TreeNode key={`${child.name}-${index}`} node={child} level={level + 1} />
+              <TreeNode
+                key={`${child.name}-${index}`}
+                node={child}
+                level={level + 1}
+                icon={icon}
+                renderIcon={renderIcon}
+              />
             ))}
           </div>
         </div>
