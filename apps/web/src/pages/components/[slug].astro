@@ -45,7 +45,7 @@ const tocItems = sections.map((key) => ({
 					return (
 						<section class="scroll-mt-20">
 							<ClientSectionWrapper
-								type={Section.type as 'anatomy' | 'props'}
+								type={Section.type}
 								data={Section.data as any}
 								designLayers={Section.designLayers as any}
 								client:load

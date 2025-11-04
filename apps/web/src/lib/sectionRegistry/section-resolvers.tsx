@@ -14,6 +14,7 @@ import type {
 import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
 import { loadContent } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';
+import { SectionKey } from './types';
 import { Accessibility, FigmaKits, Kpis, Overview, Systems } from '@sections';
 
 /**
@@ -43,7 +44,7 @@ export const anatomy: SectionModule = async ({ slug }) => {
 
   return {
     isClient: true,
-    type: 'anatomy',
+    type: SectionKey.anatomy,
     data,
     designLayers,
   };
@@ -58,7 +59,7 @@ export const props: SectionModule = async ({ slug }) => {
 
   return {
     isClient: true,
-    type: 'props',
+    type: SectionKey.props,
     data,
   };
 };
