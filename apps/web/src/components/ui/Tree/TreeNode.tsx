@@ -4,15 +4,23 @@ import { ChevronDown, ChevronRight } from 'lucide-react';
 import { tv } from 'tailwind-variants';
 
 const container = tv({
-  base: 'select-none',
+  base: 'select-none flex flex-col',
+  variants: {
+    isOpen: {
+      true: 'gap-2',
+      false: '',
+    },
+  },
 });
 
 const row = tv({
-  base: [
-    'flex items-center gap-2 py-1 px-2 rounded-md cursor-pointer',
-    'hover:bg-slate-100 dark:hover:bg-slate-800',
-    'transition-colors duration-150',
-  ],
+  base: ['flex items-center gap-2 py-1 px-2 rounded-md', 'hover:bg-white/5', 'transition-colors duration-150'],
+  variants: {
+    hasChildren: {
+      true: ['cursor-pointer'],
+      false: '',
+    },
+  },
 });
 
 const chevronIcon = tv({
@@ -20,11 +28,11 @@ const chevronIcon = tv({
 });
 
 const startIcon = tv({
-  base: 'flex items-center justify-center flex-shrink-0 text-slate-600 dark:text-slate-400',
+  base: 'flex items-center justify-center flex-shrink-0 text-[#d1a8ff]',
 });
 
 const label = tv({
-  base: 'text-sm text-slate-900 dark:text-slate-100 font-medium',
+  base: 'text-sm font-normal text-[#d1a8ff]',
 });
 
 const children = tv({
@@ -38,10 +46,15 @@ const children = tv({
 });
 
 const childrenList = tv({
-  base: 'ml-4 border-l border-slate-200 dark:border-slate-700',
+  base: 'ml-4 gap-2 flex flex-col',
 });
 
 export interface TreeNodeProps {
+  /**
+   * Optional CSS class name.
+   */
+  className?: string;
+
   /**
    * The node data to render.
    */
@@ -60,10 +73,6 @@ export interface TreeNodeProps {
 
   /**
    * Optional function to render an icon based on the node.
-   * This allows dynamic icon selection. If provided, takes precedence over the `icon` prop.
-   *
-   * @param node - The current tree node
-   * @returns A React element to render as the icon
    */
   renderIcon?: (node: TreeNodeData) => React.ReactNode;
 }
@@ -71,11 +80,8 @@ export interface TreeNodeProps {
 /**
  * Generic TreeNode component that renders a single node in the tree.
  * Handles both folder nodes (with children) and file nodes (without children).
- *
- * This is a generic component that can be used for any tree structure.
- * For Figma-specific trees, consider using FigmaTreeNode instead.
  */
-export const TreeNode = ({ node, level = 0, icon, renderIcon }: TreeNodeProps) => {
+export const TreeNode = ({ className, node, level = 0, icon, renderIcon }: TreeNodeProps) => {
   const hasChildren = node.children && node.children.length > 0;
   const [isOpen, setIsOpen] = useState(node.defaultOpen ?? false);
 
@@ -94,8 +100,8 @@ export const TreeNode = ({ node, level = 0, icon, renderIcon }: TreeNodeProps) =
   };
 
   const classes = {
-    container: container(),
-    row: row(),
+    container: container({ isOpen, className }),
+    row: row({ hasChildren }),
     chevronIcon: chevronIcon(),
     startIcon: startIcon(),
     label: label(),
@@ -118,9 +124,9 @@ export const TreeNode = ({ node, level = 0, icon, renderIcon }: TreeNodeProps) =
         <div className={classes.chevronIcon}>
           {hasChildren ? (
             isOpen ? (
-              <ChevronDown size={16} className="text-slate-500" />
+              <ChevronDown size={16} className="text-[#d1a8ff]" />
             ) : (
-              <ChevronRight size={16} className="text-slate-500" />
+              <ChevronRight size={16} className="text-[#d1a8ff]" />
             )
           ) : (
             <span className="w-4" />
