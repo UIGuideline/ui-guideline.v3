@@ -1,6 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+/**
+ * Components Collection Schema
+ */
 const components = defineCollection({
   loader: glob({ pattern: '**/_meta.yml', base: './src/content/components' }),
   schema: z.object({
@@ -15,6 +18,9 @@ const components = defineCollection({
   }),
 });
 
+/**
+ * Overview Content Schema
+ */
 const overview = defineCollection({
   type: 'data',
   schema: z.object({
@@ -22,6 +28,9 @@ const overview = defineCollection({
   }),
 });
 
+/**
+ * Props Content Schema
+ */
 const props = defineCollection({
   type: 'data',
   schema: z.array(
@@ -37,6 +46,9 @@ const props = defineCollection({
   ),
 });
 
+/**
+ * Anatomy Content Schema
+ */
 const anatomy = defineCollection({
   type: 'data',
   schema: z.object({
@@ -88,6 +100,9 @@ const designLayers = defineCollection({
   }),
 });
 
+/**
+ * Accessibility Content Schema
+ */
 const accessibility = defineCollection({
   type: 'data',
   schema: z.object({
@@ -95,6 +110,9 @@ const accessibility = defineCollection({
   }),
 });
 
+/**
+ * KPIs Content Schema
+ */
 const kpis = defineCollection({
   type: 'data',
   schema: z.object({
@@ -141,6 +159,9 @@ const kpis = defineCollection({
   }),
 });
 
+/**
+ * Systems Content Schema
+ */
 const systems = defineCollection({
   type: 'data',
   schema: z.object({
@@ -150,6 +171,9 @@ const systems = defineCollection({
   }),
 });
 
+/**
+ * Figma Kits Content Schema
+ */
 const figmaKits = defineCollection({
   type: 'data',
   schema: z.object({
@@ -163,11 +187,11 @@ export const collections = {
   overview,
   props,
   anatomy,
+  designLayers,
   kpis,
   systems,
   figmaKits,
   accessibility,
-  designLayers,
 };
 
 /**
