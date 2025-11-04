@@ -133,18 +133,14 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.code)}</div>
             </div>
           </Tabs.Content>
-          <Tabs.Content value={AnatomyTab.design}>
+          <Tabs.Content value={AnatomyTab.design} className="flex flex-col gap-4">
             <div className={classes.content}>
               <div className={classes.copyButton}>
                 <CopyButton imageUrl={getImageUrl(AnatomyTab.design)} />
               </div>
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.design)}</div>
             </div>
-            {designLayers && (
-              <div className="p-4">
-                <FigmaTree data={designLayers.layers} />
-              </div>
-            )}
+            {designLayers && <FigmaTree data={designLayers.layers} />}
           </Tabs.Content>
         </Tabs>
       </div>
