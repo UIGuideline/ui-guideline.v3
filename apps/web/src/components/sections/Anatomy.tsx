@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import type { AnatomyData } from '@lib';
+import type { AnatomyData, DesignLayersData } from '@lib';
 import { ASSET_PATHS } from '@lib';
-import { CopyButton, Tabs } from '@ui';
+import { CopyButton, Tabs, Tree } from '@ui';
 import { tv } from 'tailwind-variants';
 
 enum AnatomyTab {
@@ -44,12 +44,17 @@ interface AnatomyProps {
    * The data for the anatomy.
    */
   data: AnatomyData;
+
+  /**
+   * Optional design layers data for the Design Anatomy tab.
+   */
+  designLayers?: DesignLayersData;
 }
 
 /**
  * This component is used to render a card with the systems and UI libraries.
  */
-export const Anatomy = ({ className, data }: AnatomyProps) => {
+export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
   const { baseAnatomy, codeAnatomy, designAnatomy } = data;
 
   const classes = {
@@ -134,6 +139,11 @@ export const Anatomy = ({ className, data }: AnatomyProps) => {
               </div>
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.design)}</div>
             </div>
+            {designLayers && (
+              <div className="p-4">
+                <Tree data={designLayers.layers} />
+              </div>
+            )}
           </Tabs.Content>
         </Tabs>
       </div>
