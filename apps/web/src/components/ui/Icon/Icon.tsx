@@ -1,26 +1,16 @@
-import * as React from 'react';
 import { IconCatalog } from './iconCatalog';
+import type { BaseIconProps } from './types';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const root = tv({
   base: '',
 });
 
-export interface IconProps extends React.HTMLAttributes<SVGSVGElement>, VariantProps<typeof root> {
-  /**
-   * Set the class name of the icon.
-   */
-  className?: string;
-
+export interface IconProps extends BaseIconProps, VariantProps<typeof root> {
   /**
    * Set the icon from the IconCatalog.
    */
   icon: IconCatalog;
-
-  /**
-   * When the icon is clicked, this callback is called.
-   */
-  onClick?: React.MouseEventHandler<SVGSVGElement>;
 }
 
 export const Icon = ({ icon = IconCatalog.checkCircle, className, onClick, ...props }: IconProps) => {
@@ -42,6 +32,7 @@ export const Icon = ({ icon = IconCatalog.checkCircle, className, onClick, ...pr
   );
 };
 
+export { type BaseIconProps } from './types';
 export { IconCatalog };
 
 export type IconCatalogItem = keyof typeof IconCatalog;

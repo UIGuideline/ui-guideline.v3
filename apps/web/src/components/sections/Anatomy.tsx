@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FigmaTreeNode } from '@composed';
 import type { AnatomyData, DesignLayersData } from '@lib';
 import { ASSET_PATHS } from '@lib';
 import { CopyButton, Tabs, Tree } from '@ui';
@@ -141,7 +142,11 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
             </div>
             {designLayers && (
               <div className="p-4">
-                <Tree data={designLayers.layers} />
+                <Tree data={designLayers.layers}>
+                  {designLayers.layers.map((layer) => (
+                    <FigmaTreeNode key={layer.name} node={layer} level={0} />
+                  ))}
+                </Tree>
               </div>
             )}
           </Tabs.Content>
