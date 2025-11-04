@@ -1,4 +1,4 @@
 export { Tree } from './Tree';
 export { TreeNode } from './TreeNode';
-export { getIconForType, FIGMA_ICONS, DEFAULT_ICON } from './figmaIcons';
-export type { TreeProps, TreeNodeProps, TreeNodeData, IconGetter } from './Tree.types';
+export { DEFAULT_ICON, FIGMA_ICONS, getIconForType } from './figmaIcons';
+export type { TreeNodeData } from './types';

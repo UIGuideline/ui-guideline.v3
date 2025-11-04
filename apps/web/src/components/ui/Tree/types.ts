@@ -1,5 +1,3 @@
-import type { LucideIcon } from 'lucide-react';
-
 /**
  * Represents a single node in the tree structure.
  * This type is designed to be agnostic to specific Figma element types.
@@ -33,38 +31,3 @@ export interface TreeNodeData {
    */
   children?: TreeNodeData[];
 }
-
-/**
- * Props for the Tree component.
- */
-export interface TreeProps {
-  /**
-   * The tree data structure to render.
-   */
-  data: TreeNodeData[];
-
-  /**
-   * Optional CSS class name.
-   */
-  className?: string;
-}
-
-/**
- * Props for the TreeNode component.
- */
-export interface TreeNodeProps {
-  /**
-   * The node data to render.
-   */
-  node: TreeNodeData;
-
-  /**
-   * Nesting level (for indentation).
-   */
-  level?: number;
-}
-
-/**
- * Type for icon getter function.
- */
-export type IconGetter = (type: string) => LucideIcon;

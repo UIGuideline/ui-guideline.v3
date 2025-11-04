@@ -1,3 +1,4 @@
+import type { LucideIcon } from 'lucide-react';
 import {
   Box,
   Circle,
@@ -10,7 +11,6 @@ import {
   ToggleLeft,
   Type,
 } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 
 /**
  * Mapping of Figma element types to Lucide React icons.
