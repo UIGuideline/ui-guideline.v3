@@ -1,7 +1,3 @@
-/**
- * Represents a single node in the tree structure.
- * This type is designed to be agnostic to specific Figma element types.
- */
 export interface TreeNodeData {
   /**
    * Type of the element (e.g., "component", "text", "frame").
