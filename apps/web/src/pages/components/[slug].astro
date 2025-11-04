@@ -1,17 +1,7 @@
 ---
+import { ClientSectionWrapper } from '@composed';
 import { ComponentDetailLayout } from '@layouts';
-import type { AnatomyData, PropsData } from '@lib';
-import {
-	camelToKebab,
-	camelToTitleCase,
-	CLIENT_SECTIONS_CONFIG,
-	CONTENT_PATHS,
-	isClientSection,
-	loadContent,
-	renderSections,
-	SectionKey,
-} from '@lib';
-import { Anatomy, Props } from '@sections';
+import { camelToKebab, camelToTitleCase, renderSections, SectionKey } from '@lib';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -26,29 +16,13 @@ const { component } = Astro.props;
 const entry = component;
 if (!entry) throw new Error(`Component not found`);
 
-const basePath = `${CONTENT_PATHS.COMPONENTS}/${entry.id}`;
 const sections = (entry.data.sections ?? []) as SectionKey[];
-
-// Pre-load data for sections that need client-side hydration
-const clientSectionData: Partial<Record<SectionKey, unknown>> = {};
-for (const sectionKey of sections) {
-	if (isClientSection(sectionKey)) {
-		const config = CLIENT_SECTIONS_CONFIG[sectionKey as keyof typeof CLIENT_SECTIONS_CONFIG];
-		const data = await loadContent(entry.data.slug, config.dataFile);
-
-		if (data) clientSectionData[sectionKey] = data;
-	}
-}
-
-// Render server-side sections (excluding client-hydrated ones)
-const serverSections = sections.filter((s) => !isClientSection(s));
-const rendered = await renderSections(serverSections, {
+const rendered = await renderSections(sections, {
 	slug: entry.data.slug,
-	basePath,
+	basePath: '',
 	title: entry.data.title,
 });
 
-// Generate TOC from all sections
 const tocItems = sections.map((key) => ({
 	id: camelToKebab(key),
 	label: camelToTitleCase(key),
@@ -61,42 +35,26 @@ const tocItems = sections.map((key) => ({
 	currentSlug={entry.data.slug}
 	toc={tocItems}
 >
-	<!-- Dynamic Sections -->
 	<div class="space-y-8">
 		{
-			sections.map(async (sectionKey) => {
-				// Client-side hydrated sections (must use imported components directly)
-				if (sectionKey === SectionKey.props) {
-					const data = clientSectionData[sectionKey] as PropsData;
-					if (!data) return null;
-
-					return (
-						<section class="scroll-mt-20">
-							<Props data={data} client:load />
-						</section>
-					);
-				}
-				// TODO: Refactor this validation to avoid list every section here
-				if (sectionKey === SectionKey.anatomy) {
-					const data = clientSectionData[sectionKey] as AnatomyData;
-					const designLayers = await loadContent(entry.data.slug, 'design-layers.yml');
-
-					if (!data || !designLayers) return null;
-
-					return (
-						<section class="scroll-mt-20">
-							<Anatomy data={data} designLayers={designLayers} client:load />
-						</section>
-					);
-				}
-
-				// Server-side rendered sections
-				const renderedIndex = serverSections.indexOf(sectionKey);
-				if (renderedIndex === -1) return null;
-
-				const Section = rendered[renderedIndex];
+			rendered.map((Section) => {
 				if (!Section) return null;
 
+				// Client section (island with hydration)
+				if (typeof Section === 'object' && 'isClient' in Section) {
+					return (
+						<section class="scroll-mt-20">
+							<ClientSectionWrapper
+								type={Section.type as 'anatomy' | 'props'}
+								data={Section.data as any}
+								designLayers={Section.designLayers as any}
+								client:load
+							/>
+						</section>
+					);
+				}
+
+				// Server-rendered section
 				return (
 					<section class="scroll-mt-20">
 						<Section />

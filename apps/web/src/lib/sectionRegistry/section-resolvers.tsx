@@ -14,7 +14,7 @@ import type {
 import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
 import { loadContent } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';
-import { Accessibility, Anatomy, FigmaKits, Kpis, Overview, Props, Systems } from '@sections';
+import { Accessibility, FigmaKits, Kpis, Overview, Systems } from '@sections';
 
 /**
  * Individual section resolvers for each component section type.
@@ -41,8 +41,12 @@ export const anatomy: SectionModule = async ({ slug }) => {
   const designLayers = await loadContent<DesignLayersData>(slug, 'design-layers.yml');
   if (!data || !designLayers) return null;
 
-  const Section: ComponentFactory = () => <Anatomy data={data} designLayers={designLayers} />;
-  return Section;
+  return {
+    isClient: true,
+    type: 'anatomy',
+    data,
+    designLayers,
+  };
 };
 
 /*------------------------------------*
@@ -52,8 +56,11 @@ export const props: SectionModule = async ({ slug }) => {
   const data = await loadContent<PropsData>(slug, 'props.yml');
   if (!data?.length) return null;
 
-  const Section: ComponentFactory = () => <Props data={data} />;
-  return Section;
+  return {
+    isClient: true,
+    type: 'props',
+    data,
+  };
 };
 
 /*------------------------------------*

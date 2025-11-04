@@ -20,5 +20,14 @@ export type LoaderCtx = { slug: string; basePath: string; title?: string; status
 // We allow returning either an Astro component or a React component factory.
 // Keep the signature framework-agnostic: a function receiving optional props and returning any renderable node.
 export type ComponentFactory = (props?: Record<string, unknown>) => unknown;
-export type Renderable = ComponentFactory | null;
+
+// Metadata for client-side hydrated sections (using Astro Islands)
+export type ClientSectionMetadata = {
+  isClient: true;
+  type: 'anatomy' | 'props';
+  data: unknown;
+  designLayers?: unknown;
+};
+
+export type Renderable = ComponentFactory | ClientSectionMetadata | null;
 export type SectionModule = (ctx: LoaderCtx) => Promise<Renderable>;
