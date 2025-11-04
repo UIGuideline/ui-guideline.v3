@@ -1,52 +1,41 @@
-import type { TreeProps } from './Tree.types';
 import { TreeNode } from './TreeNode';
+import type { TreeNodeData } from './types';
 import { tv } from 'tailwind-variants';
 
-const treeContainer = tv({
+const container = tv({
   base: ['w-full', 'bg-white dark:bg-slate-900', 'border border-slate-200 dark:border-slate-700', 'rounded-lg', 'p-3'],
 });
 
+export interface TreeProps {
+  /**
+   * The tree data structure to render.
+   */
+  data: TreeNodeData[];
+
+  /**
+   * Optional CSS class name.
+   */
+  className?: string;
+}
+
 /**
- * Tree component for displaying hierarchical Figma layer structures.
- *
- * This component is designed to be:
- * - Agnostic to element types (works with any type defined in figmaIcons.ts)
- * - Recursive (handles any depth of nesting)
- * - Extensible (add new types by updating figmaIcons.ts)
- * - Accessible (keyboard navigation, ARIA labels)
- *
- * @example
- * ```tsx
- * const layers = [
- *   {
- *     type: "component",
- *     name: "Button",
- *     defaultOpen: true,
- *     children: [
- *       { type: "text", name: "Label" },
- *       { type: "instance", name: "Icon" }
- *     ]
- *   }
- * ];
- *
- * <Tree data={layers} />
- * ```
+ * Tree component for displaying hierarchical data structures.
  */
 export const Tree = ({ data, className }: TreeProps) => {
   const classes = {
-    treeContainer: treeContainer({ className }),
+    container: container({ className }),
   };
 
   if (!data || data.length === 0) {
     return (
-      <div className={classes.treeContainer}>
+      <div className={classes.container}>
         <p className="text-sm text-slate-500 dark:text-slate-400">No design layers available</p>
       </div>
     );
   }
 
   return (
-    <div className={classes.treeContainer} role="tree">
+    <div className={classes.container} role="tree">
       {data.map((node, index) => (
         <TreeNode key={`${node.name}-${index}`} node={node} level={0} />
       ))}

@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { getIconForType } from './figmaIcons';
-import type { TreeNodeProps } from './Tree.types';
+import type { TreeNodeData } from './types';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { tv } from 'tailwind-variants';
 
-const nodeContainer = tv({
+const container = tv({
   base: 'select-none',
 });
 
-const nodeRow = tv({
+const row = tv({
   base: [
     'flex items-center gap-2 py-1 px-2 rounded-md cursor-pointer',
     'hover:bg-slate-100 dark:hover:bg-slate-800',
@@ -16,19 +16,19 @@ const nodeRow = tv({
   ],
 });
 
-const chevronContainer = tv({
+const chevronIcon = tv({
   base: 'flex items-center justify-center w-4 h-4 flex-shrink-0',
 });
 
-const iconContainer = tv({
+const startIcon = tv({
   base: 'flex items-center justify-center flex-shrink-0 text-slate-600 dark:text-slate-400',
 });
 
-const nodeName = tv({
+const label = tv({
   base: 'text-sm text-slate-900 dark:text-slate-100 font-medium',
 });
 
-const childrenContainer = tv({
+const children = tv({
   base: 'overflow-hidden transition-all duration-200',
   variants: {
     isOpen: {
@@ -38,20 +38,25 @@ const childrenContainer = tv({
   },
 });
 
-const childrenWrapper = tv({
+const childrenList = tv({
   base: 'ml-4 border-l border-slate-200 dark:border-slate-700',
 });
+
+export interface TreeNodeProps {
+  /**
+   * The node data to render.
+   */
+  node: TreeNodeData;
+
+  /**
+   * Nesting level (for indentation).
+   */
+  level?: number;
+}
 
 /**
  * TreeNode component that renders a single node in the tree.
  * Handles both folder nodes (with children) and file nodes (without children).
- *
- * Features:
- * - Automatic folder/file detection based on children presence
- * - Collapsible folders with chevron indicator
- * - Dynamic icon based on node type
- * - Keyboard accessible
- * - Respects defaultOpen state
  */
 export const TreeNode = ({ node, level = 0 }: TreeNodeProps) => {
   const hasChildren = node.children && node.children.length > 0;
@@ -73,19 +78,19 @@ export const TreeNode = ({ node, level = 0 }: TreeNodeProps) => {
   };
 
   const classes = {
-    nodeContainer: nodeContainer(),
-    nodeRow: nodeRow(),
-    chevronContainer: chevronContainer(),
-    iconContainer: iconContainer(),
-    nodeName: nodeName(),
-    childrenContainer: childrenContainer({ isOpen }),
-    childrenWrapper: childrenWrapper(),
+    container: container(),
+    row: row(),
+    chevronIcon: chevronIcon(),
+    startIcon: startIcon(),
+    label: label(),
+    children: children({ isOpen }),
+    childrenList: childrenList(),
   };
 
   return (
-    <div className={classes.nodeContainer}>
+    <div className={classes.container}>
       <div
-        className={classes.nodeRow}
+        className={classes.row}
         onClick={handleToggle}
         onKeyDown={handleKeyDown}
         role={hasChildren ? 'button' : undefined}
@@ -94,7 +99,7 @@ export const TreeNode = ({ node, level = 0 }: TreeNodeProps) => {
         title={node.description}
       >
         {/* Chevron for folders (collapsible nodes) */}
-        <div className={classes.chevronContainer}>
+        <div className={classes.chevronIcon}>
           {hasChildren ? (
             isOpen ? (
               <ChevronDown size={16} className="text-slate-500" />
@@ -107,18 +112,18 @@ export const TreeNode = ({ node, level = 0 }: TreeNodeProps) => {
         </div>
 
         {/* Icon based on element type */}
-        <div className={classes.iconContainer}>
+        <div className={classes.startIcon}>
           <Icon size={16} />
         </div>
 
         {/* Node name */}
-        <span className={classes.nodeName}>{node.name}</span>
+        <span className={classes.label}>{node.name}</span>
       </div>
 
       {/* Children (recursive) */}
       {hasChildren && (
-        <div className={classes.childrenContainer}>
-          <div className={classes.childrenWrapper}>
+        <div className={classes.children}>
+          <div className={classes.childrenList}>
             {node.children!.map((child, index) => (
               <TreeNode key={`${child.name}-${index}`} node={child} level={level + 1} />
             ))}
