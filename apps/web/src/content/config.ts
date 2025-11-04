@@ -73,7 +73,11 @@ const baseLayerSchema = z.object({
   defaultOpen: z.boolean().optional(),
 });
 
-const layerSchema: any = baseLayerSchema.extend({
+type LayerType = z.infer<typeof baseLayerSchema> & {
+  children?: LayerType[];
+};
+
+const layerSchema: z.ZodType<LayerType> = baseLayerSchema.extend({
   children: z.lazy(() => z.array(layerSchema)).optional(),
 });
 
@@ -81,7 +85,7 @@ const designLayers = defineCollection({
   type: 'data',
   schema: z.object({
     layers: z.array(layerSchema),
-  }) as any,
+  }),
 });
 
 const accessibility = defineCollection({
