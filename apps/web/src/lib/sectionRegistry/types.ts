@@ -24,7 +24,7 @@ export type ComponentFactory = (props?: Record<string, unknown>) => unknown;
 // Metadata for client-side hydrated sections (using Astro Islands)
 export type ClientSectionMetadata = {
   isClient: true;
-  type: 'anatomy' | 'props';
+  type: SectionKey.anatomy | SectionKey.props;
   data: unknown;
   designLayers?: unknown;
 };
