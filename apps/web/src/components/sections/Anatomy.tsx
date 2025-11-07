@@ -2,7 +2,22 @@ import { useState } from 'react';
 import { FigmaTree } from '@composed';
 import type { AnatomyData, DesignLayersData } from '@lib';
 import { ASSET_PATHS } from '@lib';
-import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CopyButton, Tabs } from '@ui';
+import {
+  BrandLogo,
+  BrandLogoCatalog,
+  BrandLogoSize,
+  CodeBlock,
+  CodeBlockBody,
+  CodeBlockContent,
+  CodeBlockCopyButton,
+  CodeBlockFilename,
+  CodeBlockFiles,
+  CodeBlockHeader,
+  CodeBlockItem,
+  CopyButton,
+  Tabs,
+  type BundledLanguage,
+} from '@ui';
 import { tv } from 'tailwind-variants';
 
 enum AnatomyTab {
@@ -10,6 +25,30 @@ enum AnatomyTab {
   code = 'code-anatomy',
   design = 'design-anatomy',
 }
+
+// Example code for CodeBlock demonstration
+const EXAMPLE_CODE = `interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'base' | 'lg';
+  disabled?: boolean;
+  children: React.ReactNode;
+}
+
+export const Button: React.FC<ButtonProps> = ({
+  variant = 'primary',
+  size = 'base',
+  disabled = false,
+  children,
+}) => {
+  return (
+    <button
+      className={buttonStyles({ variant, size })}
+      disabled={disabled}
+    >
+      {children}
+    </button>
+  );
+};`;
 
 const container = tv({
   base: 'overflow-hidden border border-border rounded-lg',
@@ -125,12 +164,43 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.base)}</div>
             </div>
           </Tabs.Content>
-          <Tabs.Content value={AnatomyTab.code}>
+          <Tabs.Content value={AnatomyTab.code} className="flex flex-col gap-4">
             <div className={classes.content}>
               <div className={classes.copyButton}>
                 <CopyButton imageUrl={getImageUrl(AnatomyTab.code)} />
               </div>
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.code)}</div>
+            </div>
+            <div className="flex flex-col gap-3">
+              <h3 className="text-base font-semibold text-foreground">Code Example</h3>
+              <CodeBlock
+                data={[
+                  {
+                    language: 'typescript',
+                    filename: 'Button.tsx',
+                    code: EXAMPLE_CODE,
+                  },
+                ]}
+                defaultValue="typescript"
+              >
+                <CodeBlockHeader>
+                  <CodeBlockFiles>
+                    {(item) => (
+                      <CodeBlockFilename key={item.language} value={item.language}>
+                        {item.filename}
+                      </CodeBlockFilename>
+                    )}
+                  </CodeBlockFiles>
+                  <CodeBlockCopyButton />
+                </CodeBlockHeader>
+                <CodeBlockBody>
+                  {(item) => (
+                    <CodeBlockItem key={item.language} value={item.language}>
+                      <CodeBlockContent language={item.language as BundledLanguage}>{item.code}</CodeBlockContent>
+                    </CodeBlockItem>
+                  )}
+                </CodeBlockBody>
+              </CodeBlock>
             </div>
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.design} className="flex flex-col gap-4">
