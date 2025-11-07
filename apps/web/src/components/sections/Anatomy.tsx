@@ -142,9 +142,11 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
             </div>
             {designLayers && (
               <div className="flex flex-col gap-3">
-                <div className="flex items-center gap-2">
-                  <BrandLogo name={BrandLogoCatalog.figma} size={BrandLogoSize.sm} />
-                  <span className="text-sm font-medium text-muted-foreground">Figma Layers</span>
+                <div className="inline-flex">
+                  <button className="inline-flex items-center gap-2 rounded-full bg-accent py-1.5 pl-3 pr-4">
+                    <BrandLogo name={BrandLogoCatalog.figma} size={BrandLogoSize.sm} />
+                    <span className="font-medium text-foreground">Figma Layers</span>
+                  </button>
                 </div>
                 <FigmaTree data={designLayers.layers} />
               </div>
