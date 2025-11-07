@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import React, { cloneElement, isValidElement } from 'react';
-import { ASSET_PATHS } from './constants';
+import { ASSET_PATHS } from '../common/constants';
 
 /**
  * Normalize a path.
