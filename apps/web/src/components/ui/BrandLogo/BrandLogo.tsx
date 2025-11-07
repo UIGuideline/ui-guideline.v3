@@ -2,15 +2,6 @@ import { BrandLogoCatalog, BrandLogoSVGContent } from './brandLogoCatalog';
 import { BrandLogoSize, BrandLogoVariant } from './types';
 import { tv, type VariantProps } from 'tailwind-variants';
 
-/**
- * Size configurations for brand logos
- */
-const BrandLogoSizes: Record<BrandLogoSize, string> = {
-  [BrandLogoSize.sm]: 'w-8 h-8',
-  [BrandLogoSize.md]: 'w-12 h-12',
-  [BrandLogoSize.lg]: 'w-16 h-16',
-};
-
 const container = tv({
   base: ['inline-flex items-center justify-center'],
 });
@@ -23,9 +14,10 @@ const svg = tv({
       [BrandLogoVariant.monochrome]: 'grayscale',
     },
     size: {
-      [BrandLogoSize.sm]: BrandLogoSizes[BrandLogoSize.sm],
-      [BrandLogoSize.md]: BrandLogoSizes[BrandLogoSize.md],
-      [BrandLogoSize.lg]: BrandLogoSizes[BrandLogoSize.lg],
+      [BrandLogoSize.xs]: 'w-4 h-4',
+      [BrandLogoSize.sm]: 'w-6 h-6',
+      [BrandLogoSize.md]: 'w-8 h-8',
+      [BrandLogoSize.lg]: 'w-12 h-12',
     },
   },
   defaultVariants: {
@@ -44,6 +36,11 @@ export interface BrandLogoProps extends React.HTMLAttributes<HTMLDivElement>, Va
    * Specify the label of the logo (for accessibility).
    */
   ariaLabel?: string;
+
+  /**
+   * The size of the brand logo.
+   */
+  size?: BrandLogoSize;
 }
 
 /**
