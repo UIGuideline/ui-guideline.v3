@@ -35,9 +35,9 @@ export const ASSET_PATHS = {
   ROOT: '/assets/',
 
   /**
-   * Base path for component thumbnails
+   * Base path for component thumbnail
    */
-  COMPONENT_THUMBNAILS: '/thumbnails/',
+  COMPONENT_THUMBNAIL: '/thumbnail/',
 
   /**
    * Base path for component anatomy

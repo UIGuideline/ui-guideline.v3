@@ -49,7 +49,7 @@ export const camelToTitleCase = (str: string): string => {
  * @example getComponentThumbnailUrl('button') // '/thumbnails/components/button.svg'
  */
 export const getComponentThumbnailUrl = (slug: string): string => {
-  return `${ASSET_PATHS.COMPONENT_THUMBNAILS}/${slug}.svg`;
+  return `${ASSET_PATHS.ROOT}components/${slug}${ASSET_PATHS.COMPONENT_THUMBNAIL}dark.png`;
 };
 
 /**
