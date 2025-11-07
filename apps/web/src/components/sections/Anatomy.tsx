@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FigmaTree } from '@composed';
 import type { AnatomyData, DesignLayersData } from '@lib';
 import { ASSET_PATHS } from '@lib';
-import { CopyButton, Tabs } from '@ui';
+import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CopyButton, Tabs } from '@ui';
 import { tv } from 'tailwind-variants';
 
 enum AnatomyTab {
@@ -140,7 +140,15 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
               </div>
               <div className={classes.imageContainer}>{renderImage(AnatomyTab.design)}</div>
             </div>
-            {designLayers && <FigmaTree data={designLayers.layers} />}
+            {designLayers && (
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2">
+                  <BrandLogo name={BrandLogoCatalog.figma} size={BrandLogoSize.sm} />
+                  <span className="text-sm font-medium text-muted-foreground">Figma Layers</span>
+                </div>
+                <FigmaTree data={designLayers.layers} />
+              </div>
+            )}
           </Tabs.Content>
         </Tabs>
       </div>
