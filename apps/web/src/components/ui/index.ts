@@ -1,4 +1,6 @@
 export * from './BrandLogo/BrandLogo';
+export * from './Button';
+export * from './CodeBlock';
 export * from './ComponentCard/ComponentCard';
 export * from './CopyButton/CopyButton';
 export * from './Icon/Icon';
