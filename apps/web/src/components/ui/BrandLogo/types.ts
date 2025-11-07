@@ -2,6 +2,7 @@
  * Brand Logo Size Types
  */
 export enum BrandLogoSize {
+  xs = 'xs',
   sm = 'sm',
   md = 'md',
   lg = 'lg',
