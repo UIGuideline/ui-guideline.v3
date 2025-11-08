@@ -1,7 +1,7 @@
 import { AnatomyImageContainer } from './shared';
 import type { AnatomyData } from '@lib';
 import type { BundledLanguage } from '@ui';
-import { CodeBlock, Tabs, TriggerSize } from '@ui';
+import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, Tabs, TriggerSize } from '@ui';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const container = tv({
@@ -51,7 +51,8 @@ export const CodeAnatomyTab = ({ className, data }: CodeAnatomyTabProps) => {
               shadcn/ui
             </Tabs.PillTrigger>
             <Tabs.PillTrigger value="radixui" size={TriggerSize.xs}>
-              Radix UI
+              <BrandLogo name={BrandLogoCatalog.radixui} size={BrandLogoSize.sm} />
+              <span>Radix UI</span>
             </Tabs.PillTrigger>
             <Tabs.PillTrigger value="baseui" size={TriggerSize.xs}>
               Base UI

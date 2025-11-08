@@ -7,14 +7,14 @@ import { tv, type VariantProps } from 'tailwind-variants';
 const trigger = tv({
   base: [
     'cursor-pointer',
-    'inline-flex items-center gap-2 rounded-full py-1.5 pl-3 pr-4',
+    'inline-flex items-center gap-1 rounded-full py-1.5 pl-3 pr-4',
     'hover:text-foreground',
-    'data-[state=active]:bg-accent data-[state=active]:text-foreground',
+    'data-[state=active]:bg-accent data-[state=active]:text-foreground data-[state=active]:font-semibold',
     'data-[state=inactive]:text-muted-foreground',
   ],
   variants: {
     size: {
-      [TriggerSize.xs]: 'p-2',
+      [TriggerSize.xs]: 'py-1.5 pl-3 pr-4',
       [TriggerSize.sm]: 'p-3',
       [TriggerSize.base]: 'p-4',
     },
