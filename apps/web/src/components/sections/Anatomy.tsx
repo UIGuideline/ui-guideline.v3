@@ -12,28 +12,9 @@ enum AnatomyTab {
 }
 
 // Example code for CodeBlock demonstration
-const EXAMPLE_CODE = `interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'ghost';
-  size?: 'sm' | 'base' | 'lg';
-  disabled?: boolean;
-  children: React.ReactNode;
-}
-
-export const Button: React.FC<ButtonProps> = ({
-  variant = 'primary',
-  size = 'base',
-  disabled = false,
-  children,
-}) => {
-  return (
-    <button
-      className={buttonStyles({ variant, size })}
-      disabled={disabled}
-    >
-      {children}
-    </button>
-  );
-};`;
+const EXAMPLE_CODE = `<Button>
+  <PlusIcon /> Add product
+</Button>`;
 
 const container = tv({
   base: 'overflow-hidden border border-border rounded-lg',
@@ -161,12 +142,12 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
               <CodeBlock
                 data={[
                   {
-                    language: 'typescript',
+                    language: 'jsx',
                     filename: 'Button.tsx',
                     code: EXAMPLE_CODE,
                   },
                 ]}
-                defaultValue="typescript"
+                defaultValue="jsx"
               >
                 <CodeBlock.Body>
                   {(item) => (
