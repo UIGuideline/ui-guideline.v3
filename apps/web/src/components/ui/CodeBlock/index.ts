@@ -1,19 +1,3 @@
-export {
-  CodeBlock,
-  CodeBlockBody,
-  CodeBlockContent,
-  CodeBlockCopyButton,
-  CodeBlockFiles,
-  CodeBlockFilename,
-  CodeBlockHeader,
-  CodeBlockItem,
-  type BundledLanguage,
-  type CodeBlockBodyProps,
-  type CodeBlockContentProps,
-  type CodeBlockCopyButtonProps,
-  type CodeBlockFilenameProps,
-  type CodeBlockFilesProps,
-  type CodeBlockHeaderProps,
-  type CodeBlockItemProps,
-  type CodeBlockProps,
-} from './CodeBlock';
+export type { BundledLanguage } from 'shiki';
+export { CodeBlock, type CodeBlockProps } from './CodeBlock';
+export type { CodeBlockData } from './types';
