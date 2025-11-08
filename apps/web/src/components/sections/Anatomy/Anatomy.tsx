@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { BaseAnatomyTab } from './tabs/BaseAnatomyTab';
-import { FigmaTree } from '@composed';
+import { BaseAnatomyTab, CodeAnatomyTab, DesignAnatomyTab } from './tabs';
 import type { AnatomyData, DesignLayersData } from '@lib';
-import { ASSET_PATHS } from '@lib';
-import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, CopyButton, Tabs, type BundledLanguage } from '@ui';
+import { Tabs } from '@ui';
 import { tv } from 'tailwind-variants';
 
 enum AnatomyTab {
@@ -12,33 +10,8 @@ enum AnatomyTab {
   design = 'design-anatomy',
 }
 
-// Example code for CodeBlock demonstration
-const EXAMPLE_CODE = `<Button>
-  <PlusIcon/> Add product
-</Button>`;
-
 const container = tv({
   base: 'overflow-hidden border border-border rounded-lg',
-});
-
-const content = tv({
-  base: 'relative z-0 text-slate-100 overflow-hidden border border-border rounded-b-lg',
-});
-
-const floatTag = tv({
-  base: 'absolute bottom-2 left-2 z-20',
-});
-
-const copyButton = tv({
-  base: 'absolute top-3 right-3 z-20',
-});
-
-const imageContainer = tv({
-  base: ['relative -z-1', 'min-[547px]:grid max-[547px]:overflow-scroll', 'place-content-center'],
-});
-
-const image = tv({
-  base: 'min-w-fit min-h-fit',
 });
 
 interface AnatomyProps {
@@ -62,15 +35,8 @@ interface AnatomyProps {
  * This component is used to render a card with the systems and UI libraries.
  */
 export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
-  const { baseAnatomy, codeAnatomy, designAnatomy } = data;
-
   const classes = {
     container: container({ className }),
-    content: content(),
-    floatTag: floatTag(),
-    copyButton: copyButton(),
-    imageContainer: imageContainer(),
-    image: image(),
   };
 
   const [activeTab, setActiveTab] = useState<AnatomyTab>(AnatomyTab.base);
@@ -78,37 +44,6 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
   const handleTabChange = (value: string) => {
     console.log(value);
     setActiveTab(value as AnatomyTab);
-  };
-
-  const getAnatomyDataByTab = (tab: AnatomyTab) => {
-    switch (tab) {
-      case AnatomyTab.base:
-        return baseAnatomy;
-      case AnatomyTab.code:
-        return codeAnatomy;
-      case AnatomyTab.design:
-        return designAnatomy;
-      default:
-        return baseAnatomy;
-    }
-  };
-
-  const renderImage = (tab: AnatomyTab) => {
-    const anatomyData = getAnatomyDataByTab(tab);
-
-    if (!anatomyData) return null;
-
-    const imageUrl = ASSET_PATHS.ROOT.concat(anatomyData.darkImageUrl);
-    const imageUrl2x = ASSET_PATHS.ROOT.concat(anatomyData.darkImageUrl2x);
-    const srcSet = `${imageUrl}, ${imageUrl2x} 2x`;
-
-    return <img src={imageUrl} srcSet={srcSet} alt={`${tab} anatomy`} className={classes.image} />;
-  };
-
-  const getImageUrl = (tab: AnatomyTab): string => {
-    const anatomyData = getAnatomyDataByTab(tab);
-    if (!anatomyData) return '';
-    return ASSET_PATHS.ROOT.concat(anatomyData.darkImageUrl);
   };
 
   return (
@@ -126,54 +61,11 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
           <Tabs.Content value={AnatomyTab.base}>
             <BaseAnatomyTab data={data} />
           </Tabs.Content>
-          <Tabs.Content value={AnatomyTab.code} className="flex flex-col gap-4">
-            <div className={classes.content}>
-              <div className={classes.copyButton}>
-                <CopyButton imageUrl={getImageUrl(AnatomyTab.code)} />
-              </div>
-              <div className={classes.imageContainer}>{renderImage(AnatomyTab.code)}</div>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h3 className="text-base font-semibold text-foreground">Code Example</h3>
-              <CodeBlock
-                data={[
-                  {
-                    language: 'jsx',
-                    filename: 'Button.tsx',
-                    code: EXAMPLE_CODE,
-                  },
-                ]}
-                defaultValue="jsx"
-              >
-                <CodeBlock.Body>
-                  {(item) => (
-                    <CodeBlock.Item className="relative" key={item.language} value={item.language}>
-                      <CodeBlock.CopyButton className="absolute top-3 right-3 z-20" />
-                      <CodeBlock.Content language={item.language as BundledLanguage}>{item.code}</CodeBlock.Content>
-                    </CodeBlock.Item>
-                  )}
-                </CodeBlock.Body>
-              </CodeBlock>
-            </div>
+          <Tabs.Content value={AnatomyTab.code}>
+            <CodeAnatomyTab data={data} />
           </Tabs.Content>
-          <Tabs.Content value={AnatomyTab.design} className="flex flex-col gap-4">
-            <div className={classes.content}>
-              <div className={classes.copyButton}>
-                <CopyButton imageUrl={getImageUrl(AnatomyTab.design)} />
-              </div>
-              <div className={classes.imageContainer}>{renderImage(AnatomyTab.design)}</div>
-            </div>
-            {designLayers && (
-              <div className="flex flex-col gap-3">
-                <div className="inline-flex">
-                  <button className="inline-flex items-center gap-2 rounded-full bg-accent py-1.5 pl-3 pr-4">
-                    <BrandLogo name={BrandLogoCatalog.figma} size={BrandLogoSize.sm} />
-                    <span className="font-medium text-foreground">Figma Layers</span>
-                  </button>
-                </div>
-                <FigmaTree data={designLayers.layers} />
-              </div>
-            )}
+          <Tabs.Content value={AnatomyTab.design}>
+            <DesignAnatomyTab data={data} designLayers={designLayers} />
           </Tabs.Content>
         </Tabs>
       </div>
