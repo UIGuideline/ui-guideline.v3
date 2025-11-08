@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BaseAnatomyTab } from './tabs/BaseAnatomyTab';
 import { FigmaTree } from '@composed';
 import type { AnatomyData, DesignLayersData } from '@lib';
 import { ASSET_PATHS } from '@lib';
@@ -123,12 +124,7 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
             <Tabs.Trigger value={AnatomyTab.design}>Design Anatomy</Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value={AnatomyTab.base}>
-            <div className={classes.content}>
-              <div className={classes.copyButton}>
-                <CopyButton imageUrl={getImageUrl(AnatomyTab.base)} />
-              </div>
-              <div className={classes.imageContainer}>{renderImage(AnatomyTab.base)}</div>
-            </div>
+            <BaseAnatomyTab data={data} />
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.code} className="flex flex-col gap-4">
             <div className={classes.content}>
