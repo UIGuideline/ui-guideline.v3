@@ -3,6 +3,8 @@ import * as React from 'react';
 export enum BrandLogoCatalog {
   figma = 'figma',
   radixui = 'radixui',
+  baseui = 'baseui',
+  shadcnui = 'shadcnui',
 }
 
 export type BrandLogoCatalogItem = keyof typeof BrandLogoCatalog;
@@ -46,6 +48,36 @@ export const BrandLogoSVGContent: Record<BrandLogoCatalog, React.ReactNode> = {
       <path
         d="M63.9999 34.3477C70.7233 34.3477 76.1737 28.8973 76.1737 22.1739C76.1737 15.4504 70.7233 10 63.9999 10C57.2765 10 51.826 15.4504 51.826 22.1739C51.826 28.8973 57.2765 34.3477 63.9999 34.3477Z"
         fill="#FFF"
+      />
+    </>
+  ),
+  [BrandLogoCatalog.baseui]: (
+    <>
+      <path
+        d="M53.5454 31.8749C52.5433 31.813 51.7269 32.633 51.7269 33.6371V90.0001C67.7933 90.0001 80.8175 76.9759 80.8175 60.9095C80.8175 45.4541 68.7645 32.8135 53.5454 31.8749Z"
+        fill="#FFF"
+      />
+      <path
+        d="M48.0906 41.9996V49.9995V89.9991C32.0243 89.9991 19 75.6723 19 57.9994V49.9995V10C35.0663 10 48.0906 24.3267 48.0906 41.9996Z"
+        fill="#FFF"
+      />
+    </>
+  ),
+  [BrandLogoCatalog.shadcnui]: (
+    <>
+      <path
+        d="M81 51.4761L51.4762 80.9999"
+        stroke="#FFF"
+        stroke-width="11.8095"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M75.0952 19L19 75.0952"
+        stroke="#FFF"
+        stroke-width="11.8095"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </>
   ),

@@ -14,10 +14,10 @@ const svg = tv({
       [BrandLogoVariant.monochrome]: 'grayscale',
     },
     size: {
-      [BrandLogoSize.xs]: 'w-4 h-4',
+      [BrandLogoSize.xs]: 'w-5 h-5',
       [BrandLogoSize.sm]: 'w-6 h-6',
-      [BrandLogoSize.md]: 'w-8 h-8',
-      [BrandLogoSize.lg]: 'w-12 h-12',
+      [BrandLogoSize.md]: 'w-7 h-7',
+      [BrandLogoSize.lg]: 'w-8 h-8',
     },
   },
   defaultVariants: {
