@@ -13,7 +13,7 @@ enum AnatomyTab {
 
 // Example code for CodeBlock demonstration
 const EXAMPLE_CODE = `<Button>
-  <PlusIcon /> Add product
+  <PlusIcon/> Add product
 </Button>`;
 
 const container = tv({
