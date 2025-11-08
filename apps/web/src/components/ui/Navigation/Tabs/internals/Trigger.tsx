@@ -7,8 +7,8 @@ import { tv, type VariantProps } from 'tailwind-variants';
 const trigger = tv({
   base: [
     'cursor-pointer',
-    'text-neutral-500 hover:text-neutral-400',
-    'data-[state=active]:border-b-2 data-[state=active]:border-b-neutral-white data-[state=active]:text-white',
+    'text-muted-foreground hover:text-foreground',
+    'data-[state=active]:border-b-2 data-[state=active]:border-b-neutral-white data-[state=active]:text-foreground',
     'data-[state=inactive]:border-b-neutral-800',
   ],
   variants: {
