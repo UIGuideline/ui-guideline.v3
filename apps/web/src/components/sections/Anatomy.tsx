@@ -2,22 +2,7 @@ import { useState } from 'react';
 import { FigmaTree } from '@composed';
 import type { AnatomyData, DesignLayersData } from '@lib';
 import { ASSET_PATHS } from '@lib';
-import {
-  BrandLogo,
-  BrandLogoCatalog,
-  BrandLogoSize,
-  CodeBlock,
-  CodeBlockBody,
-  CodeBlockContent,
-  CodeBlockCopyButton,
-  CodeBlockFilename,
-  CodeBlockFiles,
-  CodeBlockHeader,
-  CodeBlockItem,
-  CopyButton,
-  Tabs,
-  type BundledLanguage,
-} from '@ui';
+import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, CopyButton, Tabs, type BundledLanguage } from '@ui';
 import { tv } from 'tailwind-variants';
 
 enum AnatomyTab {
@@ -183,23 +168,23 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
                 ]}
                 defaultValue="typescript"
               >
-                <CodeBlockHeader>
-                  <CodeBlockFiles>
+                <CodeBlock.Header>
+                  <CodeBlock.Files>
                     {(item) => (
-                      <CodeBlockFilename key={item.language} value={item.language}>
+                      <CodeBlock.Filename key={item.language} value={item.language}>
                         {item.filename}
-                      </CodeBlockFilename>
+                      </CodeBlock.Filename>
                     )}
-                  </CodeBlockFiles>
-                  <CodeBlockCopyButton />
-                </CodeBlockHeader>
-                <CodeBlockBody>
+                  </CodeBlock.Files>
+                  <CodeBlock.CopyButton />
+                </CodeBlock.Header>
+                <CodeBlock.Body>
                   {(item) => (
-                    <CodeBlockItem key={item.language} value={item.language}>
-                      <CodeBlockContent language={item.language as BundledLanguage}>{item.code}</CodeBlockContent>
-                    </CodeBlockItem>
+                    <CodeBlock.Item key={item.language} value={item.language}>
+                      <CodeBlock.Content language={item.language as BundledLanguage}>{item.code}</CodeBlock.Content>
+                    </CodeBlock.Item>
                   )}
-                </CodeBlockBody>
+                </CodeBlock.Body>
               </CodeBlock>
             </div>
           </Tabs.Content>
