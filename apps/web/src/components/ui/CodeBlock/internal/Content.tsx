@@ -12,9 +12,24 @@ import type { BundledLanguage, CodeOptionsMultipleThemes } from 'shiki';
 import { codeToHtml } from 'shiki';
 
 export type ContentProps = HTMLAttributes<HTMLDivElement> & {
+  /**
+   * The themes to use for the code block.
+   */
   themes?: CodeOptionsMultipleThemes['themes'];
+
+  /**
+   * The language to use for the code block.
+   */
   language?: BundledLanguage;
+
+  /**
+   * Whether to enable syntax highlighting.
+   */
   syntaxHighlighting?: boolean;
+
+  /**
+   * The children to render in the code block.
+   */
   children: string;
 };
 
@@ -54,7 +69,6 @@ export const Content = ({ children, themes, language, syntaxHighlighting = true,
 
     highlight(children as string, language, themes)
       .then(setHtml)
-      // biome-ignore lint/suspicious/noConsole: "it's fine"
       .catch(console.error);
   }, [children, themes, syntaxHighlighting, language]);
 
