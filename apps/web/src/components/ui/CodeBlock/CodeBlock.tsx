@@ -3,7 +3,11 @@ import { createContext } from 'react';
 import { Body, Content, CopyButton, Filename, Files, Header, Item } from './internal';
 import type { CodeBlockContextType, CodeBlockData } from './types';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
-import { tv } from 'tailwind-variants';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+const codeBlock = tv({
+  base: 'size-full overflow-hidden rounded-md border border-border',
+});
 
 export const CodeBlockContext = createContext<CodeBlockContextType>({
   value: undefined,
@@ -11,13 +15,32 @@ export const CodeBlockContext = createContext<CodeBlockContextType>({
   data: [],
 });
 
-export type CodeBlockProps = HTMLAttributes<HTMLDivElement> & {
-  defaultValue?: string;
-  value?: string;
-  onValueChange?: (value: string) => void;
-  data: CodeBlockData[];
-};
+export type CodeBlockProps = HTMLAttributes<HTMLDivElement> &
+  VariantProps<typeof codeBlock> & {
+    /**
+     * The default value of the code block.
+     */
+    defaultValue?: string;
 
+    /**
+     * The value of the code block.
+     */
+    value?: string;
+
+    /**
+     * The function to call when the value of the code block changes.
+     */
+    onValueChange?: (value: string) => void;
+
+    /**
+     * The data of the code block.
+     */
+    data: CodeBlockData[];
+  };
+
+/**
+ * The component to render the code block.
+ */
 export type CodeBlockComponent = React.ForwardRefExoticComponent<
   CodeBlockProps & React.RefAttributes<HTMLDivElement>
 > & {
@@ -29,10 +52,6 @@ export type CodeBlockComponent = React.ForwardRefExoticComponent<
   Item: typeof Item;
   Content: typeof Content;
 };
-
-const codeBlock = tv({
-  base: 'size-full overflow-hidden rounded-md border border-border',
-});
 
 const CodeBlockRoot = ({
   value: controlledValue,
