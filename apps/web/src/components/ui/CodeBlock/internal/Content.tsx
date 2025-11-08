@@ -63,9 +63,7 @@ export const Content = ({ children, themes, language, syntaxHighlighting = true,
   const [html, setHtml] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!syntaxHighlighting) {
-      return;
-    }
+    if (!syntaxHighlighting) return;
 
     highlight(children as string, language, themes)
       .then(setHtml)
