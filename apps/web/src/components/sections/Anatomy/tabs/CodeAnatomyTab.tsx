@@ -48,14 +48,16 @@ export const CodeAnatomyTab = ({ className, data }: CodeAnatomyTabProps) => {
         <Tabs defaultValue="shadcnui">
           <Tabs.List className="mb-3 flex gap-2 items-center">
             <Tabs.PillTrigger value="shadcnui" size={TriggerSize.xs}>
-              shadcn/ui
+              <BrandLogo name={BrandLogoCatalog.shadcnui} size={BrandLogoSize.xs} />
+              <span>shadcn/ui</span>
             </Tabs.PillTrigger>
             <Tabs.PillTrigger value="radixui" size={TriggerSize.xs}>
-              <BrandLogo name={BrandLogoCatalog.radixui} size={BrandLogoSize.sm} />
+              <BrandLogo name={BrandLogoCatalog.radixui} size={BrandLogoSize.xs} />
               <span>Radix UI</span>
             </Tabs.PillTrigger>
             <Tabs.PillTrigger value="baseui" size={TriggerSize.xs}>
-              Base UI
+              <BrandLogo name={BrandLogoCatalog.baseui} size={BrandLogoSize.xs} />
+              <span>Base UI</span>
             </Tabs.PillTrigger>
           </Tabs.List>
           <Tabs.Content value="shadcnui">
