@@ -45,7 +45,7 @@ export const DesignAnatomyTab = ({ className, data, designLayers }: DesignAnatom
           <Tabs defaultValue="figma-layers">
             <Tabs.List className="mb-3 flex gap-2 items-center">
               <Tabs.PillTrigger value="figma-layers" size={TriggerSize.xs}>
-                <BrandLogo name={BrandLogoCatalog.figma} size={BrandLogoSize.sm} />
+                <BrandLogo name={BrandLogoCatalog.figma} size={BrandLogoSize.xs} />
                 <span>Figma Layers</span>
               </Tabs.PillTrigger>
             </Tabs.List>
