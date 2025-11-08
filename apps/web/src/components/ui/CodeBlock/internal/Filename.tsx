@@ -17,9 +17,7 @@ export const Filename = ({ icon, value, children, ...props }: FilenameProps) => 
   })?.[1];
   const Icon = icon ?? defaultIcon;
 
-  if (value !== activeValue) {
-    return null;
-  }
+  if (value !== activeValue) return null;
 
   return (
     <div className="flex items-center gap-2 bg-secondary px-4 py-1.5 text-muted-foreground text-xs" {...props}>

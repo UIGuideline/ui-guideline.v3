@@ -31,7 +31,7 @@ export type CodeBlockComponent = React.ForwardRefExoticComponent<
 };
 
 const codeBlock = tv({
-  base: 'size-full overflow-hidden rounded-md border',
+  base: 'size-full overflow-hidden rounded-md border border-border',
 });
 
 const CodeBlockRoot = ({
