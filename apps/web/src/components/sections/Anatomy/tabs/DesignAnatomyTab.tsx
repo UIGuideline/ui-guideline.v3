@@ -1,11 +1,11 @@
 import { AnatomyImageContainer } from './shared';
 import { FigmaTree } from '@composed';
 import type { AnatomyData, DesignLayersData } from '@lib';
-import { BrandLogo, BrandLogoCatalog, BrandLogoSize } from '@ui';
+import { BrandLogo, BrandLogoCatalog, BrandLogoSize, Tabs, TriggerSize } from '@ui';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const container = tv({
-  base: 'flex flex-col gap-4',
+  base: 'flex flex-col gap-6',
 });
 
 interface DesignAnatomyTabProps extends VariantProps<typeof container> {
@@ -40,17 +40,21 @@ export const DesignAnatomyTab = ({ className, data, designLayers }: DesignAnatom
   return (
     <div className={classes.container}>
       <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="design anatomy" />
-      {designLayers && (
-        <div className="flex flex-col gap-3">
-          <div className="inline-flex">
-            <button className="inline-flex items-center gap-2 rounded-full bg-accent py-1.5 pl-3 pr-4">
-              <BrandLogo name={BrandLogoCatalog.figma} size={BrandLogoSize.sm} />
-              <span className="font-medium text-foreground">Figma Layers</span>
-            </button>
-          </div>
-          <FigmaTree data={designLayers.layers} />
-        </div>
-      )}
+      <div className="flex flex-col gap-3">
+        {designLayers && (
+          <Tabs defaultValue="figma-layers">
+            <Tabs.List className="mb-3 flex gap-2 items-center">
+              <Tabs.PillTrigger value="figma-layers" size={TriggerSize.xs}>
+                <BrandLogo name={BrandLogoCatalog.figma} size={BrandLogoSize.sm} />
+                <span>Figma Layers</span>
+              </Tabs.PillTrigger>
+            </Tabs.List>
+            <Tabs.Content value="figma-layers">
+              <FigmaTree data={designLayers.layers} />
+            </Tabs.Content>
+          </Tabs>
+        )}
+      </div>
     </div>
   );
 };
