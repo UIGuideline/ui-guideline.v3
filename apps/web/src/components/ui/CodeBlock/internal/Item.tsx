@@ -1,12 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import { useContext } from 'react';
 import { CodeBlockContext } from '../CodeBlock';
-import { tv } from 'tailwind-variants';
-
-export type ItemProps = HTMLAttributes<HTMLDivElement> & {
-  value: string;
-  lineNumbers?: boolean;
-};
+import { tv, type VariantProps } from 'tailwind-variants';
 
 const lineNumberStyles = tv({
   base: [
@@ -90,12 +85,16 @@ const codeBlockStyles = tv({
   ],
 });
 
+export type ItemProps = HTMLAttributes<HTMLDivElement> &
+  VariantProps<typeof codeBlockStyles> & {
+    value: string;
+    lineNumbers?: boolean;
+  };
+
 export const Item = ({ children, lineNumbers = true, className, value, ...props }: ItemProps) => {
   const { value: activeValue } = useContext(CodeBlockContext);
 
-  if (value !== activeValue) {
-    return null;
-  }
+  if (value !== activeValue) return null;
 
   const classes = [
     codeBlockStyles(),

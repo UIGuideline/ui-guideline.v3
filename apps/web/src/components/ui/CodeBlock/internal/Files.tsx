@@ -2,19 +2,21 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import { useContext } from 'react';
 import { CodeBlockContext } from '../CodeBlock';
 import type { CodeBlockData } from '../types';
-import { tv } from 'tailwind-variants';
-
-export type FilesProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
-  children: (item: CodeBlockData) => ReactNode;
-};
+import { tv, type VariantProps } from 'tailwind-variants';
 
 const files = tv({
   base: 'flex grow flex-row items-center gap-2',
 });
 
+export type FilesProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> &
+  VariantProps<typeof files> & {
+    children: (item: CodeBlockData) => ReactNode;
+  };
+
 export const Files = ({ className, children, ...props }: FilesProps) => {
-  const { data } = useContext(CodeBlockContext);
   const classes = files({ className });
+
+  const { data } = useContext(CodeBlockContext);
 
   return (
     <div className={classes} {...props}>
