@@ -1,5 +1,5 @@
 import { AnatomyImageContainer } from './shared';
-import type { AnatomyData } from '@lib';
+import type { AnatomyData, CodeAnatomyData } from '@lib';
 import type { BundledLanguage } from '@ui';
 import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, Tabs, TriggerSize } from '@ui';
 import { tv, type VariantProps } from 'tailwind-variants';
@@ -8,14 +8,21 @@ const container = tv({
   base: 'flex flex-col gap-6',
 });
 
-// Example code for CodeBlock demonstration
-const EXAMPLE_CODE = `<Button>
-  <PlusIcon/> Add product
-</Button>`;
-
-const EXAMPLE_RADIXUI_CODE = `<Progress.Root>
-  <Progress.Indicator />
-</Progress.Root>`;
+// Library configuration for tabs
+const LIBRARY_CONFIG = {
+  shadcn: {
+    label: 'shadcn',
+    logo: BrandLogoCatalog.shadcn,
+  },
+  radixui: {
+    label: 'Radix UI',
+    logo: BrandLogoCatalog.radixui,
+  },
+  baseui: {
+    label: 'Base UI',
+    logo: BrandLogoCatalog.baseui,
+  },
+} as const;
 
 interface CodeAnatomyTabProps extends VariantProps<typeof container> {
   /**
@@ -27,12 +34,17 @@ interface CodeAnatomyTabProps extends VariantProps<typeof container> {
    * The data for the anatomy.
    */
   data?: AnatomyData;
+
+  /**
+   * Code anatomy data for each library.
+   */
+  codeAnatomy?: CodeAnatomyData;
 }
 
 /**
  * This component renders the Code Anatomy tab content with an image, copy button, and code example.
  */
-export const CodeAnatomyTab = ({ className, data }: CodeAnatomyTabProps) => {
+export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabProps) => {
   if (!data || !data.codeAnatomy) return null;
 
   const { darkImageUrl, darkImageUrl2x } = data.codeAnatomy;
@@ -41,88 +53,64 @@ export const CodeAnatomyTab = ({ className, data }: CodeAnatomyTabProps) => {
     container: container({ className }),
   };
 
+  // Get available libraries from codeAnatomy array
+  const availableLibraries = (codeAnatomy ?? []).filter((item) => item.slug in LIBRARY_CONFIG && item.code);
+
+  // If no code anatomy data is available, don't render the code section
+  if (availableLibraries.length === 0) {
+    return (
+      <div className={classes.container}>
+        <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="code anatomy" />
+      </div>
+    );
+  }
+
+  // Use first available library as default
+  const defaultLibrary = availableLibraries[0]?.slug ?? 'shadcn';
+
   return (
     <div className={classes.container}>
       <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="code anatomy" />
       <div className="flex flex-col gap-3">
-        <Tabs defaultValue="shadcnui">
+        <Tabs defaultValue={defaultLibrary}>
           <Tabs.List className="mb-3 flex gap-2 items-center">
-            <Tabs.PillTrigger value="shadcnui" size={TriggerSize.xs}>
-              <BrandLogo name={BrandLogoCatalog.shadcnui} size={BrandLogoSize.xs} />
-              <span>shadcn/ui</span>
-            </Tabs.PillTrigger>
-            <Tabs.PillTrigger value="radixui" size={TriggerSize.xs}>
-              <BrandLogo name={BrandLogoCatalog.radixui} size={BrandLogoSize.xs} />
-              <span>Radix UI</span>
-            </Tabs.PillTrigger>
-            <Tabs.PillTrigger value="baseui" size={TriggerSize.xs}>
-              <BrandLogo name={BrandLogoCatalog.baseui} size={BrandLogoSize.xs} />
-              <span>Base UI</span>
-            </Tabs.PillTrigger>
+            {availableLibraries.map((item) => {
+              const config = LIBRARY_CONFIG[item.slug as keyof typeof LIBRARY_CONFIG];
+              if (!config) return null;
+
+              return (
+                <Tabs.PillTrigger key={item.slug} value={item.slug} size={TriggerSize.xs}>
+                  <BrandLogo name={config.logo} size={BrandLogoSize.xs} />
+                  <span>{config.label}</span>
+                </Tabs.PillTrigger>
+              );
+            })}
           </Tabs.List>
-          <Tabs.Content value="shadcnui">
-            <CodeBlock
-              data={[
-                {
-                  language: 'jsx',
-                  filename: 'Button.tsx',
-                  code: EXAMPLE_CODE,
-                },
-              ]}
-              defaultValue="jsx"
-            >
-              <CodeBlock.Body>
-                {(item) => (
-                  <CodeBlock.Item className="relative" key={item.language} value={item.language}>
-                    <CodeBlock.CopyButton className="absolute top-3 right-3 z-20" />
-                    <CodeBlock.Content language={item.language as BundledLanguage}>{item.code}</CodeBlock.Content>
-                  </CodeBlock.Item>
-                )}
-              </CodeBlock.Body>
-            </CodeBlock>
-          </Tabs.Content>
-          <Tabs.Content value="radixui">
-            <CodeBlock
-              data={[
-                {
-                  language: 'jsx',
-                  filename: 'Button.tsx',
-                  code: EXAMPLE_RADIXUI_CODE,
-                },
-              ]}
-              defaultValue="jsx"
-            >
-              <CodeBlock.Body>
-                {(item) => (
-                  <CodeBlock.Item className="relative" key={item.language} value={item.language}>
-                    <CodeBlock.CopyButton className="absolute top-3 right-3 z-20" />
-                    <CodeBlock.Content language={item.language as BundledLanguage}>{item.code}</CodeBlock.Content>
-                  </CodeBlock.Item>
-                )}
-              </CodeBlock.Body>
-            </CodeBlock>
-          </Tabs.Content>
-          <Tabs.Content value="baseui">
-            <CodeBlock
-              data={[
-                {
-                  language: 'jsx',
-                  filename: 'Button.tsx',
-                  code: EXAMPLE_CODE,
-                },
-              ]}
-              defaultValue="jsx"
-            >
-              <CodeBlock.Body>
-                {(item) => (
-                  <CodeBlock.Item className="relative" key={item.language} value={item.language}>
-                    <CodeBlock.CopyButton className="absolute top-3 right-3 z-20" />
-                    <CodeBlock.Content language={item.language as BundledLanguage}>{item.code}</CodeBlock.Content>
-                  </CodeBlock.Item>
-                )}
-              </CodeBlock.Body>
-            </CodeBlock>
-          </Tabs.Content>
+          {availableLibraries.map((item) => (
+            <Tabs.Content key={item.slug} value={item.slug}>
+              <CodeBlock
+                data={[
+                  {
+                    language: 'tsx',
+                    filename: `${item.slug}.tsx`,
+                    code: item.code,
+                  },
+                ]}
+                defaultValue="tsx"
+              >
+                <CodeBlock.Body>
+                  {(codeItem) => (
+                    <CodeBlock.Item className="relative" key={codeItem.language} value={codeItem.language}>
+                      <CodeBlock.CopyButton className="absolute top-3 right-3 z-20" />
+                      <CodeBlock.Content language={codeItem.language as BundledLanguage}>
+                        {codeItem.code}
+                      </CodeBlock.Content>
+                    </CodeBlock.Item>
+                  )}
+                </CodeBlock.Body>
+              </CodeBlock>
+            </Tabs.Content>
+          ))}
         </Tabs>
       </div>
     </div>

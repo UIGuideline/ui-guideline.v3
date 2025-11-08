@@ -4,7 +4,7 @@ export enum BrandLogoCatalog {
   figma = 'figma',
   radixui = 'radixui',
   baseui = 'baseui',
-  shadcnui = 'shadcnui',
+  shadcn = 'shadcn',
 }
 
 export type BrandLogoCatalogItem = keyof typeof BrandLogoCatalog;
@@ -63,7 +63,7 @@ export const BrandLogoSVGContent: Record<BrandLogoCatalog, React.ReactNode> = {
       />
     </>
   ),
-  [BrandLogoCatalog.shadcnui]: (
+  [BrandLogoCatalog.shadcn]: (
     <>
       <path
         d="M81 51.4761L51.4762 80.9999"
