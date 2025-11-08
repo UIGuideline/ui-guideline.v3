@@ -2,6 +2,7 @@ import * as React from 'react';
 
 export enum BrandLogoCatalog {
   figma = 'figma',
+  radixui = 'radixui',
 }
 
 export type BrandLogoCatalogItem = keyof typeof BrandLogoCatalog;
@@ -32,6 +33,19 @@ export const BrandLogoSVGContent: Record<BrandLogoCatalog, React.ReactNode> = {
       <path
         d="M21.2664 50.0596C21.2664 57.9776 27.6853 64.3965 35.6033 64.3965H49.9403V35.7227H35.6033C27.6853 35.7227 21.2664 42.1415 21.2664 50.0596Z"
         fill="#874FFF"
+      />
+    </>
+  ),
+  [BrandLogoCatalog.radixui]: (
+    <>
+      <path
+        d="M48.3477 90.0004C34.9009 90.0004 24 78.3211 24 63.9135C24 49.5059 34.9009 37.8267 48.3477 37.8267V90.0004Z"
+        fill="#FFF"
+      />
+      <path d="M48.3477 10H24V34.3477H48.3477V10Z" fill="#FFF" />
+      <path
+        d="M63.9999 34.3477C70.7233 34.3477 76.1737 28.8973 76.1737 22.1739C76.1737 15.4504 70.7233 10 63.9999 10C57.2765 10 51.826 15.4504 51.826 22.1739C51.826 28.8973 57.2765 34.3477 63.9999 34.3477Z"
+        fill="#FFF"
       />
     </>
   ),
