@@ -12,8 +12,8 @@ export const theme = tv({
       true: 'w-full',
     },
     size: {
-      [ButtonSize.sm]: 'h-6 rounded px-2 py-2 text-xs',
-      [ButtonSize.base]: 'h-8 rounded px-3.5 text-sm',
+      [ButtonSize.sm]: 'h-6 rounded p-2 text-xs',
+      [ButtonSize.base]: 'h-8 rounded px-2 text-sm',
       [ButtonSize.lg]: 'h-10 rounded px-4 text-base',
     },
     variant: {
@@ -31,7 +31,7 @@ export const theme = tv({
     {
       appearance: ButtonAppearance.contained,
       variant: ButtonVariant.neutral,
-      className: ['border border-gray-700/20', 'bg-gray-800 hover:bg-gray-700/70', 'text-white'],
+      className: ['border border-neutral-700/20', 'bg-neutral-800 hover:bg-neutral-700/70', 'text-white'],
     },
     {
       appearance: ButtonAppearance.contained,
@@ -61,7 +61,7 @@ export const theme = tv({
     {
       appearance: ButtonAppearance.ghost,
       variant: ButtonVariant.neutral,
-      className: ['hover:bg-gray-800', 'text-white'],
+      className: ['hover:bg-neutral-800', 'text-white'],
     },
     {
       appearance: ButtonAppearance.ghost,

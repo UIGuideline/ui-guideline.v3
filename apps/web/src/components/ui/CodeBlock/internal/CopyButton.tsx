@@ -12,7 +12,7 @@ export type CopyButtonProps = ComponentProps<typeof Button> & {
 };
 
 const copyButton = tv({
-  base: 'shrink-0',
+  base: 'shrink-0 text-muted-foreground hover:text-foreground',
 });
 
 export const CopyButton = ({
@@ -54,12 +54,12 @@ export const CopyButton = ({
     <Button
       className={copyButton({ className })}
       onClick={copyToClipboard}
-      size={ButtonSize.sm}
+      size={ButtonSize.base}
       variant={ButtonVariant.neutral}
       appearance={ButtonAppearance.ghost}
       {...props}
     >
-      {children ?? <Icon className="text-muted-foreground" size={14} />}
+      {children ?? <Icon size={16} />}
     </Button>
   );
 };
