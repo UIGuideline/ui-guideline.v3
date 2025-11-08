@@ -11,3 +11,6 @@ node_modules/
 
 # Coverage
 coverage/ 
+
+# Code anatomy snippets (documentation only, not meant to be formatted)
+apps/web/src/content/components/**/code-anatomy/**
