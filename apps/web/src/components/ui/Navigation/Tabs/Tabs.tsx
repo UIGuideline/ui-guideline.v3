@@ -1,4 +1,4 @@
-import { Trigger } from './internals';
+import { PillTrigger, Trigger } from './internals';
 import { TriggerSize, TriggerVariant } from './types';
 import { Content, List, Root, type TabsProps } from '@radix-ui/react-tabs';
 
@@ -11,6 +11,7 @@ import { Content, List, Root, type TabsProps } from '@radix-ui/react-tabs';
 export const Tabs = (props: TabsProps) => <Root {...props} />;
 Tabs.List = List;
 Tabs.Content = Content;
+Tabs.PillTrigger = PillTrigger;
 Tabs.Trigger = Trigger;
 
 Tabs.displayName = 'Tabs';
