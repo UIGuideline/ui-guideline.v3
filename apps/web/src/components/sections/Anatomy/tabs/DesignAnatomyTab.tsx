@@ -1,30 +1,14 @@
+import { AnatomyImageContainer } from './shared';
 import { FigmaTree } from '@composed';
 import type { AnatomyData, DesignLayersData } from '@lib';
-import { ASSET_PATHS } from '@lib';
-import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CopyButton } from '@ui';
-import { tv } from 'tailwind-variants';
+import { BrandLogo, BrandLogoCatalog, BrandLogoSize } from '@ui';
+import { tv, type VariantProps } from 'tailwind-variants';
 
 const container = tv({
   base: 'flex flex-col gap-4',
 });
 
-const content = tv({
-  base: 'relative z-0 text-slate-100 overflow-hidden border border-border rounded-b-lg',
-});
-
-const copyButton = tv({
-  base: 'absolute top-3 right-3 z-20',
-});
-
-const imageContainer = tv({
-  base: ['relative -z-1', 'min-[547px]:grid max-[547px]:overflow-scroll', 'place-content-center'],
-});
-
-const image = tv({
-  base: 'min-w-fit min-h-fit',
-});
-
-interface DesignAnatomyTabProps {
+interface DesignAnatomyTabProps extends VariantProps<typeof container> {
   /**
    * The CSS class to apply to the component.
    */
@@ -51,26 +35,11 @@ export const DesignAnatomyTab = ({ className, data, designLayers }: DesignAnatom
 
   const classes = {
     container: container({ className }),
-    content: content(),
-    copyButton: copyButton(),
-    imageContainer: imageContainer(),
-    image: image(),
   };
-
-  const imageUrl = ASSET_PATHS.ROOT.concat(darkImageUrl);
-  const imageUrl2x = ASSET_PATHS.ROOT.concat(darkImageUrl2x);
-  const srcSet = `${imageUrl}, ${imageUrl2x} 2x`;
 
   return (
     <div className={classes.container}>
-      <div className={classes.content}>
-        <div className={classes.copyButton}>
-          <CopyButton imageUrl={imageUrl} />
-        </div>
-        <div className={classes.imageContainer}>
-          <img src={imageUrl} srcSet={srcSet} alt="design anatomy" className={classes.image} />
-        </div>
-      </div>
+      <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="design anatomy" />
       {designLayers && (
         <div className="flex flex-col gap-3">
           <div className="inline-flex">
