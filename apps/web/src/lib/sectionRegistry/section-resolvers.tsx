@@ -2,6 +2,7 @@ import React from 'react';
 import type {
   AccessibilityData,
   AnatomyData,
+  CodeAnatomyData,
   DesignLayersData,
   FigmaKitsData,
   KpisData,
@@ -40,6 +41,7 @@ export const overview: SectionModule = async ({ slug, title }) => {
 export const anatomy: SectionModule = async ({ slug }) => {
   const data = await loadContent<AnatomyData>(slug, 'anatomy.yml');
   const designLayers = await loadContent<DesignLayersData>(slug, 'design-layers.yml');
+  const codeAnatomy = await loadContent<CodeAnatomyData>(slug, 'code-anatomy.yml');
   if (!data || !designLayers) return null;
 
   return {
@@ -47,6 +49,7 @@ export const anatomy: SectionModule = async ({ slug }) => {
     type: SectionKey.anatomy,
     data,
     designLayers,
+    codeAnatomy,
   };
 };
 

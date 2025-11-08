@@ -26,6 +26,7 @@ export type ClientSectionMetadata = {
   type: SectionKey.anatomy | SectionKey.props;
   data: unknown;
   designLayers?: unknown;
+  codeAnatomy?: unknown;
 };
 
 export type Renderable = ComponentFactory | ClientSectionMetadata | null;

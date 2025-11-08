@@ -75,6 +75,19 @@ const anatomy = defineCollection({
 });
 
 /**
+ * Code Anatomy Collection
+ */
+const codeAnatomy = defineCollection({
+  type: 'data',
+  schema: z.array(
+    z.object({
+      slug: z.string(),
+      code: z.string(),
+    }),
+  ),
+});
+
+/**
  * Design Layers Collection
  * Uses recursive schema for nested layer structure
  */
@@ -187,6 +200,7 @@ export const collections = {
   overview,
   props,
   anatomy,
+  codeAnatomy,
   designLayers,
   kpis,
   systems,

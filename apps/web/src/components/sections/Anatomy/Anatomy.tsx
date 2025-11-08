@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BaseAnatomyTab, CodeAnatomyTab, DesignAnatomyTab } from './tabs';
-import type { AnatomyData, DesignLayersData } from '@lib';
+import type { AnatomyData, CodeAnatomyData, DesignLayersData } from '@lib';
 import { Tabs } from '@ui';
 import { tv } from 'tailwind-variants';
 
@@ -29,12 +29,17 @@ interface AnatomyProps {
    * Optional design layers data for the Design Anatomy tab.
    */
   designLayers?: DesignLayersData;
+
+  /**
+   * Optional code anatomy data for dynamic code examples.
+   */
+  codeAnatomy?: CodeAnatomyData;
 }
 
 /**
  * This component is used to render a card with the systems and UI libraries.
  */
-export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
+export const Anatomy = ({ className, data, designLayers, codeAnatomy }: AnatomyProps) => {
   const classes = {
     container: container({ className }),
   };
@@ -62,7 +67,7 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
             <BaseAnatomyTab data={data} />
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.code}>
-            <CodeAnatomyTab data={data} />
+            <CodeAnatomyTab data={data} codeAnatomy={codeAnatomy} />
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.design}>
             <DesignAnatomyTab data={data} designLayers={designLayers} />
