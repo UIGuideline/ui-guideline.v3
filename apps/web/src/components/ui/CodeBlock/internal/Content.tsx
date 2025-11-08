@@ -76,13 +76,7 @@ export const Content = ({ children, themes, language, syntaxHighlighting = true,
     return <Fallback>{children}</Fallback>;
   }
 
-  return (
-    <div
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: "Kinda how Shiki works"
-      dangerouslySetInnerHTML={{ __html: html }}
-      {...props}
-    />
-  );
+  return <div dangerouslySetInnerHTML={{ __html: html }} {...props} />;
 };
 
 Content.displayName = 'Content';
