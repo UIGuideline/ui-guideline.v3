@@ -36,7 +36,7 @@ export interface PillTriggerProps extends RadixTabsTriggerProps, VariantProps<ty
  * component. It is a pill-shaped trigger that is used to navigate between tabs.
  */
 export const PillTrigger = React.forwardRef<HTMLButtonElement, PillTriggerProps>(
-  ({ className, size, ...props }, ref) => {
+  ({ className, size = TriggerSize.base, ...props }, ref) => {
     const classes = trigger({ size, className });
 
     return <RadixTrigger ref={ref} className={classes} {...props} />;
