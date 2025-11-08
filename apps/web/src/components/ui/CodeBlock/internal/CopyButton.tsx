@@ -1,5 +1,6 @@
 import type { ComponentProps, ReactElement } from 'react';
 import { cloneElement, useContext, useState } from 'react';
+import type { ButtonProps } from '../../Button/Button';
 import { CodeBlockContext } from '../CodeBlock';
 import { Button, ButtonAppearance, ButtonSize, ButtonVariant } from '@ui';
 import { CheckIcon, CopyIcon } from 'lucide-react';
@@ -29,9 +30,7 @@ export const CopyButton = ({
   const code = data.find((item) => item.language === value)?.code;
 
   const copyToClipboard = () => {
-    if (typeof window === 'undefined' || !navigator.clipboard.writeText || !code) {
-      return;
-    }
+    if (typeof window === 'undefined' || !navigator.clipboard.writeText || !code) return;
 
     void navigator.clipboard.writeText(code).then(() => {
       setIsCopied(true);
@@ -42,8 +41,7 @@ export const CopyButton = ({
   };
 
   if (asChild) {
-    return cloneElement(children as ReactElement, {
-      // @ts-expect-error - we know this is a button
+    return cloneElement(children as ReactElement<ButtonProps>, {
       onClick: copyToClipboard,
     });
   }
