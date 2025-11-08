@@ -14,9 +14,10 @@ const files = tv({
 
 export const Files = ({ className, children, ...props }: FilesProps) => {
   const { data } = useContext(CodeBlockContext);
+  const classes = files({ className });
 
   return (
-    <div className={files({ className })} {...props}>
+    <div className={classes} {...props}>
       {data.map(children)}
     </div>
   );
