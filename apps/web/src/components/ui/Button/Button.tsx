@@ -7,7 +7,7 @@ import { tv } from 'tailwind-variants';
 const button = tv({
   base: [
     'relative',
-    'select-none',
+    'select-none cursor-pointer',
     'inline-flex flex-shrink-0 items-center justify-center',
     'whitespace-nowrap font-normal leading-normal',
     'transition-[border,background-color,color,opacity] duration-100 ease-out',

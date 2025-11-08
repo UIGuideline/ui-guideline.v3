@@ -168,19 +168,10 @@ export const Anatomy = ({ className, data, designLayers }: AnatomyProps) => {
                 ]}
                 defaultValue="typescript"
               >
-                <CodeBlock.Header>
-                  <CodeBlock.Files>
-                    {(item) => (
-                      <CodeBlock.Filename key={item.language} value={item.language}>
-                        {item.filename}
-                      </CodeBlock.Filename>
-                    )}
-                  </CodeBlock.Files>
-                  <CodeBlock.CopyButton />
-                </CodeBlock.Header>
                 <CodeBlock.Body>
                   {(item) => (
-                    <CodeBlock.Item key={item.language} value={item.language}>
+                    <CodeBlock.Item className="relative" key={item.language} value={item.language}>
+                      <CodeBlock.CopyButton className="absolute top-3 right-3 z-20" />
                       <CodeBlock.Content language={item.language as BundledLanguage}>{item.code}</CodeBlock.Content>
                     </CodeBlock.Item>
                   )}
