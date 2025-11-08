@@ -1,0 +1,1 @@
+export { AnatomyImageContainer } from './AnatomyImageContainer';

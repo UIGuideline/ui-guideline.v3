@@ -1,34 +1,18 @@
+import { AnatomyImageContainer } from './shared';
 import type { AnatomyData } from '@lib';
-import { ASSET_PATHS } from '@lib';
-import { CodeBlock, CopyButton, type BundledLanguage } from '@ui';
-import { tv } from 'tailwind-variants';
+import { CodeBlock, type BundledLanguage } from '@ui';
+import { tv, type VariantProps } from 'tailwind-variants';
+
+const container = tv({
+  base: 'flex flex-col gap-4',
+});
 
 // Example code for CodeBlock demonstration
 const EXAMPLE_CODE = `<Button>
   <PlusIcon/> Add product
 </Button>`;
 
-const container = tv({
-  base: 'flex flex-col gap-4',
-});
-
-const content = tv({
-  base: 'relative z-0 text-slate-100 overflow-hidden border border-border rounded-b-lg',
-});
-
-const copyButton = tv({
-  base: 'absolute top-3 right-3 z-20',
-});
-
-const imageContainer = tv({
-  base: ['relative -z-1', 'min-[547px]:grid max-[547px]:overflow-scroll', 'place-content-center'],
-});
-
-const image = tv({
-  base: 'min-w-fit min-h-fit',
-});
-
-interface CodeAnatomyTabProps {
+interface CodeAnatomyTabProps extends VariantProps<typeof container> {
   /**
    * The CSS class to apply to the component.
    */
@@ -50,26 +34,11 @@ export const CodeAnatomyTab = ({ className, data }: CodeAnatomyTabProps) => {
 
   const classes = {
     container: container({ className }),
-    content: content(),
-    copyButton: copyButton(),
-    imageContainer: imageContainer(),
-    image: image(),
   };
-
-  const imageUrl = ASSET_PATHS.ROOT.concat(darkImageUrl);
-  const imageUrl2x = ASSET_PATHS.ROOT.concat(darkImageUrl2x);
-  const srcSet = `${imageUrl}, ${imageUrl2x} 2x`;
 
   return (
     <div className={classes.container}>
-      <div className={classes.content}>
-        <div className={classes.copyButton}>
-          <CopyButton imageUrl={imageUrl} />
-        </div>
-        <div className={classes.imageContainer}>
-          <img src={imageUrl} srcSet={srcSet} alt="code anatomy" className={classes.image} />
-        </div>
-      </div>
+      <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="code anatomy" />
       <div className="flex flex-col gap-3">
         <h3 className="text-base font-semibold text-foreground">Code Example</h3>
         <CodeBlock
