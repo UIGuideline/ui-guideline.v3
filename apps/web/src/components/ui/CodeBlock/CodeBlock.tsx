@@ -6,7 +6,7 @@ import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const codeBlock = tv({
-  base: 'size-full overflow-hidden rounded-md border border-border',
+  base: 'size-full overflow-hidden',
 });
 
 export const CodeBlockContext = createContext<CodeBlockContextType>({
