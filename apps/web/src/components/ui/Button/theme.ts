@@ -12,13 +12,16 @@ export const theme = tv({
       true: 'w-full',
     },
     size: {
-      [ButtonSize.sm]: 'h-6 rounded p-2 text-xs',
-      [ButtonSize.base]: 'h-8 rounded px-2 text-sm',
-      [ButtonSize.lg]: 'h-10 rounded px-4 text-base',
+      [ButtonSize.sm]: 'p-1.5 text-sm font-semibold h-7 rounded [&_svg]:size-4',
+      [ButtonSize.base]: 'p-2 text-base font-semibold h-9 rounded [&_svg]:size-5',
+      [ButtonSize.lg]: 'p-3 text-lg font-semibold h-12 rounded-md [&_svg]:size-6',
+      [ButtonSize.iconSm]: 'rounded size-7 [&_svg]:size-4',
+      [ButtonSize.iconBase]: 'rounded size-9 [&_svg]:size-5',
+      [ButtonSize.iconLg]: 'rounded-md size-12 [&_svg]:size-6',
     },
     variant: {
       [ButtonVariant.primary]: '',
-      [ButtonVariant.neutral]: '',
+      [ButtonVariant.secondary]: '',
       [ButtonVariant.destructive]: '',
     },
   },
@@ -30,8 +33,8 @@ export const theme = tv({
     },
     {
       appearance: ButtonAppearance.contained,
-      variant: ButtonVariant.neutral,
-      className: ['border border-neutral-700/20', 'bg-neutral-800 hover:bg-neutral-700/70', 'text-white'],
+      variant: ButtonVariant.secondary,
+      className: ['border border-secondary-700/20', 'bg-secondary-800 hover:bg-secondary-700/70', 'text-white'],
     },
     {
       appearance: ButtonAppearance.contained,
@@ -45,7 +48,7 @@ export const theme = tv({
     },
     {
       appearance: ButtonAppearance.outlined,
-      variant: ButtonVariant.neutral,
+      variant: ButtonVariant.secondary,
       className: ['border border-gray-700/60', 'hover:border-gray-700/20 hover:bg-gray-800', 'text-white'],
     },
     {
@@ -60,7 +63,7 @@ export const theme = tv({
     },
     {
       appearance: ButtonAppearance.ghost,
-      variant: ButtonVariant.neutral,
+      variant: ButtonVariant.secondary,
       className: ['hover:bg-neutral-800', 'text-white'],
     },
     {
