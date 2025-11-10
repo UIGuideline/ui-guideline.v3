@@ -72,7 +72,7 @@ const wordHighlightStyles = tv({
 
 const codeBlockStyles = tv({
   base: [
-    'mt-0 bg-background text-base',
+    'mt-0 bg-accent text-base',
     '[&_pre]:py-4',
     '[&_.shiki]:!bg-transparent',
     '[&_code]:w-full',

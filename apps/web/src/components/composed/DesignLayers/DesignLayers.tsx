@@ -1,11 +1,11 @@
 import { FigmaTree } from '../FigmaTree';
 import type { DesignLayersData } from '@lib';
 import type { BundledLanguage, TreeNodeData } from '@ui';
-import { CodeBlock, Tabs, TriggerSize } from '@ui';
+import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, CopyButton, CopyMode, Tabs, TriggerSize } from '@ui';
 import { tv } from 'tailwind-variants';
 
 const container = tv({
-  base: ['bg-accent', 'border border-border', 'rounded-lg overflow-hidden'],
+  base: ['bg-accent', 'border border-border rounded-b-lg', 'overflow-hidden'],
 });
 
 export interface DesignLayersProps {
@@ -35,27 +35,26 @@ export const DesignLayers = ({ data, className, designLayers }: DesignLayersProp
 
   return (
     <div className={classes.container}>
-      <Tabs defaultValue="all">
+      <Tabs defaultValue="figma-layers">
         <Tabs.List className="flex items-center gap-2 border-b border-border p-2">
-          <Tabs.PillTrigger
-            size={TriggerSize.xs}
-            value="all"
-            className="data-[state=active]:bg-white/5 data-[state=active]:ring-1 data-[state=active]:ring-white/10 rounded-lg text-sm px-2.5"
-          >
-            Visual Representation
+          <Tabs.PillTrigger value="figma-layers" size={TriggerSize.xs} className="data-[state=active]:bg-white/10">
+            <BrandLogo name={BrandLogoCatalog.figma} size={BrandLogoSize.xs} />
+            <span>Figma Layers</span>
           </Tabs.PillTrigger>
           <Tabs.PillTrigger
+            value="yaml-representation"
             size={TriggerSize.xs}
-            value="components"
-            className="data-[state=active]:bg-white/5 data-[state=active]:ring-1 data-[state=active]:ring-white/10 rounded-lg text-sm px-2.5"
+            className="data-[state=active]:bg-white/10"
           >
-            Yalm Representation
+            <BrandLogo name={BrandLogoCatalog.yaml} size={BrandLogoSize.xs} />
+            <span>Yaml Representation</span>
           </Tabs.PillTrigger>
+          <CopyButton className="ml-auto" text="Copy Figma Layers" mode={CopyMode.textOnly} />
         </Tabs.List>
-        <Tabs.Content value="all">
+        <Tabs.Content value="figma-layers">
           <FigmaTree className="p-3" data={data} />
         </Tabs.Content>
-        <Tabs.Content value="components">
+        <Tabs.Content value="yaml-representation">
           <CodeBlock
             data={[
               {

@@ -2,10 +2,6 @@ import { BrandLogoCatalog, BrandLogoSVGContent } from './brandLogoCatalog';
 import { BrandLogoSize, BrandLogoVariant } from './types';
 import { tv, type VariantProps } from 'tailwind-variants';
 
-const container = tv({
-  base: ['inline-flex items-center justify-center'],
-});
-
 const svg = tv({
   base: '',
   variants: {
@@ -26,16 +22,11 @@ const svg = tv({
   },
 });
 
-export interface BrandLogoProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof svg> {
+export interface BrandLogoProps extends React.SVGProps<SVGSVGElement>, VariantProps<typeof svg> {
   /**
    * The brand logo to display from the BrandLogoCatalog.
    */
   name: BrandLogoCatalog;
-
-  /**
-   * Specify the label of the logo (for accessibility).
-   */
-  ariaLabel?: string;
 
   /**
    * The size of the brand logo.
@@ -49,22 +40,18 @@ export interface BrandLogoProps extends React.HTMLAttributes<HTMLDivElement>, Va
 export const BrandLogo = ({
   name,
   className,
-  ariaLabel,
   variant = BrandLogoVariant.color,
   size = BrandLogoSize.md,
   ...props
 }: BrandLogoProps) => {
   const classes = {
-    container: container({ className }),
-    svg: svg({ variant, size }),
+    svg: svg({ variant, size, className }),
   };
 
   return (
-    <div className={classes.container} aria-label={ariaLabel ?? name} {...props}>
-      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={classes.svg}>
-        {BrandLogoSVGContent[name]}
-      </svg>
-    </div>
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={classes.svg} {...props}>
+      {BrandLogoSVGContent[name]}
+    </svg>
   );
 };
 
