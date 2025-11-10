@@ -46,10 +46,7 @@ export const Anatomy = ({ className, data, designLayers, codeAnatomy }: AnatomyP
 
   const [activeTab, setActiveTab] = useState<AnatomyTab>(AnatomyTab.base);
 
-  const handleTabChange = (value: string) => {
-    console.log(value);
-    setActiveTab(value as AnatomyTab);
-  };
+  const handleTabChange = (value: string) => setActiveTab(value as AnatomyTab);
 
   return (
     <section className="flex flex-col gap-3">
