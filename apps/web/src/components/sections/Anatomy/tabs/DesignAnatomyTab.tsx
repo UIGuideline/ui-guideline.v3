@@ -1,11 +1,10 @@
 import { AnatomyImageContainer } from './shared';
 import { DesignLayers } from '@composed';
 import type { AnatomyData, DesignLayersData } from '@lib';
-import { BrandLogo, BrandLogoCatalog, BrandLogoSize, Tabs, TriggerSize } from '@ui';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const container = tv({
-  base: 'flex flex-col gap-6',
+  base: 'flex flex-col',
 });
 
 interface DesignAnatomyTabProps extends VariantProps<typeof container> {
@@ -41,19 +40,7 @@ export const DesignAnatomyTab = ({ className, data, designLayers }: DesignAnatom
     <div className={classes.container}>
       <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="design anatomy" />
       <div className="flex flex-col gap-3">
-        {designLayers && (
-          <Tabs defaultValue="figma-layers">
-            <Tabs.List className="mb-3 flex gap-2 items-center">
-              <Tabs.PillTrigger value="figma-layers" size={TriggerSize.xs}>
-                <BrandLogo name={BrandLogoCatalog.figma} size={BrandLogoSize.xs} />
-                <span>Figma Layers</span>
-              </Tabs.PillTrigger>
-            </Tabs.List>
-            <Tabs.Content value="figma-layers">
-              <DesignLayers data={designLayers.layers} designLayers={designLayers} />
-            </Tabs.Content>
-          </Tabs>
-        )}
+        {designLayers && <DesignLayers data={designLayers.layers} designLayers={designLayers} />}
       </div>
     </div>
   );
