@@ -56,7 +56,7 @@ export const Anatomy = ({ className, data, designLayers, codeAnatomy }: AnatomyP
       <div aria-label="Anatomy" className={classes.container}>
         <Tabs className="w-full px-4 pt-1 pb-4" defaultValue={activeTab} onValueChange={handleTabChange}>
           <Tabs.List>
-            <Tabs.Trigger value={AnatomyTab.base}>Base Anatomy</Tabs.Trigger>
+            <Tabs.Trigger value={AnatomyTab.base}>General Anatomy</Tabs.Trigger>
             <Tabs.Trigger value={AnatomyTab.code}>Code Anatomy</Tabs.Trigger>
             <Tabs.Trigger value={AnatomyTab.design}>Design Anatomy</Tabs.Trigger>
           </Tabs.List>
