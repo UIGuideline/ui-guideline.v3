@@ -7,14 +7,12 @@
 # - variant: Component Variant
 # - frame: Frame container
 # - group: Group of elements
-# - auto-layout: Auto-layout frame
+# - autoLayout: Auto-layout frame
 # - text: Text layer
-# - boolean: Boolean property
-# - vector: Vector/shape layer
 #
 # To add new types:
 # 1. Use the new type here in the YAML
-# 2. Add the corresponding icon mapping in apps/web/src/components/ui/Tree/figmaIcons.ts
+# 2. Add the corresponding icon mapping in apps/web/src/components/composed/FigmaTree/figmaTreeIcons.ts
 # 3. That's it! The component will automatically render with the new icon
 
 layers:
@@ -30,7 +28,7 @@ layers:
         defaultOpen: true
         children:
           # Auto-layout container for button content
-          - type: 'auto-layout'
+          - type: 'autoLayout'
             name: 'Container'
             description: 'Auto-layout frame that arranges label and icon horizontally'
             defaultOpen: true
@@ -46,10 +44,10 @@ layers:
                 description: 'Text layer displaying the button label'
 
           # Boolean properties
-          - type: 'boolean'
+          - type: 'frame'
             name: 'hasIcon'
             description: 'Boolean property to toggle icon visibility'
 
-          - type: 'boolean'
+          - type: 'group'
             name: 'isDisabled'
             description: 'Boolean property to toggle disabled state'
