@@ -1,5 +1,5 @@
 import { AnatomyImageContainer } from './shared';
-import { FigmaTree } from '@composed';
+import { DesignLayers } from '@composed';
 import type { AnatomyData, DesignLayersData } from '@lib';
 import { BrandLogo, BrandLogoCatalog, BrandLogoSize, Tabs, TriggerSize } from '@ui';
 import { tv, type VariantProps } from 'tailwind-variants';
@@ -50,7 +50,7 @@ export const DesignAnatomyTab = ({ className, data, designLayers }: DesignAnatom
               </Tabs.PillTrigger>
             </Tabs.List>
             <Tabs.Content value="figma-layers">
-              <FigmaTree data={designLayers.layers} />
+              <DesignLayers data={designLayers.layers} designLayers={designLayers} />
             </Tabs.Content>
           </Tabs>
         )}

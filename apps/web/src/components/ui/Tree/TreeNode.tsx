@@ -83,7 +83,7 @@ export interface TreeNodeProps {
  */
 export const TreeNode = ({ className, node, level = 0, icon, renderIcon }: TreeNodeProps) => {
   const hasChildren = node.children && node.children.length > 0;
-  const [isOpen, setIsOpen] = useState(node.defaultOpen ?? false);
+  const [isOpen, setIsOpen] = useState(true);
 
   // Determine which icon to render
   const nodeIcon = renderIcon ? renderIcon(node) : icon;

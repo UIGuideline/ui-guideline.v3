@@ -20,18 +20,15 @@ layers:
   - type: 'component'
     name: 'Button'
     description: 'Main component container for the button with all its variants'
-    defaultOpen: true
     children:
       - type: 'variant'
         name: 'Primary'
         description: 'Primary button variant'
-        defaultOpen: true
         children:
           # Auto-layout container for button content
           - type: 'autoLayout'
             name: 'Container'
             description: 'Auto-layout frame that arranges label and icon horizontally'
-            defaultOpen: true
             children:
               # Icon instance (optional, controlled by hasIcon boolean)
               - type: 'instance'

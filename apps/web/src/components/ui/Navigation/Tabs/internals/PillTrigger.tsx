@@ -9,7 +9,7 @@ const trigger = tv({
     'cursor-pointer',
     'inline-flex items-center gap-1 rounded-full py-1.5 pl-3 pr-4',
     'hover:bg-white/3',
-    'data-[state=active]:bg-accent data-[state=active]:text-foreground data-[state=active]:font-semibold',
+    'data-[state=active]:bg-accent data-[state=active]:text-foreground',
     'data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground',
   ],
   variants: {
