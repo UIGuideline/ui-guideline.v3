@@ -6,12 +6,13 @@ import { tv } from 'tailwind-variants';
 
 const button = tv({
   base: [
-    'relative',
-    'select-none cursor-pointer',
-    'inline-flex flex-shrink-0 items-center justify-center',
-    'whitespace-nowrap font-normal leading-normal',
-    'transition-[border,background-color,color,opacity] duration-100 ease-out',
-    'disabled:pointer-events-none disabled:opacity-50',
+    'flex items-center justify-center shrink-0 gap-2',
+    '[&_svg]:shrink-0',
+    'relative overflow-hidden',
+    'text-center whitespace-nowrap',
+    'transition duration-100 ease-out',
+    'cursor-pointer select-none',
+    'disabled:pointer-events-none disabled:opacity-30',
   ],
   defaultVariants: {
     appearance: ButtonAppearance.contained,
