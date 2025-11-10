@@ -1,7 +1,19 @@
 import { AnatomyImageContainer } from './shared';
 import type { AnatomyData, CodeAnatomyData } from '@lib';
 import type { BundledLanguage } from '@ui';
-import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, Tabs, TriggerSize } from '@ui';
+import {
+  BrandLogo,
+  BrandLogoCatalog,
+  BrandLogoSize,
+  Button,
+  ButtonAppearance,
+  ButtonSize,
+  ButtonVariant,
+  CodeBlock,
+  Tabs,
+  TriggerSize,
+} from '@ui';
+import { FilePlusIcon } from 'lucide-react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const container = tv({
@@ -90,6 +102,9 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabP
                 </Tabs.PillTrigger>
               );
             })}
+            <Button appearance={ButtonAppearance.contained} size={ButtonSize.iconBase} variant={ButtonVariant.primary}>
+              <FilePlusIcon />
+            </Button>
           </Tabs.List>
           {availableLibraries.map((item) => {
             const trimmedCode = item.code.trimEnd();

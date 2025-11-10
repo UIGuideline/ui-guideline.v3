@@ -2,6 +2,9 @@ export enum ButtonSize {
   sm = 'sm',
   base = 'base',
   lg = 'lg',
+  iconSm = 'iconSm',
+  iconBase = 'iconBase',
+  iconLg = 'iconLg',
 }
 
 export enum ButtonAppearance {
@@ -12,6 +15,6 @@ export enum ButtonAppearance {
 
 export enum ButtonVariant {
   primary = 'primary',
-  neutral = 'neutral',
+  secondary = 'secondary',
   destructive = 'destructive',
 }
