@@ -40,14 +40,14 @@ export const DesignLayers = ({ data, className, designLayers }: DesignLayersProp
           <Tabs.PillTrigger
             size={TriggerSize.xs}
             value="all"
-            className="data-[state=active]:bg-white/5 data-[state=active]:ring-1 data-[state=active]:ring-white/10 rounded text-sm px-2.5"
+            className="data-[state=active]:bg-white/5 data-[state=active]:ring-1 data-[state=active]:ring-white/10 rounded-lg text-sm px-2.5"
           >
             Visual Representation
           </Tabs.PillTrigger>
           <Tabs.PillTrigger
             size={TriggerSize.xs}
             value="components"
-            className="data-[state=active]:bg-white/5 data-[state=active]:ring-1 data-[state=active]:ring-white/10 rounded text-sm px-2.5"
+            className="data-[state=active]:bg-white/5 data-[state=active]:ring-1 data-[state=active]:ring-white/10 rounded-lg text-sm px-2.5"
           >
             Yalm Representation
           </Tabs.PillTrigger>
