@@ -12,7 +12,7 @@ const lineNumberStyles = tv({
     '[&_.line]:before:[counter-increment:line]',
     '[&_.line]:before:w-4',
     '[&_.line]:before:mr-4',
-    '[&_.line]:before:text-[13px]',
+    '[&_.line]:before:text-[16px]',
     '[&_.line]:before:text-right',
     '[&_.line]:before:text-muted-foreground/50',
     '[&_.line]:before:font-mono',
@@ -72,7 +72,7 @@ const wordHighlightStyles = tv({
 
 const codeBlockStyles = tv({
   base: [
-    'mt-0 bg-background text-sm',
+    'mt-0 bg-background text-base',
     '[&_pre]:py-4',
     '[&_.shiki]:!bg-transparent',
     '[&_code]:w-full',
