@@ -7,7 +7,7 @@ const container = tv({
 });
 
 const content = tv({
-  base: 'relative z-0 text-slate-100 overflow-hidden border border-border rounded-b-lg',
+  base: 'relative z-0 text-slate-100 overflow-hidden border border-border border-b-0',
 });
 
 const copyButton = tv({

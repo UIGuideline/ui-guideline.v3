@@ -5,6 +5,7 @@ export enum BrandLogoCatalog {
   radixui = 'radixui',
   baseui = 'baseui',
   shadcn = 'shadcn',
+  yaml = 'yaml',
 }
 
 export type BrandLogoCatalogItem = keyof typeof BrandLogoCatalog;
@@ -42,12 +43,12 @@ export const BrandLogoSVGContent: Record<BrandLogoCatalog, React.ReactNode> = {
     <>
       <path
         d="M48.3477 90.0004C34.9009 90.0004 24 78.3211 24 63.9135C24 49.5059 34.9009 37.8267 48.3477 37.8267V90.0004Z"
-        fill="#FFF"
+        fill="currentColor"
       />
-      <path d="M48.3477 10H24V34.3477H48.3477V10Z" fill="#FFF" />
+      <path d="M48.3477 10H24V34.3477H48.3477V10Z" fill="currentColor" />
       <path
         d="M63.9999 34.3477C70.7233 34.3477 76.1737 28.8973 76.1737 22.1739C76.1737 15.4504 70.7233 10 63.9999 10C57.2765 10 51.826 15.4504 51.826 22.1739C51.826 28.8973 57.2765 34.3477 63.9999 34.3477Z"
-        fill="#FFF"
+        fill="currentColor"
       />
     </>
   ),
@@ -55,11 +56,11 @@ export const BrandLogoSVGContent: Record<BrandLogoCatalog, React.ReactNode> = {
     <>
       <path
         d="M53.5454 31.8749C52.5433 31.813 51.7269 32.633 51.7269 33.6371V90.0001C67.7933 90.0001 80.8175 76.9759 80.8175 60.9095C80.8175 45.4541 68.7645 32.8135 53.5454 31.8749Z"
-        fill="#FFF"
+        fill="currentColor"
       />
       <path
         d="M48.0906 41.9996V49.9995V89.9991C32.0243 89.9991 19 75.6723 19 57.9994V49.9995V10C35.0663 10 48.0906 24.3267 48.0906 41.9996Z"
-        fill="#FFF"
+        fill="currentColor"
       />
     </>
   ),
@@ -67,18 +68,23 @@ export const BrandLogoSVGContent: Record<BrandLogoCatalog, React.ReactNode> = {
     <>
       <path
         d="M81 51.4761L51.4762 80.9999"
-        stroke="#FFF"
+        stroke="currentColor"
         stroke-width="11.8095"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
       <path
         d="M75.0952 19L19 75.0952"
-        stroke="#FFF"
+        stroke="currentColor"
         stroke-width="11.8095"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
+    </>
+  ),
+  [BrandLogoCatalog.yaml]: (
+    <>
+      <path d="M66.3333 13H82.7778L33.4444 87H17L41.6667 50L17 13H33.4444L49.8889 37.6667L66.3333 13Z" fill="#CB161E" />
     </>
   ),
 };

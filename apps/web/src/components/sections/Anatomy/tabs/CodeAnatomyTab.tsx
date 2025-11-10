@@ -5,7 +5,7 @@ import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, Tabs, TriggerSiz
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const container = tv({
-  base: 'flex flex-col gap-6',
+  base: 'flex flex-col',
 });
 
 // Library configuration for tabs
@@ -71,47 +71,56 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabP
   return (
     <div className={classes.container}>
       <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="code anatomy" />
-      <div className="flex flex-col gap-3">
+      <div className="flex bg-accent border border-border rounded-b-lg overflow-hidden flex-col gap-3">
         <Tabs defaultValue={defaultLibrary}>
-          <Tabs.List className="mb-3 flex gap-2 items-center">
+          <Tabs.List className="flex items-center gap-2 border-b border-border p-2">
             {availableLibraries.map((item) => {
               const config = LIBRARY_CONFIG[item.slug as keyof typeof LIBRARY_CONFIG];
               if (!config) return null;
 
               return (
-                <Tabs.PillTrigger key={item.slug} value={item.slug} size={TriggerSize.xs}>
+                <Tabs.PillTrigger
+                  key={item.slug}
+                  value={item.slug}
+                  size={TriggerSize.xs}
+                  className="data-[state=active]:bg-white/10"
+                >
                   <BrandLogo name={config.logo} size={BrandLogoSize.xs} />
                   <span>{config.label}</span>
                 </Tabs.PillTrigger>
               );
             })}
           </Tabs.List>
-          {availableLibraries.map((item) => (
-            <Tabs.Content key={item.slug} value={item.slug}>
-              <CodeBlock
-                className="bg-accent border border-border rounded-lg"
-                data={[
-                  {
-                    language: 'tsx',
-                    filename: `${item.slug}.tsx`,
-                    code: item.code,
-                  },
-                ]}
-                defaultValue="tsx"
-              >
-                <CodeBlock.Body>
-                  {(codeItem) => (
-                    <CodeBlock.Item className="relative" key={codeItem.language} value={codeItem.language}>
-                      <CodeBlock.CopyButton className="absolute top-3 right-3 z-20" />
-                      <CodeBlock.Content language={codeItem.language as BundledLanguage}>
-                        {codeItem.code}
-                      </CodeBlock.Content>
-                    </CodeBlock.Item>
-                  )}
-                </CodeBlock.Body>
-              </CodeBlock>
-            </Tabs.Content>
-          ))}
+          {availableLibraries.map((item) => {
+            const trimmedCode = item.code.trimEnd();
+
+            return (
+              <Tabs.Content key={item.slug} value={item.slug}>
+                <CodeBlock
+                  className="bg-accent"
+                  data={[
+                    {
+                      language: 'tsx',
+                      filename: `${item.slug}.tsx`,
+                      code: trimmedCode,
+                    },
+                  ]}
+                  defaultValue="tsx"
+                >
+                  <CodeBlock.Body>
+                    {(codeItem) => (
+                      <CodeBlock.Item className="relative" key={codeItem.language} value={codeItem.language}>
+                        <CodeBlock.CopyButton className="absolute top-3 right-3 z-20" />
+                        <CodeBlock.Content language={codeItem.language as BundledLanguage}>
+                          {codeItem.code}
+                        </CodeBlock.Content>
+                      </CodeBlock.Item>
+                    )}
+                  </CodeBlock.Body>
+                </CodeBlock>
+              </Tabs.Content>
+            );
+          })}
         </Tabs>
       </div>
     </div>
