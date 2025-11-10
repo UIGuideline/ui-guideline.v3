@@ -89,6 +89,7 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabP
           {availableLibraries.map((item) => (
             <Tabs.Content key={item.slug} value={item.slug}>
               <CodeBlock
+                className="bg-accent border border-border rounded-lg"
                 data={[
                   {
                     language: 'tsx',

@@ -4,7 +4,7 @@ import { Tree } from '@ui';
 import { tv } from 'tailwind-variants';
 
 const container = tv({
-  base: ['bg-accent', 'border border-border', 'rounded-lg', 'p-3'],
+  base: '',
 });
 
 const emptyState = tv({
