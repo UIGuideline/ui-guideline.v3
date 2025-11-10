@@ -1,16 +1,5 @@
 import type { BaseIconProps } from '@ui';
-import {
-  Box,
-  Circle,
-  Component,
-  Frame as FrameIcon,
-  Group,
-  Layers,
-  Shapes,
-  SquareDashedMousePointer,
-  ToggleLeft,
-  Type,
-} from 'lucide-react';
+import { IconCatalog } from '@ui';
 
 /**
  * Type definition for icon components.
@@ -40,26 +29,22 @@ export type IconComponent = React.ComponentType<BaseIconProps>;
  * - group: Group of elements
  * - auto-layout: Auto-layout frame
  * - text: Text layer
- * - boolean: Boolean property
- * - vector: Vector/shape layer
  */
-export const FIGMA_TREE_ICONS: Record<string, IconComponent> = {
-  component: Component,
-  instance: Box,
-  variant: SquareDashedMousePointer,
-  frame: FrameIcon,
-  group: Group,
-  'auto-layout': Layers,
-  text: Type,
-  boolean: ToggleLeft,
-  vector: Shapes,
+export const FIGMA_TREE_ICONS: Record<string, IconCatalog> = {
+  component: IconCatalog.figmaComponent,
+  instance: IconCatalog.figmaInstance,
+  variant: IconCatalog.figmaVariant,
+  frame: IconCatalog.figmaFrame,
+  group: IconCatalog.figmaGroup,
+  autoLayout: IconCatalog.figmaAutoLayout,
+  text: IconCatalog.figmaText,
 };
 
 /**
  * Default icon to use when a type is not found in the mapping.
  * This ensures the component doesn't break if an unknown type is used.
  */
-export const DEFAULT_FIGMA_ICON: IconComponent = Circle;
+export const DEFAULT_FIGMA_ICON: IconCatalog = IconCatalog.figmaVariant;
 
 /**
  * Get the appropriate icon component for a given Figma element type.
@@ -73,6 +58,6 @@ export const DEFAULT_FIGMA_ICON: IconComponent = Circle;
  * return <Icon size={16} />;
  * ```
  */
-export function getFigmaIconForType(type: string): IconComponent {
+export function getFigmaIconForType(type: string): IconCatalog {
   return FIGMA_TREE_ICONS[type] ?? DEFAULT_FIGMA_ICON;
 }

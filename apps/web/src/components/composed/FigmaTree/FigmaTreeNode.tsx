@@ -1,6 +1,6 @@
 import { getFigmaIconForType } from './figmaTreeIcons';
 import type { TreeNodeData } from '@ui';
-import { TreeNode, type TreeNodeProps } from '@ui';
+import { Icon, TreeNode, type TreeNodeProps } from '@ui';
 
 /**
  * This component wraps TreeNode and provides the Figma-specific icon logic,
@@ -8,8 +8,8 @@ import { TreeNode, type TreeNodeProps } from '@ui';
  */
 export const FigmaTreeNode = ({ node, level = 0 }: Omit<TreeNodeProps, 'icon' | 'renderIcon'>) => {
   const renderIcon = (node: TreeNodeData) => {
-    const IconComponent = getFigmaIconForType(node.type);
-    return <IconComponent size={16} />;
+    const IconComponentCatalog = getFigmaIconForType(node.type);
+    return <Icon icon={IconComponentCatalog} className="size-4" />;
   };
 
   return <TreeNode node={node} level={level} renderIcon={renderIcon} />;
