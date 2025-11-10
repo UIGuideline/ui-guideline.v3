@@ -25,15 +25,6 @@ export interface FigmaTreeProps {
 
 /**
  * FigmaTree is a specialized version of Tree for displaying Figma design layers.
- * Includes dark theme colors, Figma-specific icons, and appropriate empty states.
- *
- * This component handles the rendering of the tree structure internally,
- * so you only need to pass the data.
- *
- * @example
- * ```tsx
- * <FigmaTree data={designLayers} />
- * ```
  */
 export const FigmaTree = ({ data, className }: FigmaTreeProps) => {
   const classes = {
