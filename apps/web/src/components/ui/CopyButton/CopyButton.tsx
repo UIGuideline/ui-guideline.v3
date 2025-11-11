@@ -1,60 +1,21 @@
 import * as React from 'react';
+import { Button, ButtonSize, ButtonVariant, type ButtonProps } from '../Button';
 import { useCopy } from './hooks/useCopy';
 import { CopyMode, CopyStatus } from './types';
-import { Check, Copy, X } from 'lucide-react';
+import { CheckIcon, CopyIcon, XIcon } from 'lucide-react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const button = tv({
-  base: [
-    'inline-flex items-center gap-2',
-    'px-4 py-2',
-    'text-sm font-medium',
-    'rounded-md',
-    'transition-all duration-200',
-    'focus:outline-none',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-  ],
-  variants: {
-    variant: {
-      primary: [
-        'bg-blue-600 text-white',
-        'hover:bg-blue-700',
-        'focus:ring-blue-500',
-        'dark:bg-blue-500 dark:hover:bg-blue-600',
-      ],
-      secondary: [
-        'bg-gray-200 text-gray-900',
-        'hover:bg-gray-300',
-        'focus:ring-gray-400',
-        'dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600',
-      ],
-      ghost: [
-        'bg-transparent text-gray-700',
-        'hover:bg-gray-100',
-        'focus:ring-gray-400',
-        'dark:text-gray-300 dark:hover:bg-gray-800',
-      ],
-    },
-    size: {
-      sm: 'px-3 py-1.5 text-xs',
-      base: 'px-4 py-2 text-sm',
-      lg: 'px-5 py-2.5 text-base',
-    },
-  },
-  defaultVariants: {
-    variant: 'ghost',
-    size: 'base',
-  },
+  base: '',
 });
-
 const FEEDBACK_DURATION = 2000;
 
 // Status-to-icon mapping
 const STATUS_ICONS = {
-  [CopyStatus.success]: Check,
-  [CopyStatus.error]: X,
-  [CopyStatus.idle]: Copy,
-  [CopyStatus.copying]: Copy,
+  [CopyStatus.success]: CheckIcon,
+  [CopyStatus.error]: XIcon,
+  [CopyStatus.idle]: CopyIcon,
+  [CopyStatus.copying]: CopyIcon,
 } as const;
 
 // Status-to-label mapping with mode-specific messages
@@ -89,9 +50,7 @@ const getStatusLabel = (status: CopyStatus, mode: CopyMode): string => {
   return labels[mode];
 };
 
-export interface CopyButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'>,
-    VariantProps<typeof button> {
+export interface CopyButtonProps extends ButtonProps, VariantProps<typeof button> {
   /**
    * URL of the image to copy
    */
@@ -101,11 +60,6 @@ export interface CopyButtonProps
    * Text to copy alongside the image
    */
   text?: string;
-
-  /**
-   * Custom class name
-   */
-  className?: string;
 
   /**
    * what to copy
@@ -119,7 +73,19 @@ export interface CopyButtonProps
 }
 
 export const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
-  ({ imageUrl, text, className, variant, size, mode = CopyMode.imageOnly, onCopyComplete, ...props }, ref) => {
+  (
+    {
+      imageUrl,
+      text,
+      className,
+      variant = ButtonVariant.ghost,
+      size = ButtonSize.base,
+      mode = CopyMode.imageOnly,
+      onCopyComplete,
+      ...props
+    },
+    ref,
+  ) => {
     const { copy, reset, status, lastResult } = useCopy();
 
     // Determine current mode (use lastResult mode if available, otherwise use prop mode)
@@ -152,13 +118,13 @@ export const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
       onCopyComplete?.(result.success, result.mode!);
     };
 
-    const classes = button({ className, variant, size });
+    const classes = button({ className });
 
     return (
-      <button ref={ref} className={classes} onClick={handleClick} {...props}>
+      <Button ref={ref} className={classes} onClick={handleClick} variant={variant} size={size} {...props}>
         <Icon className="w-4 h-4" />
         <span>{label}</span>
-      </button>
+      </Button>
     );
   },
 );
