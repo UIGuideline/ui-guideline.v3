@@ -101,7 +101,7 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabP
                 </Tabs.PillTrigger>
               );
             })}
-            <Button size={ButtonSize.sm} variant={ButtonVariant.mono} className="ml-auto">
+            <Button size={ButtonSize.sm} variant={ButtonVariant.outline} className="ml-auto">
               Lib documentation
               <ExternalLinkIcon />
             </Button>
