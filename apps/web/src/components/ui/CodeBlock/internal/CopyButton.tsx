@@ -52,7 +52,7 @@ export const CopyButton = ({
     <Button
       className={copyButton({ className })}
       onClick={copyToClipboard}
-      size={ButtonSize.base}
+      size={ButtonSize.iconBase}
       variant={ButtonVariant.ghost}
       {...props}
     >
