@@ -7,14 +7,11 @@ export enum ButtonSize {
   iconLg = 'iconLg',
 }
 
-export enum ButtonAppearance {
-  contained = 'contained',
-  outlined = 'outlined',
-  ghost = 'ghost',
-}
-
 export enum ButtonVariant {
-  primary = 'primary',
-  secondary = 'secondary',
+  default = 'default',
+  outline = 'outline',
+  ghost = 'ghost',
   destructive = 'destructive',
+  secondary = 'secondary',
+  mono = 'mono',
 }
