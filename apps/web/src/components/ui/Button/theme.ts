@@ -1,13 +1,8 @@
-import { ButtonAppearance, ButtonSize, ButtonVariant } from './types';
+import { ButtonSize, ButtonVariant } from './types';
 import { tv } from 'tailwind-variants';
 
 export const theme = tv({
   variants: {
-    appearance: {
-      [ButtonAppearance.contained]: '',
-      [ButtonAppearance.outlined]: '',
-      [ButtonAppearance.ghost]: '',
-    },
     isFullWidth: {
       true: 'w-full',
     },
@@ -20,56 +15,12 @@ export const theme = tv({
       [ButtonSize.iconLg]: 'rounded-md size-12 [&_svg]:size-6',
     },
     variant: {
-      [ButtonVariant.primary]: '',
-      [ButtonVariant.secondary]: '',
-      [ButtonVariant.destructive]: '',
+      [ButtonVariant.default]: ['bg-primary-600 hover:bg-primary-700', 'text-white'],
+      [ButtonVariant.outline]: ['border border-input', 'hover:bg-secondary/80', 'text-secondary-foreground'],
+      [ButtonVariant.mono]: ['bg-white hover:bg-white/80', 'text-black'],
+      [ButtonVariant.ghost]: ['bg-transparent hover:bg-secondary/80', 'text-secondary-foreground'],
+      [ButtonVariant.secondary]: ['bg-secondary hover:bg-secondary/70', 'text-secondary-foreground'],
+      [ButtonVariant.destructive]: ['bg-red-600 hover:bg-red-500/80', 'text-white'],
     },
   },
-  compoundVariants: [
-    {
-      appearance: ButtonAppearance.contained,
-      variant: ButtonVariant.primary,
-      className: ['border-primary-400/20 border', 'bg-primary-500 hover:bg-primary-400/70', 'text-white'],
-    },
-    {
-      appearance: ButtonAppearance.contained,
-      variant: ButtonVariant.secondary,
-      className: ['border border-secondary-700/20', 'bg-secondary-800 hover:bg-secondary-700/70', 'text-white'],
-    },
-    {
-      appearance: ButtonAppearance.contained,
-      variant: ButtonVariant.destructive,
-      className: ['border border-red-700/20', 'bg-red-600 hover:bg-red-500/80', 'text-white'],
-    },
-    {
-      appearance: ButtonAppearance.outlined,
-      variant: ButtonVariant.primary,
-      className: ['border-primary-600/60 border', 'hover:border-primary-400/20 hover:bg-primary-500', 'text-white'],
-    },
-    {
-      appearance: ButtonAppearance.outlined,
-      variant: ButtonVariant.secondary,
-      className: ['border border-gray-700/60', 'hover:border-gray-700/20 hover:bg-gray-800', 'text-white'],
-    },
-    {
-      appearance: ButtonAppearance.outlined,
-      variant: ButtonVariant.destructive,
-      className: ['border border-red-700/60', 'hover:border-red-700/20 hover:bg-red-600', 'text-white'],
-    },
-    {
-      appearance: ButtonAppearance.ghost,
-      variant: ButtonVariant.primary,
-      className: ['hover:bg-primary-500', 'text-white'],
-    },
-    {
-      appearance: ButtonAppearance.ghost,
-      variant: ButtonVariant.secondary,
-      className: ['hover:bg-neutral-800', 'text-white'],
-    },
-    {
-      appearance: ButtonAppearance.ghost,
-      variant: ButtonVariant.destructive,
-      className: ['hover:bg-red-600', 'text-white'],
-    },
-  ],
 });

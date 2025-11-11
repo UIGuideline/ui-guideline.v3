@@ -2,7 +2,7 @@ import type { ComponentProps, ReactElement } from 'react';
 import { cloneElement, useContext, useState } from 'react';
 import type { ButtonProps } from '../../Button/Button';
 import { CodeBlockContext } from '../CodeBlock';
-import { Button, ButtonAppearance, ButtonSize, ButtonVariant } from '@ui';
+import { Button, ButtonSize, ButtonVariant } from '@ui';
 import { CheckIcon, CopyIcon } from 'lucide-react';
 import { tv } from 'tailwind-variants';
 
@@ -53,8 +53,7 @@ export const CopyButton = ({
       className={copyButton({ className })}
       onClick={copyToClipboard}
       size={ButtonSize.base}
-      variant={ButtonVariant.neutral}
-      appearance={ButtonAppearance.ghost}
+      variant={ButtonVariant.ghost}
       {...props}
     >
       {children ?? <Icon size={16} />}
