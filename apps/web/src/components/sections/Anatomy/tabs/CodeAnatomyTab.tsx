@@ -102,7 +102,7 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabP
               );
             })}
             <Button size={ButtonSize.sm} variant={ButtonVariant.outline} className="ml-auto">
-              Lib documentation
+              Doc reference
               <ExternalLinkIcon />
             </Button>
           </Tabs.List>
