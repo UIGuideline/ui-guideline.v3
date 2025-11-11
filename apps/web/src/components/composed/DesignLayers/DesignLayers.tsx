@@ -1,7 +1,7 @@
 import { FigmaTree } from '../FigmaTree';
 import type { DesignLayersData } from '@lib';
 import type { BundledLanguage, TreeNodeData } from '@ui';
-import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, CopyButton, CopyMode, Tabs, TriggerSize } from '@ui';
+import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, Tabs, TriggerSize } from '@ui';
 import { tv } from 'tailwind-variants';
 
 const container = tv({
@@ -49,7 +49,6 @@ export const DesignLayers = ({ data, className, designLayers }: DesignLayersProp
             <BrandLogo name={BrandLogoCatalog.yaml} size={BrandLogoSize.xs} />
             <span>Yaml Representation</span>
           </Tabs.PillTrigger>
-          <CopyButton className="ml-auto" text="Copy Figma Layers" mode={CopyMode.textOnly} />
         </Tabs.List>
         <Tabs.Content value="figma-layers">
           <FigmaTree className="p-3" data={data} />
