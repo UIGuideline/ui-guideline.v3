@@ -7,9 +7,9 @@ import { tv } from 'tailwind-variants';
 const button = tv({
   base: [
     'flex items-center justify-center shrink-0 gap-2',
-    '[&_svg]:shrink-0',
+    '[&_svg]:shrink-0 [&_svg]:size-4',
     'relative overflow-hidden',
-    'text-center whitespace-nowrap',
+    'text-sm font-medium text-center whitespace-nowrap',
     'transition duration-100 ease-out',
     'cursor-pointer select-none',
     'disabled:pointer-events-none disabled:opacity-30',
