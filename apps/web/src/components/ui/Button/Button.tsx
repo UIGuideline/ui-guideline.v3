@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { theme } from './theme';
-import { ButtonAppearance, ButtonSize, ButtonVariant } from './types';
+import { ButtonSize, ButtonVariant } from './types';
 import { Slot } from '@radix-ui/react-slot';
 import { tv } from 'tailwind-variants';
 
@@ -15,20 +15,14 @@ const button = tv({
     'disabled:pointer-events-none disabled:opacity-30',
   ],
   defaultVariants: {
-    appearance: ButtonAppearance.contained,
     isFullWidth: false,
     size: ButtonSize.base,
-    variant: ButtonVariant.primary,
+    variant: ButtonVariant.default,
   },
   extend: theme,
 });
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * The type of appearance of the button.
-   */
-  appearance?: ButtonAppearance;
-
   /**
    * If true, the button will be rendered as a child element. This is useful
    * when you need to use the button as a link or other element.
@@ -65,20 +59,11 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    {
-      className,
-      appearance,
-      size = ButtonSize.base,
-      variant = ButtonVariant.primary,
-      isFullWidth,
-      asChild = false,
-      ...props
-    },
+    { className, size = ButtonSize.base, variant = ButtonVariant.default, isFullWidth, asChild = false, ...props },
     ref,
   ) => {
     const Component = asChild ? Slot : 'button';
     const classes = button({
-      appearance,
       isFullWidth,
       size,
       variant,
@@ -91,4 +76,4 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button';
 
-export { ButtonAppearance, ButtonSize, ButtonVariant };
+export { ButtonSize, ButtonVariant };

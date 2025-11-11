@@ -6,14 +6,13 @@ import {
   BrandLogoCatalog,
   BrandLogoSize,
   Button,
-  ButtonAppearance,
   ButtonSize,
   ButtonVariant,
   CodeBlock,
   Tabs,
   TriggerSize,
 } from '@ui';
-import { FilePlusIcon } from 'lucide-react';
+import { ExternalLinkIcon } from 'lucide-react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const container = tv({
@@ -102,8 +101,9 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabP
                 </Tabs.PillTrigger>
               );
             })}
-            <Button appearance={ButtonAppearance.contained} size={ButtonSize.iconBase} variant={ButtonVariant.primary}>
-              <FilePlusIcon />
+            <Button size={ButtonSize.sm} variant={ButtonVariant.mono} className="ml-auto">
+              Lib documentation
+              <ExternalLinkIcon />
             </Button>
           </Tabs.List>
           {availableLibraries.map((item) => {
