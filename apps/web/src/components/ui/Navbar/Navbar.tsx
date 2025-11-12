@@ -1,4 +1,6 @@
 import { Logo, LogoAppearance, LogoSize, LogoVariant } from '../Logo/Logo';
+import { FeedbackFish } from '@feedback-fish/react';
+import { Button, ButtonSize, ButtonVariant } from '@ui';
 import { tv } from 'tailwind-variants';
 
 const nav = tv({
@@ -23,6 +25,11 @@ export const Navbar = ({ className }: NavbarProps) => {
   return (
     <nav className={classes.nav}>
       <Logo variant={LogoVariant.light} size={LogoSize.sm} appearance={LogoAppearance.complete} />
+      <FeedbackFish projectId="d26ca82e52b010">
+        <Button size={ButtonSize.sm} variant={ButtonVariant.outline}>
+          Feedback
+        </Button>
+      </FeedbackFish>
     </nav>
   );
 };
