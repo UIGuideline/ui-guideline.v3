@@ -26,6 +26,7 @@ export type ClientSectionMetadata = {
   type: SectionKey.anatomy | SectionKey.props;
   data: unknown;
   designLayers?: unknown;
+  designLayersRaw?: unknown;
   codeAnatomy?: unknown;
 };
 

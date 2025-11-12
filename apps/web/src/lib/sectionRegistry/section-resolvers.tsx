@@ -13,7 +13,7 @@ import type {
   SystemsData,
 } from '../types/content';
 import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
-import { loadContent } from './content-loader';
+import { loadContent, loadContentRaw } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';
 import { SectionKey } from './types';
 import { Accessibility, FigmaKits, Kpis, Overview, Systems } from '@sections';
@@ -41,14 +41,16 @@ export const overview: SectionModule = async ({ slug, title }) => {
 export const anatomy: SectionModule = async ({ slug }) => {
   const data = await loadContent<AnatomyData>(slug, 'anatomy.yml');
   const designLayers = await loadContent<DesignLayersData>(slug, 'design-layers.yml');
+  const designLayersRaw = await loadContentRaw(slug, 'design-layers.yml');
   const codeAnatomy = await loadContent<CodeAnatomyData>(slug, 'code-anatomy.yml');
-  if (!data || !designLayers) return null;
+  if (!data || !designLayers || !designLayersRaw || !codeAnatomy) return null;
 
   return {
     isClient: true,
     type: SectionKey.anatomy,
     data,
     designLayers,
+    designLayersRaw,
     codeAnatomy,
   };
 };

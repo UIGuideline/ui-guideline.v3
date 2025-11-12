@@ -22,12 +22,17 @@ interface DesignAnatomyTabProps extends VariantProps<typeof container> {
    * Optional design layers data for the Design Anatomy tab.
    */
   designLayers?: DesignLayersData;
+
+  /**
+   * Raw YAML content for design layers.
+   */
+  designLayersRaw?: string;
 }
 
 /**
  * This component renders the Design Anatomy tab content with an image, copy button, and optional Figma layers.
  */
-export const DesignAnatomyTab = ({ className, data, designLayers }: DesignAnatomyTabProps) => {
+export const DesignAnatomyTab = ({ className, data, designLayers, designLayersRaw }: DesignAnatomyTabProps) => {
   if (!data || !data.designAnatomy) return null;
 
   const { darkImageUrl, darkImageUrl2x } = data.designAnatomy;
@@ -40,7 +45,9 @@ export const DesignAnatomyTab = ({ className, data, designLayers }: DesignAnatom
     <div className={classes.container}>
       <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="design anatomy" />
       <div className="flex flex-col gap-3">
-        {designLayers && <DesignLayers data={designLayers.layers} designLayers={designLayers} />}
+        {designLayers && designLayersRaw && (
+          <DesignLayers data={designLayers.layers} designLayersRaw={designLayersRaw} />
+        )}
       </div>
     </div>
   );

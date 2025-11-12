@@ -1,5 +1,4 @@
 import { FigmaTree } from '../FigmaTree';
-import type { DesignLayersData } from '@lib';
 import type { BundledLanguage, TreeNodeData } from '@ui';
 import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, Tabs, TriggerSize } from '@ui';
 import { tv } from 'tailwind-variants';
@@ -20,15 +19,15 @@ export interface DesignLayersProps {
   className?: string;
 
   /**
-   * Optional design layers data for the Design Anatomy tab.
+   * Raw YAML content to display in the code block.
    */
-  designLayers: DesignLayersData;
+  designLayersRaw: string;
 }
 
 /**
  * DesignLayers is a component for displaying Figma design layers.
  */
-export const DesignLayers = ({ data, className, designLayers }: DesignLayersProps) => {
+export const DesignLayers = ({ data, className, designLayersRaw }: DesignLayersProps) => {
   const classes = {
     container: container({ className }),
   };
@@ -59,7 +58,7 @@ export const DesignLayers = ({ data, className, designLayers }: DesignLayersProp
               {
                 language: 'yml',
                 filename: 'design-layers.yml',
-                code: JSON.stringify(designLayers, null, 2),
+                code: designLayersRaw,
               },
             ]}
             defaultValue="yml"
