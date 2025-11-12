@@ -1,5 +1,10 @@
 import { AnatomyImageContainer } from './shared';
 import type { AnatomyData } from '@lib';
+import { tv } from 'tailwind-variants';
+
+const container = tv({
+  base: 'border-b',
+});
 
 interface BaseAnatomyTabProps {
   /**
@@ -21,9 +26,13 @@ export const BaseAnatomyTab = ({ className, data }: BaseAnatomyTabProps) => {
 
   const { darkImageUrl, darkImageUrl2x } = data.baseAnatomy;
 
+  const classes = {
+    container: container({ className }),
+  };
+
   return (
     <AnatomyImageContainer
-      className={className}
+      className={classes.container}
       darkImageUrl={darkImageUrl}
       darkImageUrl2x={darkImageUrl2x}
       alt="base anatomy"
