@@ -1,3 +1,20 @@
+# Design Layers for Button Component
+# This file describes the Figma layer structure for the Button component
+#
+# Available element types:
+# - component: Main Component
+# - instance: Component Instance
+# - variant: Component Variant
+# - frame: Frame container
+# - group: Group of elements
+# - autoLayout: Auto-layout frame
+# - text: Text layer
+#
+# To add new types:
+# 1. Use the new type here in the YAML
+# 2. Add the corresponding icon mapping in apps/web/src/components/composed/FigmaTree/figmaTreeIcons.ts
+# 3. That's it! The component will automatically render with the new icon
+
 layers:
   # Root component - Main Button component
   - type: 'component'
