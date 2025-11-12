@@ -19,7 +19,7 @@ export const Overview = ({ componentName, data }: OverviewProps) => {
         <h1 className="text-3xl font-bold m-0">{componentName}</h1>
       </div>
 
-      <p className="text-base text-muted-foreground max-w-2xl">{data.description}</p>
+      <p className="text-lg text-muted-foreground max-w-2xl">{data.description}</p>
     </section>
   );
 };

@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react';
 import { AnatomyImageContainer } from './shared';
 import type { AnatomyData, CodeAnatomyData } from '@lib';
 import type { BundledLanguage } from '@ui';
@@ -65,7 +66,10 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabP
   };
 
   // Get available libraries from codeAnatomy array
-  const availableLibraries = (codeAnatomy ?? []).filter((item) => item.slug in LIBRARY_CONFIG && item.code);
+  const availableLibraries = useMemo(
+    () => (codeAnatomy ?? []).filter((item) => item.slug in LIBRARY_CONFIG && item.code),
+    [codeAnatomy],
+  );
 
   // If no code anatomy data is available, don't render the code section
   if (availableLibraries.length === 0) {
@@ -79,11 +83,24 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabP
   // Use first available library as default
   const defaultLibrary = availableLibraries[0]?.slug ?? 'shadcn';
 
+  const [activeLibrary, setActiveLibrary] = useState(defaultLibrary);
+
+  useEffect(() => {
+    if (!availableLibraries.some((item) => item.slug === activeLibrary)) {
+      setActiveLibrary(defaultLibrary);
+    }
+  }, [activeLibrary, availableLibraries, defaultLibrary]);
+
+  const activeLibrarySourceUrl = useMemo(
+    () => availableLibraries.find((item) => item.slug === activeLibrary)?.sourceUrl,
+    [activeLibrary, availableLibraries],
+  );
+
   return (
     <div className={classes.container}>
       <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="code anatomy" />
       <div className="flex bg-accent border border-border rounded-b-lg overflow-hidden flex-col gap-3">
-        <Tabs defaultValue={defaultLibrary}>
+        <Tabs value={activeLibrary} onValueChange={setActiveLibrary}>
           <Tabs.List className="flex items-center gap-2 border-b border-border p-2">
             {availableLibraries.map((item) => {
               const config = LIBRARY_CONFIG[item.slug as keyof typeof LIBRARY_CONFIG];
@@ -101,10 +118,14 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabP
                 </Tabs.PillTrigger>
               );
             })}
-            <Button size={ButtonSize.sm} variant={ButtonVariant.outline} className="ml-auto">
-              Doc reference
-              <ExternalLinkIcon />
-            </Button>
+            {activeLibrarySourceUrl ? (
+              <Button asChild size={ButtonSize.sm} variant={ButtonVariant.outline} className="ml-auto">
+                <a href={activeLibrarySourceUrl} target="_blank" rel="noreferrer">
+                  Doc reference
+                  <ExternalLinkIcon />
+                </a>
+              </Button>
+            ) : null}
           </Tabs.List>
           {availableLibraries.map((item) => {
             const trimmedCode = item.code.trimEnd();
