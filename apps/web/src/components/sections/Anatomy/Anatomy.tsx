@@ -31,6 +31,11 @@ interface AnatomyProps {
   designLayers?: DesignLayersData;
 
   /**
+   * Raw YAML content for design layers.
+   */
+  designLayersRaw?: string;
+
+  /**
    * Optional code anatomy data for dynamic code examples.
    */
   codeAnatomy?: CodeAnatomyData;
@@ -39,7 +44,7 @@ interface AnatomyProps {
 /**
  * This component is used to render a card with the systems and UI libraries.
  */
-export const Anatomy = ({ className, data, designLayers, codeAnatomy }: AnatomyProps) => {
+export const Anatomy = ({ className, data, designLayers, designLayersRaw, codeAnatomy }: AnatomyProps) => {
   const classes = {
     container: container({ className }),
   };
@@ -67,7 +72,7 @@ export const Anatomy = ({ className, data, designLayers, codeAnatomy }: AnatomyP
             <CodeAnatomyTab data={data} codeAnatomy={codeAnatomy} />
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.design}>
-            <DesignAnatomyTab data={data} designLayers={designLayers} />
+            <DesignAnatomyTab data={data} designLayers={designLayers} designLayersRaw={designLayersRaw} />
           </Tabs.Content>
         </Tabs>
       </div>

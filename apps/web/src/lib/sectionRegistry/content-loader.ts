@@ -15,11 +15,16 @@ import type { ComponentFactory, Renderable } from './types';
 /** Per-request caches to avoid repeated imports */
 const contentMdxCache = new Map<string, Renderable | null>();
 const contentDataCache = new Map<string, unknown>();
+const contentRawCache = new Map<string, string>();
 const dataCache = new Map<string, unknown>();
 
 const CONTENT_ROOT = '/src/content/components';
 const CONTENT_MDX_MAP = import.meta.glob('/src/content/components/**/**.mdx');
 const CONTENT_DATA_MAP = import.meta.glob('/src/content/components/**/**.{yml,yaml,json}', { import: 'default' });
+const CONTENT_RAW_MAP = import.meta.glob('/src/content/components/**/**.{yml,yaml,json}', {
+  query: '?raw',
+  import: 'default',
+});
 const DATA_MAP = import.meta.glob('/src/data/**/**.{yml,yaml,json}', { import: 'default' });
 
 /**
@@ -80,6 +85,34 @@ export const loadContent = async <T = unknown>(slug: string, filename: string): 
 };
 
 /**
+ * Load raw content (YAML/JSON) as string from `/src/content/components/{slug}/{filename}`
+ *
+ * @param slug - Component slug (e.g., 'button', 'calendar')
+ * @param filename - Data filename (e.g., 'design-layers.yml', 'props.yml')
+ * @returns Raw file content as string or null if not found
+ */
+export const loadContentRaw = async (slug: string, filename: string): Promise<string | null> => {
+  const expected = normalize(`${CONTENT_ROOT}/${slug}/${filename}`);
+  if (contentRawCache.has(expected)) return contentRawCache.get(expected)!;
+
+  const key = Object.keys(CONTENT_RAW_MAP).find((k) => normalize(k).endsWith(expected));
+  if (!key) {
+    contentRawCache.set(expected, '');
+    return null;
+  }
+
+  try {
+    const rawContent = await (CONTENT_RAW_MAP as Record<string, () => Promise<string>>)[key]!();
+    contentRawCache.set(expected, rawContent ?? '');
+    return rawContent ?? null;
+  } catch (err) {
+    console.warn(`[content-loader] Error importing raw content from /content/ ${expected}`, err);
+    contentRawCache.set(expected, '');
+    return null;
+  }
+};
+
+/**
  * Load and validate global data files from `/src/data/{filename}`
  *
  * Automatically validates data against registered Zod schema and infers types.
@@ -126,5 +159,6 @@ export const loadData = async <T extends DataFileName>(filename: T): Promise<Inf
 export const clearCaches = (): void => {
   contentMdxCache.clear();
   contentDataCache.clear();
+  contentRawCache.clear();
   dataCache.clear();
 };
