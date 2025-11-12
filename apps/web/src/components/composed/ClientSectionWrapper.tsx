@@ -17,7 +17,6 @@ export const ClientSectionWrapper = ({
   designLayersRaw,
   codeAnatomy,
 }: ClientSectionProps) => {
-  console.log('designLayersRaw WITHIN', designLayersRaw);
   if (type === SectionKey.anatomy && designLayers && designLayersRaw) {
     return (
       <Anatomy
