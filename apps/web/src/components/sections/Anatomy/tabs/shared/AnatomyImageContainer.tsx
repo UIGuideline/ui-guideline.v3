@@ -2,10 +2,6 @@ import { ASSET_PATHS } from '@lib';
 import { CopyButton } from '@ui';
 import { tv, type VariantProps } from 'tailwind-variants';
 
-const container = tv({
-  base: 'flex flex-col gap-4',
-});
-
 const content = tv({
   base: 'relative z-0 text-slate-100 overflow-hidden border border-border border-b-0',
 });
@@ -22,7 +18,7 @@ const image = tv({
   base: 'min-w-fit min-h-fit',
 });
 
-interface AnatomyImageContainerProps extends VariantProps<typeof container> {
+interface AnatomyImageContainerProps extends VariantProps<typeof content> {
   /**
    * The CSS class to apply to the container.
    */
@@ -50,8 +46,7 @@ interface AnatomyImageContainerProps extends VariantProps<typeof container> {
  */
 export const AnatomyImageContainer = ({ className, darkImageUrl, darkImageUrl2x, alt }: AnatomyImageContainerProps) => {
   const classes = {
-    container: container({ className }),
-    content: content(),
+    content: content({ className }),
     copyButton: copyButton(),
     imageContainer: imageContainer(),
     image: image(),
