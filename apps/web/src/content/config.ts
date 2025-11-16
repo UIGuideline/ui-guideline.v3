@@ -1,8 +1,29 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+/**********************************************************
+ * OVERVIEW SECTIONS
+ **********************************************************/
+
+const overviewDocs = defineCollection({
+  loader: glob({
+    pattern: '**/*.mdx',
+    base: './src/content/overview',
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    sidebarLabel: z.string().optional(),
+    order: z.number().optional(),
+  }),
+});
+
+/**********************************************************
+ * COMPONENTS SECTIONS
+ **********************************************************/
+
 /**
- * Components Collection Schema
+ * Component List
  */
 const components = defineCollection({
   loader: glob({ pattern: '**/_meta.yml', base: './src/content/components' }),
@@ -19,7 +40,7 @@ const components = defineCollection({
 });
 
 /**
- * Overview Content Schema
+ * Component Details - Overview
  */
 const overview = defineCollection({
   type: 'data',
@@ -29,41 +50,7 @@ const overview = defineCollection({
 });
 
 /**
- * Overview Docs (MDX Sections)
- */
-const overviewDocs = defineCollection({
-  loader: glob({
-    pattern: '**/*.mdx',
-    base: './src/content/overview',
-  }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    sidebarLabel: z.string().optional(),
-    order: z.number().optional(),
-  }),
-});
-
-/**
- * Props Content Schema
- */
-const props = defineCollection({
-  type: 'data',
-  schema: z.array(
-    z.object({
-      name: z.string(),
-      description: z.string(),
-      value: z.union([z.string(), z.array(z.string())]),
-      defaultValue: z.string().optional(),
-      exampleValue: z.union([z.string(), z.array(z.string())]).optional(),
-      isRequired: z.boolean().optional(),
-      usedBy: z.array(z.string()).optional(),
-    }),
-  ),
-});
-
-/**
- * Anatomy Content Schema
+ * Component Details - Base Anatomy
  */
 const anatomy = defineCollection({
   type: 'data',
@@ -91,7 +78,7 @@ const anatomy = defineCollection({
 });
 
 /**
- * Code Anatomy Collection
+ * Component Details - Code Anatomy
  */
 const codeAnatomy = defineCollection({
   type: 'data',
@@ -105,7 +92,7 @@ const codeAnatomy = defineCollection({
 });
 
 /**
- * Design Layers Collection
+ * Component Details - Design Layers
  * Uses recursive schema for nested layer structure
  */
 const baseLayerSchema = z.object({
@@ -115,11 +102,7 @@ const baseLayerSchema = z.object({
   defaultOpen: z.boolean().optional(),
 });
 
-type LayerType = z.infer<typeof baseLayerSchema> & {
-  children?: LayerType[];
-};
-
-const layerSchema: z.ZodType<LayerType> = baseLayerSchema.extend({
+const layerSchema: z.ZodType<Layer> = baseLayerSchema.extend({
   children: z.lazy(() => z.array(layerSchema)).optional(),
 });
 
@@ -130,8 +113,34 @@ const designLayers = defineCollection({
   }),
 });
 
+export type Layer = z.infer<typeof baseLayerSchema> & {
+  children?: Layer[];
+};
+
+export type DesignLayers = {
+  layers: Layer[];
+};
+
 /**
- * Accessibility Content Schema
+ * Component Details - Props
+ */
+const props = defineCollection({
+  type: 'data',
+  schema: z.array(
+    z.object({
+      name: z.string(),
+      description: z.string(),
+      value: z.union([z.string(), z.array(z.string())]),
+      defaultValue: z.string().optional(),
+      exampleValue: z.union([z.string(), z.array(z.string())]).optional(),
+      isRequired: z.boolean().optional(),
+      usedBy: z.array(z.string()).optional(),
+    }),
+  ),
+});
+
+/**
+ * Component Details - Accessibility
  */
 const accessibility = defineCollection({
   type: 'data',
@@ -141,7 +150,7 @@ const accessibility = defineCollection({
 });
 
 /**
- * KPIs Content Schema
+ * Component Details - KPIs
  */
 const kpis = defineCollection({
   type: 'data',
@@ -190,7 +199,7 @@ const kpis = defineCollection({
 });
 
 /**
- * Systems Content Schema
+ * Component Details - Systems
  */
 const systems = defineCollection({
   type: 'data',
@@ -202,7 +211,7 @@ const systems = defineCollection({
 });
 
 /**
- * Figma Kits Content Schema
+ * Component Details - Figma Kits
  */
 const figmaKits = defineCollection({
   type: 'data',
@@ -211,6 +220,8 @@ const figmaKits = defineCollection({
     url: z.string(),
   }),
 });
+
+// ------------------------------------------------------------
 
 export const collections = {
   components,
@@ -224,15 +235,4 @@ export const collections = {
   figmaKits,
   accessibility,
   overviewDocs,
-};
-
-/**
- * Exported types for design layers
- */
-export type Layer = z.infer<typeof baseLayerSchema> & {
-  children?: Layer[];
-};
-
-export type DesignLayers = {
-  layers: Layer[];
 };
