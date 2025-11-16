@@ -11,6 +11,7 @@
       "@composed": ["src/components/composed"],
       "@content": ["src/content"],
       "@data": ["src/data"],
+      "@docs": ["src/components/docs"],
       "@layouts": ["src/components/layouts"],
       "@lib": ["src/lib"],
       "@sections": ["src/components/sections"],
@@ -22,6 +23,6 @@
       }
     ]
   },
-  "include": [".astro/types.d.ts", "**/*"],
+  "include": [".astro/types.d.ts", "src/**/*"],
   "exclude": ["node_modules", "dist"]
 }
