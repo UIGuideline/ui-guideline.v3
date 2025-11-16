@@ -1,0 +1,41 @@
+---
+import { docsComponents } from '@docs';
+import { DocsLayout } from '@layouts';
+import { getCollection, render } from 'astro:content';
+
+interface StaticPathProps {
+	entryId: string;
+}
+
+export async function getStaticPaths() {
+	const docs = await getCollection('overviewDocs');
+
+	return docs.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entryId: entry.id },
+	}));
+}
+
+const { entryId } = Astro.props as StaticPathProps;
+
+const allDocs = await getCollection('overviewDocs');
+const entry = allDocs.find((doc) => doc.id === entryId);
+
+if (!entry) {
+	throw new Error(`Overview doc not found: ${entryId}`);
+}
+
+const { Content } = await render(entry);
+
+const sidebarItems = allDocs
+	.slice()
+	.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+	.map((doc) => ({
+		slug: doc.id,
+		label: doc.data.sidebarLabel ?? doc.data.title,
+	}));
+---
+
+<DocsLayout title={entry.data.title} description={entry.data.description} sidebarItems={sidebarItems}>
+	<Content components={docsComponents} />
+</DocsLayout>
