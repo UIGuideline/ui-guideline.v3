@@ -1,7 +1,8 @@
 ---
+import { camelToKebab, camelToTitleCase } from '@common';
 import { ClientSectionWrapper } from '@composed';
 import { ComponentDetailLayout } from '@layouts';
-import { camelToKebab, camelToTitleCase, renderSections, SectionKey } from '@lib';
+import { renderSections, SectionKey } from '@lib';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {

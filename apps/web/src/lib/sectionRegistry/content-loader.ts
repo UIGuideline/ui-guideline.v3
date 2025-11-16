@@ -1,6 +1,6 @@
-import { normalize } from '../helpers';
 import { dataSchemas, type DataFileName, type InferDataType } from '../schemas/data-schemas';
 import type { ComponentFactory, Renderable } from './types';
+import { normalize } from '@common';
 
 /**
  * Content Loader - Centralized data loading system
