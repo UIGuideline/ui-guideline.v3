@@ -1,4 +1,4 @@
-import { IconCatalog } from './iconCatalog';
+import { IconCatalog } from './icon-catalog';
 import type { BaseIconProps } from './types';
 import { tv, type VariantProps } from 'tailwind-variants';
 
