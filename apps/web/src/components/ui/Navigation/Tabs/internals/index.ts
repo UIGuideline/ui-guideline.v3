@@ -1,2 +1,2 @@
 export * from './PillTrigger';
-export * from './Trigger';
+export * from './trigger';

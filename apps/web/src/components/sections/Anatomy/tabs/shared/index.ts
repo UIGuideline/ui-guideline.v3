@@ -1,1 +1,1 @@
-export { AnatomyImageContainer } from './AnatomyImageContainer';
+export { AnatomyImageContainer } from './anatomy-image-container';

@@ -1,3 +1,3 @@
-export { default as BaseLayout } from './BaseLayout.astro';
-export { default as ComponentDetailLayout } from './ComponentDetailLayout.astro';
-export { default as DocsLayout } from './DocsLayout.astro';
+export { default as BaseLayout } from './base-layout.astro';
+export { default as ComponentDetailLayout } from './component-detail-layout.astro';
+export { default as DocsLayout } from './docs-layout.astro';
