@@ -1,4 +1,4 @@
-import { ASSET_PATHS } from '@lib';
+import { ASSET_PATHS } from '@common';
 import { CopyButton } from '@ui';
 import { tv, type VariantProps } from 'tailwind-variants';
 
