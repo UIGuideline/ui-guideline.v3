@@ -15,6 +15,7 @@
       "@layouts": ["src/components/layouts"],
       "@lib": ["src/lib"],
       "@sections": ["src/components/sections"],
+      "@styles": ["src/styles"],
       "@ui": ["src/components/ui"]
     },
     "plugins": [

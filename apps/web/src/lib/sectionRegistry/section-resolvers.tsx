@@ -1,4 +1,9 @@
 import React from 'react';
+import type { MergedFigmaKitsData, MergedSystemsData } from '../../data/schemas';
+import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
+import { loadContent, loadContentRaw } from './content-loader';
+import type { ComponentFactory, SectionModule } from './types';
+import { SectionKey } from './types';
 import type {
   AccessibilityData,
   AnatomyData,
@@ -6,16 +11,10 @@ import type {
   DesignLayersData,
   FigmaKitsData,
   KpisData,
-  MergedFigmaKitsData,
-  MergedSystemsData,
   OverviewData,
   PropsData,
   SystemsData,
-} from '../../content/types';
-import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
-import { loadContent, loadContentRaw } from './content-loader';
-import type { ComponentFactory, SectionModule } from './types';
-import { SectionKey } from './types';
+} from '@content';
 import { Accessibility, FigmaKits, Kpis, Overview, Systems } from '@sections';
 
 /**

@@ -1,2 +1,2 @@
+export * from './components/types';
 export * from './config';
-export * from './types';

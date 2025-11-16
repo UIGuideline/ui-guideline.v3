@@ -1,6 +1,6 @@
+import { devWarn } from './catalog-manager';
 import { accessibility, anatomy, figmaKits, kpis, overview, props, systems } from './section-resolvers';
 import type { LoaderCtx, Renderable, SectionKey, SectionModule } from './types';
-import { devWarn } from './utils';
 
 /**
  * Section registry orchestrates dynamic composition of component pages.
