@@ -1,17 +1,20 @@
 import CollapsibleCode from './interactive/collapsible-code';
 import Tabs from './interactive/tabs';
 import CodeBlock from './root/code-block.astro';
-import H1 from './root/H1.astro';
-import H2 from './root/H2.astro';
+import h1 from './root/h1.astro';
+import h2 from './root/h2.astro';
 import InlineCode from './root/inline-code.astro';
-import Strong from './root/Strong.astro';
+import strong from './root/strong.astro';
+import Subtitle from './root/subtitle.astro';
+import type { JSX } from 'astro/jsx-runtime';
 
 export const docsComponents = {
-  h1: H1,
-  h2: H2,
-  strong: Strong,
+  h1,
+  h2,
+  strong,
+  Subtitle,
   code: InlineCode,
   pre: CodeBlock,
   Tabs,
   CollapsibleCode,
-};
+} satisfies Record<string, JSX.Element>;
