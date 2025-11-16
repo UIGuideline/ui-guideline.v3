@@ -1,6 +1,6 @@
 ---
 import { docsComponents } from '@docs';
-import { DocsLayout } from '@layouts';
+import { ComponentDetailLayout } from '@layouts';
 import { getCollection, render } from 'astro:content';
 
 interface StaticPathProps {
@@ -27,15 +27,51 @@ if (!entry) {
 
 const { Content } = await render(entry);
 
-const sidebarItems = allDocs
-	.slice()
-	.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
-	.map((doc) => ({
-		slug: doc.id,
-		label: doc.data.sidebarLabel ?? doc.data.title,
-	}));
+/**
+ * Extract headings from MDX body for Table of Contents
+ * Matches # heading syntax in the raw MDX content
+ */
+function extractHeadings(body: string): Array<{ id: string; label: string; level?: number }> {
+	const headingRegex = /^(#{1,6})\s+(.+)$/gm;
+	const headings: Array<{ id: string; label: string; level?: number }> = [];
+	let match: RegExpExecArray | null;
+
+	while ((match = headingRegex.exec(body)) !== null) {
+		const level = match[1]!.length;
+		const text = match[2]!.trim();
+
+		// Skip h1 (usually the page title)
+		if (level === 1) continue;
+
+		// Generate slug from heading text (simple version)
+		const id = text
+			.toLowerCase()
+			.replace(/[^a-z0-9\s-]/g, '')
+			.replace(/\s+/g, '-')
+			.replace(/-+/g, '-')
+			.trim();
+
+		headings.push({
+			id,
+			label: text,
+			level,
+		});
+	}
+
+	return headings;
+}
+
+const toc = extractHeadings(entry.body ?? '');
 ---
 
-<DocsLayout title={entry.data.title} description={entry.data.description} sidebarItems={sidebarItems}>
-	<Content components={docsComponents} />
-</DocsLayout>
+<ComponentDetailLayout
+	title={`${entry.data.title} | UI Guideline`}
+	description={entry.data.description}
+	currentSlug={entry.id}
+	toc={toc}
+	section="overview"
+>
+	<article class="prose prose-invert max-w-none">
+		<Content components={docsComponents} />
+	</article>
+</ComponentDetailLayout>
