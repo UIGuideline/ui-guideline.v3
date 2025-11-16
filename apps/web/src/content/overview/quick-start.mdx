@@ -1,0 +1,29 @@
+---
+title: "Quick start"
+description: "Get productive with UI Guideline in minutes."
+sidebarLabel: "Quick start"
+order: 10
+---
+
+# Quick start
+
+Welcome to UI Guideline.
+
+Use `<Tabs />` and `<CollapsibleCode />` directly:
+
+<Tabs
+  items={[
+    { id: "pnpm", label: "PNPM", content: "pnpm dev" },
+    { id: "npm", label: "npm", content: "npm run dev" },
+  ]}
+/>
+
+<CollapsibleCode title="Sample config">
+{`
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+  integrations: [],
+});
+`}
+</CollapsibleCode>

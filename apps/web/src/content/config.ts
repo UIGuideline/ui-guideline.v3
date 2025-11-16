@@ -29,6 +29,22 @@ const overview = defineCollection({
 });
 
 /**
+ * Overview Docs (MDX Sections)
+ */
+const overviewDocs = defineCollection({
+  loader: glob({
+    pattern: '**/*.mdx',
+    base: './src/content/overview',
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    sidebarLabel: z.string().optional(),
+    order: z.number().optional(),
+  }),
+});
+
+/**
  * Props Content Schema
  */
 const props = defineCollection({
@@ -207,6 +223,7 @@ export const collections = {
   systems,
   figmaKits,
   accessibility,
+  overviewDocs,
 };
 
 /**
