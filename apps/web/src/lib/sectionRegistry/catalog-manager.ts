@@ -1,6 +1,47 @@
+import type { FigmaKitItem, SystemItem } from '../../data/schemas';
 import { loadData } from './content-loader';
-import type { CatalogItem, FigmaKitItem, SystemItem } from './types';
-import { devWarn, mergeBySlug } from './utils';
+import type { CatalogItem } from './types';
+
+/**
+ * This function is used to warn in development mode.
+ *
+ * @function
+ * @param {string} msg - message to warn.
+ * @param {unknown[]} args - arguments to warn.
+ */
+export const devWarn = (msg: string, ...args: unknown[]) => {
+  if (import.meta.env.MODE === 'development' || import.meta.env.PUBLIC_DEBUG_LOGS === '1') {
+    console.warn(`[section-registry] ${msg}`, ...args);
+  }
+};
+
+/**
+ * Merge component-specific references with global catalog data.
+ * Combines local reference data with full catalog information.
+ *
+ * @function
+ * @param {Array<R & { slug: string }>} references - component-specific references with slug
+ * @param {T[]} catalog - global catalog to merge with
+ * @param {string} key - key to match by (default: 'slug')
+ * @returns {Array<T & R>} merged objects with both local and catalog data
+ */
+export const mergeBySlug = <T extends { slug: string }, R extends Record<string, unknown> & { slug: string }>(
+  references: R[],
+  catalog: T[],
+  key: 'slug' = 'slug',
+): Array<T & R> => {
+  return references
+    .map((ref) => {
+      const catalogItem = catalog.find((item) => item.slug === ref[key]);
+      if (!catalogItem) {
+        devWarn(`No catalog item found for slug: ${ref[key]}`);
+        return null;
+      }
+      // Merge catalog data with local reference data
+      return { ...catalogItem, ...ref };
+    })
+    .filter(Boolean) as Array<T & R>;
+};
 
 /**
  * Catalog manager handles global data catalogs and joins them with component-specific references.

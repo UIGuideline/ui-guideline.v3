@@ -1,4 +1,4 @@
-import { dataSchemas, type DataFileName, type InferDataType } from '../schemas/data-schemas';
+import { dataSchemas, type DataFileName, type InferDataType } from '../../data/schemas';
 import type { ComponentFactory, Renderable } from './types';
 import { normalize } from '@common';
 
