@@ -26,12 +26,22 @@ export interface Props {
 	 * Optional Table of Contents items.
 	 */
 	toc?: Array<{ id: string; label: string }>;
+
+	/**
+	 * The section type to identify Overview vs Components.
+	 * Defaults to 'components' if not provided.
+	 */
+	section?: 'overview' | 'components';
 }
 
-const { title, description, currentSlug, toc } = Astro.props;
+const { title, description, currentSlug, toc, section = 'components' } = Astro.props;
 
 // Get all components for navigation
 const allComponents = await getCollection('components');
+
+// Get all overview docs for navigation
+const allOverviewDocs = await getCollection('overviewDocs');
+const sortedOverviewDocs = allOverviewDocs.slice().sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 
 // Load categories data from /src/data/ (type automatically inferred as Category[])
 const categories = (await loadData('categories.yml')) ?? [];
@@ -88,35 +98,23 @@ sortedCategories.forEach((category) => {
 			<div class="hidden lg:block w-64 flex-shrink-0">
 				<SideBar>
 					<SideNav>
-						<!-- Section - SECTIONS -->
+						<!-- Section - OVERVIEW -->
 						<SideNav.Section>
-							<SideNav.Heading className="mb-4">Getting started</SideNav.Heading>
+							<SideNav.Heading className="mb-4">Overview</SideNav.Heading>
 							<SideNav.List>
-								<SideNav.Item level={1} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
-									<SideNav.Link level={1} href={ROUTES.LLMS_TXT} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
-										Introduction
-									</SideNav.Link>
-								</SideNav.Item>
-								<SideNav.Item level={1} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
-									<SideNav.Link level={1} href={ROUTES.COMPONENTS} isActive={Astro.url.pathname === ROUTES.COMPONENTS}>
-										Components
-									</SideNav.Link>
-								</SideNav.Item>
-								<SideNav.Item level={1} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
-									<SideNav.Link level={1} href={ROUTES.LLMS_TXT} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
-										MCP Server
-									</SideNav.Link>
-								</SideNav.Item>
-								<SideNav.Item level={1} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
-									<SideNav.Link level={1} href={ROUTES.LLMS_TXT} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
-										llms.txt
-									</SideNav.Link>
-								</SideNav.Item>
-								<SideNav.Item level={1} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
-									<SideNav.Link level={1} href={ROUTES.LLMS_TXT} isActive={Astro.url.pathname === ROUTES.LLMS_TXT}>
-										Story
-									</SideNav.Link>
-								</SideNav.Item>
+								{
+									sortedOverviewDocs.map((doc) => (
+										<SideNav.Item level={1} isActive={section === 'overview' && currentSlug === doc.id}>
+											<SideNav.Link
+												level={1}
+												href={`${ROUTES.OVERVIEW}/${doc.id}`}
+												isActive={section === 'overview' && currentSlug === doc.id}
+											>
+												{doc.data.sidebarLabel ?? doc.data.title}
+											</SideNav.Link>
+										</SideNav.Item>
+									))
+								}
 							</SideNav.List>
 						</SideNav.Section>
 
