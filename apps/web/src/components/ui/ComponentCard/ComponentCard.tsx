@@ -1,5 +1,5 @@
 import React from 'react';
-import { ROUTES } from '@lib';
+import { ROUTES } from '@common';
 
 export interface ComponentCardProps {
   /**

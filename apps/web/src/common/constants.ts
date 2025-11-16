@@ -54,14 +54,3 @@ export const ASSET_PATHS = {
    */
   COMPONENT_ANATOMY: '/anatomy/',
 } as const;
-
-/**
- * Content Paths
- * Centralized content directory paths
- */
-export const CONTENT_PATHS = {
-  /**
-   * Base path for components content directory
-   */
-  COMPONENTS: '/src/content/components',
-} as const;
