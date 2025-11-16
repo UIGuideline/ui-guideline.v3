@@ -1,5 +1,4 @@
 import { dataSchemas, type DataFileName, type InferDataType } from '../../data/schemas';
-import type { ComponentFactory, Renderable } from './types';
 import { normalize } from '@common';
 
 /**
@@ -13,48 +12,17 @@ import { normalize } from '@common';
  */
 
 /** Per-request caches to avoid repeated imports */
-const contentMdxCache = new Map<string, Renderable | null>();
 const contentDataCache = new Map<string, unknown>();
 const contentRawCache = new Map<string, string>();
 const dataCache = new Map<string, unknown>();
 
 const CONTENT_ROOT = '/src/content/components';
-const CONTENT_MDX_MAP = import.meta.glob('/src/content/components/**/**.mdx');
 const CONTENT_DATA_MAP = import.meta.glob('/src/content/components/**/**.{yml,yaml,json}', { import: 'default' });
 const CONTENT_RAW_MAP = import.meta.glob('/src/content/components/**/**.{yml,yaml,json}', {
   query: '?raw',
   import: 'default',
 });
 const DATA_MAP = import.meta.glob('/src/data/**/**.{yml,yaml,json}', { import: 'default' });
-
-/**
- * Load MDX content from `/src/content/components/{slug}/{filename}`
- *
- * @param slug - Component slug (e.g., 'button', 'calendar')
- * @param filename - MDX filename (e.g., 'index.mdx', 'accessibility.mdx')
- * @returns MDX component factory or null if not found
- */
-export const loadContentMdx = async (slug: string, filename: string): Promise<Renderable> => {
-  const expected = normalize(`${CONTENT_ROOT}/${slug}/${filename}`);
-  if (contentMdxCache.has(expected)) return contentMdxCache.get(expected)!;
-
-  const key = Object.keys(CONTENT_MDX_MAP).find((k) => normalize(k).endsWith(expected));
-  if (!key) {
-    contentMdxCache.set(expected, null);
-    return null;
-  }
-
-  try {
-    const mod: unknown = await (CONTENT_MDX_MAP as Record<string, () => Promise<unknown>>)[key]!();
-    const MDX = (mod as { default: ComponentFactory }).default;
-    contentMdxCache.set(expected, MDX);
-    return MDX;
-  } catch (err) {
-    console.warn(`[content-loader] Error importing MDX from /content/ ${expected}`, err);
-    contentMdxCache.set(expected, null);
-    return null;
-  }
-};
 
 /**
  * Load structured data (YAML/JSON) from `/src/content/components/{slug}/{filename}`
@@ -157,7 +125,6 @@ export const loadData = async <T extends DataFileName>(filename: T): Promise<Inf
  * Clear all caches (useful for testing or memory management)
  */
 export const clearCaches = (): void => {
-  contentMdxCache.clear();
   contentDataCache.clear();
   contentRawCache.clear();
   dataCache.clear();
