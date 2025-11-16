@@ -1,3 +1,4 @@
+import type { FigmaKitsData, SystemsData } from '@content';
 import { z } from 'zod';
 
 /**
@@ -81,3 +82,22 @@ export type DataFileName = keyof typeof dataSchemas;
  * type SystemsType = InferDataType<'systems.yml'>;       // SystemItem[]
  */
 export type InferDataType<T extends DataFileName> = z.infer<(typeof dataSchemas)[T]>;
+
+/**
+ * Merges component System references with global System catalog data.
+ * Used to list Systems that use a component and access base System data
+ * (name, url, logo, description) from the global catalog.
+ */
+export type MergedSystemsData = SystemsData & {
+  name_in_system: string;
+  component_site_url: string;
+};
+
+/**
+ * Merges component Figma Kits references with global Figma Kits catalog data.
+ * Used to list Figma Kits that use a component and access base Kit data
+ * (name, url, description) from the global catalog.
+ */
+export type MergedFigmaKitsData = FigmaKitsData & {
+  url: string;
+};

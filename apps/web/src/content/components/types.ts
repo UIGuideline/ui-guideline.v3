@@ -21,13 +21,3 @@ export type DesignLayersData = DesignLayersEntry['data'];
 export type KpisData = KpisEntry['data'];
 export type SystemsData = SystemsEntry['data'];
 export type FigmaKitsData = FigmaKitsEntry['data'];
-
-// Enhanced types for merged data (used in section resolvers)
-export type MergedSystemsData = SystemsData & {
-  name_in_system: string;
-  component_site_url: string;
-};
-
-export type MergedFigmaKitsData = FigmaKitsData & {
-  url: string;
-};
