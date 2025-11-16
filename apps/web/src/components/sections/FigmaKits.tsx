@@ -1,4 +1,4 @@
-import type { MergedFigmaKitsData } from '../../lib/types/content';
+import type { MergedFigmaKitsData } from '@content';
 
 export interface FigmaKitsProps {
   /**

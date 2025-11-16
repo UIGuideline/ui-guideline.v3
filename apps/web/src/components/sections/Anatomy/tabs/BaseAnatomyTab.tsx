@@ -1,5 +1,5 @@
 import { AnatomyImageContainer } from './shared';
-import type { AnatomyData } from '@lib';
+import type { AnatomyData } from '@content';
 import { tv } from 'tailwind-variants';
 
 const container = tv({

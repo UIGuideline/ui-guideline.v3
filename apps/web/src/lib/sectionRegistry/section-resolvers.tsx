@@ -11,7 +11,7 @@ import type {
   OverviewData,
   PropsData,
   SystemsData,
-} from '../types/content';
+} from '../../content/types';
 import { resolveDesignSystems, resolveFigmaKits } from './catalog-manager';
 import { loadContent, loadContentRaw } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';

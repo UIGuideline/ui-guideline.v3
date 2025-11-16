@@ -1,4 +1,4 @@
-import type { AccessibilityData } from '@lib';
+import type { AccessibilityData } from '@content';
 
 export interface AccessibilityProps {
   /**

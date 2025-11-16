@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BaseAnatomyTab, CodeAnatomyTab, DesignAnatomyTab } from './tabs';
-import type { AnatomyData, CodeAnatomyData, DesignLayersData } from '@lib';
+import type { AnatomyData, CodeAnatomyData, DesignLayersData } from '@content';
 import { Tabs } from '@ui';
 import { tv } from 'tailwind-variants';
 
