@@ -25,7 +25,6 @@ import { Accessibility, FigmaKits, Kpis, Overview, Systems } from '@sections';
 /*------------------------------------*
  * Overview Section
  *------------------------------------*/
-// export const overview: SectionModule = async ({ slug }) => loadContentMdx(slug, 'index.mdx');
 export const overview: SectionModule = async ({ slug, title }) => {
   const data = await loadContent<OverviewData>(slug, 'overview.yml');
   if (!data) return null;
@@ -71,7 +70,6 @@ export const props: SectionModule = async ({ slug }) => {
 /*------------------------------------*
  * Accessibility Section
  *------------------------------------*/
-// export const accessibility: SectionModule = async ({ slug }) => loadContentMdx(slug, 'accessibility.mdx');
 export const accessibility: SectionModule = async ({ slug }) => {
   const data = await loadContent<AccessibilityData>(slug, 'accessibility.yml');
   if (!data) return null;
