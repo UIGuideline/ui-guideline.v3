@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AnatomyImageContainer } from './shared';
-import type { AnatomyData, CodeAnatomyData } from '@lib';
+import type { AnatomyData, CodeAnatomyData } from '@content';
 import type { BundledLanguage } from '@ui';
 import {
   BrandLogo,

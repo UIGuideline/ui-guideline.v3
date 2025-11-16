@@ -1,4 +1,4 @@
-import type { MergedSystemsData } from '../../lib/types/content';
+import type { MergedSystemsData } from '@content';
 
 export interface SystemsProps {
   /**

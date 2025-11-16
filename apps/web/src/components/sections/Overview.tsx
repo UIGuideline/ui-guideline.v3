@@ -1,4 +1,4 @@
-import type { OverviewData } from '@lib';
+import type { OverviewData } from '@content';
 
 export interface OverviewProps {
   /**

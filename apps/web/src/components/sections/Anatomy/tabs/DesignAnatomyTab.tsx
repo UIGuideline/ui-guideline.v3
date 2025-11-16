@@ -1,6 +1,6 @@
 import { AnatomyImageContainer } from './shared';
 import { DesignLayers } from '@composed';
-import type { AnatomyData, DesignLayersData } from '@lib';
+import type { AnatomyData, DesignLayersData } from '@content';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const container = tv({

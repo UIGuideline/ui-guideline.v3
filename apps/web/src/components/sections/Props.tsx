@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { PropsList, PropsTable } from '@composed';
-import type { PropsData } from '@lib';
+import type { PropsData } from '@content';
 import { ToggleGroup, ToggleGroupSelection } from '@ui';
 import { Menu, Rows3, Table } from 'lucide-react';
 
