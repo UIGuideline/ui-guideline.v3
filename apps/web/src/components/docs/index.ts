@@ -1,1 +1,1 @@
-export { docsComponents } from './MDXComponents';
+export { docsComponents } from './mdx-components';

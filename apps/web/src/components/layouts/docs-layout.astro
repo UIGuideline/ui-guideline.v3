@@ -1,0 +1,48 @@
+---
+import BaseLayout from './base-layout.astro';
+import { Navbar } from '@ui';
+
+interface SidebarItem {
+	slug: string;
+	label: string;
+}
+
+interface Props {
+	title: string;
+	description?: string;
+	sidebarItems?: SidebarItem[];
+}
+
+const { title, description, sidebarItems = [] } = Astro.props as Props;
+---
+
+<BaseLayout title={title} description={description}>
+	<header class="sticky top-0 z-40 w-full border-b border-border bg-background/90 backdrop-blur-sm">
+		<Navbar client:load className="@md:max-w-[1350px] mx-auto border-x border-border" />
+	</header>
+
+	<main class="@md:max-w-[1350px] mx-auto flex min-h-screen gap-8 border-dashed-wide px-4 py-8 text-foreground">
+		{
+			sidebarItems.length > 0 && (
+				<aside class="w-56 border-r border-border pr-4">
+					<nav class="space-y-1 text-sm">
+						{sidebarItems.map((item) => (
+							<a
+								href={`/overview/${item.slug}`}
+								class="block rounded px-2 py-1 text-muted-foreground hover:bg-muted hover:text-foreground"
+							>
+								{item.label}
+							</a>
+						))}
+					</nav>
+				</aside>
+			)
+		}
+
+		<article class="flex-1">
+			<div class="prose prose-invert max-w-none">
+				<slot />
+			</div>
+		</article>
+	</main>
+</BaseLayout>

@@ -1,4 +1,4 @@
-import { Logo, LogoAppearance, LogoSize, LogoVariant } from '../Logo/Logo';
+import { Logo, LogoAppearance, LogoSize, LogoVariant } from '../logo/logo';
 import { FeedbackFish } from '@feedback-fish/react';
 import { Button, ButtonSize, ButtonVariant } from '@ui';
 import { tv } from 'tailwind-variants';
