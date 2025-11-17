@@ -17,7 +17,13 @@ const config = {
   singleQuote: true,
   tabWidth: 2,
   trailingComma: 'all',
-  plugins: ['prettier-plugin-astro', '@ianvs/prettier-plugin-sort-imports'],
+  // Use function to conditionally load plugins based on file
+  plugins: [
+    'prettier-plugin-astro',
+    // Conditionally include sort-imports plugin
+    // It will be excluded for MDX files via override
+    '@ianvs/prettier-plugin-sort-imports',
+  ],
 
   /** Sort Imports Plugin Config. */
   importOrder: [
@@ -37,6 +43,17 @@ const config = {
       files: ['*.astro'],
       options: {
         parser: 'astro',
+      },
+    },
+    {
+      files: ['*.mdx'],
+      options: {
+        parser: 'mdx',
+        printWidth: 120,
+        // CRITICAL: Override plugins to EXCLUDE sort-imports plugin
+        // This prevents the plugin from processing imports in MDX files
+        plugins: ['prettier-plugin-astro'],
+        // Remove all import-related options to prevent processing
       },
     },
   ],
