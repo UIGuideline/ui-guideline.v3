@@ -1,9 +1,7 @@
 import CollapsibleCode from './interactive/collapsible-code';
 import Tabs from './interactive/tabs';
 import CodeBlock from './root/code-block.astro';
-import { H2 } from './root/h2';
-import InlineCode from './root/inline-code.astro';
-import strong from './root/strong.astro';
+import { HeadingLink } from './root/heading-link';
 
 interface MDXComponents {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,13 +9,37 @@ interface MDXComponents {
 }
 
 export const docsComponents: MDXComponents = {
+  a: (props) => (
+    <a className="text-primary-500 font-medium underline underline-offset-4 hover:text-primary-600" {...props} />
+  ),
   h1: (props) => <h1 className="mb-4 text-3xl font-bold text-balance" {...props} />,
-  h2: H2,
-  p: (props) => <p className="mb-4" {...props} />,
-  strong,
+  h2: (props) => (
+    <h2
+      className="mt-10 mb-4 scroll-mt-18 group text-foreground hover:text-foreground/90 text-2xl font-bold text-balance inline-flex items-center gap-2"
+      id={props.id}
+      {...props}
+    >
+      <HeadingLink id={props.id}>{props.children}</HeadingLink>
+    </h2>
+  ),
+  h3: (props) => (
+    <h3
+      className="mt-8 scroll-m-28 text-lg group text-foreground hover:text-foreground/90 font-bold text-balance inline-flex items-center gap-2 [&+p]:!mt-4 *:[code]:text-xl"
+      id={props.id}
+      {...props}
+    >
+      <HeadingLink id={props.id}>{props.children}</HeadingLink>
+    </h3>
+  ),
+  p: (props) => <p className="mb-4 text-foreground" {...props} />,
+  strong: (props) => <strong className="rounded bg-accent px-0.5 font-semibold text-white" {...props} />,
   Subtitle: (props) => <div className="text-lg text-muted-foreground max-w-2xl mb-5 -mt-2" {...props} />,
-  code: InlineCode,
+  code: (props) => <code className="rounded bg-slate-800 px-1 py-0.5 text-sm font-mono text-primary-300" {...props} />,
   pre: CodeBlock,
+  li: (props) => <li className="mb-1 [&>p]:mb-2" {...props} />,
+  ul: (props) => <ul className="my-6 ml-6 list-disc ps-4 marker:text-primary-600" {...props} />,
+  ol: (props) => <ol className="mb-4 ml-7 list-decimal" {...props} />,
+  hr: (props) => <hr className="mt-8 mb-4 border-border" {...props} />,
   Tabs,
   CollapsibleCode,
 };
