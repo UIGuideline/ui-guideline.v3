@@ -1,7 +1,4 @@
-import CollapsibleCode from './interactive/collapsible-code';
-import Tabs from './interactive/tabs';
-import CodeBlock from './root/code-block.astro';
-import { HeadingLink } from './root/heading-link';
+import { HeadingLink, Subtitle } from './root';
 import { QuoteIcon } from 'lucide-react';
 
 interface MDXComponents {
@@ -34,9 +31,15 @@ export const docsComponents: MDXComponents = {
   ),
   p: (props) => <p className="mb-4 text-foreground" {...props} />,
   strong: (props) => <strong className="rounded bg-accent px-0.5 font-semibold text-white" {...props} />,
-  Subtitle: (props) => <div className="text-lg text-muted-foreground max-w-2xl mb-5 -mt-2" {...props} />,
+  Subtitle,
   code: (props) => <code className="rounded bg-slate-800 px-1 py-0.5 text-sm font-mono text-primary-300" {...props} />,
-  pre: CodeBlock,
+  pre: (props) => (
+    <pre className="relative overflow-x-auto rounded-lg bg-slate-900 p-4 text-xs leading-relaxed" {...props}>
+      <code className="font-mono text-slate-100">
+        <slot />
+      </code>
+    </pre>
+  ),
   li: (props) => <li className="mb-1 [&>p]:mb-2" {...props} />,
   ul: (props) => <ul className="my-6 ml-6 list-disc ps-4 marker:text-primary-600" {...props} />,
   ol: (props) => <ol className="mb-4 ml-7 list-decimal" {...props} />,
@@ -52,6 +55,4 @@ export const docsComponents: MDXComponents = {
       </div>
     </blockquote>
   ),
-  Tabs,
-  CollapsibleCode,
 };
