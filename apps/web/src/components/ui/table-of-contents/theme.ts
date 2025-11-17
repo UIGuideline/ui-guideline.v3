@@ -16,7 +16,7 @@ export const item = tv({
       3: 'pl-9',
     },
     isActive: {
-      true: 'border-amber-200 text-foreground hover:border-amber-200',
+      true: 'border-primary-500 text-foreground hover:border-primary-800',
     },
     defaultVariants: {
       level: 0,
