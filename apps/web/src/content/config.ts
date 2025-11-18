@@ -163,7 +163,6 @@ const systemList = defineCollection({
     }),
     description: z.string(),
     websiteUrl: z.string().url().optional(),
-    systemSiteUrl: z.string().url().optional(),
     repositoryUrl: z.string().url().optional(),
     storybookUrl: z.string().url().optional(),
     figmaUrl: z.string().url().optional(),

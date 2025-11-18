@@ -1,15 +1,14 @@
-slug: radix-ui
-name: Radix UI
+slug: mantine
+name: Mantine
 contributors:
   featured:
-    - name: Ryan Chenkie
+    - name: Vitaly Rtishchev
       avatarUrl: https://avatars.githubusercontent.com/u/10353856
-      siteUrl: https://github.com/ryanchenkie
+      siteUrl: https://github.com/rtivital
   totalCount: 755
-description: Build fully functional accessible web applications faster than ever – Radix UI includes more than 100 customizable components and 50 hooks to cover you in any situation.
-websiteUrl: https://github.com/ryanchenkie
-systemSiteUrl: https://radix-ui.com/
-repositoryUrl: https://github.com/radix-ui/primitives
+description: Build fully functional accessible web applications faster than ever – Mantine includes more than 100 customizable components and 50 hooks to cover you in any situation.
+websiteUrl: https://mantine.dev/
+repositoryUrl: https://github.com/mantinedev/mantine
 figmaUrl: https://www.figma.com/community/file/1067173247578645134
 quantityOfComponents: 82
 popularity: medium
