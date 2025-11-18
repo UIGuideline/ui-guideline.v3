@@ -179,7 +179,7 @@ const systemComponents = defineCollection({
   schema: z.union([
     z.array(z.string()),
     z.object({
-      components: z.array(z.string()),
+      components: z.array(z.string()).optional(),
     }),
   ]),
 });
