@@ -62,5 +62,5 @@ export const ASSET_PATHS = {
   /**
    * Base path for system thumbnail
    */
-  SYSTEM_THUMBNAIL: 'systems/thumbnail',
+  SYSTEM_THUMBNAIL: 'systems/thumbnails',
 } as const;

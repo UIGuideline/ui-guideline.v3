@@ -57,11 +57,12 @@ export const getComponentThumbnailUrl = (slug: string): string => {
  *
  * @function
  * @param {string} slug - The system slug.
+ * @param {string} type - The type of thumbnail to return.
  * @returns {string} The thumbnail URL path.
  * @example getSystemThumbnailUrl('material-design') // '/systems/thumbnail/material-design.svg'
  */
-export const getSystemThumbnailUrl = (slug: string): string => {
-  return `/${ASSET_PATHS.ROOT}/${ASSET_PATHS.SYSTEM_THUMBNAIL}/${slug}.svg`;
+export const getSystemThumbnailUrl = (slug: string, type: 'contained' | 'ghost' = 'ghost'): string => {
+  return `/${ASSET_PATHS.ROOT}/${ASSET_PATHS.SYSTEM_THUMBNAIL}/${type}/${slug}.svg`;
 };
 
 /**
