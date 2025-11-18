@@ -8,9 +8,9 @@ const avatar = tv({
   base: ['relative flex shrink-0 overflow-hidden rounded-full'],
   variants: {
     size: {
-      [AvatarSize.xs]: 'size-8',
-      [AvatarSize.sm]: 'size-10',
-      [AvatarSize.base]: 'size-12',
+      [AvatarSize.xs]: 'size-6',
+      [AvatarSize.sm]: 'size-8',
+      [AvatarSize.base]: 'size-10',
     },
   },
   defaultVariants: {
