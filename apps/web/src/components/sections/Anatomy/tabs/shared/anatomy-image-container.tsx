@@ -52,8 +52,8 @@ export const AnatomyImageContainer = ({ className, darkImageUrl, darkImageUrl2x,
     image: image(),
   };
 
-  const imageUrl = ASSET_PATHS.ROOT.concat(darkImageUrl);
-  const imageUrl2x = ASSET_PATHS.ROOT.concat(darkImageUrl2x);
+  const imageUrl = `/${ASSET_PATHS.ROOT}/${darkImageUrl}`;
+  const imageUrl2x = `/${ASSET_PATHS.ROOT}/${darkImageUrl2x}`;
   const srcSet = `${imageUrl}, ${imageUrl2x} 2x`;
 
   return (
