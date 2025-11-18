@@ -6,8 +6,8 @@ import { renderSections, SectionKey } from '@lib';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-	const components = await getCollection('components');
-	return components.map((component) => ({
+	const componentList = await getCollection('componentList');
+	return componentList.map((component) => ({
 		params: { slug: component.data.slug },
 		props: { component },
 	}));

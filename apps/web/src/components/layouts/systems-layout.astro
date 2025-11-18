@@ -24,8 +24,8 @@ export interface Props {
 const { title, description, currentSlug } = Astro.props;
 
 // Get all systems for navigation
-const allSystems = await getCollection('system_list');
-const sortedSystems = allSystems.slice().sort((a, b) => a.data.name.localeCompare(b.data.name));
+const systemList = await getCollection('systemList');
+const sortedSystems = systemList.slice().sort((a, b) => a.data.name.localeCompare(b.data.name));
 ---
 
 <BaseLayout title={title} description={description}>
