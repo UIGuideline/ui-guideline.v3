@@ -1,0 +1,14 @@
+slug: hero-ui
+name: Hero UI
+contributors:
+  featured:
+    - name: Junior Garcia
+      avatarUrl: https://avatars.githubusercontent.com/u/30373425
+      siteUrl: https://github.com/jrgarciadev
+  totalCount: 66
+description: HeroUI is a UI library for React that helps you build beautiful and accessible user interfaces. Created on top of Tailwind CSS and React Aria.
+websiteUrl: https://www.heroui.com/
+repositoryUrl: https://github.com/heroui-inc/heroui
+figmaUrl: https://www.figma.com/community/file/1267584376234254760
+quantityOfComponents: 50
+popularity: medium
