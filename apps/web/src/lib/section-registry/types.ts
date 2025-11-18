@@ -5,12 +5,8 @@
  **********************************************************/
 export enum SectionKey {
   overview = 'overview',
-  accessibility = 'accessibility',
   anatomy = 'anatomy',
-  figmaKits = 'figmaKits',
   props = 'props',
-  kpis = 'kpis',
-  systems = 'systems',
 }
 
 /**
