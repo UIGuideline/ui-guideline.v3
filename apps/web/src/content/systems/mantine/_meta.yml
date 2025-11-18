@@ -1,12 +1,11 @@
 slug: mantine
 name: Mantine
 contributors:
-  - name: Vitaly Rtishchev
-    url: https://github.com/rtivital
-    avatarUrl: https://github.com/rtivital.png
-  - name: John Doe
-    url: https://github.com/johndoe
-    avatarUrl: https://github.com/johndoe.png
+  featured:
+    - name: Vitaly Rtishchev
+      avatarUrl: https://avatars.githubusercontent.com/u/10353856
+      siteUrl: https://github.com/rtivital
+  totalCount: 750
 description: Build fully functional accessible web applications faster than ever – Mantine includes more than 100 customizable components and 50 hooks to cover you in any situation.
 websiteUrl: https://github.com/rtivital
 systemSiteUrl: https://mantine.dev/
