@@ -58,9 +58,32 @@ const componentsInfo = systemComponents
 				}
 				<div>
 					<h1 class="text-4xl font-bold text-gray-900 dark:text-white">{entry.data.name}</h1>
-					<p class="text-lg text-gray-600 dark:text-gray-300">
-						{entry.data.contributors.map((contributor) => contributor.name).join(', ')}
-					</p>
+					<div class="flex items-center gap-2 flex-wrap">
+						<div class="flex items-center gap-2">
+							{
+								entry.data.contributors.featured.map((contributor) => (
+									<a
+										href={contributor.siteUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="flex items-center gap-2 hover:opacity-80 transition-opacity"
+										title={contributor.name}
+									>
+										<img src={contributor.avatarUrl} alt={contributor.name} class="w-8 h-8 rounded-full" />
+										<span class="text-lg text-gray-600 dark:text-gray-300">{contributor.name}</span>
+									</a>
+								))
+							}
+						</div>
+						{
+							entry.data.contributors.totalCount &&
+								entry.data.contributors.totalCount > entry.data.contributors.featured.length && (
+									<span class="text-lg text-gray-500 dark:text-gray-400">
+										+ {entry.data.contributors.totalCount - entry.data.contributors.featured.length} more
+									</span>
+								)
+						}
+					</div>
 				</div>
 			</div>
 			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl">{entry.data.description}</p>

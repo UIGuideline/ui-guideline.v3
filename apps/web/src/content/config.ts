@@ -151,13 +151,16 @@ const systemList = defineCollection({
   schema: z.object({
     slug: z.string(),
     name: z.string(),
-    contributors: z.array(
-      z.object({
-        name: z.string(),
-        url: z.string().url(),
-        avatarUrl: z.string().url(),
-      }),
-    ),
+    contributors: z.object({
+      featured: z.array(
+        z.object({
+          name: z.string(),
+          siteUrl: z.string().url(),
+          avatarUrl: z.string().url(),
+        }),
+      ),
+      totalCount: z.number().optional(),
+    }),
     description: z.string(),
     websiteUrl: z.string().url().optional(),
     systemSiteUrl: z.string().url().optional(),
