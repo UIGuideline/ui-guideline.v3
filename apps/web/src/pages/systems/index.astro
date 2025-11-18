@@ -5,11 +5,11 @@ import { SystemCard } from '@ui';
 import { getCollection } from 'astro:content';
 
 // Get all systems for the grid
-const allSystems = await getCollection('system_list');
+const allSystems = await getCollection('systemList');
 const sortedSystems = allSystems.sort((a, b) => a.data.name.localeCompare(b.data.name));
 
 // Map systems data for rendering
-const systemsWithDescriptions = sortedSystems.map((system) => ({
+const systemList = sortedSystems.map((system) => ({
 	title: system.data.name,
 	slug: system.data.slug,
 	description: system.data.description,
@@ -34,7 +34,7 @@ const systemsWithDescriptions = sortedSystems.map((system) => ({
 		<!-- Systems Grid -->
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			{
-				systemsWithDescriptions.map((system) => (
+				systemList.map((system) => (
 					<SystemCard
 						client:load
 						title={system.title}

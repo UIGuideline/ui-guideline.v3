@@ -25,7 +25,7 @@ const overviewDocs = defineCollection({
 /**
  * Component List
  */
-const components = defineCollection({
+const componentList = defineCollection({
   loader: glob({ pattern: '**/_meta.yml', base: './src/content/components' }),
   schema: z.object({
     title: z.string(),
@@ -139,88 +139,6 @@ const props = defineCollection({
   ),
 });
 
-/**
- * Component Details - Accessibility
- */
-const accessibility = defineCollection({
-  type: 'data',
-  schema: z.object({
-    description: z.string(),
-  }),
-});
-
-/**
- * Component Details - KPIs
- */
-const kpis = defineCollection({
-  type: 'data',
-  schema: z.object({
-    id: z.string(),
-    label: z.string(),
-    description: z.string().optional(),
-    value: z.union([z.string(), z.number()]),
-    unit: z.string().optional(),
-    format: z.string().optional(),
-    target: z.number().optional(),
-    status: z.enum(['on_track', 'at_risk', 'off_track', 'unknown']).optional(),
-    source: z
-      .object({
-        name: z.string(),
-        url: z.string(),
-        lastChecked: z.string(),
-      })
-      .optional(),
-    tags: z.array(z.string()).optional(),
-    notes: z.string().optional(),
-    trend: z
-      .object({
-        direction: z.enum(['up', 'down', 'flat', 'unknown']),
-        changeAbs: z.number(),
-        changePct: z.number(),
-        period: z.enum(['daily', 'weekly', 'monthly', 'quarterly', 'yearly']),
-      })
-      .optional(),
-    breakdowns: z
-      .array(
-        z.object({
-          key: z.string(),
-          label: z.string(),
-          items: z.array(
-            z.object({
-              id: z.string(),
-              label: z.string(),
-              value: z.number(),
-            }),
-          ),
-        }),
-      )
-      .optional(),
-  }),
-});
-
-/**
- * Component Details - Systems
- */
-const systems = defineCollection({
-  type: 'data',
-  schema: z.object({
-    slug: z.string(),
-    nameInSystem: z.string(),
-    componentSiteUrl: z.string(),
-  }),
-});
-
-/**
- * Component Details - Figma Kits
- */
-const figmaKits = defineCollection({
-  type: 'data',
-  schema: z.object({
-    slug: z.string(),
-    url: z.string(),
-  }),
-});
-
 /**********************************************************
  * SYSTEMS SECTIONS
  **********************************************************/
@@ -228,7 +146,7 @@ const figmaKits = defineCollection({
 /**
  * System List
  */
-const system_list = defineCollection({
+const systemList = defineCollection({
   loader: glob({ pattern: '**/_meta.yml', base: './src/content/systems' }),
   schema: z.object({
     slug: z.string(),
@@ -244,6 +162,7 @@ const system_list = defineCollection({
     websiteUrl: z.string().url().optional(),
     systemSiteUrl: z.string().url().optional(),
     repositoryUrl: z.string().url().optional(),
+    storybookUrl: z.string().url().optional(),
     figmaUrl: z.string().url().optional(),
     quantityOfComponents: z.number().optional(),
     popularity: z.number().optional(),
@@ -253,25 +172,26 @@ const system_list = defineCollection({
 /**
  * System Details - Components
  */
-const system_components = defineCollection({
+const systemComponents = defineCollection({
   loader: glob({ pattern: '**/components.yml', base: './src/content/systems' }),
-  schema: z.array(z.string()),
+  schema: z.union([
+    z.array(z.string()),
+    z.object({
+      components: z.array(z.string()),
+    }),
+  ]),
 });
 
 // ------------------------------------------------------------
 
 export const collections = {
-  components,
+  componentList,
   overview,
   props,
   anatomy,
   codeAnatomy,
   designLayers,
-  kpis,
-  systems,
-  figmaKits,
-  accessibility,
   overviewDocs,
-  system_list,
-  system_components,
+  systemList,
+  systemComponents,
 };

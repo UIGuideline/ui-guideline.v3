@@ -37,7 +37,7 @@ export interface Props {
 const { title, description, currentSlug, toc, section = 'components' } = Astro.props;
 
 // Get all components for navigation
-const allComponents = await getCollection('components');
+const componentList = await getCollection('componentList');
 
 // Get all overview docs for navigation
 const allOverviewDocs = await getCollection('overviewDocs');
@@ -57,14 +57,14 @@ const getCategoryName = (slug: string): string => {
 };
 
 // Group components by category
-const componentsByCategory = allComponents.reduce(
+const componentsByCategory = componentList.reduce(
 	(acc, component) => {
 		const category = component.data.category || 'uncategorized';
 		if (!acc[category]) acc[category] = [];
 		acc[category]!.push(component);
 		return acc;
 	},
-	{} as Record<string, typeof allComponents>,
+	{} as Record<string, typeof componentList>,
 );
 
 // Sort categories alphabetically (uncategorized goes last)
