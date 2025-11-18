@@ -1,3 +1,4 @@
+export * from './avatar/avatar';
 export * from './brand-logo/brand-logo';
 export * from './button';
 export * from './code-block';
