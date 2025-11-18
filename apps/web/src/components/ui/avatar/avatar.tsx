@@ -1,0 +1,48 @@
+import { Fallback, Image } from './internals';
+import { AvatarSize } from './types';
+import { Root, type AvatarProps as RadixAvatarProps } from '@radix-ui/react-avatar';
+import type { VariantProps } from 'tailwind-variants';
+import { tv } from 'tailwind-variants';
+
+const avatar = tv({
+  base: ['relative flex shrink-0 overflow-hidden rounded-full'],
+  variants: {
+    size: {
+      [AvatarSize.xs]: 'size-8',
+      [AvatarSize.sm]: 'size-10',
+      [AvatarSize.base]: 'size-12',
+    },
+  },
+  defaultVariants: {
+    size: AvatarSize.base,
+  },
+});
+
+export interface AvatarProps extends RadixAvatarProps, VariantProps<typeof avatar> {
+  /**
+   * The size of the avatar.
+   */
+  size: AvatarSize;
+}
+
+/**
+ * `Avatar` component is used to show a thumbnail representation of an
+ * individual or business in the interface.
+ *
+ * @see https://www.uiguideline.com/components/avatar
+ */
+export const Avatar = (props: AvatarProps) => {
+  const classes = avatar({ className: props.className, size: props.size });
+  return <Root data-slot="avatar" className={classes} {...props} />;
+};
+
+Avatar.Image = Image;
+Avatar.Fallback = Fallback;
+
+Avatar.displayName = 'Avatar';
+
+export { AvatarSize };
+
+/**
+ * Reference: https://www.radix-ui.com/primitives/docs/components/avatar.
+ */

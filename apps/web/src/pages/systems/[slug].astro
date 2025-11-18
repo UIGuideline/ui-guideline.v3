@@ -1,5 +1,6 @@
 ---
 import { getSystemThumbnailUrl, ROUTES } from '@common';
+import { ContributorAvatar } from '@composed';
 import { SystemsLayout } from '@layouts';
 import { getCollection, getEntry } from 'astro:content';
 
@@ -36,6 +37,8 @@ const componentsInfo = systemComponents
 		return title ? { slug, title } : null;
 	})
 	.filter(Boolean) as Array<{ slug: string; title: string }>;
+
+const logoUrl = getSystemThumbnailUrl(entry.data.slug);
 ---
 
 <SystemsLayout
@@ -47,15 +50,7 @@ const componentsInfo = systemComponents
 		<!-- Header -->
 		<div class="space-y-4">
 			<div class="flex items-center gap-4">
-				{
-					getSystemThumbnailUrl(entry.data.slug) && (
-						<img
-							src={getSystemThumbnailUrl(entry.data.slug)}
-							alt={`${entry.data.name} logo`}
-							class="w-16 h-16 object-contain"
-						/>
-					)
-				}
+				{logoUrl && <img src={logoUrl} alt={`${entry.data.name} logo`} class="w-16 h-16 object-contain" />}
 				<div>
 					<h1 class="text-4xl font-bold text-gray-900 dark:text-white">{entry.data.name}</h1>
 					<div class="flex items-center gap-2 flex-wrap">
@@ -69,7 +64,12 @@ const componentsInfo = systemComponents
 										class="flex items-center gap-2 hover:opacity-80 transition-opacity"
 										title={contributor.name}
 									>
-										<img src={contributor.avatarUrl} alt={contributor.name} class="w-8 h-8 rounded-full" />
+										<ContributorAvatar
+											client:load
+											src={contributor.avatarUrl}
+											alt={contributor.name}
+											fallback={contributor.name.charAt(0)}
+										/>
 										<span class="text-lg text-gray-600 dark:text-gray-300">{contributor.name}</span>
 									</a>
 								))
