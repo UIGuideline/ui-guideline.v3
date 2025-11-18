@@ -19,8 +19,10 @@ export const categorySchema = z.object({
 });
 
 /**
- * Schema for systems.yml
- * Defines design systems catalog
+ * Schema for systems catalog (now in content collection system_list)
+ * Defines design systems catalog structure
+ * Note: Systems are now managed as content collections, but this schema
+ * is kept for type compatibility with SystemItem
  */
 export const systemSchema = z.object({
   slug: z.string(),
@@ -64,7 +66,6 @@ export type FigmaKitItem = z.infer<typeof figmaKitSchema>;
  */
 export const dataSchemas = {
   'categories.yml': z.array(categorySchema),
-  'systems.yml': z.array(systemSchema),
   'figma-kits.yml': z.array(figmaKitSchema),
 } as const;
 
@@ -79,7 +80,7 @@ export type DataFileName = keyof typeof dataSchemas;
  *
  * @example
  * type CategoriesType = InferDataType<'categories.yml'>; // Category[]
- * type SystemsType = InferDataType<'systems.yml'>;       // SystemItem[]
+ * type FigmaKitsType = InferDataType<'figma-kits.yml'>;  // FigmaKitItem[]
  */
 export type InferDataType<T extends DataFileName> = z.infer<(typeof dataSchemas)[T]>;
 

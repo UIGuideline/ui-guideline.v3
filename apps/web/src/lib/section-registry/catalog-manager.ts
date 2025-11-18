@@ -1,6 +1,7 @@
 import type { FigmaKitItem, SystemItem } from '../../data/schemas';
 import { loadData } from './content-loader';
 import type { CatalogItem } from './types';
+import { getCollection } from 'astro:content';
 
 /**
  * This function is used to warn in development mode.
@@ -49,13 +50,19 @@ export const mergeBySlug = <T extends { slug: string }, R extends Record<string,
  */
 
 /**
- * Load design systems catalog from /src/data/systems.yml
+ * Load design systems catalog from content collection system_list
  * @returns Array of design system items or empty array on error
  */
 export const loadSystemsCatalog = async (): Promise<SystemItem[]> => {
   try {
-    const data = await loadData('systems.yml');
-    return data ?? [];
+    const systems = await getCollection('system_list');
+    return systems.map((entry) => ({
+      slug: entry.data.slug,
+      name: entry.data.name,
+      url: entry.data.system_site_url,
+      description: entry.data.description,
+      logo: entry.data.logo_url,
+    }));
   } catch (e) {
     devWarn('Could not load design-systems catalog', e);
     return [];
