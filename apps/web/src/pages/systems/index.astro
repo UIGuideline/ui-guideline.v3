@@ -13,6 +13,9 @@ const systemList = sortedSystems.map((system) => ({
 	name: system.data.name,
 	slug: system.data.slug,
 	thumbnailUrl: getSystemThumbnailUrl(system.data.slug),
+	quantityOfComponents: system.data.quantityOfComponents,
+	popularity: system.data.popularity,
+	contributors: system.data.contributors,
 }));
 ---
 
@@ -34,7 +37,15 @@ const systemList = sortedSystems.map((system) => ({
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			{
 				systemList.map((system) => (
-					<SystemCard client:load name={system.name} slug={system.slug} thumbnailUrl={system.thumbnailUrl} />
+					<SystemCard
+						client:load
+						name={system.name}
+						slug={system.slug}
+						thumbnailUrl={system.thumbnailUrl}
+						quantityOfComponents={system.quantityOfComponents}
+						popularity={system.popularity}
+						contributors={system.contributors}
+					/>
 				))
 			}
 		</div>

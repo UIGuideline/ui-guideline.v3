@@ -168,7 +168,7 @@ const systemList = defineCollection({
     storybookUrl: z.string().url().optional(),
     figmaUrl: z.string().url().optional(),
     quantityOfComponents: z.number().optional(),
-    popularity: z.number().optional(),
+    popularity: z.enum(['low', 'medium', 'high']).default('medium').optional(),
   }),
 });
 
