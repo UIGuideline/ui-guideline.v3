@@ -1,4 +1,5 @@
 import { Logo, LogoAppearance, LogoSize, LogoVariant } from '../logo/logo';
+import { ROUTES } from '@common';
 import { FeedbackFish } from '@feedback-fish/react';
 import { Button, ButtonSize, ButtonVariant } from '@ui';
 import { tv } from 'tailwind-variants';
@@ -24,7 +25,18 @@ export const Navbar = ({ className }: NavbarProps) => {
 
   return (
     <nav className={classes.nav}>
-      <Logo variant={LogoVariant.light} size={LogoSize.sm} appearance={LogoAppearance.complete} />
+      <div className="flex items-center gap-5">
+        <Logo variant={LogoVariant.light} size={LogoSize.sm} appearance={LogoAppearance.complete} />
+        <div className="flex items-center gap-1">
+          <Button size={ButtonSize.sm} variant={ButtonVariant.ghost}>
+            <a href={ROUTES.COMPONENTS}>Components</a>
+          </Button>
+          <Button size={ButtonSize.sm} variant={ButtonVariant.ghost}>
+            <a href={ROUTES.SYSTEMS}>Systems</a>
+          </Button>
+        </div>
+      </div>
+
       <FeedbackFish projectId="d26ca82e52b010">
         <Button size={ButtonSize.sm} variant={ButtonVariant.outline}>
           Feedback

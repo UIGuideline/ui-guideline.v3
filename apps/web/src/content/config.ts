@@ -221,6 +221,43 @@ const figmaKits = defineCollection({
   }),
 });
 
+/**********************************************************
+ * SYSTEMS SECTIONS
+ **********************************************************/
+
+/**
+ * System List
+ */
+const system_list = defineCollection({
+  loader: glob({ pattern: '**/_meta.yml', base: './src/content/systems' }),
+  schema: z.object({
+    slug: z.string(),
+    name: z.string(),
+    contributors: z.array(
+      z.object({
+        name: z.string(),
+        url: z.string().url(),
+        avatarUrl: z.string().url(),
+      }),
+    ),
+    description: z.string(),
+    websiteUrl: z.string().url().optional(),
+    systemSiteUrl: z.string().url().optional(),
+    repositoryUrl: z.string().url().optional(),
+    figmaUrl: z.string().url().optional(),
+    quantityOfComponents: z.number().optional(),
+    popularity: z.number().optional(),
+  }),
+});
+
+/**
+ * System Details - Components
+ */
+const system_components = defineCollection({
+  loader: glob({ pattern: '**/components.yml', base: './src/content/systems' }),
+  schema: z.array(z.string()),
+});
+
 // ------------------------------------------------------------
 
 export const collections = {
@@ -235,4 +272,6 @@ export const collections = {
   figmaKits,
   accessibility,
   overviewDocs,
+  system_list,
+  system_components,
 };
