@@ -1,6 +1,18 @@
-import { devWarn } from './catalog-manager';
-import { accessibility, anatomy, figmaKits, kpis, overview, props, systems } from './section-resolvers';
+import { anatomy, overview, props } from './section-resolvers';
 import type { LoaderCtx, Renderable, SectionKey, SectionModule } from './types';
+
+/**
+ * This function is used to warn in development mode.
+ *
+ * @function
+ * @param {string} msg - message to warn.
+ * @param {unknown[]} args - arguments to warn.
+ */
+export const devWarn = (msg: string, ...args: unknown[]) => {
+  if (import.meta.env.MODE === 'development' || import.meta.env.PUBLIC_DEBUG_LOGS === '1') {
+    console.warn(`[section-registry] ${msg}`, ...args);
+  }
+};
 
 /**
  * Section registry orchestrates dynamic composition of component pages.
@@ -13,12 +25,8 @@ import type { LoaderCtx, Renderable, SectionKey, SectionModule } from './types';
 
 export const sectionRegistry: Record<SectionKey, SectionModule> = {
   overview,
-  kpis,
   anatomy,
   props,
-  systems,
-  figmaKits,
-  accessibility,
 };
 
 /**

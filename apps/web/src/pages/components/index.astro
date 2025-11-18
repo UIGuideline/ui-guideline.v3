@@ -5,11 +5,11 @@ import { ComponentCard } from '@ui';
 import { getCollection } from 'astro:content';
 
 // Get all components for the grid
-const allComponents = await getCollection('components');
+const allComponents = await getCollection('componentList');
 const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare(b.data.title));
 
 // Map components data for rendering
-const componentsWithDescriptions = sortedComponents.map((component) => ({
+const componentList = sortedComponents.map((component) => ({
 	title: component.data.title,
 	slug: component.data.slug,
 	description: component.data.description,
@@ -34,7 +34,7 @@ const componentsWithDescriptions = sortedComponents.map((component) => ({
 		<!-- Components Grid -->
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			{
-				componentsWithDescriptions.map((component) => (
+				componentList.map((component) => (
 					<ComponentCard
 						client:load
 						title={component.title}
