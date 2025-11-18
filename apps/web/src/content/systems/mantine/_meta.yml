@@ -1,0 +1,16 @@
+slug: mantine
+name: Mantine
+contributors:
+  - name: Vitaly Rtishchev
+    url: https://github.com/rtivital
+    avatarUrl: https://github.com/rtivital.png
+  - name: John Doe
+    url: https://github.com/johndoe
+    avatarUrl: https://github.com/johndoe.png
+description: Build fully functional accessible web applications faster than ever – Mantine includes more than 100 customizable components and 50 hooks to cover you in any situation.
+websiteUrl: https://github.com/rtivital
+systemSiteUrl: https://mantine.dev/
+repositoryUrl: https://github.com/mantinedev/mantine
+figmaUrl: https://www.figma.com/community/file/1067173247578645134
+quantityOfComponents: 82
+popularity: 3

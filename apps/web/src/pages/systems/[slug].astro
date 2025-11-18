@@ -1,0 +1,149 @@
+---
+import { ROUTES } from '@common';
+import { SystemsLayout } from '@layouts';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+	const systems = await getCollection('system_list');
+	return systems.map((system) => ({
+		params: { slug: system.data.slug },
+		props: { system },
+	}));
+}
+
+const { system } = Astro.props;
+const entry = system;
+if (!entry) throw new Error(`System not found`);
+
+// Get system components
+const systemComponentsEntry = await getEntry('system_components', `${entry.data.slug}/components`);
+const systemComponents = systemComponentsEntry?.data || [];
+
+// Get all components to match slugs with titles
+const allComponents = await getCollection('components');
+const componentMap = new Map(allComponents.map((c) => [c.data.slug, c.data.title]));
+
+// Map component slugs to component info
+const componentsInfo = systemComponents
+	.map((slug) => {
+		const title = componentMap.get(slug);
+		return title ? { slug, title } : null;
+	})
+	.filter(Boolean) as Array<{ slug: string; title: string }>;
+---
+
+<SystemsLayout
+	title={`${entry.data.name} | UI Guideline`}
+	description={`${entry.data.description}`}
+	currentSlug={entry.data.slug}
+>
+	<div class="space-y-8">
+		<!-- Header -->
+		<div class="space-y-4">
+			<div class="flex items-center gap-4">
+				{entry.data.logo_url && (
+					<img
+						src={entry.data.logo_url}
+						alt={`${entry.data.name} logo`}
+						class="w-16 h-16 object-contain"
+					/>
+				)}
+				<div>
+					<h1 class="text-4xl font-bold text-gray-900 dark:text-white">{entry.data.name}</h1>
+					<p class="text-lg text-gray-600 dark:text-gray-300">{entry.data.company}</p>
+				</div>
+			</div>
+			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl">{entry.data.description}</p>
+		</div>
+
+		<!-- Stats -->
+		{(entry.data.popularity || entry.data.score || entry.data.quantity_of_components) && (
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+				{entry.data.quantity_of_components && (
+					<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+						<div class="text-2xl font-bold text-gray-900 dark:text-white">
+							{entry.data.quantity_of_components}
+						</div>
+						<div class="text-sm text-gray-600 dark:text-gray-300">Components</div>
+					</div>
+				)}
+				{entry.data.popularity && (
+					<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+						<div class="text-2xl font-bold text-gray-900 dark:text-white">{entry.data.popularity}</div>
+						<div class="text-sm text-gray-600 dark:text-gray-300">Popularity</div>
+					</div>
+				)}
+				{entry.data.score && (
+					<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+						<div class="text-2xl font-bold text-gray-900 dark:text-white">{entry.data.score}</div>
+						<div class="text-sm text-gray-600 dark:text-gray-300">Score</div>
+					</div>
+				)}
+			</div>
+		)}
+
+		<!-- Links -->
+		<div class="flex flex-wrap gap-4">
+			{entry.data.system_site_url && (
+				<a
+					href={entry.data.system_site_url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+				>
+					Visit Website
+				</a>
+			)}
+			{entry.data.repository_url && (
+				<a
+					href={entry.data.repository_url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+				>
+					Repository
+				</a>
+			)}
+			{entry.data.figma_url && (
+				<a
+					href={entry.data.figma_url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+				>
+					Figma
+				</a>
+			)}
+			{entry.data.storybook_url && (
+				<a
+					href={entry.data.storybook_url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+				>
+					Storybook
+				</a>
+			)}
+		</div>
+
+		<!-- Components List -->
+		{componentsInfo.length > 0 && (
+			<div class="space-y-4">
+				<h2 class="text-2xl font-bold text-gray-900 dark:text-white">Components</h2>
+				<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+					{
+						componentsInfo.map((component) => (
+							<a
+								href={`${ROUTES.COMPONENTS}/${component.slug}`}
+								class="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-center"
+							>
+								{component.title}
+							</a>
+						))
+					}
+				</div>
+			</div>
+		)}
+	</div>
+</SystemsLayout>
+

@@ -14,14 +14,19 @@ export const ROUTES = {
   COMPONENTS: '/components',
 
   /**
+   * llms.txt base route
+   */
+  LLMS_TXT: '/llms.txt',
+
+  /**
    * Overview docs route
    */
   OVERVIEW: '/overview',
 
   /**
-   * llms.txt base route
+   * Systems base route
    */
-  LLMS_TXT: '/llms.txt',
+  SYSTEMS: '/systems',
 } as const;
 
 /**
@@ -32,7 +37,7 @@ export const ASSET_PATHS = {
   /**
    * Base path for assets
    */
-  ROOT: '/assets/',
+  ROOT: 'assets',
 
   /**
    * Base path for brands
@@ -47,10 +52,15 @@ export const ASSET_PATHS = {
   /**
    * Base path for component thumbnail
    */
-  COMPONENT_THUMBNAIL: '/thumbnail/',
+  COMPONENT_THUMBNAIL: 'thumbnail',
 
   /**
    * Base path for component anatomy
    */
   COMPONENT_ANATOMY: '/anatomy/',
+
+  /**
+   * Base path for system thumbnail
+   */
+  SYSTEM_THUMBNAIL: 'systems/thumbnail',
 } as const;

@@ -41,7 +41,7 @@ export const camelToTitleCase = (str: string): string => {
 };
 
 /**
- * Get the thumbnail URL for a component based on its slug.
+ * Get the thumbnail URL for a Component based on its slug.
  *
  * @function
  * @param {string} slug - The component slug.
@@ -49,7 +49,19 @@ export const camelToTitleCase = (str: string): string => {
  * @example getComponentThumbnailUrl('button') // '/thumbnails/components/button.svg'
  */
 export const getComponentThumbnailUrl = (slug: string): string => {
-  return `${ASSET_PATHS.ROOT}components/${slug}${ASSET_PATHS.COMPONENT_THUMBNAIL}dark.png`;
+  return `/${ASSET_PATHS.ROOT}/components/${slug}/${ASSET_PATHS.COMPONENT_THUMBNAIL}/dark.png`;
+};
+
+/**
+ * Get the thumbnail URL for a System based on its slug.
+ *
+ * @function
+ * @param {string} slug - The system slug.
+ * @returns {string} The thumbnail URL path.
+ * @example getSystemThumbnailUrl('material-design') // '/systems/thumbnail/material-design.svg'
+ */
+export const getSystemThumbnailUrl = (slug: string): string => {
+  return `/${ASSET_PATHS.ROOT}/${ASSET_PATHS.SYSTEM_THUMBNAIL}/${slug}.svg`;
 };
 
 /**
