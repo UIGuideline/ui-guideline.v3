@@ -10,9 +10,8 @@ const sortedSystems = allSystems.sort((a, b) => a.data.name.localeCompare(b.data
 
 // Map systems data for rendering
 const systemList = sortedSystems.map((system) => ({
-	title: system.data.name,
+	name: system.data.name,
 	slug: system.data.slug,
-	description: system.data.description,
 	thumbnailUrl: getSystemThumbnailUrl(system.data.slug),
 }));
 ---
@@ -35,13 +34,7 @@ const systemList = sortedSystems.map((system) => ({
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			{
 				systemList.map((system) => (
-					<SystemCard
-						client:load
-						title={system.title}
-						description={system.description}
-						slug={system.slug}
-						thumbnailUrl={system.thumbnailUrl}
-					/>
+					<SystemCard client:load name={system.name} slug={system.slug} thumbnailUrl={system.thumbnailUrl} />
 				))
 			}
 		</div>
