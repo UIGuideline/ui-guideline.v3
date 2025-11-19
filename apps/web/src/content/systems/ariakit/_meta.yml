@@ -1,0 +1,13 @@
+slug: ark-ui
+name: Ark UI
+contributors:
+  featured:
+    - name: Chakra UI Team
+      avatarUrl: https://avatars.githubusercontent.com/u/54212428?s=200
+      siteUrl: https://github.com/chakra-ui
+  totalCount: 84
+description: Ark UI provides components for building complex, interactive, and accessible user interfaces across multiple JavaScript frameworks.
+websiteUrl: https://ark-ui.com/
+repositoryUrl: https://github.com/chakra-ui/ark
+quantityOfComponents: 47
+popularity: low
