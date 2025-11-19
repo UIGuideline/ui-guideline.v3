@@ -1,0 +1,14 @@
+slug: react-aria
+name: React Aria
+contributors:
+  featured:
+    - name: Adobe Team
+      avatarUrl: https://avatars.githubusercontent.com/u/476009?s=200
+      siteUrl: https://github.com/adobe
+  totalCount: 398
+description: React Aria is a library of unstyled React components and hooks that helps you build accessible, high quality UI components for your application or design system.
+websiteUrl: https://react-spectrum.adobe.com/react-aria/
+repositoryUrl: https://github.com/adobe/react-spectrum
+figmaUrl: https://www.figma.com/community/file/1211274196563394418/adobe-spectrum-design-system
+quantityOfComponents: 40
+popularity: medium
