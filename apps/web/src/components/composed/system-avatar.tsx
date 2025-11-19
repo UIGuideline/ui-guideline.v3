@@ -7,7 +7,7 @@ export interface SystemAvatarProps {
   size?: AvatarSize;
 }
 
-export const SystemAvatar = ({ src, alt, fallback, size = AvatarSize.base }: SystemAvatarProps) => {
+export const SystemAvatar = ({ src, alt, fallback, size = AvatarSize.xl }: SystemAvatarProps) => {
   return (
     <Avatar size={size}>
       {src && <Avatar.Image src={src} alt={alt} />}

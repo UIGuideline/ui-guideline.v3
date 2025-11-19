@@ -1,4 +1,6 @@
 import { ContributorAvatar } from './contributor-avatar';
+import { SystemAvatar } from './system-avatar';
+import { getSystemThumbnailUrl } from '@common';
 import type { Contributors } from '@content';
 import { tv } from 'tailwind-variants';
 
@@ -13,9 +15,9 @@ export interface SystemOverviewProps {
   className?: string;
 
   /**
-   * The logo URL of the system.
+   * The slug of the system.
    */
-  logoUrl: string;
+  slug: string;
 
   /**
    * The name of the system.
@@ -36,47 +38,53 @@ export interface SystemOverviewProps {
 /**
  * This component displays an overview of the systems on the System Details page.
  */
-export const SystemOverview = ({ className, logoUrl, name, description, contributors }: SystemOverviewProps) => {
+export const SystemOverview = ({ className, slug, name, description, contributors }: SystemOverviewProps) => {
   const classes = {
     container: container({ className }),
   };
 
+  const thumbnailUrl = getSystemThumbnailUrl(slug, 'ghost');
+
   return (
-    <div className={classes.container}>
+    <section className={classes.container}>
       <div className="flex items-center gap-4">
-        {logoUrl && <img src={logoUrl} alt={`${name} logo`} className="size-20 object-contain" />}
+        {thumbnailUrl && <SystemAvatar src={thumbnailUrl} alt={name} fallback={name.charAt(0)} />}
         <div className="flex flex-col gap-1">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{name}</h1>
+          <h1 className="text-3xl font-bold">{name}</h1>
           <div className="flex items-center gap-2 flex-wrap">
             <div className="flex items-center gap-2">
-              {contributors.featured.map((contributor) => (
-                <a
-                  href={contributor.siteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 group"
-                  title={contributor.name}
-                >
-                  <ContributorAvatar
-                    src={contributor.avatarUrl}
-                    alt={contributor.name}
-                    fallback={contributor.name.charAt(0)}
-                  />
-                  <span className="text-base group-hover:text-primary text-muted-foreground transition-colors">
-                    {contributor.name}
-                  </span>
-                </a>
+              <span className="text-sm group-hover:text-primary text-foreground transition-colors">By</span>
+              {contributors.featured.map((contributor, index) => (
+                <>
+                  <a
+                    href={contributor.siteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 group"
+                    title={contributor.name}
+                  >
+                    <ContributorAvatar
+                      src={contributor.avatarUrl}
+                      alt={contributor.name}
+                      fallback={contributor.name.charAt(0)}
+                    />
+                    <span className="text-base group-hover:text-primary text-muted-foreground transition-colors">
+                      {contributor.name}
+                    </span>
+                  </a>
+                  {index < contributors.featured.length - 1 && <span className="text-foreground">·</span>}
+                </>
               ))}
             </div>
             {contributors.totalCount && contributors.totalCount > contributors.featured.length && (
               <span className="text-base text-muted-foreground">
-                + {contributors.totalCount - contributors.featured.length} more
+                + {contributors.totalCount - contributors.featured.length} contributors
               </span>
             )}
           </div>
         </div>
       </div>
-      <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl">{description}</p>
-    </div>
+      <p className="text-lg text-muted-foreground max-w-2xl">{description}</p>
+    </section>
   );
 };
