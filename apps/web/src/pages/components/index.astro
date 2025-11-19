@@ -12,9 +12,7 @@ const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare
 const componentList = sortedComponents.map((component) => ({
 	title: component.data.title,
 	slug: component.data.slug,
-	description: component.data.description,
-	status: component.data.status,
-	thumbnailUrl: getComponentThumbnailUrl(component.data.slug),
+	thumbnailData: getComponentThumbnailUrl(component.data.slug),
 }));
 ---
 
@@ -38,10 +36,8 @@ const componentList = sortedComponents.map((component) => ({
 					<ComponentCard
 						client:load
 						title={component.title}
-						description={component.description}
 						slug={component.slug}
-						thumbnailUrl={component.thumbnailUrl}
-						status={component.status}
+						thumbnailData={component.thumbnailData}
 					/>
 				))
 			}

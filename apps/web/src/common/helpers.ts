@@ -45,11 +45,16 @@ export const camelToTitleCase = (str: string): string => {
  *
  * @function
  * @param {string} slug - The component slug.
- * @returns {string} The thumbnail URL path.
- * @example getComponentThumbnailUrl('button') // '/thumbnails/components/button.svg'
+ * @returns {object} Object with src and srcset for responsive images.
+ * @example getComponentThumbnailUrl('button')
+ * // { src: '/assets/components/button/thumbnail/dark.png', srcset: '/assets/components/button/thumbnail/dark.png 1x, /assets/components/button/thumbnail/dark@2x.png 2x' }
  */
-export const getComponentThumbnailUrl = (slug: string): string => {
-  return `/${ASSET_PATHS.ROOT}/components/${slug}/${ASSET_PATHS.COMPONENT_THUMBNAIL}/dark.png`;
+export const getComponentThumbnailUrl = (slug: string): { src: string; srcset: string } => {
+  const basePath = `/${ASSET_PATHS.ROOT}/components/${slug}/${ASSET_PATHS.COMPONENT_THUMBNAIL}`;
+  const src = `${basePath}/dark.png`;
+  const srcset = `${basePath}/dark.png 1x, ${basePath}/dark@2x.png 2x`;
+
+  return { src, srcset };
 };
 
 /**
