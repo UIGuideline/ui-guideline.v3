@@ -1,7 +1,7 @@
 ---
 import { SystemOverview } from '@composed';
 import { SystemsLayout } from '@layouts';
-import { mapSystemComponents } from '@lib';
+import { toComponentCard } from '@lib';
 import { ComponentCard } from '@ui';
 import { getCollection, getEntry } from 'astro:content';
 
@@ -21,8 +21,8 @@ if (!entry) throw new Error(`System not found`);
 const systemComponentsEntry = await getEntry('systemComponents', `${entry.data.slug}/components`);
 const allComponents = await getCollection('componentList');
 
-// Transform data using utility helper
-const componentsInfo = mapSystemComponents(systemComponentsEntry?.data?.components ?? [], allComponents);
+// Transform data using transformer
+const componentsInfo = toComponentCard(systemComponentsEntry?.data?.components ?? [], allComponents);
 ---
 
 <SystemsLayout
