@@ -1,9 +1,14 @@
 import React from 'react';
 import { ROUTES } from '@common';
+import { ArrowUpRightIcon } from 'lucide-react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const componentCard = tv({
   base: 'group flex flex-col gap-1 w-full',
+});
+
+const componentCardLink = tv({
+  base: 'flex flex-col gap-1 w-full',
 });
 
 const thumbnailContainer = tv({
@@ -41,35 +46,70 @@ export interface ComponentCardProps extends VariantProps<typeof componentCard> {
     src: string;
     srcset: string;
   };
+
+  /**
+   * Optional external documentation URL
+   */
+  externalUrl?: string;
+
+  /**
+   * Optional label for the external link
+   */
+  externalLabel?: string;
 }
 
 /**
  * ComponentCard displays a component preview with thumbnail as background and title badge
  */
-export const ComponentCard: React.FC<ComponentCardProps> = ({ title, slug, thumbnailData, className }) => {
+export const ComponentCard: React.FC<ComponentCardProps> = ({
+  title,
+  slug,
+  thumbnailData,
+  externalUrl,
+  externalLabel,
+  className,
+}) => {
   const classes = {
     componentCard: componentCard({
       className,
     }),
+    componentCardLink: componentCardLink(),
     thumbnailContainer: thumbnailContainer(),
     thumbnail: thumbnail(),
   };
 
   return (
-    <a href={`${ROUTES.COMPONENTS}/${slug}`} className={classes.componentCard}>
-      {/* Card Container with Background Image */}
-      <div className={classes.thumbnailContainer}>
-        {/* Background Image */}
-        <img
-          src={thumbnailData.src}
-          srcSet={thumbnailData.srcset}
-          alt={`${title} component preview`}
-          className={classes.thumbnail}
-        />
-      </div>
+    <div className={classes.componentCard}>
+      <a href={`${ROUTES.COMPONENTS}/${slug}`} className={classes.componentCardLink}>
+        {/* Card Container with Background Image */}
+        <div className={classes.thumbnailContainer}>
+          {/* Background Image */}
+          <img
+            src={thumbnailData.src}
+            srcSet={thumbnailData.srcset}
+            alt={`${title} component preview`}
+            className={classes.thumbnail}
+          />
+        </div>
+        <div className="flex items-center mx-1">
+          {/* Component Name Label (Outside Card) */}
+          <div className="text-lg font-semibold text-foreground">{title}</div>
 
-      {/* Component Name Label (Outside Card) */}
-      <span className="text-lg font-semibold text-foreground transition-colors ml-1">{title}</span>
-    </a>
+          {/* External Documentation Link */}
+          {externalUrl && (
+            <a
+              href={externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs ml-auto text-muted-foreground hover:text-primary-500 hover:underline transition-colors inline-flex items-center gap-1 w-fit"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {externalLabel ?? 'View docs'}
+              <ArrowUpRightIcon className="size-3" />
+            </a>
+          )}
+        </div>
+      </a>
+    </div>
   );
 };
