@@ -1,7 +1,7 @@
 import type { CollectionEntry } from 'astro:content';
 
 // Re-export types from config.ts
-export type { Contributors, FeaturedContributor } from '../config';
+export type { Contributors, FeaturedContributor, SystemComponent } from '../config';
 
 // Types derived from Astro Collections
 export type SystemListEntry = CollectionEntry<'systemList'>;

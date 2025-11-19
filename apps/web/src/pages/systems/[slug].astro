@@ -1,21 +1,9 @@
 ---
-import { getComponentThumbnailUrl } from '@common';
 import { SystemOverview } from '@composed';
 import { SystemsLayout } from '@layouts';
+import { mapSystemComponents } from '@lib';
 import { ComponentCard } from '@ui';
 import { getCollection, getEntry } from 'astro:content';
-
-/**
- * Component information with thumbnail data
- */
-interface ComponentInfo {
-	slug: string;
-	title: string;
-	thumbnailData: {
-		src: string;
-		srcset: string;
-	};
-}
 
 export async function getStaticPaths() {
 	const systems = await getCollection('systemList');
@@ -29,33 +17,12 @@ const { system } = Astro.props;
 const entry = system;
 if (!entry) throw new Error(`System not found`);
 
-// Get system components
+// Load data from collections
 const systemComponentsEntry = await getEntry('systemComponents', `${entry.data.slug}/components`);
-const systemComponentsData = systemComponentsEntry?.data;
-
-// Get all components to match slugs with titles
 const allComponents = await getCollection('componentList');
-const componentMap = new Map(allComponents.map((c) => [c.data.slug, c.data.title]));
 
-/**
- * Maps component slug to ComponentInfo if the component exists
- */
-const mapComponentToInfo = (slug: string): ComponentInfo | null => {
-	const title = componentMap.get(slug);
-	if (!title) return null;
-
-	return {
-		slug,
-		title,
-		thumbnailData: getComponentThumbnailUrl(slug),
-	};
-};
-
-// Map component slugs to component info with thumbnail data
-const componentsInfo: ComponentInfo[] =
-	systemComponentsData?.components
-		.map(mapComponentToInfo)
-		.filter((component): component is ComponentInfo => component !== null) ?? [];
+// Transform data using utility helper
+const componentsInfo = mapSystemComponents(systemComponentsEntry?.data?.components ?? [], allComponents);
 ---
 
 <SystemsLayout
@@ -83,6 +50,8 @@ const componentsInfo: ComponentInfo[] =
 							title={component.title}
 							slug={component.slug}
 							thumbnailData={component.thumbnailData}
+							externalUrl={component.docUrl}
+							externalLabel={`View in ${entry.data.name}`}
 						/>
 					))
 				}

@@ -183,14 +183,24 @@ const systemList = defineCollection({
 });
 
 /**
+ * System Component Schema
+ */
+const systemComponentSchema = z.object({
+  slug: z.string(),
+  docUrl: z.string().url(),
+});
+
+/**
  * System Details - Components
  */
 const systemComponents = defineCollection({
   loader: glob({ pattern: '**/components.yml', base: './src/content/systems' }),
   schema: z.object({
-    components: z.array(z.string()),
+    components: z.array(systemComponentSchema),
   }),
 });
+
+export type SystemComponent = z.infer<typeof systemComponentSchema>;
 
 // ------------------------------------------------------------
 

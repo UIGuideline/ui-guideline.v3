@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { ContributorAvatar } from './contributor-avatar';
 import { SystemAvatar } from './system-avatar';
 import { getSystemThumbnailUrl } from '@common';
@@ -55,7 +56,7 @@ export const SystemOverview = ({ className, slug, name, description, contributor
             <div className="flex items-center gap-2">
               <span className="text-sm text-foreground transition-colors">By</span>
               {contributors.featured.map((contributor, index) => (
-                <>
+                <Fragment key={contributor.name}>
                   <a
                     href={contributor.siteUrl}
                     target="_blank"
@@ -71,7 +72,7 @@ export const SystemOverview = ({ className, slug, name, description, contributor
                     {contributor.name}
                   </a>
                   {index < contributors.featured.length - 1 && <span className="text-foreground">·</span>}
-                </>
+                </Fragment>
               ))}
             </div>
             {contributors.totalCount && contributors.totalCount > contributors.featured.length && (
