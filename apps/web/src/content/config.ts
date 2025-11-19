@@ -176,12 +176,9 @@ const systemList = defineCollection({
  */
 const systemComponents = defineCollection({
   loader: glob({ pattern: '**/components.yml', base: './src/content/systems' }),
-  schema: z.union([
-    z.array(z.string()),
-    z.object({
-      components: z.array(z.string()).optional(),
-    }),
-  ]),
+  schema: z.object({
+    components: z.array(z.string()),
+  }),
 });
 
 // ------------------------------------------------------------
