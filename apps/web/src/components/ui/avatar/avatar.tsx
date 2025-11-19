@@ -11,6 +11,8 @@ const avatar = tv({
       [AvatarSize.xs]: 'size-6',
       [AvatarSize.sm]: 'size-8',
       [AvatarSize.base]: 'size-10',
+      [AvatarSize.lg]: 'size-12',
+      [AvatarSize.xl]: 'size-14',
     },
   },
   defaultVariants: {
