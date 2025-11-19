@@ -144,6 +144,26 @@ const props = defineCollection({
  **********************************************************/
 
 /**
+ * Featured Contributor Schema
+ */
+const featuredContributorSchema = z.object({
+  name: z.string(),
+  siteUrl: z.string().url(),
+  avatarUrl: z.string().url(),
+});
+
+/**
+ * Contributors Schema
+ */
+const contributorsSchema = z.object({
+  featured: z.array(featuredContributorSchema),
+  totalCount: z.number().optional(),
+});
+
+export type FeaturedContributor = z.infer<typeof featuredContributorSchema>;
+export type Contributors = z.infer<typeof contributorsSchema>;
+
+/**
  * System List
  */
 const systemList = defineCollection({
@@ -151,16 +171,7 @@ const systemList = defineCollection({
   schema: z.object({
     slug: z.string(),
     name: z.string(),
-    contributors: z.object({
-      featured: z.array(
-        z.object({
-          name: z.string(),
-          siteUrl: z.string().url(),
-          avatarUrl: z.string().url(),
-        }),
-      ),
-      totalCount: z.number().optional(),
-    }),
+    contributors: contributorsSchema,
     description: z.string(),
     websiteUrl: z.string().url().optional(),
     repositoryUrl: z.string().url().optional(),

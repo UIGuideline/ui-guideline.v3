@@ -1,6 +1,6 @@
 ---
 import { getSystemThumbnailUrl, ROUTES } from '@common';
-import { ContributorAvatar } from '@composed';
+import { SystemOverview } from '@composed';
 import { SystemsLayout } from '@layouts';
 import { getCollection, getEntry } from 'astro:content';
 
@@ -40,122 +40,14 @@ const logoUrl = getSystemThumbnailUrl(entry.data.slug);
 	description={`${entry.data.description}`}
 	currentSlug={entry.data.slug}
 >
-	<div class="space-y-8">
-		<!-- Header -->
-		<div class="space-y-4">
-			<div class="flex items-center gap-4">
-				{logoUrl && <img src={logoUrl} alt={`${entry.data.name} logo`} class="size-20 object-contain" />}
-				<div class="flex flex-col gap-1">
-					<h1 class="text-3xl font-bold text-gray-900 dark:text-white">{entry.data.name}</h1>
-					<div class="flex items-center gap-2 flex-wrap">
-						<div class="flex items-center gap-2">
-							{
-								entry.data.contributors.featured.map((contributor) => (
-									<a
-										href={contributor.siteUrl}
-										target="_blank"
-										rel="noopener noreferrer"
-										class="flex items-center gap-2 group"
-										title={contributor.name}
-									>
-										<ContributorAvatar
-											client:load
-											src={contributor.avatarUrl}
-											alt={contributor.name}
-											fallback={contributor.name.charAt(0)}
-										/>
-										<span class="text-base group-hover:text-primary text-muted-foreground transition-colors">
-											{contributor.name}
-										</span>
-									</a>
-								))
-							}
-						</div>
-						{
-							entry.data.contributors.totalCount &&
-								entry.data.contributors.totalCount > entry.data.contributors.featured.length && (
-									<span class="text-base text-muted-foreground">
-										+ {entry.data.contributors.totalCount - entry.data.contributors.featured.length} more
-									</span>
-								)
-						}
-					</div>
-				</div>
-			</div>
-			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl">{entry.data.description}</p>
-		</div>
-
-		<!-- Stats -->
-		{
-			(entry.data.popularity || entry.data.quantityOfComponents) && (
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-					{entry.data.quantityOfComponents && (
-						<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-							<div class="text-2xl font-bold text-gray-900 dark:text-white">{entry.data.quantityOfComponents}</div>
-							<div class="text-sm text-gray-600 dark:text-gray-300">Components</div>
-						</div>
-					)}
-					{entry.data.popularity && (
-						<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-							<div class="text-2xl font-bold text-gray-900 dark:text-white">{entry.data.popularity}</div>
-							<div class="text-sm text-gray-600 dark:text-gray-300">Popularity</div>
-						</div>
-					)}
-				</div>
-			)
-		}
-
-		<!-- Links -->
-		<div class="flex flex-wrap gap-4">
-			{
-				entry.data.websiteUrl && (
-					<a
-						href={entry.data.websiteUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-					>
-						Visit Website
-					</a>
-				)
-			}
-			{
-				entry.data.repositoryUrl && (
-					<a
-						href={entry.data.repositoryUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-					>
-						Repository
-					</a>
-				)
-			}
-			{
-				entry.data.figmaUrl && (
-					<a
-						href={entry.data.figmaUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-					>
-						Figma
-					</a>
-				)
-			}
-			{
-				entry.data.storybookUrl && (
-					<a
-						href={entry.data.storybookUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-					>
-						Storybook
-					</a>
-				)
-			}
-		</div>
+	<div class="flex flex-col gap-8">
+		<SystemOverview
+			client:load
+			logoUrl={logoUrl}
+			name={entry.data.name}
+			description={entry.data.description}
+			contributors={entry.data.contributors}
+		/>
 
 		<!-- Components List -->
 		{
