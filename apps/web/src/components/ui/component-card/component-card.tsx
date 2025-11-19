@@ -1,16 +1,33 @@
 import React from 'react';
 import { ROUTES } from '@common';
+import { tv, type VariantProps } from 'tailwind-variants';
 
-export interface ComponentCardProps {
+const componentCard = tv({
+  base: 'group flex flex-col gap-1 w-full',
+});
+
+const thumbnailContainer = tv({
+  base: [
+    'relative aspect-[4/3] overflow-hidden rounded-lg',
+    'border border-border hover:border-muted-foreground/40',
+    'transition-all duration-200',
+  ],
+});
+
+const thumbnail = tv({
+  base: 'absolute inset-0 w-full h-full object-cover',
+});
+
+export interface ComponentCardProps extends VariantProps<typeof componentCard> {
+  /**
+   * Specify an optional className to be added to the component.
+   */
+  className?: string;
+
   /**
    * The title of the component
    */
   title: string;
-
-  /**
-   * The description of the component
-   */
-  description: string;
 
   /**
    * The slug/url for the component detail page
@@ -18,48 +35,41 @@ export interface ComponentCardProps {
   slug: string;
 
   /**
-   * The URL to the thumbnail image
+   * The thumbnail image data with src and srcset
    */
-  thumbnailUrl: string;
-
-  /**
-   * Optional status badge (e.g., 'stable', 'beta', 'experimental')
-   */
-  status?: string;
+  thumbnailData: {
+    src: string;
+    srcset: string;
+  };
 }
 
 /**
- * ComponentCard displays a component preview with thumbnail, title, and description
+ * ComponentCard displays a component preview with thumbnail as background and title badge
  */
-export const ComponentCard: React.FC<ComponentCardProps> = ({ title, description, slug, thumbnailUrl, status }) => {
+export const ComponentCard: React.FC<ComponentCardProps> = ({ title, slug, thumbnailData, className }) => {
+  const classes = {
+    componentCard: componentCard({
+      className,
+    }),
+    thumbnailContainer: thumbnailContainer(),
+    thumbnail: thumbnail(),
+  };
+
   return (
-    <a
-      href={`${ROUTES.COMPONENTS}/${slug}`}
-      className="group block border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden transition-all duration-200 hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-600"
-    >
-      {/* Thumbnail Container */}
-      <div className="relative aspect-video bg-gray-100 dark:bg-gray-800 overflow-hidden">
+    <a href={`${ROUTES.COMPONENTS}/${slug}`} className={classes.componentCard}>
+      {/* Card Container with Background Image */}
+      <div className={classes.thumbnailContainer}>
+        {/* Background Image */}
         <img
-          src={thumbnailUrl}
+          src={thumbnailData.src}
+          srcSet={thumbnailData.srcset}
           alt={`${title} component preview`}
-          className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+          className={classes.thumbnail}
         />
-        {status && (
-          <div className="absolute top-3 right-3">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-              {status}
-            </span>
-          </div>
-        )}
       </div>
 
-      {/* Content */}
-      <div className="p-5">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-          {title}
-        </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{description}</p>
-      </div>
+      {/* Component Name Label (Outside Card) */}
+      <span className="text-lg font-semibold text-foreground transition-colors ml-1">{title}</span>
     </a>
   );
 };
