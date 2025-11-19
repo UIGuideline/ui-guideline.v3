@@ -43,7 +43,7 @@ const logoUrl = getSystemThumbnailUrl(entry.data.slug);
 	<div class="flex flex-col gap-8">
 		<SystemOverview
 			client:load
-			logoUrl={logoUrl}
+			slug={entry.data.slug}
 			name={entry.data.name}
 			description={entry.data.description}
 			contributors={entry.data.contributors}
