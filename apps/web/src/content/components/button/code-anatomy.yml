@@ -4,7 +4,7 @@
       <PlusIcon /> Add product
     </Button>
 
-- slug: radixui
+- slug: radix-ui
   code: |
     <Button.Root>
       <Button.Icon>
@@ -13,7 +13,7 @@
       <Button.Label>Add product</Button.Label>
     </Button.Root>
 
-- slug: baseui
+- slug: base-ui
   code: |
     <Button startEnhancer={<PlusIcon />}>
       Add product
