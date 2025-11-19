@@ -1,0 +1,14 @@
+slug: chakra-ui
+name: Chakra UI
+contributors:
+  featured:
+    - name: Segun Adebayo
+      avatarUrl: https://avatars.githubusercontent.com/u/6916170
+      siteUrl: https://github.com/segunadebayo
+  totalCount: 722
+description: Accessible React components for building high-quality web apps and design systems. Works with Next.js RSC.
+websiteUrl: https://chakra-ui.com/
+repositoryUrl: https://github.com/chakra-ui/chakra-ui
+figmaUrl: https://www.figma.com/community/file/1506648876941130701
+quantityOfComponents: 47
+popularity: high
