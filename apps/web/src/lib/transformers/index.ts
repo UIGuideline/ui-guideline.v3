@@ -13,7 +13,8 @@
  *
  * Transformers are organized by domain/context:
  * - systems/ - Transformers for Systems section
- * - (future: components/, overview/, etc.)
+ * - components/ - Transformers for Components section
  */
 
+export * from './components';
 export * from './systems';

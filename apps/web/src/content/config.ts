@@ -86,7 +86,6 @@ const codeAnatomy = defineCollection({
     z.object({
       slug: z.string(),
       code: z.string(),
-      sourceUrl: z.string().optional(),
     }),
   ),
 });

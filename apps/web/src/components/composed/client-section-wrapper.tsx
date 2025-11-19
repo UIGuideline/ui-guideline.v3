@@ -1,5 +1,5 @@
 import type { AnatomyData, CodeAnatomyData, DesignLayersData, PropsData } from '@content';
-import { SectionKey } from '@lib';
+import { SectionKey, type SystemReference } from '@lib';
 import { Anatomy, Props } from '@sections';
 
 type ClientSectionProps = {
@@ -8,6 +8,7 @@ type ClientSectionProps = {
   designLayers?: DesignLayersData;
   designLayersRaw?: string;
   codeAnatomy?: CodeAnatomyData;
+  systemsForComponent?: SystemReference[];
 };
 
 export const ClientSectionWrapper = ({
@@ -16,6 +17,7 @@ export const ClientSectionWrapper = ({
   designLayers,
   designLayersRaw,
   codeAnatomy,
+  systemsForComponent,
 }: ClientSectionProps) => {
   if (type === SectionKey.anatomy && designLayers && designLayersRaw) {
     return (
@@ -24,6 +26,7 @@ export const ClientSectionWrapper = ({
         designLayers={designLayers}
         designLayersRaw={designLayersRaw}
         codeAnatomy={codeAnatomy}
+        systemsForComponent={systemsForComponent}
       />
     );
   }
