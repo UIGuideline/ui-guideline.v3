@@ -40,7 +40,7 @@ const logoUrl = getSystemThumbnailUrl(entry.data.slug);
 	description={`${entry.data.description}`}
 	currentSlug={entry.data.slug}
 >
-	<div class="flex flex-col gap-8">
+	<div class="flex flex-col gap-16">
 		<SystemOverview
 			client:load
 			slug={entry.data.slug}
@@ -49,23 +49,21 @@ const logoUrl = getSystemThumbnailUrl(entry.data.slug);
 			contributors={entry.data.contributors}
 		/>
 
-		<!-- Components List -->
-		{
-			componentsInfo.length > 0 && (
-				<div class="space-y-4">
-					<h2 class="text-2xl font-bold text-gray-900 dark:text-white">Components</h2>
-					<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-						{componentsInfo.map((component) => (
-							<a
-								href={`${ROUTES.COMPONENTS}/${component.slug}`}
-								class="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-center"
-							>
-								{component.title}
-							</a>
-						))}
-					</div>
-				</div>
-			)
-		}
+		<!-- System Components -->
+		<section class="flex flex-col gap-3">
+			<h1 id="components" class="text-xl font-bold m-0">Components</h1>
+			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+				{
+					componentsInfo.map((component) => (
+						<a
+							href={`${ROUTES.COMPONENTS}/${component.slug}`}
+							class="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-center"
+						>
+							{component.title}
+						</a>
+					))
+				}
+			</div>
+		</section>
 	</div>
 </SystemsLayout>
