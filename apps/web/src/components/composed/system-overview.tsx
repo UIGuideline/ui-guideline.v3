@@ -49,18 +49,18 @@ export const SystemOverview = ({ className, slug, name, description, contributor
     <section className={classes.container}>
       <div className="flex items-center gap-4">
         {thumbnailUrl && <SystemAvatar src={thumbnailUrl} alt={name} fallback={name.charAt(0)} />}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1.5">
           <h1 className="text-3xl font-bold">{name}</h1>
           <div className="flex items-center gap-2 flex-wrap">
             <div className="flex items-center gap-2">
-              <span className="text-sm group-hover:text-primary text-foreground transition-colors">By</span>
+              <span className="text-sm text-foreground transition-colors">By</span>
               {contributors.featured.map((contributor, index) => (
                 <>
                   <a
                     href={contributor.siteUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 group"
+                    className="flex items-center gap-2 text-base text-muted-foreground hover:text-primary-500"
                     title={contributor.name}
                   >
                     <ContributorAvatar
@@ -68,9 +68,7 @@ export const SystemOverview = ({ className, slug, name, description, contributor
                       alt={contributor.name}
                       fallback={contributor.name.charAt(0)}
                     />
-                    <span className="text-base group-hover:text-primary text-muted-foreground transition-colors">
-                      {contributor.name}
-                    </span>
+                    {contributor.name}
                   </a>
                   {index < contributors.featured.length - 1 && <span className="text-foreground">·</span>}
                 </>
