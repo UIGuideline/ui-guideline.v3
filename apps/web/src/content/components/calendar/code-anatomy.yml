@@ -24,7 +24,7 @@
       </CalendarGrid>
     </Calendar>
 
-- slug: radixui
+- slug: radix-ui
   code: |
     <Calendar.Root>
       <Calendar.Header>
@@ -48,7 +48,7 @@
       </Calendar.Grid>
     </Calendar.Root>
 
-- slug: baseui
+- slug: base-ui
   code: |
     <Calendar
       header={

@@ -27,11 +27,11 @@ const LIBRARY_CONFIG = {
     label: 'shadcn',
     logo: BrandLogoCatalog.shadcn,
   },
-  radixui: {
+  'radix-ui': {
     label: 'Radix UI',
     logo: BrandLogoCatalog.radixui,
   },
-  baseui: {
+  'base-ui': {
     label: 'Base UI',
     logo: BrandLogoCatalog.baseui,
   },
