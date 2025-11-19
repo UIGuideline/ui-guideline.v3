@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BaseAnatomyTab, CodeAnatomyTab, DesignAnatomyTab } from './tabs';
 import type { AnatomyData, CodeAnatomyData, DesignLayersData } from '@content';
+import type { SystemReference } from '@lib';
 import { Tabs } from '@ui';
 import { tv } from 'tailwind-variants';
 
@@ -39,12 +40,24 @@ interface AnatomyProps {
    * Optional code anatomy data for dynamic code examples.
    */
   codeAnatomy?: CodeAnatomyData;
+
+  /**
+   * Systems that include this component (used for external doc URLs).
+   */
+  systemsForComponent?: SystemReference[];
 }
 
 /**
  * This component is used to render a card with the systems and UI libraries.
  */
-export const Anatomy = ({ className, data, designLayers, designLayersRaw, codeAnatomy }: AnatomyProps) => {
+export const Anatomy = ({
+  className,
+  data,
+  designLayers,
+  designLayersRaw,
+  codeAnatomy,
+  systemsForComponent,
+}: AnatomyProps) => {
   const classes = {
     container: container({ className }),
   };
@@ -69,7 +82,7 @@ export const Anatomy = ({ className, data, designLayers, designLayersRaw, codeAn
             <BaseAnatomyTab data={data} />
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.code}>
-            <CodeAnatomyTab data={data} codeAnatomy={codeAnatomy} />
+            <CodeAnatomyTab data={data} codeAnatomy={codeAnatomy} systemsForComponent={systemsForComponent} />
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.design}>
             <DesignAnatomyTab data={data} designLayers={designLayers} designLayersRaw={designLayersRaw} />
