@@ -38,7 +38,7 @@ alwaysApply: true
      - **Where**: Where in the codebase changes were made
      - **Why**: Why this solution was chosen
    - **Modified Files**: List of all files that were changed
-   - **Code Snippets**: Relevant code blocks showing key changes (not full files, just important snippets)
+   - **Code Snippets**: Relevant code blocks showing key changes (not full files, just important snippets, as small references)
    - **Evidence**: Proof that the problem was resolved (test results, verification steps, etc.)
 
 3. Be concise but informative - focus on what matters for future reference
