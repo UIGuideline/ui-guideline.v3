@@ -1,8 +1,21 @@
 ---
-import { getSystemThumbnailUrl, ROUTES } from '@common';
+import { getComponentThumbnailUrl } from '@common';
 import { SystemOverview } from '@composed';
 import { SystemsLayout } from '@layouts';
+import { ComponentCard } from '@ui';
 import { getCollection, getEntry } from 'astro:content';
+
+/**
+ * Component information with thumbnail data
+ */
+interface ComponentInfo {
+	slug: string;
+	title: string;
+	thumbnailData: {
+		src: string;
+		srcset: string;
+	};
+}
 
 export async function getStaticPaths() {
 	const systems = await getCollection('systemList');
@@ -24,15 +37,25 @@ const systemComponentsData = systemComponentsEntry?.data;
 const allComponents = await getCollection('componentList');
 const componentMap = new Map(allComponents.map((c) => [c.data.slug, c.data.title]));
 
-// Map component slugs to component info
-const componentsInfo = systemComponentsData?.components
-	.map((slug: string) => {
-		const title = componentMap.get(slug);
-		return title ? { slug, title } : null;
-	})
-	.filter(Boolean) as Array<{ slug: string; title: string }>;
+/**
+ * Maps component slug to ComponentInfo if the component exists
+ */
+const mapComponentToInfo = (slug: string): ComponentInfo | null => {
+	const title = componentMap.get(slug);
+	if (!title) return null;
 
-const logoUrl = getSystemThumbnailUrl(entry.data.slug);
+	return {
+		slug,
+		title,
+		thumbnailData: getComponentThumbnailUrl(slug),
+	};
+};
+
+// Map component slugs to component info with thumbnail data
+const componentsInfo: ComponentInfo[] =
+	systemComponentsData?.components
+		.map(mapComponentToInfo)
+		.filter((component): component is ComponentInfo => component !== null) ?? [];
 ---
 
 <SystemsLayout
@@ -50,17 +73,17 @@ const logoUrl = getSystemThumbnailUrl(entry.data.slug);
 		/>
 
 		<!-- System Components -->
-		<section class="flex flex-col gap-3">
+		<section class="flex flex-col gap-6">
 			<h1 id="components" class="text-xl font-bold m-0">Components</h1>
-			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{
 					componentsInfo.map((component) => (
-						<a
-							href={`${ROUTES.COMPONENTS}/${component.slug}`}
-							class="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-center"
-						>
-							{component.title}
-						</a>
+						<ComponentCard
+							client:load
+							title={component.title}
+							slug={component.slug}
+							thumbnailData={component.thumbnailData}
+						/>
 					))
 				}
 			</div>
