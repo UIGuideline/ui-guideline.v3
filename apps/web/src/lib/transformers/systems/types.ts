@@ -1,6 +1,5 @@
 /**
- * This type represents a component with all the necessary data for rendering
- * in cards
+ * Component information for rendering in ComponentCard within Systems section
  */
 export interface ComponentInfo {
   slug: string;
