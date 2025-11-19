@@ -1,0 +1,57 @@
+---
+alwaysApply: true
+---
+
+## Product Journal
+
+### Before Starting Any Task
+
+**MANDATORY**: Before beginning any new task or feature:
+
+1. Read `PRODUCT_JOURNAL.md` to understand past problems and their solutions
+2. Review recent entries to identify similar patterns or issues that might be relevant
+3. Use context from previous entries to inform your approach and avoid repeating past mistakes
+4. Reference applicable solutions when planning the implementation
+
+### After Completing a Task
+
+**When the user indicates task completion** using phrases like:
+
+- "terminamos"
+- "haz el resumen"
+- "genera el resumen"
+- "terminamos la tarea"
+- "haz el resumen del feature"
+- "genera el resumen de la tarea"
+- or similar completion phrases
+
+**You MUST**:
+
+1. **CRITICAL**: Add the new entry at the **TOP** of the "Journal Entries" section in `PRODUCT_JOURNAL.md`, immediately after the "## Journal Entries" header. **NEVER** add entries at the bottom of the file.
+
+2. Follow the exact format from the template in `PRODUCT_JOURNAL.md`, including:
+   - **Date**: Current date in YYYY-MM-DD format
+   - **Feature Name**: A descriptive title that summarizes the problem/feature
+   - **Problem**: Detailed description of what problem was encountered
+   - **Solution**: Structured with:
+     - **What**: What was done to solve it
+     - **Where**: Where in the codebase changes were made
+     - **Why**: Why this solution was chosen
+   - **Modified Files**: List of all files that were changed
+   - **Code Snippets**: Relevant code blocks showing key changes (not full files, just important snippets)
+   - **Evidence**: Proof that the problem was resolved (test results, verification steps, etc.)
+
+3. Be concise but informative - focus on what matters for future reference
+
+4. Include code snippets that demonstrate the solution, not just the problem
+
+5. Ensure the entry provides enough context for future developers (including yourself) to understand both the problem and the solution
+
+### Entry Placement Reminder
+
+**IMPORTANT**: The most recent entry must always be at the top. When adding a new entry:
+
+- Open `.cursor/PRODUCT_JOURNAL.md`
+- Find the line `## Journal Entries`
+- Insert the new entry immediately after that line
+- Do NOT append to the end of the file
