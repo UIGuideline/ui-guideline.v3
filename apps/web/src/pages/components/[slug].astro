@@ -2,7 +2,7 @@
 import { camelToKebab, camelToTitleCase } from '@common';
 import { ClientSectionWrapper } from '@composed';
 import { ComponentDetailLayout } from '@layouts';
-import { renderSections, SectionKey } from '@lib';
+import { getSystemsForComponent, renderSections, SectionKey } from '@lib';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -23,6 +23,11 @@ const rendered = await renderSections(sections, {
 	basePath: '',
 	title: entry.data.title,
 });
+
+// Load systems that include this component (for Code Anatomy URLs, future Systems section, etc.)
+const allSystems = await getCollection('systemList');
+const allSystemComponents = await getCollection('systemComponents');
+const systemsForComponent = getSystemsForComponent(entry.data.slug, allSystems, allSystemComponents);
 
 const tocItems = sections.map((key) => ({
 	id: camelToKebab(key),
@@ -51,6 +56,7 @@ const tocItems = sections.map((key) => ({
 								designLayers={Section.designLayers as any}
 								designLayersRaw={Section.designLayersRaw as any}
 								codeAnatomy={Section.codeAnatomy as any}
+								systemsForComponent={systemsForComponent}
 								client:load
 							/>
 						</section>

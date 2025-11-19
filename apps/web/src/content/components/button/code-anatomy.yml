@@ -3,7 +3,6 @@
     <Button>
       <PlusIcon /> Add product
     </Button>
-  sourceUrl: https://ui.shadcn.com/docs/components/button
 
 - slug: radixui
   code: |
@@ -13,11 +12,9 @@
       </Button.Icon>
       <Button.Label>Add product</Button.Label>
     </Button.Root>
-  sourceUrl: https://www.radix-ui.com/docs/primitives/components/button
 
 - slug: baseui
   code: |
     <Button startEnhancer={<PlusIcon />}>
       Add product
     </Button>
-  sourceUrl: https://baseweb.design/components/button/

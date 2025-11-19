@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AnatomyImageContainer } from './shared';
 import type { AnatomyData, CodeAnatomyData } from '@content';
+import type { SystemReference } from '@lib';
 import type { BundledLanguage } from '@ui';
 import {
   BrandLogo,
@@ -51,12 +52,17 @@ interface CodeAnatomyTabProps extends VariantProps<typeof container> {
    * Code anatomy data for each library.
    */
   codeAnatomy?: CodeAnatomyData;
+
+  /**
+   * Systems that include this component (used for external doc URLs).
+   */
+  systemsForComponent?: SystemReference[];
 }
 
 /**
  * This component renders the Code Anatomy tab content with an image, copy button, and code example.
  */
-export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabProps) => {
+export const CodeAnatomyTab = ({ className, data, codeAnatomy, systemsForComponent }: CodeAnatomyTabProps) => {
   if (!data || !data.codeAnatomy) return null;
 
   const { darkImageUrl, darkImageUrl2x } = data.codeAnatomy;
@@ -92,8 +98,8 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy }: CodeAnatomyTabP
   }, [activeLibrary, availableLibraries, defaultLibrary]);
 
   const activeLibrarySourceUrl = useMemo(
-    () => availableLibraries.find((item) => item.slug === activeLibrary)?.sourceUrl,
-    [activeLibrary, availableLibraries],
+    () => systemsForComponent?.find((sys) => sys.slug === activeLibrary)?.docUrl,
+    [activeLibrary, systemsForComponent],
   );
 
   return (
