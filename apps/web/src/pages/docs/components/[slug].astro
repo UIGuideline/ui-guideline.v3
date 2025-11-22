@@ -1,8 +1,7 @@
 ---
-import { camelToKebab, camelToTitleCase } from '@common';
 import { ClientSectionWrapper } from '@composed';
-import { ComponentDetailLayout } from '@layouts';
-import { getSystemsForComponent, renderSections, SectionKey } from '@lib';
+import { DocsLayout } from '@layouts';
+import { generateTOCFromSections, getSystemsForComponent, renderSections, SectionKey } from '@lib';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -29,17 +28,16 @@ const allSystems = await getCollection('systemList');
 const allSystemComponents = await getCollection('systemComponents');
 const systemsForComponent = getSystemsForComponent(entry.data.slug, allSystems, allSystemComponents);
 
-const tocItems = sections.map((key) => ({
-	id: camelToKebab(key),
-	label: camelToTitleCase(key),
-}));
+// Generate TOC from sections
+const tocItems = generateTOCFromSections(sections);
 ---
 
-<ComponentDetailLayout
+<DocsLayout
 	title={`${entry.data.title} | UI Guideline`}
 	description={`${entry.data.title} component documentation from leading design systems.`}
 	currentSlug={entry.data.slug}
 	toc={tocItems}
+	section="components"
 >
 	<div class="space-y-16">
 		{
@@ -72,4 +70,4 @@ const tocItems = sections.map((key) => ({
 			})
 		}
 	</div>
-</ComponentDetailLayout>
+</DocsLayout>

@@ -1,16 +1,11 @@
+import type { TOCItem } from '@lib';
 import { TableOfContents } from '@ui';
-
-interface TocItem {
-  id: string;
-  label: string;
-  level?: 0 | 1 | 2 | 3;
-}
 
 export interface ComponentDetailTOCProps {
   /**
    * Array of table of contents items to display.
    */
-  items?: TocItem[];
+  items?: TOCItem[];
 
   /**
    * Optional CSS class name.
@@ -31,7 +26,7 @@ export const ComponentDetailTOC = ({ items = [], className }: ComponentDetailTOC
     <TableOfContents className={className} scrollSpy={{ enabled: true }}>
       <TableOfContents.List>
         {items.map((item) => (
-          <TableOfContents.Item key={item.id} level={item.level ?? 1} href={`#${item.id}`}>
+          <TableOfContents.Item key={item.id} level={item.level as 0 | 1 | 2 | 3} href={`#${item.id}`}>
             {item.label}
           </TableOfContents.Item>
         ))}

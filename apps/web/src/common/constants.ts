@@ -9,9 +9,14 @@ export const ROUTES = {
   HOME: '/',
 
   /**
+   * Docs base route
+   */
+  DOCS: '/docs',
+
+  /**
    * Components base route
    */
-  COMPONENTS: '/components',
+  COMPONENTS: '/docs/components',
 
   /**
    * llms.txt base route
@@ -19,14 +24,14 @@ export const ROUTES = {
   LLMS_TXT: '/llms.txt',
 
   /**
-   * Overview docs route
+   * Overview docs route (deprecated - pages now live directly under /docs)
    */
-  OVERVIEW: '/overview',
+  OVERVIEW: '/docs',
 
   /**
    * Systems base route
    */
-  SYSTEMS: '/systems',
+  SYSTEMS: '/docs/systems',
 } as const;
 
 /**

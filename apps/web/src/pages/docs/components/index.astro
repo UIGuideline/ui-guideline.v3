@@ -1,6 +1,6 @@
 ---
 import { getComponentThumbnailUrl } from '@common';
-import { ComponentDetailLayout } from '@layouts';
+import { DocsLayout } from '@layouts';
 import { ComponentCard } from '@ui';
 import { getCollection } from 'astro:content';
 
@@ -16,9 +16,10 @@ const componentList = sortedComponents.map((component) => ({
 }));
 ---
 
-<ComponentDetailLayout
+<DocsLayout
 	title="Components - UI Guideline v3"
 	description="Browse our comprehensive library of UI components"
+	section="components"
 >
 	<div class="space-y-8">
 		<!-- Header -->
@@ -43,4 +44,4 @@ const componentList = sortedComponents.map((component) => ({
 			}
 		</div>
 	</div>
-</ComponentDetailLayout>
+</DocsLayout>
