@@ -1,6 +1,6 @@
 ---
 import { SystemOverview } from '@composed';
-import { SystemsLayout } from '@layouts';
+import { DocsLayout } from '@layouts';
 import { toComponentCard } from '@lib';
 import { ComponentCard } from '@ui';
 import { getCollection, getEntry } from 'astro:content';
@@ -25,10 +25,11 @@ const allComponents = await getCollection('componentList');
 const componentsInfo = toComponentCard(systemComponentsEntry?.data?.components ?? [], allComponents);
 ---
 
-<SystemsLayout
+<DocsLayout
 	title={`${entry.data.name} | UI Guideline`}
 	description={`${entry.data.description}`}
 	currentSlug={entry.data.slug}
+	section="systems"
 >
 	<div class="flex flex-col gap-16">
 		<SystemOverview
@@ -58,4 +59,4 @@ const componentsInfo = toComponentCard(systemComponentsEntry?.data?.components ?
 			</div>
 		</section>
 	</div>
-</SystemsLayout>
+</DocsLayout>

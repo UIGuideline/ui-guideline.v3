@@ -1,6 +1,6 @@
 ---
 import { getSystemThumbnailUrl } from '@common';
-import { SystemsLayout } from '@layouts';
+import { DocsLayout } from '@layouts';
 import { SystemCard } from '@ui';
 import { getCollection } from 'astro:content';
 
@@ -19,9 +19,10 @@ const systemList = sortedSystems.map((system) => ({
 }));
 ---
 
-<SystemsLayout
+<DocsLayout
 	title="Systems - UI Guideline v3"
 	description="Browse our comprehensive library of design systems and UI libraries"
+	section="systems"
 >
 	<div class="space-y-8">
 		<!-- Header -->
@@ -50,4 +51,4 @@ const systemList = sortedSystems.map((system) => ({
 			}
 		</div>
 	</div>
-</SystemsLayout>
+</DocsLayout>
