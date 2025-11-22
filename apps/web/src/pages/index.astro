@@ -2,11 +2,13 @@
 import { ROUTES } from '@common';
 import { BaseLayout } from '@layouts';
 import { Logo, Navbar } from '@ui';
+
+const currentPath = Astro.url.pathname;
 ---
 
 <BaseLayout title="UI Guideline v3 - The Design System of Design Systems">
 	<div class="flex flex-col min-h-screen bg-red-500">
-		<Navbar client:load />
+		<Navbar client:load currentPath={currentPath} />
 
 		<main class="flex-1 container mx-auto px-4 py-8">
 			<div class="text-center">
@@ -25,12 +27,6 @@ import { Logo, Navbar } from '@ui';
 						class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
 					>
 						Browse Components
-					</a>
-					<a
-						href={ROUTES.OVERVIEW}
-						class="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-					>
-						Documentation
 					</a>
 				</div>
 			</div>

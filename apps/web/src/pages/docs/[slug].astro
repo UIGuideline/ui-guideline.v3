@@ -20,6 +20,8 @@ const { Content } = await render(entry);
 
 // Extract TOC from MDX body
 const toc = extractHeadingsFromMDX(entry.body ?? '');
+
+const defaultContext = 'components';
 ---
 
 <DocsLayout
@@ -27,11 +29,9 @@ const toc = extractHeadingsFromMDX(entry.body ?? '');
 	description={entry.data.description}
 	currentSlug={entry.id}
 	toc={toc}
-	section="components"
+	section={defaultContext}
 >
 	<article class="max-w-none">
 		<Content components={docsComponents} />
 	</article>
 </DocsLayout>
-
-
