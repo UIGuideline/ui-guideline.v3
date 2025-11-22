@@ -13,12 +13,20 @@ export interface NavbarProps {
    * Additional class names.
    */
   className?: string;
+
+  /**
+   * The pathname of the current page.
+   */
+  currentPath: string;
 }
 
 /**
  * Component to display the navbar.
  */
-export const Navbar = ({ className }: NavbarProps) => {
+export const Navbar = ({ className, currentPath }: NavbarProps) => {
+  const isComponentsActive = currentPath.includes('/docs/components');
+  const isSystemsActive = currentPath.includes('/docs/systems');
+
   const classes = {
     nav: nav({ className }),
   };
@@ -27,11 +35,11 @@ export const Navbar = ({ className }: NavbarProps) => {
     <nav className={classes.nav}>
       <div className="flex items-center gap-5">
         <Logo variant={LogoVariant.light} size={LogoSize.sm} appearance={LogoAppearance.complete} />
-        <div className="flex items-center gap-1">
-          <Button size={ButtonSize.sm} variant={ButtonVariant.ghost}>
+        <div className="flex items-center gap-2">
+          <Button size={ButtonSize.sm} variant={isComponentsActive ? ButtonVariant.secondary : ButtonVariant.ghost}>
             <a href={ROUTES.COMPONENTS}>Components</a>
           </Button>
-          <Button size={ButtonSize.sm} variant={ButtonVariant.ghost}>
+          <Button size={ButtonSize.sm} variant={isSystemsActive ? ButtonVariant.secondary : ButtonVariant.ghost}>
             <a href={ROUTES.SYSTEMS}>Systems</a>
           </Button>
         </div>

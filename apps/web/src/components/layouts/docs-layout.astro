@@ -84,9 +84,7 @@ const sortedSystems = systemList.slice().sort((a, b) => a.data.name.localeCompar
 // Initial Visibility Classes
 const componentsClass = section === 'components' ? '' : 'hidden';
 const systemsClass = section === 'systems' ? '' : 'hidden';
-
-// Context query param for overview links
-const contextParam = section === 'systems' ? '?context=systems' : '?context=components';
+const currentPath = Astro.url.pathname;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -95,6 +93,7 @@ const contextParam = section === 'systems' ? '?context=systems' : '?context=comp
 		<Navbar
 			client:load
 			className="@md:max-w-[1350px] mx-auto border-x border-border backdrop-blur-sm bg-background/90"
+			currentPath={currentPath}
 		/>
 	</header>
 
@@ -115,25 +114,12 @@ const contextParam = section === 'systems' ? '?context=systems' : '?context=comp
 								{
 									sortedOverviewDocs.map((doc) => (
 										<SideNav.Item level={1} isActive={currentSlug === doc.id}>
-											<SideNav.Link level={1} href={`/docs/${doc.id}${contextParam}`} isActive={currentSlug === doc.id}>
+											<SideNav.Link level={1} href={`/docs/${doc.id}`} isActive={currentSlug === doc.id}>
 												{doc.data.sidebarLabel ?? doc.data.title}
 											</SideNav.Link>
 										</SideNav.Item>
 									))
 								}
-
-								{/* Static Links for Quick Navigation */}
-								<SideNav.Item level={1} isActive={section === 'components' && !currentSlug}>
-									<SideNav.Link level={1} href={ROUTES.COMPONENTS} isActive={section === 'components' && !currentSlug}>
-										Components
-									</SideNav.Link>
-								</SideNav.Item>
-
-								<SideNav.Item level={1} isActive={section === 'systems' && !currentSlug}>
-									<SideNav.Link level={1} href={ROUTES.SYSTEMS} isActive={section === 'systems' && !currentSlug}>
-										Systems
-									</SideNav.Link>
-								</SideNav.Item>
 							</SideNav.List>
 						</SideNav.Section>
 
