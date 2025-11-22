@@ -121,6 +121,19 @@ const contextParam = section === 'systems' ? '?context=systems' : '?context=comp
 										</SideNav.Item>
 									))
 								}
+
+								{/* Static Links for Quick Navigation */}
+								<SideNav.Item level={1} isActive={section === 'components' && !currentSlug}>
+									<SideNav.Link level={1} href={ROUTES.COMPONENTS} isActive={section === 'components' && !currentSlug}>
+										Components
+									</SideNav.Link>
+								</SideNav.Item>
+
+								<SideNav.Item level={1} isActive={section === 'systems' && !currentSlug}>
+									<SideNav.Link level={1} href={ROUTES.SYSTEMS} isActive={section === 'systems' && !currentSlug}>
+										Systems
+									</SideNav.Link>
+								</SideNav.Item>
 							</SideNav.List>
 						</SideNav.Section>
 
@@ -254,7 +267,6 @@ const contextParam = section === 'systems' ? '?context=systems' : '?context=comp
 				componentsNav.classList.remove('hidden');
 				systemsNav.classList.add('hidden');
 			}
-			// Priority 3: Default server rendering (already handled by HTML classes)
 		})();
 	</script>
 </BaseLayout>
