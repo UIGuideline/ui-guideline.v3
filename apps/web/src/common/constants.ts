@@ -24,11 +24,6 @@ export const ROUTES = {
   LLMS_TXT: '/llms.txt',
 
   /**
-   * Overview docs route (deprecated - pages now live directly under /docs)
-   */
-  OVERVIEW: '/docs',
-
-  /**
    * Systems base route
    */
   SYSTEMS: '/docs/systems',
