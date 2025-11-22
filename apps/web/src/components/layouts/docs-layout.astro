@@ -5,7 +5,6 @@ import { BaseLayout } from '@layouts';
 import { loadData, type TOCItem } from '@lib';
 import { Navbar, SideBar, SideNav } from '@ui';
 import { getCollection } from 'astro:content';
-import { ClientRouter } from 'astro:transitions';
 
 export interface Props {
 	/**
@@ -85,13 +84,12 @@ const sortedSystems = systemList.slice().sort((a, b) => a.data.name.localeCompar
 // Initial Visibility Classes
 const componentsClass = section === 'components' ? '' : 'hidden';
 const systemsClass = section === 'systems' ? '' : 'hidden';
+
+// Context query param for overview links
+const contextParam = section === 'systems' ? '?context=systems' : '?context=components';
 ---
 
 <BaseLayout title={title} description={description}>
-	<head slot="head">
-		<ClientRouter />
-	</head>
-
 	<!-- Top Navigation -->
 	<header class="sticky top-0 w-full border-b border-border z-40">
 		<Navbar
@@ -105,7 +103,7 @@ const systemsClass = section === 'systems' ? '' : 'hidden';
 			<!-- ========================================== -->
 			<!-- Left Sidebar - Navigation (Fixed Width)   -->
 			<!-- ========================================== -->
-			<div class="hidden lg:block w-64 flex-shrink-0" transition:persist="sidebar-nav">
+			<div class="hidden lg:block w-64 flex-shrink-0">
 				<SideBar>
 					<SideNav>
 						<!-- ============================================ -->
@@ -117,7 +115,7 @@ const systemsClass = section === 'systems' ? '' : 'hidden';
 								{
 									sortedOverviewDocs.map((doc) => (
 										<SideNav.Item level={1} isActive={currentSlug === doc.id}>
-											<SideNav.Link level={1} href={`/docs/${doc.id}`} isActive={currentSlug === doc.id}>
+											<SideNav.Link level={1} href={`/docs/${doc.id}${contextParam}`} isActive={currentSlug === doc.id}>
 												{doc.data.sidebarLabel ?? doc.data.title}
 											</SideNav.Link>
 										</SideNav.Item>
@@ -225,28 +223,38 @@ const systemsClass = section === 'systems' ? '' : 'hidden';
 		</div>
 	</div>
 
-	<!-- Client-side script to handle sidebar visibility on navigation -->
+	<!-- Client-side script to handle sidebar visibility -->
 	<script is:inline>
-		document.addEventListener('astro:page-load', () => {
+		(function () {
+			const params = new URLSearchParams(window.location.search);
+			const context = params.get('context');
 			const path = window.location.pathname;
+
 			const componentsNav = document.getElementById('nav-components');
 			const systemsNav = document.getElementById('nav-systems');
 
 			if (!componentsNav || !systemsNav) return;
 
-			// If navigating explicitly to Systems section
+			// Priority 1: Explicit path (e.g. /systems/...) overrides everything
 			if (path.includes('/systems')) {
 				componentsNav.classList.add('hidden');
 				systemsNav.classList.remove('hidden');
+				return;
+			} else if (path.includes('/components')) {
+				componentsNav.classList.remove('hidden');
+				systemsNav.classList.add('hidden');
+				return;
 			}
-			// If navigating explicitly to Components section
-			else if (path.includes('/components')) {
+
+			// Priority 2: Context query param (for overview pages)
+			if (context === 'systems') {
+				componentsNav.classList.add('hidden');
+				systemsNav.classList.remove('hidden');
+			} else if (context === 'components') {
 				componentsNav.classList.remove('hidden');
 				systemsNav.classList.add('hidden');
 			}
-			// If navigating to Overview or other pages:
-			// Do NOTHING. Keep the current state (persistence).
-			// This allows "Overview" to inherit the sidebar from the previous page.
-		});
+			// Priority 3: Default server rendering (already handled by HTML classes)
+		})();
 	</script>
 </BaseLayout>
