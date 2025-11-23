@@ -152,6 +152,9 @@ importers:
       tailwind-variants:
         specifier: ^3.1.1
         version: 3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.13)
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
       yaml:
         specifier: ^2.8.1
         version: 2.8.1
@@ -171,6 +174,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.19
         version: 0.5.19(tailwindcss@4.1.13)
+      '@types/mdast':
+        specifier: ^4.0.4
+        version: 4.0.4
       '@types/mdx':
         specifier: ^2.0.13
         version: 2.0.13
