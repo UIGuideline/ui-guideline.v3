@@ -87,27 +87,26 @@ A "composable" component isn't a monolithic piece, but a set of parts you can as
 
 Just as in Figma you organize components into layers with clear names, Composition Components work the same way. Each "layer" has a specific name (Root, Trigger, Content, Item) and can be modified without affecting the others.
 
----
+## 3. Defined Anatomy
 
-### 3. Defined Anatomy
-
-**What do we evaluate?**  
+**What do we evaluate?** <br />
 That the system clearly documents all internal parts of each component.
 
-**Why does it matter?**  
-At UI Guideline we believe in **Anatomy First**: the construction and definition of a UI component should originate from its anatomy. Anatomy isn't just documentation—it's the **starting point** for creating scalable, maintainable, and productive components.
+**Why does it matter?** <br />
+At UI Guideline, we believe in **Anatomy First**.
 
-Why? Because anatomy contains all the necessary information to compose the component correctly. When a system clearly defines its parts (Root, Trigger, Content, Item), it's establishing:
+> The construction and definition of a UI Component should originate from its Anatomy.
 
-1. **Composition structure** - What pieces exist and how they relate
-2. **Standard nomenclature** - How to name each part consistently
-3. **Logical hierarchy** - What goes inside what
+We seek systems that clearly define the Anatomy of their components because **Anatomy is the bridge that aligns Design and Development**.
 
-This same logic applies in code (Composition Components) and in design (layer structure in Figma). They are **the same system of thinking in different mediums**. It's like having a Figma file where each layer is perfectly named and organized. You know exactly which element to style to achieve the desired result.
+- **In Code:** Anatomy is the composition of internal components and parts.
+- **In Design (Figma):** Anatomy is the composition of layers, frames, and internal components.
 
-By comparing anatomies across the best Design Systems, we identify the naming and structural patterns that have proven most effective, allowing us to define solid conventions for any component.
+When a system has a well-defined Anatomy, it creates a **Unified Language**. It allows Designers and Developers to speak the same language, referring to the same parts by the same names, effectively shortening the gap between both worlds.
 
 **Example: Anatomy of a Slider**
+
+**In Code (Composition):**
 
 ```
 Slider.Root       → Main container
@@ -117,21 +116,29 @@ Slider.Range      → The "filled" portion of the track
 Slider.Thumb      → The draggable control
 ```
 
----
+**In Design (Figma Layers):**
 
-### 4. Granular Props
+```
+🗂 Slider (Root)
+  ├─ 📝 Label
+  └─ 🗂 Track
+      ├─ ▭ Range
+      └─ ⚪ Thumb
+```
 
-**What do we evaluate?**  
+## 4. Granular Props
+
+**What do we evaluate?** <br />
 That each component exposes clear and specific properties to control its behavior and appearance.
 
-**Why does it matter?**  
+**Why does it matter?** <br />
 Props (properties) are the **configuration language** of a component. When comparing systems, we analyze which props they consistently use, how they name them, and what values they accept. This allows us to identify standard conventions:
 
-- Do they use `variant` or `appearance?`
-- Is size called `size` or `scale?`
-- Are values `sm/md/lg` or `small/medium/large?`
+- Do they use `variant` or `appearance`?
+- Is size called `size` or `scale`?
+- Are values `sm/md/lg` or `small/medium/large`?
 
-Identifying these patterns allows us to recommend the most adopted and consistent conventions.
+Identifying these patterns `allows` us to recommend the most adopted and consistent conventions.
 
 **What are Granular Props?**
 
