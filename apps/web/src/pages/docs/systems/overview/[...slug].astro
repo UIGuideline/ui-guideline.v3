@@ -5,8 +5,7 @@ import { extractHeadingsFromMDX } from '@lib';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-	const overviewDocs = await getCollection('overviewDocs');
-
+	const overviewDocs = await getCollection('systemsOverview');
 	return overviewDocs.map((entry) => ({
 		params: { slug: entry.id },
 		props: { entry },
@@ -17,11 +16,7 @@ const { entry } = Astro.props;
 if (!entry) throw new Error(`Overview doc not found`);
 
 const { Content } = await render(entry);
-
-// Extract TOC from MDX body
 const toc = extractHeadingsFromMDX(entry.body ?? '');
-
-const defaultContext = 'components';
 ---
 
 <DocsLayout
@@ -29,7 +24,7 @@ const defaultContext = 'components';
 	description={entry.data.description}
 	currentSlug={entry.id}
 	toc={toc}
-	section={defaultContext}
+	section="systems"
 >
 	<article class="max-w-none">
 		<Content components={docsComponents} />

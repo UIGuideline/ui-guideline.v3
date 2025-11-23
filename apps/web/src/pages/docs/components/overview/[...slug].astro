@@ -1,0 +1,32 @@
+---
+import { docsComponents } from '@docs';
+import { DocsLayout } from '@layouts';
+import { extractHeadingsFromMDX } from '@lib';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const overviewDocs = await getCollection('componentsOverview');
+	return overviewDocs.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+if (!entry) throw new Error(`Overview doc not found`);
+
+const { Content } = await render(entry);
+const toc = extractHeadingsFromMDX(entry.body ?? '');
+---
+
+<DocsLayout
+	title={`${entry.data.title} | UI Guideline`}
+	description={entry.data.description}
+	currentSlug={entry.id}
+	toc={toc}
+	section="components"
+>
+	<article class="max-w-none">
+		<Content components={docsComponents} />
+	</article>
+</DocsLayout>
