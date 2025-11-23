@@ -7,7 +7,7 @@ import { glob } from 'astro/loaders';
 
 const componentsOverview = defineCollection({
   loader: glob({
-    pattern: '**/*.mdx',
+    pattern: ['components/**/*.mdx', 'shared/**/*.mdx'],
     base: './src/content/overview',
   }),
   schema: z.object({
@@ -21,7 +21,7 @@ const componentsOverview = defineCollection({
 
 const systemsOverview = defineCollection({
   loader: glob({
-    pattern: '**/*.mdx',
+    pattern: ['systems/**/*.mdx', 'shared/**/*.mdx'],
     base: './src/content/overview',
   }),
   schema: z.object({
