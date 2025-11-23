@@ -17,7 +17,7 @@ interface CodeBlockProps extends BaseCodeBlockProps {
   language?: string;
 }
 
-export const CodeBlock = ({ code = '', language = '', className }: CodeBlockProps) => {
+export const CodeBlock = ({ code = '', language = 'tsx', className }: CodeBlockProps) => {
   const classes = {
     container: container({ className }),
   };
