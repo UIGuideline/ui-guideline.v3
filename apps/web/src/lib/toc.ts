@@ -58,5 +58,6 @@ export function generateTOCFromSections(sections: string[]): TOCItem[] {
   return sections.map((key) => ({
     id: camelToKebab(key),
     label: camelToTitleCase(key),
+    level: 2,
   }));
 }
