@@ -52,5 +52,6 @@
   // Prisma Settings
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
-  }
+  },
+  "git.ignoreLimitWarning": true
 }

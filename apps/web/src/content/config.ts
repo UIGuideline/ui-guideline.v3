@@ -5,7 +5,7 @@ import { glob } from 'astro/loaders';
  * OVERVIEW SECTIONS
  **********************************************************/
 
-const overviewDocs = defineCollection({
+const componentsOverview = defineCollection({
   loader: glob({
     pattern: '**/*.mdx',
     base: './src/content/overview',
@@ -15,6 +15,21 @@ const overviewDocs = defineCollection({
     description: z.string().optional(),
     sidebarLabel: z.string().optional(),
     order: z.number().optional(),
+    shared: z.boolean().optional(),
+  }),
+});
+
+const systemsOverview = defineCollection({
+  loader: glob({
+    pattern: '**/*.mdx',
+    base: './src/content/overview',
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    sidebarLabel: z.string().optional(),
+    order: z.number().optional(),
+    shared: z.boolean().optional(),
   }),
 });
 
@@ -210,7 +225,8 @@ export const collections = {
   anatomy,
   codeAnatomy,
   designLayers,
-  overviewDocs,
+  componentsOverview,
+  systemsOverview,
   systemList,
   systemComponents,
 };

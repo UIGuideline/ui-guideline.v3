@@ -41,8 +41,8 @@ const { title, description, currentSlug, toc, section } = Astro.props;
 // ============================================================
 
 // Overview docs
-const allOverviewDocs = await getCollection('overviewDocs');
-const sortedOverviewDocs = allOverviewDocs.slice().sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const componentsOverviewDocs = await getCollection('componentsOverview');
+const systemsOverviewDocs = await getCollection('systemsOverview');
 
 // Components data
 const componentList = await getCollection('componentList');
@@ -106,22 +106,30 @@ const currentPath = Astro.url.pathname;
 				<SideBar>
 					<SideNav>
 						<!-- ============================================ -->
-						<!-- OVERVIEW Section (ALWAYS VISIBLE - SHARED)   -->
+						<!-- OVERVIEW Section (COMPONENTS)                -->
 						<!-- ============================================ -->
-						<SideNav.Section>
-							<SideNav.Heading className="mb-4">Overview</SideNav.Heading>
-							<SideNav.List>
-								{
-									sortedOverviewDocs.map((doc) => (
-										<SideNav.Item level={1} isActive={currentSlug === doc.id}>
-											<SideNav.Link level={1} href={`/docs/${doc.id}`} isActive={currentSlug === doc.id}>
-												{doc.data.sidebarLabel ?? doc.data.title}
-											</SideNav.Link>
-										</SideNav.Item>
-									))
-								}
-							</SideNav.List>
-						</SideNav.Section>
+						<div id="nav-components-overview" class={componentsClass}>
+							<SideNav.Section>
+								<SideNav.Heading className="mb-4">Overview</SideNav.Heading>
+								<SideNav.List>
+									{
+										componentsOverviewDocs
+											.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+											.map((doc) => (
+												<SideNav.Item level={1} isActive={currentSlug === doc.id}>
+													<SideNav.Link
+														level={1}
+														href={`/docs/components/overview/${doc.id}`}
+														isActive={currentSlug === doc.id}
+													>
+														{doc.data.sidebarLabel ?? doc.data.title}
+													</SideNav.Link>
+												</SideNav.Item>
+											))
+									}
+								</SideNav.List>
+							</SideNav.Section>
+						</div>
 
 						<!-- ============================================ -->
 						<!-- COMPONENTS Section (Persisted)               -->
@@ -171,6 +179,32 @@ const currentPath = Astro.url.pathname;
 						<!-- SYSTEMS Section (Persisted)                  -->
 						<!-- ============================================ -->
 						<div id="nav-systems" class={systemsClass}>
+							<!-- ============================================ -->
+							<!-- OVERVIEW Section (SYSTEMS)                   -->
+							<!-- ============================================ -->
+							<SideNav.Section>
+								<SideNav.Heading className="mb-4">Overview</SideNav.Heading>
+								<SideNav.List>
+									{
+										systemsOverviewDocs
+											.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+											.map((doc) => (
+												<SideNav.Item level={1} isActive={currentSlug === doc.id}>
+													<SideNav.Link
+														level={1}
+														href={`/docs/systems/overview/${doc.id}`}
+														isActive={currentSlug === doc.id}
+													>
+														{doc.data.sidebarLabel ?? doc.data.title}
+													</SideNav.Link>
+												</SideNav.Item>
+											))
+									}
+								</SideNav.List>
+							</SideNav.Section>
+
+							<div class="h-8"></div>
+
 							<SideNav.Section>
 								<SideNav.Heading>TOP 10 Systems</SideNav.Heading>
 								<SideNav.List className="mt-2">
@@ -223,36 +257,4 @@ const currentPath = Astro.url.pathname;
 	</div>
 
 	<!-- Client-side script to handle sidebar visibility -->
-	<script is:inline>
-		(function () {
-			const params = new URLSearchParams(window.location.search);
-			const context = params.get('context');
-			const path = window.location.pathname;
-
-			const componentsNav = document.getElementById('nav-components');
-			const systemsNav = document.getElementById('nav-systems');
-
-			if (!componentsNav || !systemsNav) return;
-
-			// Priority 1: Explicit path (e.g. /systems/...) overrides everything
-			if (path.includes('/systems')) {
-				componentsNav.classList.add('hidden');
-				systemsNav.classList.remove('hidden');
-				return;
-			} else if (path.includes('/components')) {
-				componentsNav.classList.remove('hidden');
-				systemsNav.classList.add('hidden');
-				return;
-			}
-
-			// Priority 2: Context query param (for overview pages)
-			if (context === 'systems') {
-				componentsNav.classList.add('hidden');
-				systemsNav.classList.remove('hidden');
-			} else if (context === 'components') {
-				componentsNav.classList.remove('hidden');
-				systemsNav.classList.add('hidden');
-			}
-		})();
-	</script>
 </BaseLayout>
