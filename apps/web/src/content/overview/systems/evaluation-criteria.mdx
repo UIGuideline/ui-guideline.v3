@@ -1,56 +1,59 @@
 ---
-title: 'Evaluation Criteria: Top 10 Design Systems 2025'
-description: 'The rigorous criteria used to select the top design systems.'
-sidebarLabel: 'Evaluation Criteria'
+title: 'Evaluation Criteria: Top 10 Design Systems'
+description: 'The criteria used to select the top Design Systems.'
+sidebarLabel: 'Why these Systems?'
 order: 2
 ---
 
-## Introduction
+import { Subtitle } from '@docs';
 
-The Design Systems landscape has evolved considerably. In 2025, the best systems aren't necessarily the most popular, but those that offer **real flexibility, guaranteed accessibility, and creative control without sacrificing user experience**.
+# Why these Systems?
 
-Our research focused on identifying systems that **bridge the gap between design and development**, creating consistency through repeatable conventions and patterns extracted from the top Design Systems, unified in one place.
+<Subtitle>The criteria used to select the top 10 Design Systems and UI Libraries.</Subtitle>
 
-This benefits not only human teams—designers, developers, and decision-makers—but also **Language Models (LLMs)**. At a time when artificial intelligence is transforming how we build digital products, providing clear and efficient context to these models is fundamental to achieving better results. A well-documented system with consistent patterns and unified terminology enables both people and AI to work with greater precision.
+The Design Systems / UI Libraries landscape has evolved considerably. In **2025**, the best Systems aren't necessarily the most popular, but those that offer **real flexibility, guaranteed accessibility, and creative control without sacrificing user experience**.
 
----
-
-## The Evolution: From Monolithic to Composable
-
-### The paradigm shift
-
-Traditional Design Systems came with fully styled components: blue buttons, cards with specific shadows, inputs with defined borders. This created a problem: **every time you wanted to adapt the system to your brand, you had to override styles, creating layers of code that were difficult to maintain**.
-
-The modern approach separates two fundamental responsibilities:
-
-- **Behavior**: how a component works (interactions, keyboard, states)
-- **Appearance**: how it looks (colors, typography, spacing)
-
-**Analogy**: Think of a car. Headless primitives are like the engine and chassis (the essential mechanics), while the visual design is the body and interior finishes. You can completely change the appearance without touching what makes it work.
+Our research identifies systems that **bridge the gap between design and development** through unified patterns. Today, this consistency serves a dual purpose: aligning human teams and providing **precise, structured context for Large Language Models (LLMs)**. We are evolving beyond a reference Wiki into a **contextual infrastructure**, ensuring that designers, developers, and AI models all operate with the same high-fidelity definitions.
 
 ---
 
-## The Five Evaluation Criteria
+# The Evolution: From Monolithic to Composable
 
-To select the Top 10, we established five rigorous criteria that ensure a Design System / UI Library is scalable, accessible, and adaptable.
+For years, Design Systems treated components as **"Black Boxes"**.
+In code, this meant rigid components where you couldn't change the internal structure. In Design, it felt like using a component where you couldn't detach or modify the layers. If you wanted to customize something, like moving an icon or changing a layout, you were limited to a set of pre-defined "switches" `(props/variants)` that the system creators decided to expose.
 
-### 1. Component Coverage
+This led to rigid systems where Designers and Developers **felt constrained** by complex configurations just to make small visual changes.
 
-**What do we evaluate?**
-That the system offers more than 20-25 basic and advanced components.
+**The shift to Composition** breaks these boxes open.
 
-**Why does it matter?**
-UI Guideline is the synthesis of the top Design Systems. To identify which patterns, nomenclatures, and conventions are consistently repeated in the best systems, we need to analyze the broadest possible coverage of components. Only by comparing many components across multiple systems can we extract **collective wisdom**: which props most use, which anatomies are standard, which practices have proven to work best. A comprehensive catalog allows us to make that rigorous comparison.
+Modern libraries like **Radix UI**, **Shadcn/UI**, and **Base UI** don't give you a sealed block; they give you the **building blocks**. You don't just get a "Dropdown"; you get its independent parts: a `Trigger`, a `Content`, an `Item`.
+
+- **For Designers:** It mirrors how you think in **Figma**, grouping layers and frames to build a UI.
+- **For Developers:** It means assembling components with clean, readable code instead of hacking rigid libraries.
+
+It is the freedom to build exactly what you designed, without fighting the System.
 
 ---
 
-### 2. Composition Architecture
+# The 5 Evaluation Criteria
 
-**What do we evaluate?**
+To select the [Top 10](/docs/systems), we established **5 rigorous criteria** that ensure a Design System / UI Library is scalable, accessible, and adaptable.
+
+## 1. Component Coverage
+
+**What do we evaluate?** <br />
+That the System offers more than **20-25 basic and advanced components**.
+
+**Why does it matter?** <br />
+UI Guideline is the synthesis of the top Design Systems and UI Libraries. To identify which patterns, nomenclatures, and conventions are consistently repeated in the best systems, we need to analyze the broadest possible coverage of components. Only by comparing many components across multiple systems can we extract **collective wisdom**: which props most use, which anatomies are standard, which practices have proven to work best. A comprehensive catalog allows us to make that comparison.
+
+## 2. Composition Architecture
+
+**What do we evaluate?** <br />
 That components can be decomposed into independent parts that work together.
 
-**Why does it matter?**  
-Composition allows building complex components from simpler, reusable, and individually controllable pieces. When comparing systems, we need to identify **how they structure their components internally**: which parts are consistent, what names they use, and how they relate to each other. This information is crucial for defining standard patterns in UI Guideline.
+**Why does it matter?** <br />
+_Composition_ allows building complex components from simpler, reusable, and individually controllable pieces. When comparing systems, we need to identify **how they structure their components internally**: which parts are consistent, what names they use, and how they relate to each other. This information is crucial for defining standard patterns in UI Guideline.
 
 **What are Composition Components?**
 
