@@ -10,7 +10,7 @@ export const docsComponents: MDXComponents = {
   a: (props) => (
     <a className="text-primary-500 font-medium underline underline-offset-4 hover:text-primary-600" {...props} />
   ),
-  h1: (props) => <h1 className="mb-4 text-3xl font-bold text-balance" {...props} />,
+  h1: (props) => <h1 className="mt-14 mb-4 text-3xl font-bold text-balance" {...props} />,
   h2: (props) => (
     <h2
       className="mt-10 mb-4 scroll-mt-18 group text-foreground hover:text-foreground/90 text-2xl font-bold text-balance inline-flex items-center gap-2"
