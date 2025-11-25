@@ -1,15 +1,39 @@
-- slug: 'buttons'
-  name: 'Buttons'
-  description: 'Buttons are used to trigger actions, submit forms, and navigate.'
-
 - slug: 'data-display'
   name: 'Data Display'
-  description: 'Data display components are used to display data in a visual way.'
+  description: 'Components for displaying data in a visual and organized way.'
 
-- slug: 'feedback'
-  name: 'Feedback'
-  description: 'Feedback components are used to provide feedback to the user.'
+- slug: 'overlays'
+  name: 'Overlays'
+  description: 'Components that appear above the main content, such as modals and tooltips.'
+
+- slug: 'controls'
+  name: 'Controls'
+  description: 'Interactive control components for user input and selection.'
+
+- slug: 'inputs'
+  name: 'Inputs'
+  description: 'Input components for collecting user data and text entry.'
+
+- slug: 'atomic-elements'
+  name: 'Atomic Elements'
+  description: 'Basic building block components for UI composition.'
+
+- slug: 'notifications'
+  name: 'Notifications'
+  description: 'Components for displaying alerts, messages, and notifications.'
+
+- slug: 'states'
+  name: 'States'
+  description: 'Components for representing different application states.'
+
+- slug: 'buttons'
+  name: 'Buttons'
+  description: 'Button components for triggering actions and interactions.'
+
+- slug: 'loaders'
+  name: 'Loaders'
+  description: 'Loading indicators and progress components.'
 
 - slug: 'navigation'
   name: 'Navigation'
-  description: 'Navigation components are used to navigate through the application.'
+  description: 'Components for navigating through the application.'
