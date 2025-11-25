@@ -1,2 +1,3 @@
+export * from './islands';
 export { docsComponents } from './mdx-components';
-export { Subtitle } from './root/subtitle';
+export * from './root';

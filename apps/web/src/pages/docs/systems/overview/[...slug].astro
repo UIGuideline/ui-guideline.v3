@@ -1,5 +1,5 @@
 ---
-import { docsComponents } from '@docs';
+import { CodeBlockIsland, docsComponents } from '@docs';
 import { DocsLayout } from '@layouts';
 import { extractHeadingsFromMDX } from '@lib';
 import { getCollection, render } from 'astro:content';
@@ -17,6 +17,11 @@ if (!entry) throw new Error(`Overview doc not found`);
 
 const { Content } = await render(entry);
 const toc = extractHeadingsFromMDX(entry.body ?? '');
+
+const components = {
+	...docsComponents,
+	CodeBlock: CodeBlockIsland,
+};
 ---
 
 <DocsLayout
@@ -27,6 +32,6 @@ const toc = extractHeadingsFromMDX(entry.body ?? '');
 	section="systems"
 >
 	<article class="max-w-none">
-		<Content components={docsComponents} />
+		<Content components={components} />
 	</article>
 </DocsLayout>

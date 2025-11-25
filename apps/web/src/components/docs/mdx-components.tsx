@@ -1,4 +1,4 @@
-import { Code, CodeBlock, HeadingLink, Subtitle } from './root';
+import { Code, HeadingLink, Subtitle } from './root';
 import { QuoteIcon } from 'lucide-react';
 
 interface MDXComponents {
@@ -32,7 +32,6 @@ export const docsComponents: MDXComponents = {
   p: (props) => <p className="mb-4 text-foreground" {...props} />,
   strong: (props) => <strong className="rounded bg-accent px-0.5 font-semibold text-white" {...props} />,
   code: (props) => <Code isBlock={false} {...props} />,
-  CodeBlock: (props) => <CodeBlock {...props} className="mt-5 mb-6" />,
   Subtitle,
   li: (props) => <li className="mb-1 [&>p]:mb-2" {...props} />,
   ul: (props) => <ul className="my-6 ml-6 list-disc ps-4 marker:text-primary-600" {...props} />,
@@ -50,3 +49,9 @@ export const docsComponents: MDXComponents = {
     </blockquote>
   ),
 };
+
+/*
+  NOTE:
+    Only components that will be used in MDX and do not require
+    React-side hydration are exported here.
+*/

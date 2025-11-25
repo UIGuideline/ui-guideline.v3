@@ -24,6 +24,6 @@
       }
     ]
   },
-  "include": [".astro/types.d.ts", "src/**/*"],
+  "include": [".astro/types.d.ts", "src/**/*", "remark-code-block.mjs"],
   "exclude": ["node_modules", "dist"]
 }
