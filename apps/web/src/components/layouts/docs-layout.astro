@@ -3,7 +3,7 @@ import { ROUTES } from '@common';
 import { ComponentDetailTOC } from '@composed';
 import { BaseLayout } from '@layouts';
 import { loadData, type TOCItem } from '@lib';
-import { Navbar, SideBar, SideNav } from '@ui';
+import { Navbar, SideBar, SideNav, Tag } from '@ui';
 import { getCollection } from 'astro:content';
 
 export interface Props {
@@ -156,17 +156,29 @@ const currentPath = Astro.url.pathname;
 													</SideNav.Item>
 
 													{/* Components in Category */}
-													{componentsInCategory.map((component) => (
-														<SideNav.Item level={1} isActive={currentSlug === component.data.slug}>
-															<SideNav.Link
-																level={1}
-																href={`${ROUTES.COMPONENTS}/${component.data.slug}`}
-																isActive={currentSlug === component.data.slug}
-															>
-																{component.data.title}
-															</SideNav.Link>
-														</SideNav.Item>
-													))}
+													{componentsInCategory.map((component) => {
+														const isComingSoon = component.data.status === 'soon';
+														return (
+															<SideNav.Item level={1} isActive={currentSlug === component.data.slug}>
+																{isComingSoon ? (
+																	<span class="flex items-center gap-2 text-sm text-muted-foreground/60 cursor-not-allowed font-medium">
+																		{component.data.title}
+																		<Tag variant="default" className="text-[10px]" isRound>
+																			Soon
+																		</Tag>
+																	</span>
+																) : (
+																	<SideNav.Link
+																		level={1}
+																		href={`${ROUTES.COMPONENTS}/${component.data.slug}`}
+																		isActive={currentSlug === component.data.slug}
+																	>
+																		{component.data.title}
+																	</SideNav.Link>
+																)}
+															</SideNav.Item>
+														);
+													})}
 												</>
 											);
 										})

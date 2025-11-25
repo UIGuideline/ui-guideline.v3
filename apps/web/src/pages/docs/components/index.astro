@@ -6,13 +6,25 @@ import { getCollection } from 'astro:content';
 
 // Get all components for the grid
 const allComponents = await getCollection('componentList');
-const sortedComponents = allComponents.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+// Sort: stable first, then soon, alphabetically within each
+const sortedComponents = allComponents.sort((a, b) => {
+	const statusA = a.data.status || 'stable';
+	const statusB = b.data.status || 'stable';
+
+	// First sort by status
+	if (statusA !== statusB) return statusA === 'stable' ? -1 : 1;
+
+	// Then alphabetically
+	return a.data.title.localeCompare(b.data.title);
+});
 
 // Map components data for rendering
 const componentList = sortedComponents.map((component) => ({
 	title: component.data.title,
 	slug: component.data.slug,
 	thumbnailData: getComponentThumbnailUrl(component.data.slug),
+	status: component.data.status || 'stable',
 }));
 ---
 
@@ -41,6 +53,7 @@ const componentList = sortedComponents.map((component) => ({
 						title={component.title}
 						slug={component.slug}
 						thumbnailData={component.thumbnailData}
+						status={component.status}
 					/>
 				))
 			}
