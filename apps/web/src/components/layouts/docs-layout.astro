@@ -162,9 +162,9 @@ const currentPath = Astro.url.pathname;
 																		isDisabled={isComingSoon}
 																	>
 																		{isComingSoon ? (
-																			<span class="flex items-center gap-2 text-sm text-muted-foreground/60 font-medium select-none">
+																			<span class="flex items-center gap-2 text-sm text-muted-foreground/50 font-medium select-none">
 																				{component.data.title}
-																				<Tag variant="outline" size="sm" isRound>
+																				<Tag variant="outline" size="sm" isRound className="opacity-50">
 																					Soon
 																				</Tag>
 																			</span>
