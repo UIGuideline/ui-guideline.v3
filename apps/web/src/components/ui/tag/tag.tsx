@@ -4,16 +4,17 @@ import { Slot } from '@radix-ui/react-slot';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const tag = tv({
-  base: [
-    'inline-flex items-center justify-center',
-    'px-2 py-0.5',
-    'text-xs font-medium leading-[none]',
-    'border',
-    'transition-colors',
-  ],
+  base: ['inline-flex items-center justify-center', 'font-medium leading-[none]', 'border', 'transition-colors'],
+  variants: {
+    size: {
+      sm: 'px-1 text-[10px]',
+      default: 'px-2 py-0.5 text-sm',
+    },
+  },
   defaultVariants: {
     variant: 'default',
     isRound: false,
+    size: 'default',
   },
   extend: theme,
 });
@@ -35,6 +36,11 @@ export interface TagProps extends VariantProps<typeof tag> {
   isRound?: boolean;
 
   /**
+   * The size of the tag
+   */
+  size?: 'sm' | 'default';
+
+  /**
    * The element to render the tag as
    */
   asChild?: boolean;
@@ -45,8 +51,15 @@ export interface TagProps extends VariantProps<typeof tag> {
  * Usually, it allows users to sort, search, paginate, filter data,
  * and take action on large amounts of data.
  */
-export const Tag: React.FC<TagProps> = ({ variant, className, isRound = false, asChild, ...props }) => {
-  const classes = tag({ variant, className, isRound });
+export const Tag: React.FC<TagProps> = ({
+  variant,
+  className,
+  isRound = false,
+  size = 'default',
+  asChild,
+  ...props
+}) => {
+  const classes = tag({ variant, className, isRound, size });
 
   const Component = asChild ? Slot : 'span';
 
