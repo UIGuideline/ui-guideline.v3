@@ -23,18 +23,19 @@ export function toComponentCard(
   systemComponents: SystemComponent[],
   allComponents: CollectionEntry<'componentList'>[],
 ): ComponentInfo[] {
-  const componentMap = new Map(allComponents.map((c) => [c.data.slug, c.data.title]));
+  const componentMap = new Map(allComponents.map((c) => [c.data.slug, { title: c.data.title, status: c.data.status }]));
 
   return systemComponents
     .map((systemComponent): ComponentInfo | null => {
-      const title = componentMap.get(systemComponent.slug);
-      if (!title) return null;
+      const componentData = componentMap.get(systemComponent.slug);
+      if (!componentData) return null;
 
       return {
         slug: systemComponent.slug,
-        title,
+        title: componentData.title,
         thumbnailData: getComponentThumbnailUrl(systemComponent.slug),
         docUrl: systemComponent.docUrl,
+        status: componentData.status ?? 'stable',
       };
     })
     .filter((component): component is ComponentInfo => component !== null);
