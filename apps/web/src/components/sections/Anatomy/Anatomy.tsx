@@ -67,10 +67,13 @@ export const Anatomy = ({
   const handleTabChange = (value: string) => setActiveTab(value as AnatomyTab);
 
   return (
-    <section className="flex flex-col gap-3">
-      <h1 id="anatomy" className="text-xl font-bold m-0">
+    <section className="flex flex-col mb-4">
+      <h2
+        id="anatomy"
+        className="mt-10 mb-4 scroll-mt-18 group text-foreground hover:text-foreground/90 text-2xl font-bold text-balance inline-flex items-center gap-2"
+      >
         Anatomy
-      </h1>
+      </h2>
       <div aria-label="Anatomy" className={classes.container}>
         <Tabs className="w-full px-4 pt-1 pb-4" defaultValue={activeTab} onValueChange={handleTabChange}>
           <Tabs.List>

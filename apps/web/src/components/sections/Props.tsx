@@ -41,11 +41,14 @@ export const Props = ({ data = [] }: PropsSectionProps) => {
   };
 
   return (
-    <section className="flex flex-col gap-3">
-      <div className="flex gap-2">
-        <h1 id="props" className="text-2xl text-gray-200 ml-1">
+    <section className="flex flex-col mb-4">
+      <div className="flex items-center gap-2 mt-10 mb-4">
+        <h2
+          id="props"
+          className="scroll-mt-18 group text-foreground hover:text-foreground/90 text-2xl font-bold text-balance inline-flex items-center gap-2"
+        >
           Props
-        </h1>
+        </h2>
         <ToggleGroup
           type={ToggleGroupSelection.single}
           className="ml-auto"
