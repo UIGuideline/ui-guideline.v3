@@ -13,5 +13,6 @@ export * from './sidebar/sidebar';
 export * from './system-card/system-card';
 export * from './table-of-contents';
 export * from './table/table';
+export * from './tag/tag';
 export * from './toggle-group';
 export * from './tree';

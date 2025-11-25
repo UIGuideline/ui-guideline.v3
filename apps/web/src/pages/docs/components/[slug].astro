@@ -6,7 +6,9 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
 	const componentList = await getCollection('componentList');
-	return componentList.map((component) => ({
+	// Only generate routes for stable components (exclude "soon")
+	const stableComponents = componentList.filter((component) => component.data.status !== 'soon');
+	return stableComponents.map((component) => ({
 		params: { slug: component.data.slug },
 		props: { component },
 	}));

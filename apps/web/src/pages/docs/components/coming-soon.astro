@@ -1,0 +1,42 @@
+---
+import { DocsLayout } from '@layouts';
+import { Tag } from '@ui';
+
+// Get the component name from URL params
+const componentName = Astro.url.searchParams.get('component') || 'este componente';
+---
+
+<DocsLayout title="Coming Soon - UI Guideline" description="Este componente está en desarrollo" section="components">
+	<div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+		<Tag variant="default" className="mb-6 text-sm px-4 py-2">Coming Soon</Tag>
+
+		<h1 class="text-4xl font-bold mb-4 text-balance">Estamos trabajando en este componente</h1>
+
+		<p class="text-lg text-muted-foreground max-w-2xl mb-8">
+			Estamos investigando y recaudando toda la información requerida para <span class="font-semibold text-foreground"
+				>{componentName}</span
+			>. Te estaremos avisando en cuanto lo tengamos al 100%.
+		</p>
+
+		<a
+			href="/docs/components"
+			class="inline-flex items-center gap-2 px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors font-medium"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="20"
+				height="20"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			>
+				<path d="m12 19-7-7 7-7"></path>
+				<path d="M19 12H5"></path>
+			</svg>
+			Volver a Componentes
+		</a>
+	</div>
+</DocsLayout>
