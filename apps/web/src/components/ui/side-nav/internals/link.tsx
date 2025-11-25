@@ -5,8 +5,8 @@ const link = tv({
   base: ['relative flex items-center gap-2', 'text-sm', 'transition-colors'],
   variants: {
     level: {
-      0: ['text-zinc-400 group-hover:text-zinc-300 font-semibold'],
-      1: ['text-muted-foreground group-hover:text-foreground font-medium'],
+      0: ['text-zinc-600 group-hover:text-zinc-300 font-semibold'],
+      1: ['text-zinc-400 group-hover:text-foreground font-medium'],
       2: ['text-muted-foreground font-medium'],
     },
     isActive: {
