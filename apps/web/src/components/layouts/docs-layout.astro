@@ -159,9 +159,13 @@ const currentPath = Astro.url.pathname;
 													{componentsInCategory.map((component) => {
 														const isComingSoon = component.data.status === 'soon';
 														return (
-															<SideNav.Item level={1} isActive={currentSlug === component.data.slug}>
+															<SideNav.Item
+																level={1}
+																isActive={currentSlug === component.data.slug}
+																isDisabled={isComingSoon}
+															>
 																{isComingSoon ? (
-																	<span class="flex items-center gap-2 text-sm text-muted-foreground/60 cursor-not-allowed font-medium">
+																	<span class="flex items-center gap-2 text-sm text-muted-foreground/60 font-medium select-none">
 																		{component.data.title}
 																		<Tag variant="default" className="text-[10px]" isRound>
 																			Soon

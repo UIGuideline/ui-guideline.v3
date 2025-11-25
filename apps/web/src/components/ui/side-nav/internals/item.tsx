@@ -12,21 +12,33 @@ const item = tv({
     isActive: {
       true: '',
     },
+    isDisabled: {
+      true: '',
+    },
   },
   compoundVariants: [
     {
       level: 1,
       isActive: true,
+      isDisabled: false,
       class: 'border-foreground',
     },
     {
       level: 1,
       isActive: false,
+      isDisabled: false,
       class: 'hover:border-muted-foreground/50 hover:bg-muted/50',
+    },
+    {
+      level: 1,
+      isDisabled: true,
+      class: 'cursor-default',
     },
   ],
   defaultVariants: {
     level: 0,
+    isActive: false,
+    isDisabled: false,
   },
 });
 
@@ -46,11 +58,16 @@ export type ItemProps = React.ComponentPropsWithoutRef<'li'> &
      * Whether the item is active.
      */
     isActive?: boolean;
+
+    /**
+     * Whether the item is disabled.
+     */
+    isDisabled?: boolean;
   };
 
 export const Item = React.forwardRef<HTMLLIElement, ItemProps>(
-  ({ className, level = 0, isActive = false, children, ...props }, ref) => {
-    const classes = item({ level, isActive, className });
+  ({ className, level = 0, isActive = false, isDisabled = false, children, ...props }, ref) => {
+    const classes = item({ level, isActive, isDisabled, className });
 
     return (
       <li ref={ref} className={classes} data-level={level} {...props}>
