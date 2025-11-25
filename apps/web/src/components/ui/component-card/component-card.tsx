@@ -1,5 +1,6 @@
 import React from 'react';
 import { ROUTES } from '@common';
+import { Tag } from '@ui';
 import { ArrowUpRightIcon } from 'lucide-react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
@@ -12,15 +13,24 @@ const componentCardLink = tv({
 });
 
 const thumbnailContainer = tv({
-  base: [
-    'relative aspect-[4/3] overflow-hidden rounded-lg',
-    'border border-border hover:border-muted-foreground/40',
-    'transition-all duration-200',
-  ],
+  base: ['relative aspect-[4/3] overflow-hidden rounded-lg', 'border border-border', 'transition-all duration-200'],
+  variants: {
+    status: {
+      stable: 'hover:border-muted-foreground/40 cursor-default',
+      soon: 'opacity-60 cursor-not-allowed',
+    },
+  },
+  defaultVariants: {
+    status: 'stable',
+  },
 });
 
 const thumbnail = tv({
   base: 'absolute inset-0 w-full h-full object-cover',
+});
+
+const badgeContainer = tv({
+  base: 'absolute inset-0 bg-zinc-900/80 backdrop-blur-[2px] flex items-center justify-center',
 });
 
 export interface ComponentCardProps extends VariantProps<typeof componentCard> {
@@ -56,6 +66,11 @@ export interface ComponentCardProps extends VariantProps<typeof componentCard> {
    * Optional label for the external link
    */
   externalLabel?: string;
+
+  /**
+   * Component status - determines if component is available or coming soon
+   */
+  status?: 'stable' | 'soon';
 }
 
 /**
@@ -67,20 +82,33 @@ export const ComponentCard: React.FC<ComponentCardProps> = ({
   thumbnailData,
   externalUrl,
   externalLabel,
+  status = 'stable',
   className,
 }) => {
+  const isComingSoon = status === 'soon';
+
   const classes = {
     componentCard: componentCard({
       className,
     }),
     componentCardLink: componentCardLink(),
-    thumbnailContainer: thumbnailContainer(),
+    thumbnailContainer: thumbnailContainer({ status }),
     thumbnail: thumbnail(),
+    badgeContainer: badgeContainer(),
+  };
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (isComingSoon) e.preventDefault();
   };
 
   return (
     <div className={classes.componentCard}>
-      <a href={`${ROUTES.COMPONENTS}/${slug}`} className={classes.componentCardLink}>
+      <a
+        href={isComingSoon ? '#' : `${ROUTES.COMPONENTS}/${slug}`}
+        className={classes.componentCardLink}
+        onClick={handleClick}
+        aria-disabled={isComingSoon}
+      >
         {/* Card Container with Background Image */}
         <div className={classes.thumbnailContainer}>
           {/* Background Image */}
@@ -90,6 +118,15 @@ export const ComponentCard: React.FC<ComponentCardProps> = ({
             alt={`${title} component preview`}
             className={classes.thumbnail}
           />
+
+          {/* Coming Soon Overlay */}
+          {isComingSoon && (
+            <div className={classes.badgeContainer}>
+              <Tag variant="default" isRound>
+                Coming Soon
+              </Tag>
+            </div>
+          )}
         </div>
         <div className="flex items-center mx-1">
           {/* Component Name Label (Outside Card) */}
