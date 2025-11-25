@@ -6,7 +6,7 @@ const container = tv({
   base: 'bg-accent border border-border rounded-lg',
 });
 
-interface CodeBlockProps extends BaseCodeBlockProps {
+export interface CodeBlockProps extends BaseCodeBlockProps {
   /**
    * The raw code string to display
    */
@@ -17,6 +17,9 @@ interface CodeBlockProps extends BaseCodeBlockProps {
   language?: string;
 }
 
+/**
+ * The component to render the code block for the Docs pages.
+ */
 export const CodeBlock = ({ code = '', language = 'tsx', className }: CodeBlockProps) => {
   const classes = {
     container: container({ className }),

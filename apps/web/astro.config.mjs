@@ -1,4 +1,4 @@
-import remarkCodeBlock from './src/lib/plugins/remark-code-block.mjs';
+import remarkCodeBlock from './remark-code-block.mjs';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';

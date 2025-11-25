@@ -1,0 +1,16 @@
+---
+import { CodeBlock as ReactCodeBlock, type CodeBlockProps } from '../root/code-block';
+
+const props = Astro.props as CodeBlockProps;
+---
+
+<ReactCodeBlock client:load {...props} className="mt-4 mb-6" />
+
+<!--
+NOTE: If I need to pass props from where I am using it, the best and most recommended approach is to create a Wrapper in .astro and call that component.
+
+example:
+
+<SystemCodeBlockWrapper className="mt-4 mb-6" />
+
+-->
