@@ -119,11 +119,11 @@ Slider.Thumb      → The draggable control
 **In Design (Figma Layers):**
 
 ```
-🗂 Slider (Root)
-  ├─ 📝 Label
-  └─ 🗂 Track
-      ├─ ▭ Range
-      └─ ⚪ Thumb
+🗂 Slider.Root (Main component)
+  ├─ 📝 Slider.Label (Text)
+  └─ 🗂 Slider.Track (Frame)
+      ├─ ▭ Slider.Range (Frame)
+      └─ ⚪ Slider.Thumb (Frame)
 ```
 
 ## 4. Granular Props
@@ -138,7 +138,7 @@ Props (properties) are the **configuration language** of a component. When compa
 - Is size called `size` or `scale`?
 - Are values `sm/md/lg` or `small/medium/large`?
 
-Identifying these patterns `allows` us to recommend the most adopted and consistent conventions.
+Identifying these patterns allows us to recommend the most adopted and consistent conventions.
 
 **What are Granular Props?**
 
@@ -160,25 +160,23 @@ They are properties that allow configuring specific aspects of the component ind
 **Design example (Figma - Props):**
 
 ```
-🔘 Button Component
-   Properties:
-   ├─ Variant: [Primary ▼]  [Secondary] [Ghost]
-   ├─ Size: [Small] [Medium ▼] [Large]
-   ├─ State: [Default ▼] [Disabled]
-   └─ Full Width: [◉ True]  [○ False]
+🗂 Button Component
+  Properties:
+  ├─ Variant: primary
+  ├─ Size: md
+  ├─ State: default (or disabled: false)
+  └─ Full Width: true
 ```
 
-Just as in Figma you define properties in your component to create variants (Primary/Secondary, Small/Large), components in code work exactly the same way. Each prop is a "control knob" that modifies a specific aspect.
+Just as in Figma you define properties in your component to create variants (`primary/secondary`, `sm/md/lg`), components in code work exactly the same way. Each prop is a "control knob" that modifies a specific aspect.
 
----
-
-### 5. Active Maintenance
+## 5. Active Maintenance
 
 **What do we evaluate?**  
 That the system has regular updates (at least one every 6 months).
 
 **Why does it matter?**  
-This industry is evolving rapidly, especially with the accelerated adoption of artificial intelligence, LLMs, and new technologies like Model Context Protocol (MCP). A Design System that doesn't update regularly falls behind in many aspects, and we cannot trust its proposals in the medium/long term.
+This industry is evolving rapidly, especially with the accelerated adoption of artificial intelligence, LLMs, and new technologies like Model Context Protocol (MCP). A Design System / UI Library that doesn't update regularly falls behind in many aspects, and we cannot trust its proposals in the medium/long term.
 
 For UI Guideline, it makes no sense to analyze systems whose last release was more than a year ago. If a system hasn't released updates in 2024 or 2025, it means it's not capturing the most recent innovations or adapting to the new needs of the ecosystem. **Only active systems reflect current best practices**, which is precisely what we seek to synthesize.
 
