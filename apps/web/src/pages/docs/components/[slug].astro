@@ -39,35 +39,33 @@ const tocItems = generateTOCFromSections(sections);
 	toc={tocItems}
 	section="components"
 >
-	<div class="space-y-16">
-		{
-			rendered.map((Section) => {
-				if (!Section) return null;
+	{
+		rendered.map((Section) => {
+			if (!Section) return null;
 
-				// Client section (island with hydration)
-				if (typeof Section === 'object' && 'isClient' in Section) {
-					return (
-						<section class="scroll-mt-20">
-							<ClientSectionWrapper
-								type={Section.type}
-								data={Section.data as any}
-								designLayers={Section.designLayers as any}
-								designLayersRaw={Section.designLayersRaw as any}
-								codeAnatomy={Section.codeAnatomy as any}
-								systemsForComponent={systemsForComponent}
-								client:load
-							/>
-						</section>
-					);
-				}
-
-				// Server-rendered section
+			// Client section (island with hydration)
+			if (typeof Section === 'object' && 'isClient' in Section) {
 				return (
 					<section class="scroll-mt-20">
-						<Section />
+						<ClientSectionWrapper
+							type={Section.type}
+							data={Section.data as any}
+							designLayers={Section.designLayers as any}
+							designLayersRaw={Section.designLayersRaw as any}
+							codeAnatomy={Section.codeAnatomy as any}
+							systemsForComponent={systemsForComponent}
+							client:load
+						/>
 					</section>
 				);
-			})
-		}
-	</div>
+			}
+
+			// Server-rendered section
+			return (
+				<section class="scroll-mt-20">
+					<Section />
+				</section>
+			);
+		})
+	}
 </DocsLayout>

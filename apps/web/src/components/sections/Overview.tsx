@@ -14,12 +14,10 @@ export interface OverviewProps {
 
 export const Overview = ({ componentName, data }: OverviewProps) => {
   return (
-    <section id="overview" className="flex flex-col gap-2">
-      <div className="flex items-center gap-4">
-        <h1 className="text-3xl font-bold m-0">{componentName}</h1>
-      </div>
+    <section id="overview" className="flex flex-col">
+      <h1 className="mt-14 mb-4 text-3xl font-bold text-balance">{componentName}</h1>
 
-      <p className="text-lg text-muted-foreground max-w-2xl">{data.description}</p>
+      <div className="text-lg text-muted-foreground max-w-2xl mb-4 -mt-2">{data.description}</div>
     </section>
   );
 };
