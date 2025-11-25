@@ -9,4 +9,5 @@ export interface ComponentInfo {
     srcset: string;
   };
   docUrl?: string;
+  status?: 'stable' | 'soon';
 }
