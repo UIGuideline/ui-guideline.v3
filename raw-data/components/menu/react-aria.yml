@@ -501,15 +501,113 @@ anatomy:
 
   - library_name: 'MenuItem'
     standard_role: 'item'
-    description: 'An individual option within the menu.'
+    description: 'A <MenuItem> defines a single item within a <Menu>. If the children are not plain text, then the textValue prop must also be set to a plain text representation, which will be used for autocomplete in the Menu.'
     is_essential: true
-    props: []
+    props:
+      - name: 'id'
+        type: 'Key'
+        default: '-'
+        description: 'The unique id of the item.'
+
+      - name: 'value'
+        type: 'object'
+        default: '-'
+        description: 'The object value that this item represents. When using dynamic collections, this is set automatically.'
+
+      - name: 'textValue'
+        type: 'string'
+        default: '-'
+        description: "A string representation of the item's contents, used for features like typeahead."
+
+      - name: 'isDisabled'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the item is disabled.'
+
+      - name: 'children'
+        type: 'ChildrenOrFunction<MenuItemRenderProps>'
+        default: '-'
+        description: 'The children of the component. A function may be provided to alter the children based on component state.'
+
+      - name: 'className'
+        type: 'ClassNameOrFunction<MenuItemRenderProps>'
+        default: '-'
+        description: 'The CSS className for the element. A function may be provided to compute the class based on component state.'
+
+      - name: 'style'
+        type: 'StyleOrFunction<MenuItemRenderProps>'
+        default: '-'
+        description: 'The inline style for the element. A function may be provided to compute the style based on component state.'
+
+      - name: 'href'
+        type: 'Href'
+        default: '-'
+        description: 'A URL to link to. See MDN.'
 
   - library_name: 'MenuSection'
     standard_role: 'section'
-    description: 'Groups related menu items together.'
+    description: 'A <MenuSection> defines the child items for a section within a <Menu>. It may also contain an optional <Header> element. If there is no header, then an aria‑label must be provided to identify the section to assistive technologies.'
     is_essential: false
-    props: []
+    props:
+      - name: 'id'
+        type: 'Key'
+        default: '-'
+        description: 'The unique id of the section.'
+
+      - name: 'value'
+        type: 'object'
+        default: '-'
+        description: 'The object value that this section represents. When using dynamic collections, this is set automatically.'
+
+      - name: 'children'
+        type: 'ReactNode | (item: object) => ReactElement'
+        default: '-'
+        description: 'Static child items or a function to render children.'
+
+      - name: 'dependencies'
+        type: 'ReadonlyArray<any>'
+        default: '-'
+        description: 'Values that should invalidate the item cache when using dynamic collections.'
+
+      - name: 'items'
+        type: 'Iterable<object>'
+        default: '-'
+        description: 'Item objects in the section.'
+
+      - name: 'className'
+        type: 'string'
+        default: '-'
+        description: 'The CSS className for the element.'
+
+      - name: 'style'
+        type: 'CSSProperties'
+        default: '-'
+        description: 'The inline style for the element.'
+
+      - name: 'selectionMode'
+        type: 'SelectionMode'
+        default: '-'
+        description: 'The type of selection that is allowed in the collection.'
+
+      - name: 'disallowEmptySelection'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the collection allows empty selection.'
+
+      - name: 'selectedKeys'
+        type: "'all' | Iterable<Key>"
+        default: '-'
+        description: 'The currently selected keys in the collection (controlled).'
+
+      - name: 'defaultSelectedKeys'
+        type: "'all' | Iterable<Key>"
+        default: '-'
+        description: 'The initial selected keys in the collection (uncontrolled).'
+
+      - name: 'disabledKeys'
+        type: 'Iterable<Key>'
+        default: '-'
+        description: 'The currently disabled keys in the collection (controlled).'
 
   - library_name: 'Header'
     standard_role: 'header'
