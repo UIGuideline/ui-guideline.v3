@@ -6,7 +6,7 @@ The goal of this project is to aggregate, standardize, and compare the wisdom of
 
 ## Your Objective
 
-I will provide you with the URL documentation of a specific UI Component. Your task is to analyze the documentation and generate a YAML file that maps the component's anatomy and API reference.
+I will provide you with the URL documentation of a specific UI Component. Your task is to analyze the documentation and generate a YAML file that maps the component's anatomy and API reference (Props table).
 
 ## Non-Negotiable Acceptance Criteria
 
