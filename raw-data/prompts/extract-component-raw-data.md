@@ -101,3 +101,8 @@ anatomy:
 ## Output
 
 Create the result YAML file on /raw-data/components/[component-name]/[system-name].yml
+
+---
+
+Best model: Gemini Pro 3 (High)
+Platform: Google Antigravity
