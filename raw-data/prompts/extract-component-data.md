@@ -16,7 +16,8 @@ I will provide you with the URL documentation of a specific UI Component. Your t
 4. **No Guessing Props**: If a prop is not explicitly stated, do not add it.
 5. **No Remove Props**: Include ALL props from each Props table.
 6. **No Guessing Defaults**: If a default value is not explicitly stated, use `-`.
-7. **Strict Output**: Return ONLY the valid YAML code inside a code block. Do not include introductory or concluding text.
+7. **Anatomy Code Example**: Search for a code example in the documentation that demonstrates the component's structure/anatomy. This is typically found in sections like "Usage", "Example", "Anatomy", or "Composition". Extract this code block EXACTLY as shown and include it in the `code` field.
+8. **Strict Output**: Return ONLY the valid YAML code inside a code block. Do not include introductory or concluding text.
 
 ## Anatomy Mapping Rules
 
@@ -30,7 +31,7 @@ Identify every sub-component (part) of the anatomy.
 
 ## YAML Schema Structure
 
-```
+```yaml
 meta:
   library_name: "Name of the Library"
   website_url: "URL of the documentation"
@@ -40,6 +41,14 @@ meta:
 component:
   name: "Component Name"
   type: "Generic Category (e.g., Dropdown, Modal, Inputs)"
+
+code: |
+  <Component.Root>
+    <Component.Trigger />
+    <Component.Content>
+      <Component.Item />
+    </Component.Content>
+  </Component.Root>
 
 anatomy:
   - library_name: "ExactName.FromLibrary"
@@ -57,23 +66,38 @@ anatomy:
 
 Use this extracted YAML for the Ark UI Menu component as your style guide for quality and formatting:
 
-```
+```yaml
+code: |
+  <Menu.Root>
+    <Menu.Trigger>Open Menu</Menu.Trigger>
+    <Menu.Positioner>
+      <Menu.Content>
+        <Menu.Item value="new">New File</Menu.Item>
+        <Menu.Item value="open">Open File</Menu.Item>
+      </Menu.Content>
+    </Menu.Positioner>
+  </Menu.Root>
+
 anatomy:
-  - library_name: "Menu.Root"
-    standard_role: "root"
-    description: "The top-level element that manages the menu state and context."
+  - library_name: 'Menu.Root'
+    standard_role: 'root'
+    description: 'The top-level element that manages the menu state and context.'
     is_essential: true
     props:
-      - name: "closeOnSelect"
-        type: "boolean"
-        default: "true"
-        description: "Whether the menu should close when an item is selected."
-      - name: "dir"
+      - name: 'closeOnSelect'
+        type: 'boolean'
+        default: 'true'
+        description: 'Whether the menu should close when an item is selected.'
+      - name: 'dir'
         type: "'ltr' | 'rtl'"
-        default: "-"
+        default: '-'
         description: "The document's text/writing direction."
 ```
 
 ## Input Data
 
 [INSERT URL OR PASTE DOCUMENTATION TEXT HERE]
+
+## Output
+
+Create the result YAML file on /raw-data/components/[component-name]/[system-name].yml
