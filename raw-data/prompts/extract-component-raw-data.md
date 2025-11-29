@@ -104,6 +104,7 @@ anatomy:
         type: 'boolean'
         default: 'true'
         description: 'Whether the menu should close when an item is selected.'
+
       - name: 'dir'
         type: "'ltr' | 'rtl'"
         default: '-'
