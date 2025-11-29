@@ -60,6 +60,22 @@ anatomy:
         type: "propType"
         default: "value" or "-"
         description: "Exact description from docs."
+
+    props:
+      - name: "propName"
+        type: "propType"
+        default: "value" or "-"
+        description: "Exact description from docs."
+
+  - library_name: "ExactName.FromLibrary"
+    standard_role: "canonical_role_lowercase"
+    description: "Exact description from docs."
+    is_essential: true/false
+    props:
+      - name: "propName"
+        type: "propType"
+        default: "value" or "-"
+        description: "Exact description from docs."
 ```
 
 ## Reference Example (Gold Standard)
