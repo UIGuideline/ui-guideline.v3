@@ -1,0 +1,428 @@
+meta:
+  library_name: 'Radix UI'
+  website_url: 'https://www.radix-ui.com/primitives/docs/components/dropdown-menu'
+  component_url: 'https://www.radix-ui.com/primitives/docs/components/dropdown-menu'
+  last_updated: '2025-11-29'
+
+component:
+  name: 'Dropdown Menu'
+  type: 'Dropdown'
+
+code: |
+  <DropdownMenu.Root>
+    <DropdownMenu.Trigger />
+    <DropdownMenu.Portal>
+      <DropdownMenu.Content>
+        <DropdownMenu.Label />
+        <DropdownMenu.Item />
+        <DropdownMenu.Group>
+          <DropdownMenu.Item />
+        </DropdownMenu.Group>
+        <DropdownMenu.CheckboxItem>
+          <DropdownMenu.ItemIndicator />
+        </DropdownMenu.CheckboxItem>
+        <DropdownMenu.RadioGroup>
+          <DropdownMenu.RadioItem>
+            <DropdownMenu.ItemIndicator />
+          </DropdownMenu.RadioItem>
+        </DropdownMenu.RadioGroup>
+        <DropdownMenu.Sub>
+          <DropdownMenu.SubTrigger />
+          <DropdownMenu.Portal>
+            <DropdownMenu.SubContent />
+          </DropdownMenu.Portal>
+        </DropdownMenu.Sub>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Arrow />
+      </DropdownMenu.Content>
+    </DropdownMenu.Portal>
+  </DropdownMenu.Root>
+
+anatomy:
+  - library_name: 'DropdownMenu.Root'
+    standard_role: 'root'
+    description: 'Contains all the parts of a dropdown menu.'
+    is_essential: true
+    props:
+      - name: 'defaultOpen'
+        type: 'boolean'
+        default: '-'
+        description: 'The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state.'
+      - name: 'open'
+        type: 'boolean'
+        default: '-'
+        description: 'The controlled open state of the dropdown menu. Must be used in conjunction with onOpenChange.'
+      - name: 'onOpenChange'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when the open state of the dropdown menu changes.'
+      - name: 'modal'
+        type: 'boolean'
+        default: 'true'
+        description: 'The modality of the dropdown menu. When set to true, interaction with outside elements will be disabled and only menu content will be visible to screen readers.'
+      - name: 'dir'
+        type: 'enum'
+        default: '-'
+        description: 'The reading direction of the dropdown menu when applicable. If omitted, inherits globally from DirectionProvider or assumes LTR (left-to-right) reading mode.'
+
+  - library_name: 'DropdownMenu.Trigger'
+    standard_role: 'trigger'
+    description: 'The button that toggles the dropdown menu. By default, the DropdownMenu.Content will position itself against the trigger.'
+    is_essential: true
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+
+  - library_name: 'DropdownMenu.Portal'
+    standard_role: 'portal'
+    description: 'When used, portals the content part into the body.'
+    is_essential: false
+    props:
+      - name: 'forceMount'
+        type: 'boolean'
+        default: '-'
+        description: 'Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.'
+      - name: 'container'
+        type: 'HTMLElement'
+        default: 'document.body'
+        description: 'Specify a container element to portal the content into.'
+
+  - library_name: 'DropdownMenu.Content'
+    standard_role: 'content'
+    description: 'The component that pops out when the dropdown menu is open.'
+    is_essential: true
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'loop'
+        type: 'boolean'
+        default: 'false'
+        description: 'When true, keyboard navigation will loop from last item to first, and vice versa.'
+      - name: 'onCloseAutoFocus'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when focus moves to the trigger after closing. It can be prevented by calling event.preventDefault.'
+      - name: 'onEscapeKeyDown'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when the escape key is down. It can be prevented by calling event.preventDefault.'
+      - name: 'onPointerDownOutside'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when a pointer event occurs outside the bounds of the component. It can be prevented by calling event.preventDefault.'
+      - name: 'onFocusOutside'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when focus moves outside the bounds of the component. It can be prevented by calling event.preventDefault.'
+      - name: 'onInteractOutside'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when an interaction (pointer or focus event) happens outside the bounds of the component. It can be prevented by calling event.preventDefault.'
+      - name: 'forceMount'
+        type: 'boolean'
+        default: '-'
+        description: 'Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.'
+      - name: 'side'
+        type: 'enum'
+        default: '"bottom"'
+        description: 'The preferred side of the trigger to render against when open. Will be reversed when collisions occur.'
+      - name: 'sideOffset'
+        type: 'number'
+        default: '0'
+        description: 'The distance in pixels from the trigger.'
+      - name: 'align'
+        type: 'enum'
+        default: '"center"'
+        description: 'The preferred alignment against the trigger. May change when collisions occur.'
+      - name: 'alignOffset'
+        type: 'number'
+        default: '0'
+        description: 'An offset in pixels from the "start" or "end" alignment options.'
+      - name: 'avoidCollisions'
+        type: 'boolean'
+        default: 'true'
+        description: 'When true, overrides the side and align preferences to prevent collisions with boundary edges.'
+      - name: 'collisionBoundary'
+        type: 'Boundary'
+        default: '[]'
+        description: 'The element used as the collision boundary. By default this is the viewport, though you can provide additional element(s) to be included in this check.'
+      - name: 'collisionPadding'
+        type: 'number | Padding'
+        default: '0'
+        description: 'The distance in pixels from the boundary edges where collision detection should occur. Accepts a number (same for all sides) or a partial padding object, for example: { top: 20, bottom: 10 }.'
+      - name: 'arrowPadding'
+        type: 'number'
+        default: '0'
+        description: 'The padding between the arrow and the edges of the content. If your content has border-radius, this will prevent it from overflowing the corners.'
+      - name: 'sticky'
+        type: 'enum'
+        default: '"partial"'
+        description: 'The sticky behavior on the align axis. "partial" will keep the content in the boundary as long as the trigger is at least partially in the boundary, "always" will keep the content in the boundary regardless.'
+      - name: 'hideWhenDetached'
+        type: 'boolean'
+        default: 'false'
+        description: 'Whether to hide the content when the trigger becomes fully occluded.'
+
+  - library_name: 'DropdownMenu.Arrow'
+    standard_role: 'arrow'
+    description: 'An optional arrow element to render alongside the dropdown menu. This can be used to help visually link the trigger with the DropdownMenu.Content. Must be rendered inside DropdownMenu.Content.'
+    is_essential: false
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'width'
+        type: 'number'
+        default: '10'
+        description: 'The width of the arrow in pixels.'
+      - name: 'height'
+        type: 'number'
+        default: '5'
+        description: 'The height of the arrow in pixels.'
+
+  - library_name: 'DropdownMenu.Item'
+    standard_role: 'item'
+    description: 'The component that contains the dropdown menu items.'
+    is_essential: true
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'disabled'
+        type: 'boolean'
+        default: '-'
+        description: 'When true, prevents the user from interacting with the item.'
+      - name: 'onSelect'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when the user selects an item (via mouse or keyboard). Calling event.preventDefault in this handler will prevent the dropdown menu from closing when selecting that item.'
+      - name: 'textValue'
+        type: 'string'
+        default: '-'
+        description: 'Optional text used for typeahead purposes. By default the typeahead behavior will use the .textContent of the item. Use this when the content is complex, or you have non-textual content inside.'
+
+  - library_name: 'DropdownMenu.Group'
+    standard_role: 'group'
+    description: 'Used to group multiple DropdownMenu.Items.'
+    is_essential: false
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+
+  - library_name: 'DropdownMenu.Label'
+    standard_role: 'label'
+    description: "Used to render a label. It won't be focusable using arrow keys."
+    is_essential: false
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+
+  - library_name: 'DropdownMenu.CheckboxItem'
+    standard_role: 'item'
+    description: 'An item that can be controlled and rendered like a checkbox.'
+    is_essential: false
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'checked'
+        type: "boolean | 'indeterminate'"
+        default: '-'
+        description: 'The controlled checked state of the item. Must be used in conjunction with onCheckedChange.'
+      - name: 'onCheckedChange'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when the checked state changes.'
+      - name: 'disabled'
+        type: 'boolean'
+        default: '-'
+        description: 'When true, prevents the user from interacting with the item.'
+      - name: 'onSelect'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when the user selects an item (via mouse or keyboard). Calling event.preventDefault in this handler will prevent the dropdown menu from closing when selecting that item.'
+      - name: 'textValue'
+        type: 'string'
+        default: '-'
+        description: 'Optional text used for typeahead purposes. By default the typeahead behavior will use the .textContent of the item. Use this when the content is complex, or you have non-textual content inside.'
+
+  - library_name: 'DropdownMenu.RadioGroup'
+    standard_role: 'group'
+    description: 'Used to group multiple DropdownMenu.RadioItems.'
+    is_essential: false
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'value'
+        type: 'string'
+        default: '-'
+        description: 'The value of the radio item that should be checked.'
+      - name: 'onValueChange'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when the value changes.'
+
+  - library_name: 'DropdownMenu.RadioItem'
+    standard_role: 'item'
+    description: 'An item that can be controlled and rendered like a radio.'
+    is_essential: false
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'value*'
+        type: 'string'
+        default: '-'
+        description: 'The value given as data when submitted with a name.'
+      - name: 'disabled'
+        type: 'boolean'
+        default: '-'
+        description: 'When true, prevents the user from interacting with the item.'
+      - name: 'onSelect'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when the user selects an item (via mouse or keyboard). Calling event.preventDefault in this handler will prevent the dropdown menu from closing when selecting that item.'
+      - name: 'textValue'
+        type: 'string'
+        default: '-'
+        description: 'Optional text used for typeahead purposes. By default the typeahead behavior will use the .textContent of the item. Use this when the content is complex, or you have non-textual content inside.'
+
+  - library_name: 'DropdownMenu.ItemIndicator'
+    standard_role: 'indicator'
+    description: 'Renders when the parent DropdownMenu.CheckboxItem or DropdownMenu.RadioItem is checked. You can style this element directly, or you can use it as a wrapper to put an icon into, or both.'
+    is_essential: false
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'forceMount'
+        type: 'boolean'
+        default: '-'
+        description: 'Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.'
+
+  - library_name: 'DropdownMenu.Separator'
+    standard_role: 'separator'
+    description: 'Used to visually separate items in the dropdown menu.'
+    is_essential: false
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+
+  - library_name: 'DropdownMenu.Sub'
+    standard_role: 'root'
+    description: 'Contains all the parts of a submenu.'
+    is_essential: false
+    props:
+      - name: 'defaultOpen'
+        type: 'boolean'
+        default: '-'
+        description: 'The open state of the submenu when it is initially rendered. Use when you do not need to control its open state.'
+      - name: 'open'
+        type: 'boolean'
+        default: '-'
+        description: 'The controlled open state of the submenu. Must be used in conjunction with onOpenChange.'
+      - name: 'onOpenChange'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when the open state of the submenu changes.'
+
+  - library_name: 'DropdownMenu.SubTrigger'
+    standard_role: 'trigger'
+    description: 'An item that opens a submenu. Must be rendered inside DropdownMenu.Sub.'
+    is_essential: true
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'disabled'
+        type: 'boolean'
+        default: '-'
+        description: 'When true, prevents the user from interacting with the item.'
+      - name: 'textValue'
+        type: 'string'
+        default: '-'
+        description: 'Optional text used for typeahead purposes. By default the typeahead behavior will use the .textContent of the item. Use this when the content is complex, or you have non-textual content inside.'
+
+  - library_name: 'DropdownMenu.SubContent'
+    standard_role: 'content'
+    description: 'The component that pops out when a submenu is open. Must be rendered inside DropdownMenu.Sub.'
+    is_essential: true
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'loop'
+        type: 'boolean'
+        default: 'false'
+        description: 'When true, keyboard navigation will loop from last item to first, and vice versa.'
+      - name: 'onEscapeKeyDown'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when the escape key is down. It can be prevented by calling event.preventDefault.'
+      - name: 'onPointerDownOutside'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when a pointer event occurs outside the bounds of the component. It can be prevented by calling event.preventDefault.'
+      - name: 'onFocusOutside'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when focus moves outside the bounds of the component. It can be prevented by calling event.preventDefault.'
+      - name: 'onInteractOutside'
+        type: 'function'
+        default: '-'
+        description: 'Event handler called when an interaction (pointer or focus event) happens outside the bounds of the component. It can be prevented by calling event.preventDefault.'
+      - name: 'forceMount'
+        type: 'boolean'
+        default: '-'
+        description: 'Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.'
+      - name: 'sideOffset'
+        type: 'number'
+        default: '0'
+        description: 'The distance in pixels from the trigger.'
+      - name: 'alignOffset'
+        type: 'number'
+        default: '0'
+        description: 'An offset in pixels from the "start" or "end" alignment options.'
+      - name: 'avoidCollisions'
+        type: 'boolean'
+        default: 'true'
+        description: 'When true, overrides the side and align preferences to prevent collisions with boundary edges.'
+      - name: 'collisionBoundary'
+        type: 'Boundary'
+        default: '[]'
+        description: 'The element used as the collision boundary. By default this is the viewport, though you can provide additional element(s) to be included in this check.'
+      - name: 'collisionPadding'
+        type: 'number | Padding'
+        default: '0'
+        description: 'The distance in pixels from the boundary edges where collision detection should occur. Accepts a number (same for all sides) or a partial padding object, for example: { top: 20, bottom: 10 }.'
+      - name: 'arrowPadding'
+        type: 'number'
+        default: '0'
+        description: 'The padding between the arrow and the edges of the content. If your content has border-radius, this will prevent it from overflowing the corners.'
+      - name: 'sticky'
+        type: 'enum'
+        default: '"partial"'
+        description: 'The sticky behavior on the align axis. "partial" will keep the content in the boundary as long as the trigger is at least partially in the boundary, "always" will keep the content in the boundary regardless.'
+      - name: 'hideWhenDetached'
+        type: 'boolean'
+        default: 'false'
+        description: 'Whether to hide the content when the trigger becomes fully occluded.'
