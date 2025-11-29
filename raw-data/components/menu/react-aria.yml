@@ -1,12 +1,12 @@
 meta:
-  library_name: "React Aria"
-  website_url: "https://react-spectrum.adobe.com/react-aria/"
-  component_url: "https://react-spectrum.adobe.com/react-aria/Menu.html"
-  last_updated: "2025-11-29"
+  library_name: 'React Aria'
+  website_url: 'https://react-spectrum.adobe.com/react-aria'
+  component_url: 'https://react-spectrum.adobe.com/react-aria/Menu.html'
+  last_updated: '2025-11-29'
 
 component:
-  name: "Menu"
-  type: "Dropdown"
+  name: 'Menu'
+  type: 'Dropdown'
 
 code: |
   <MenuTrigger>
@@ -31,33 +31,43 @@ code: |
 anatomy:
   - library_name: 'MenuTrigger'
     standard_role: 'root'
-    description: 'The top-level component that wraps the menu trigger button and popover.'
+    description: 'Wraps a trigger element and a popover containing a menu.'
     is_essential: true
     props:
       - name: 'children'
         type: 'ReactNode'
         default: '-'
-        description: ''
+        description: '-'
 
       - name: 'trigger'
         type: 'MenuTriggerType'
-        default: "'press'"
-        description: ''
+        default: 'press'
+        description: 'How the menu is triggered.'
 
       - name: 'isOpen'
         type: 'boolean'
         default: '-'
-        description: ''
+        description: 'Whether the overlay is open by default (controlled).'
 
       - name: 'defaultOpen'
         type: 'boolean'
         default: '-'
-        description: ''
+        description: 'Whether the overlay is open by default (uncontrolled).'
 
-      - name: 'onOpenChange'
-        type: '(isOpen: boolean) => void'
+  - library_name: 'SubmenuTrigger'
+    standard_role: 'trigger'
+    description: 'The contents of the SubmenuTrigger. The first child should be an Item (the trigger) and the second child should be the Popover (for the submenu).'
+    is_essential: false
+    props:
+      - name: 'children'
+        type: 'ReactElement[]'
         default: '-'
-        description: ''
+        description: 'The contents of the SubmenuTrigger. The first child should be an Item (the trigger) and the second child should be the Popover (for the submenu).'
+
+      - name: 'delay'
+        type: 'number'
+        default: '200'
+        description: 'The delay time in milliseconds for the submenu to appear after hovering over the trigger.'
 
   - library_name: 'Button'
     standard_role: 'trigger'
@@ -431,337 +441,79 @@ anatomy:
 
   - library_name: 'Menu'
     standard_role: 'content'
-    description: 'The menu content container.'
+    description: 'A menu displays a list of actions or options that a user can choose.'
     is_essential: true
     props:
       - name: 'renderEmptyState'
         type: '() => ReactNode'
         default: '-'
-        description: ''
+        description: 'Provides content to display when there are no items in the list.'
 
       - name: 'escapeKeyBehavior'
         type: "'clearSelection' | 'none'"
-        default: "'clearSelection'"
-        description: 'Whether pressing the escape key should clear selection in the menu or not.\nMost experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually.'
+        default: 'clearSelection'
+        description: "Whether pressing the escape key should clear selection in the menu or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually."
 
       - name: 'autoFocus'
         type: 'boolean | FocusStrategy'
         default: '-'
-        description: ''
+        description: 'Where the focus should be set.'
 
       - name: 'shouldFocusWrap'
         type: 'boolean'
         default: '-'
-        description: ''
+        description: 'Whether keyboard navigation is circular.'
 
       - name: 'items'
         type: 'Iterable<T>'
         default: '-'
-        description: ''
+        description: 'Item objects in the collection.'
 
       - name: 'disabledKeys'
         type: 'Iterable<Key>'
         default: '-'
-        description: ''
+        description: 'The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with.'
 
       - name: 'selectionMode'
         type: 'SelectionMode'
         default: '-'
-        description: ''
+        description: 'The type of selection that is allowed in the collection.'
 
       - name: 'disallowEmptySelection'
         type: 'boolean'
         default: '-'
-        description: ''
+        description: 'Whether the collection allows empty selection.'
 
       - name: 'selectedKeys'
         type: "'all' | Iterable<Key>"
         default: '-'
-        description: ''
+        description: 'The currently selected keys in the collection (controlled).'
 
       - name: 'defaultSelectedKeys'
         type: "'all' | Iterable<Key>"
         default: '-'
-        description: ''
+        description: 'The initial selected keys in the collection (uncontrolled).'
 
       - name: 'children'
-        type: 'ReactNode | (item: object) => ReactNode'
+        type: 'ReactNode | (item: object) =>'
         default: '-'
-        description: ''
-
-      - name: 'dependencies'
-        type: 'ReadonlyArray<any>'
-        default: '-'
-        description: ''
-
-      - name: 'className'
-        type: 'ClassNameOrFunction<MenuRenderProps>'
-        default: '-'
-        description: ''
-
-      - name: 'style'
-        type: 'StyleOrFunction<MenuRenderProps>'
-        default: '-'
-        description: ''
-
-      - name: 'onAction'
-        type: '(key: Key) => void'
-        default: '-'
-        description: ''
-
-      - name: 'onClose'
-        type: '() => void'
-        default: '-'
-        description: ''
-
-      - name: 'onSelectionChange'
-        type: '(keys: Selection) => void'
-        default: '-'
-        description: ''
-
-      - name: 'slot'
-        type: 'string | null'
-        default: '-'
-        description: 'A slot name for the component. Slots allow the component to receive props from a parent component. An explicit null value indicates that the local props completely override all props received from a parent.'
-
-      - name: 'id'
-        type: 'string'
-        default: '-'
-        description: ''
-
-      - name: 'aria-label'
-        type: 'string'
-        default: '-'
-        description: ''
-
-      - name: 'aria-labelledby'
-        type: 'string'
-        default: '-'
-        description: ''
-
-      - name: 'aria-describedby'
-        type: 'string'
-        default: '-'
-        description: ''
-
-      - name: 'aria-details'
-        type: 'string'
-        default: '-'
-        description: ''
+        description: 'The contents of the collection.'
 
   - library_name: 'MenuItem'
     standard_role: 'item'
-    description: 'A <MenuItem> defines a single item within a <Menu>. If the children are not plain text, then the textValue prop must also be set to a plain text representation, which will be used for autocomplete in the Menu.'
+    description: 'An individual option within the menu.'
     is_essential: true
-    props:
-      - name: 'id'
-        type: 'Key'
-        default: '-'
-        description: ''
-
-      - name: 'value'
-        type: 'object'
-        default: '-'
-        description: ''
-
-      - name: 'textValue'
-        type: 'string'
-        default: '-'
-        description: ''
-
-      - name: 'isDisabled'
-        type: 'boolean'
-        default: '-'
-        description: ''
-
-      - name: 'children'
-        type: 'ChildrenOrFunction<MenuItemRenderProps>'
-        default: '-'
-        description: ''
-
-      - name: 'className'
-        type: 'ClassNameOrFunction<MenuItemRenderProps>'
-        default: '-'
-        description: ''
-
-      - name: 'style'
-        type: 'StyleOrFunction<MenuItemRenderProps>'
-        default: '-'
-        description: ''
-
-      - name: 'href'
-        type: 'Href'
-        default: '-'
-        description: ''
-
-      - name: 'hrefLang'
-        type: 'string'
-        default: '-'
-        description: ''
-
-      - name: 'target'
-        type: 'HTMLAttributeAnchorTarget'
-        default: '-'
-        description: ''
-
-      - name: 'rel'
-        type: 'string'
-        default: '-'
-        description: ''
-
-      - name: 'download'
-        type: 'boolean | string'
-        default: '-'
-        description: ''
-
-      - name: 'ping'
-        type: 'string'
-        default: '-'
-        description: ''
-
-      - name: 'referrerPolicy'
-        type: 'HTMLAttributeReferrerPolicy'
-        default: '-'
-        description: ''
-
-      - name: 'routerOptions'
-        type: 'RouterOptions'
-        default: '-'
-        description: ''
-
-      - name: 'onAction'
-        type: '() => void'
-        default: '-'
-        description: ''
-
-      - name: 'onHoverStart'
-        type: '(e: HoverEvent) => void'
-        default: '-'
-        description: ''
-
-      - name: 'onHoverEnd'
-        type: '(e: HoverEvent) => void'
-        default: '-'
-        description: ''
-
-      - name: 'onHoverChange'
-        type: '(isHovering: boolean) => void'
-        default: '-'
-        description: ''
-
-      - name: 'onPress'
-        type: '(e: PressEvent) => void'
-        default: '-'
-        description: ''
-
-      - name: 'onPressStart'
-        type: '(e: PressEvent) => void'
-        default: '-'
-        description: ''
-
-      - name: 'onPressEnd'
-        type: '(e: PressEvent) => void'
-        default: '-'
-        description: 'Handler that is called when a press interaction ends, either over the target or when the pointer leaves the target.'
-
-      - name: 'onPressChange'
-        type: '(isPressed: boolean) => void'
-        default: '-'
-        description: ''
-
-      - name: 'onPressUp'
-        type: '(e: PressEvent) => void'
-        default: '-'
-        description: 'Handler that is called when a press is released over the target, regardless of whether it started on the target or not.'
-
-      - name: 'onClick'
-        type: '(e: MouseEvent<FocusableElement>) => void'
-        default: '-'
-        description: 'Not recommended – use onPress instead. onClick is an alias for onPress provided for compatibility with other libraries. onPress provides additional event details for non-mouse interactions.'
-
-      - name: 'aria-label'
-        type: 'string'
-        default: '-'
-        description: ''
+    props: []
 
   - library_name: 'MenuSection'
-    standard_role: 'group'
-    description: 'A <MenuSection> defines the child items for a section within a <Menu>. It may also contain an optional <Header> element. If there is no header, then an aria-label must be provided to identify the section to assistive technologies.'
+    standard_role: 'section'
+    description: 'Groups related menu items together.'
     is_essential: false
-    props:
-      - name: 'id'
-        type: 'Key'
-        default: '-'
-        description: ''
-
-      - name: 'value'
-        type: 'object'
-        default: '-'
-        description: ''
-
-      - name: 'children'
-        type: 'ReactNode | (item: object) => ReactElement'
-        default: '-'
-        description: ''
-
-      - name: 'dependencies'
-        type: 'ReadonlyArray<any>'
-        default: '-'
-        description: ''
-
-      - name: 'items'
-        type: 'Iterable<object>'
-        default: '-'
-        description: ''
-
-      - name: 'className'
-        type: 'string'
-        default: '-'
-        description: ''
-
-      - name: 'style'
-        type: 'CSSProperties'
-        default: '-'
-        description: ''
-
-      - name: 'selectionMode'
-        type: 'SelectionMode'
-        default: '-'
-        description: ''
-
-      - name: 'disallowEmptySelection'
-        type: 'boolean'
-        default: '-'
-        description: ''
-
-      - name: 'selectedKeys'
-        type: "'all' | Iterable<Key>"
-        default: '-'
-        description: ''
-
-      - name: 'defaultSelectedKeys'
-        type: "'all' | Iterable<Key>"
-        default: '-'
-        description: ''
-
-      - name: 'disabledKeys'
-        type: 'Iterable<Key>'
-        default: '-'
-        description: ''
-
-      - name: 'onSelectionChange'
-        type: '(keys: Selection) => void'
-        default: '-'
-        description: ''
-
-      - name: 'aria-label'
-        type: 'string'
-        default: '-'
-        description: ''
+    props: []
 
   - library_name: 'Header'
-    standard_role: 'label'
-    description: 'A <Header> defines the title for a <MenuSection>. It accepts all DOM attributes.'
+    standard_role: 'header'
+    description: 'Provides a header for a menu section.'
     is_essential: false
     props: []
 
@@ -819,36 +571,3 @@ anatomy:
         type: 'string'
         default: '-'
         description: ''
-
-  - library_name: 'SubmenuTrigger'
-    standard_role: 'submenu_trigger'
-    description: 'Component for triggering submenus.'
-    is_essential: false
-    props:
-      - name: 'children'
-        type: 'ReactElement[]'
-        default: '-'
-        description: ''
-
-      - name: 'delay'
-        type: 'number'
-        default: '200'
-        description: ''
-
-  - library_name: 'Text'
-    standard_role: 'text'
-    description: 'Text component for menu item labels and descriptions.'
-    is_essential: false
-    props: []
-
-  - library_name: 'Keyboard'
-    standard_role: 'keyboard'
-    description: 'Component for displaying keyboard shortcuts in menu items.'
-    is_essential: false
-    props: []
-
-  - library_name: 'SelectionIndicator'
-    standard_role: 'selection_indicator'
-    description: 'Component for displaying selection state in menu items.'
-    is_essential: false
-    props: []
