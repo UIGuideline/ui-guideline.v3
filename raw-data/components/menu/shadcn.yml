@@ -34,6 +34,7 @@ anatomy:
         type: '"ltr" | "rtl"'
         default: '-'
         description: 'The reading direction of the dropdown menu. If omitted, inherits globally from `DirectionProvider` or assumes LTR (left-to-right) reading mode.'
+
   - library_name: 'DropdownMenu.Trigger'
     standard_role: 'trigger'
     description: 'The button that toggles the dropdown menu. By default, the `DropdownMenu.Content` will position itself against the trigger.'
@@ -43,6 +44,7 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior. Read our [Composition](https://www.radix-ui.com/primitives/docs/guides/composition) guide for more details.'
+
   - library_name: 'DropdownMenu.Portal'
     standard_role: 'portal'
     description: 'When used, portals the content part into the `body`.'
@@ -56,6 +58,7 @@ anatomy:
         type: 'HTMLElement'
         default: 'document.body'
         description: 'Specify a container element to portal the content into.'
+
   - library_name: 'DropdownMenu.Content'
     standard_role: 'content'
     description: 'The component that pops out when the dropdown menu is open.'
@@ -133,6 +136,7 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Whether to hide the content when the trigger becomes fully occluded.'
+
   - library_name: 'DropdownMenu.Arrow'
     standard_role: 'arrow'
     description: 'An optional arrow element to render alongside the dropdown menu. This can be used to help visually link the trigger with the `DropdownMenu.Content`. Must be rendered inside `DropdownMenu.Content`.'
@@ -150,6 +154,7 @@ anatomy:
         type: 'number'
         default: '5'
         description: 'The height of the arrow in pixels.'
+
   - library_name: 'DropdownMenu.Item'
     standard_role: 'item'
     description: 'The component that contains the dropdown menu items.'
@@ -171,6 +176,7 @@ anatomy:
         type: 'string'
         default: '-'
         description: 'Optional text used for typeahead purposes. By default the typeahead behavior will use the `.textContent` of the item. Use this when the content is complex, or you have non-textual content inside.'
+
   - library_name: 'DropdownMenu.Group'
     standard_role: 'group'
     description: 'Used to group multiple `DropdownMenu.Item`s.'
@@ -180,6 +186,7 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior. Read our [Composition](https://www.radix-ui.com/primitives/docs/guides/composition) guide for more details.'
+
   - library_name: 'DropdownMenu.Label'
     standard_role: 'label'
     description: "Used to render a label. It won't be focusable using arrow keys."
@@ -189,6 +196,7 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior. Read our [Composition](https://www.radix-ui.com/primitives/docs/guides/composition) guide for more details.'
+
   - library_name: 'DropdownMenu.CheckboxItem'
     standard_role: 'item_checkbox'
     description: 'An item that can be controlled and rendered like a checkbox.'
@@ -218,6 +226,7 @@ anatomy:
         type: 'string'
         default: '-'
         description: 'Optional text used for typeahead purposes. By default the typeahead behavior will use the `.textContent` of the item. Use this when the content is complex, or you have non-textual content inside.'
+
   - library_name: 'DropdownMenu.RadioGroup'
     standard_role: 'group_radio'
     description: 'Used to group multiple `DropdownMenu.RadioItem`s.'
@@ -235,6 +244,7 @@ anatomy:
         type: '(value: string) => void'
         default: '-'
         description: 'Event handler called when the value changes.'
+
   - library_name: 'DropdownMenu.RadioItem'
     standard_role: 'item_radio'
     description: 'An item that can be controlled and rendered like a radio.'
@@ -260,6 +270,7 @@ anatomy:
         type: 'string'
         default: '-'
         description: 'Optional text used for typeahead purposes. By default the typeahead behavior will use the `.textContent` of the item. Use this when the content is complex, or you have non-textual content inside.'
+
   - library_name: 'DropdownMenu.ItemIndicator'
     standard_role: 'item_indicator'
     description: 'Renders when the parent `DropdownMenu.CheckboxItem` or `DropdownMenu.RadioItem` is checked. You can style this element directly, or you can use it as a wrapper to put an icon into, or both.'
@@ -273,6 +284,7 @@ anatomy:
         type: 'boolean'
         default: '-'
         description: 'Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.'
+
   - library_name: 'DropdownMenu.Separator'
     standard_role: 'separator'
     description: 'Used to visually separate items in the dropdown menu.'
@@ -282,6 +294,7 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior. Read our [Composition](https://www.radix-ui.com/primitives/docs/guides/composition) guide for more details.'
+
   - library_name: 'DropdownMenu.Sub'
     standard_role: 'sub_menu'
     description: 'Contains all the parts of a submenu.'
@@ -299,6 +312,7 @@ anatomy:
         type: '(open: boolean) => void'
         default: '-'
         description: 'Event handler called when the open state of the submenu changes.'
+
   - library_name: 'DropdownMenu.SubTrigger'
     standard_role: 'sub_trigger'
     description: 'An item that opens a submenu. Must be rendered inside `DropdownMenu.Sub`.'
@@ -316,6 +330,7 @@ anatomy:
         type: 'string'
         default: '-'
         description: 'Optional text used for typeahead purposes. By default the typeahead behavior will use the `.textContent` of the item. Use this when the content is complex, or you have non-textual content inside.'
+
   - library_name: 'DropdownMenu.SubContent'
     standard_role: 'sub_content'
     description: 'The component that pops out when a submenu is open. Must be rendered inside `DropdownMenu.Sub`.'
