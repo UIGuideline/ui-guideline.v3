@@ -97,21 +97,11 @@ The `standard_role` field is a **guide to help you identify and compare similar 
 
 **Validation**: Use the **anatomy description** and **code block position** to confirm components truly serve the same function before assigning the same `standard_role`.
 
-### 5. General Purpose Anatomy (The 80/20 Rule)
+### 5. Prop Consolidation Rules
 
-**Exclude specialized or niche components** from the consolidated anatomy, even if they appear in multiple systems. Use `essential: false` to consider not including them in the consolidated anatomy.
-
-- **Focus on the Core**: Only include components that are used in **80-90% of standard implementations**.
-- **Exclude Specialized Variants**: Do not include inner components that are specific to advanced or niche use cases unless they are absolutely essential.
-  - **Example (Menu)**: Include `MenuItem`, `MenuSeparator`, `MenuLabel`.
-  - **Exclude (Menu)**: `MenuCheckboxItem`, `MenuRadioGroup`, `MenuArrow`.
-- **Goal**: Create a clean, general-purpose definition that developers can extend. Do not bloat the anatomy with every possible feature.
-
-### 6. Prop Consolidation Rules
-
-- **Type Normalization**: If multiple systems have the same prop with slightly different type definitions, choose the most comprehensive or common one
-- **Default Values**: Use the most common default value. If there's a tie, prefer the value from high-quality systems (Radix, shadcn, React Aria)
-- **Descriptions**: Write a clear, concise description that captures the essence from multiple systems. Prioritize descriptions from well-documented systems
+- **Type Normalization**: If multiple systems have the same prop with slightly different type definitions, choose the most comprehensive or common one.
+- **Default Values**: Use the most common default value. If there's a tie, prefer the value from high-quality systems (Radix UI, shadcn, React Aria, Base UI).
+- **Descriptions**: Write a clear, concise description (BUT self-explained), that captures the essence from multiple systems. Prioritize descriptions from well-documented systems.
 - **Exclude Niche Props**: Apply the same 80/20 rule to props. If a prop is only for a specialized variant (that we excluded), exclude the prop too.
 
 ## Consolidation Process (Step-by-Step)
