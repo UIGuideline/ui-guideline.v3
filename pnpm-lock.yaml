@@ -305,6 +305,18 @@ importers:
         specifier: ^5.6.2
         version: 5.7.3
 
+  packages/component-data:
+    devDependencies:
+      '@ui-guideline/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint-config
+      '@ui-guideline/typescript-config':
+        specifier: workspace:*
+        version: link:../../tooling/typescript-config
+      typescript:
+        specifier: ^5.6.2
+        version: 5.9.2
+
   packages/db:
     dependencies:
       '@prisma/client':
