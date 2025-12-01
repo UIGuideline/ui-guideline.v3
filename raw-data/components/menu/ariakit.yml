@@ -1,0 +1,1093 @@
+meta:
+  library_name: 'Ariakit'
+  website_url: 'https://ariakit.org/components/menu'
+  component_url: 'https://ariakit.org/components/menu'
+  last_updated: '2025-11-29'
+
+component:
+  name: 'Menu'
+  type: 'Menu'
+
+code: |
+  <MenuProvider>
+    <MenuButton>Edit</MenuButton>
+    <Menu>
+      <MenuItem>Undo</MenuItem>
+      <MenuItem>Redo</MenuItem>
+      <MenuSeparator />
+      <MenuItem>Cut</MenuItem>
+      <MenuItem>Copy</MenuItem>
+      <MenuItem>Paste</MenuItem>
+    </Menu>
+  </MenuProvider>
+
+anatomy:
+  - library_name: 'MenuProvider'
+    standard_role: 'provider'
+    description: 'Manages the state for the menu components.'
+    is_essential: true
+    props:
+      - name: 'activeId'
+        type: 'string | null | undefined'
+        default: '-'
+        description: 'The current active item id.'
+
+      - name: 'combobox'
+        type: 'ComboboxStore | null | undefined'
+        default: '-'
+        description: 'A reference to a combobox store.'
+
+      - name: 'defaultActiveId'
+        type: 'string | null | undefined'
+        default: '-'
+        description: 'The composite item id that should be active by default.'
+
+      - name: 'defaultItems'
+        type: 'T[] | undefined'
+        default: '[]'
+        description: 'The default value for the items state.'
+
+      - name: 'defaultOpen'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Whether the content should be visible by default.'
+
+      - name: 'defaultValues'
+        type: 'T | undefined'
+        default: '{}'
+        description: 'The default values for the values state.'
+
+      - name: 'disclosure'
+        type: 'DisclosureStore | null | undefined'
+        default: '-'
+        description: 'A reference to another disclosure store.'
+
+      - name: 'focusLoop'
+        type: 'boolean | Orientation'
+        default: 'false'
+        description: 'Determines how the focus behaves when the user reaches the end of the composite widget.'
+
+      - name: 'focusShift'
+        type: 'boolean'
+        default: 'false'
+        description: 'Works only on two-dimensional composite widgets.'
+
+      - name: 'focusWrap'
+        type: 'boolean | Orientation'
+        default: 'false'
+        description: 'Works only on two-dimensional composite widgets.'
+
+      - name: 'hideTimeout'
+        type: 'number | undefined'
+        default: '0'
+        description: 'The amount of time in milliseconds to wait before hiding the popup.'
+
+      - name: 'id'
+        type: 'string'
+        default: '-'
+        description: 'The ID of the composite store.'
+
+      - name: 'includesBaseElement'
+        type: 'boolean'
+        default: 'false'
+        description: 'Indicates if the composite base element should be part of the focus order.'
+
+      - name: 'items'
+        type: 'T[]'
+        default: '-'
+        description: 'Lists all items along with their metadata.'
+
+      - name: 'menubar'
+        type: 'MenubarStore | null | undefined'
+        default: '-'
+        description: 'A reference to a menubar store.'
+
+      - name: 'open'
+        type: 'boolean'
+        default: 'false'
+        description: 'Whether the content is visible.'
+
+      - name: 'orientation'
+        type: 'Orientation'
+        default: '"vertical"'
+        description: 'Defines the orientation of the composite widget.'
+
+      - name: 'parent'
+        type: 'MenuStore | null | undefined'
+        default: '-'
+        description: 'A reference to a parent menu store.'
+
+      - name: 'placement'
+        type: 'Placement'
+        default: '"bottom-start"'
+        description: 'The placement of the popover.'
+
+      - name: 'popover'
+        type: 'PopoverStore | null | undefined'
+        default: '-'
+        description: 'A reference to another popover store.'
+
+      - name: 'rtl'
+        type: 'boolean'
+        default: 'false'
+        description: 'Determines how the next and previous functions will behave.'
+
+      - name: 'setActiveId'
+        type: '(activeId: string | null | undefined) => void'
+        default: '-'
+        description: 'A callback that gets called when the activeId state changes.'
+
+      - name: 'setItems'
+        type: '(items: T[]) => void'
+        default: '-'
+        description: 'A callback that gets called when the items state changes.'
+
+      - name: 'setMounted'
+        type: '(mounted: boolean) => void'
+        default: '-'
+        description: 'A callback that gets called when the mounted state changes.'
+
+      - name: 'setOpen'
+        type: '(open: boolean) => void'
+        default: '-'
+        description: 'A callback that gets called when the open state changes.'
+
+      - name: 'setValues'
+        type: '(values: T) => void'
+        default: '-'
+        description: 'A callback that gets called when the values state changes.'
+
+      - name: 'showTimeout'
+        type: 'number | undefined'
+        default: '-'
+        description: 'The amount of time in milliseconds to wait before showing the popup.'
+
+      - name: 'store'
+        type: 'Store | undefined'
+        default: '-'
+        description: 'Another store object that will be kept in sync with the original store.'
+
+      - name: 'timeout'
+        type: 'number'
+        default: '500'
+        description: 'The amount of time in milliseconds to wait before showing and hiding the popup.'
+
+      - name: 'values'
+        type: 'T'
+        default: '-'
+        description: 'A map of names and values that will be used by the MenuItemCheckbox and MenuItemRadio components.'
+
+      - name: 'virtualFocus'
+        type: 'boolean'
+        default: 'false'
+        description: 'If enabled, the composite element will act as an aria-activedescendant container.'
+
+      - name: 'animated'
+        type: 'number | boolean | undefined'
+        default: '-'
+        description: 'Deprecated: Manually setting the animated prop is no longer necessary.'
+
+  - library_name: 'MenuButton'
+    standard_role: 'trigger'
+    description: 'The interactive element that triggers the display of a menu.'
+    is_essential: true
+    props:
+      - name: 'accessibleWhenDisabled'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Indicates whether the element should be focusable even when it is disabled.'
+
+      - name: 'autoFocus'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Automatically focuses the element upon mounting.'
+
+      - name: 'clickOnEnter'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'If set to true, pressing the enter key while this element is focused will trigger a click.'
+
+      - name: 'clickOnSpace'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'If set to true, pressing and releasing the space key while this element is focused will trigger a click.'
+
+      - name: 'disabled'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Determines if the element is disabled.'
+
+      - name: 'focusable'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Determines if Focusable features should be active on non-native focusable elements.'
+
+      - name: 'onFocusVisible'
+        type: '(event: SyntheticEvent) => void'
+        default: '-'
+        description: 'Custom event handler invoked when the element gains focus through keyboard interaction.'
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'showOnHover'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: "Shows the content element based on the user's hover intent over the anchor element."
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+      - name: 'toggleOnClick'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines whether toggle will be called on click.'
+
+      - name: 'typeahead'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Determines whether pressing a character key should move focus to the MenuItem starting with that character.'
+
+  - library_name: 'MenuButtonArrow'
+    standard_role: 'arrow'
+    description: 'Renders an arrow associated with a menu button.'
+    is_essential: false
+    props:
+      - name: 'placement'
+        type: 'Placement | undefined'
+        default: '-'
+        description: "Arrow's placement direction."
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+  - library_name: 'MenuList'
+    standard_role: 'list'
+    description: 'Represents the actual list of menu items.'
+    is_essential: true
+    props:
+      - name: 'accessibleWhenDisabled'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Indicates whether the element should be focusable even when it is disabled.'
+
+      - name: 'alwaysVisible'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Determines whether the content element should remain visible even when the open state is false.'
+
+      - name: 'autoFocus'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Automatically focuses the element upon mounting.'
+
+      - name: 'composite'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Determines if the component should act as a composite widget.'
+
+      - name: 'disabled'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Determines if the element is disabled.'
+
+      - name: 'focusable'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Determines if Focusable features should be active on non-native focusable elements.'
+
+      - name: 'focusOnMove'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Determines if the active composite item should receive focus when moving through items.'
+
+      - name: 'moveOnKeyPress'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines whether the composite widget should move focus to an item when arrow keys are pressed.'
+
+      - name: 'onFocusVisible'
+        type: '(event: SyntheticEvent) => void'
+        default: '-'
+        description: 'Custom event handler invoked when the element gains focus through keyboard interaction.'
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+      - name: 'typeahead'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'When enabled, pressing printable character keys will move focus to the next composite item.'
+
+  - library_name: 'Menu'
+    standard_role: 'content'
+    description: 'A comprehensive menu container that combines features from Popover and Composite.'
+    is_essential: true
+    props:
+      - name: 'accessibleWhenDisabled'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Indicates whether the element should be focusable even when it is disabled.'
+
+      - name: 'alwaysVisible'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Determines whether the content element should remain visible even when the open state is false.'
+
+      - name: 'arrowPadding'
+        type: 'number | undefined'
+        default: '4'
+        description: 'The minimum padding between the arrow and the popover corner.'
+
+      - name: 'autoFocus'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Automatically focuses the element upon mounting.'
+
+      - name: 'autoFocusOnHide'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines whether an element outside of the dialog will be focused when the dialog is hidden.'
+
+      - name: 'autoFocusOnShow'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines whether an element inside the dialog will receive focus when the dialog is shown.'
+
+      - name: 'backdrop'
+        type: 'boolean | ReactElement | ElementType | undefined'
+        default: '-'
+        description: 'Determines whether there will be a backdrop behind the dialog.'
+
+      - name: 'composite'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Determines if the component should act as a composite widget.'
+
+      - name: 'disabled'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Determines if the element is disabled.'
+
+      - name: 'disablePointerEventsOnApproach'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines if the pointer events outside of the popover should be disabled during hover intent.'
+
+      - name: 'finalFocus'
+        type: 'HTMLElement | RefObject | null | undefined'
+        default: '-'
+        description: 'Determines the element that will receive focus once the dialog is closed.'
+
+      - name: 'fitViewport'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Whether the popover should fit the viewport.'
+
+      - name: 'fixed'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Whether the popover has position: fixed or not.'
+
+      - name: 'flip'
+        type: 'string | boolean | undefined'
+        default: 'true'
+        description: 'Controls the behavior of the popover when it overflows the viewport.'
+
+      - name: 'focusable'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Determines if Focusable features should be active on non-native focusable elements.'
+
+      - name: 'focusOnMove'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Determines if the active composite item should receive focus when moving through items.'
+
+      - name: 'getAnchorRect'
+        type: '((anchor: HTMLElement | null) => AnchorRect | null) | undefined'
+        default: '-'
+        description: "Function that returns the anchor element's DOMRect."
+
+      - name: 'getPersistentElements'
+        type: '(() => Iterable<Element>) | undefined'
+        default: '-'
+        description: 'Returns an iterable collection of elements that will be considered as part of the dialog.'
+
+      - name: 'gutter'
+        type: 'number | undefined'
+        default: '0'
+        description: 'The distance between the popover and the anchor element.'
+
+      - name: 'hideOnEscape'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines if the dialog will hide when the user presses the Escape key.'
+
+      - name: 'hideOnHoverOutside'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines whether the popover should hide when the mouse leaves the popover.'
+
+      - name: 'hideOnInteractOutside'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines if the dialog should hide when the user clicks or focuses on an element outside the dialog.'
+
+      - name: 'initialFocus'
+        type: 'HTMLElement | RefObject | null | undefined'
+        default: '-'
+        description: 'Specifies the element that will receive focus when the dialog is first opened.'
+
+      - name: 'modal'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Determines whether the dialog is modal.'
+
+      - name: 'moveOnKeyPress'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines whether the composite widget should move focus to an item when arrow keys are pressed.'
+
+      - name: 'onClose'
+        type: '((event: Event) => void) | undefined'
+        default: '-'
+        description: "Event handler prop triggered when the dialog's close event is dispatched."
+
+      - name: 'onFocusVisible'
+        type: '(event: SyntheticEvent) => void'
+        default: '-'
+        description: 'Custom event handler invoked when the element gains focus through keyboard interaction.'
+
+      - name: 'open'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Controls the open state of the dialog.'
+
+      - name: 'overflowPadding'
+        type: 'number | undefined'
+        default: '8'
+        description: 'The minimum padding between the popover and the viewport edge.'
+
+      - name: 'overlap'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Whether the popover can overlap the anchor element when it overflows.'
+
+      - name: 'portal'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Determines whether the element should be rendered as a React Portal.'
+
+      - name: 'portalElement'
+        type: 'HTMLElement | ((element: HTMLElement) => HTMLElement | null) | null | undefined'
+        default: '-'
+        description: 'An HTML element or a memoized callback function that returns an HTML element to be used as the portal element.'
+
+      - name: 'portalRef'
+        type: 'RefCallback | MutableRefObject | undefined'
+        default: '-'
+        description: 'portalRef is similar to ref but is scoped to the portal node.'
+
+      - name: 'preserveTabOrder'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: "When enabled, preserveTabOrder will keep the DOM element's tab order."
+
+      - name: 'preserveTabOrderAnchor'
+        type: 'Element | null | undefined'
+        default: '-'
+        description: 'An anchor element for maintaining the tab order when preserveTabOrder prop is enabled.'
+
+      - name: 'preventBodyScroll'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Determines whether the body scrolling will be prevented when the dialog is shown.'
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'sameWidth'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Whether the popover should have the same width as the anchor element.'
+
+      - name: 'shift'
+        type: 'number | undefined'
+        default: '0'
+        description: 'The skidding of the popover along the anchor element.'
+
+      - name: 'slide'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Whether the popover should slide when it overflows.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+      - name: 'typeahead'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'When enabled, pressing printable character keys will move focus to the next composite item.'
+
+      - name: 'unmountOnHide'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: "When set to true, the content element will be unmounted and removed from the DOM when it's hidden."
+
+      - name: 'updatePosition'
+        type: '((props: { updatePosition: () => Promise<void>; }) => void | Promise<void>) | undefined'
+        default: '-'
+        description: 'A callback that will be called when the popover needs to calculate its position.'
+
+      - name: 'wrapperProps'
+        type: 'HTMLAttributes | undefined'
+        default: '-'
+        description: 'Props that will be passed to the popover wrapper element.'
+
+  - library_name: 'MenuArrow'
+    standard_role: 'arrow'
+    description: 'Renders an arrow for the menu.'
+    is_essential: false
+    props:
+      - name: 'borderWidth'
+        type: 'number | undefined'
+        default: '-'
+        description: "The arrow's border width."
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'size'
+        type: 'number | undefined'
+        default: '30'
+        description: 'The size of the arrow.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+  - library_name: 'MenuHeading'
+    standard_role: 'heading'
+    description: 'Renders a heading within the menu.'
+    is_essential: false
+    props:
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+  - library_name: 'MenuDescription'
+    standard_role: 'description'
+    description: 'Renders a description within the menu.'
+    is_essential: false
+    props:
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+  - library_name: 'MenuDismiss'
+    standard_role: 'dismiss'
+    description: 'A button to dismiss the menu.'
+    is_essential: false
+    props:
+      - name: 'accessibleWhenDisabled'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Indicates whether the element should be focusable even when it is disabled.'
+
+      - name: 'autoFocus'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Automatically focuses the element upon mounting.'
+
+      - name: 'clickOnEnter'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'If set to true, pressing the enter key while this element is focused will trigger a click.'
+
+      - name: 'clickOnSpace'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'If set to true, pressing and releasing the space key while this element is focused will trigger a click.'
+
+      - name: 'disabled'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Determines if the element is disabled.'
+
+      - name: 'focusable'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Determines if Focusable features should be active on non-native focusable elements.'
+
+      - name: 'onFocusVisible'
+        type: '(event: SyntheticEvent) => void'
+        default: '-'
+        description: 'Custom event handler invoked when the element gains focus through keyboard interaction.'
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+  - library_name: 'MenuGroup'
+    standard_role: 'group'
+    description: 'Used for grouping related menu items.'
+    is_essential: false
+    props:
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+  - library_name: 'MenuGroupLabel'
+    standard_role: 'label'
+    description: 'Provides a label for a MenuGroup.'
+    is_essential: false
+    props:
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+  - library_name: 'MenuItem'
+    standard_role: 'item'
+    description: 'Represents an item within a menu.'
+    is_essential: true
+    props:
+      - name: 'accessibleWhenDisabled'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Indicates whether the element should be focusable even when it is disabled.'
+
+      - name: 'autoFocus'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Automatically focuses the element upon mounting.'
+
+      - name: 'blurOnHoverEnd'
+        type: 'BooleanOrCallback | undefined'
+        default: '-'
+        description: 'Determines if the composite item should lose focus when the mouse leaves.'
+
+      - name: 'clickOnEnter'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'If set to true, pressing the enter key while this element is focused will trigger a click.'
+
+      - name: 'clickOnSpace'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'If set to true, pressing and releasing the space key while this element is focused will trigger a click.'
+
+      - name: 'disabled'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Determines if the element is disabled.'
+
+      - name: 'focusable'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Determines if Focusable features should be active on non-native focusable elements.'
+
+      - name: 'focusOnHover'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines if the composite item should be focused when hovered over.'
+
+      - name: 'getItem'
+        type: '((props: CollectionStoreItem) => CollectionStoreItem) | undefined'
+        default: '-'
+        description: 'A memoized function that returns props to be passed with the item during its registration in the store.'
+
+      - name: 'hideOnClick'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines if the menu should hide when this item is clicked.'
+
+      - name: 'id'
+        type: 'string | undefined'
+        default: '-'
+        description: 'The unique ID of the item.'
+
+      - name: 'moveOnKeyPress'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines if pressing arrow keys while this item is in focus should move focus to a different item.'
+
+      - name: 'onFocusVisible'
+        type: '(event: SyntheticEvent) => void'
+        default: '-'
+        description: 'Custom event handler invoked when the element gains focus through keyboard interaction.'
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'rowId'
+        type: 'string | undefined'
+        default: '-'
+        description: 'The id that will be used to group items in the same row.'
+
+      - name: 'shouldRegisterItem'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Determines if the item should be registered as part of the collection.'
+
+      - name: 'store'
+        type: 'MenuStore | MenubarStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore or useMenubarStore hooks.'
+
+      - name: 'tabbable'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'When the tabbable prop is set to true, the roving tabindex method is partially disabled for this element.'
+
+      - name: 'preventScrollOnKeyDown'
+        type: 'BooleanOrCallback | undefined'
+        default: 'false'
+        description: 'Deprecated: Use CSS scroll-margin instead.'
+
+  - library_name: 'MenuItemCheckbox'
+    standard_role: 'item'
+    description: 'A menu item that functions as a checkbox.'
+    is_essential: false
+    props:
+      - name: 'name'
+        type: 'string'
+        default: '-'
+        description: 'The name of the field in the values state.'
+
+      - name: 'accessibleWhenDisabled'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Indicates whether the element should be focusable even when it is disabled.'
+
+      - name: 'autoFocus'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Automatically focuses the element upon mounting.'
+
+      - name: 'blurOnHoverEnd'
+        type: 'BooleanOrCallback | undefined'
+        default: '-'
+        description: 'Determines if the composite item should lose focus when the mouse leaves.'
+
+      - name: 'checked'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'The controlled checked state of the element.'
+
+      - name: 'clickOnEnter'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'If set to true, pressing the enter key while this element is focused will trigger a click.'
+
+      - name: 'clickOnSpace'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'If set to true, pressing and releasing the space key while this element is focused will trigger a click.'
+
+      - name: 'defaultChecked'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'The default checked state of the element.'
+
+      - name: 'disabled'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Determines if the element is disabled.'
+
+      - name: 'focusable'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Determines if Focusable features should be active on non-native focusable elements.'
+
+      - name: 'focusOnHover'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines if the composite item should be focused when hovered over.'
+
+      - name: 'getItem'
+        type: '((props: CollectionStoreItem) => CollectionStoreItem) | undefined'
+        default: '-'
+        description: 'A memoized function that returns props to be passed with the item during its registration in the store.'
+
+      - name: 'hideOnClick'
+        type: 'BooleanOrCallback | undefined'
+        default: 'false'
+        description: 'Determines if the menu should hide when this item is clicked.'
+
+      - name: 'id'
+        type: 'string | undefined'
+        default: '-'
+        description: 'The unique ID of the item.'
+
+      - name: 'moveOnKeyPress'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines if pressing arrow keys while this item is in focus should move focus to a different item.'
+
+      - name: 'onChange'
+        type: 'ChangeEventHandler | undefined'
+        default: '-'
+        description: "A function that is called when the checkbox's checked state changes."
+
+      - name: 'onFocusVisible'
+        type: '(event: SyntheticEvent) => void'
+        default: '-'
+        description: 'Custom event handler invoked when the element gains focus through keyboard interaction.'
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'rowId'
+        type: 'string | undefined'
+        default: '-'
+        description: 'The id that will be used to group items in the same row.'
+
+      - name: 'shouldRegisterItem'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Determines if the item should be registered as part of the collection.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+      - name: 'tabbable'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'When the tabbable prop is set to true, the roving tabindex method is partially disabled for this element.'
+
+      - name: 'value'
+        type: 'string | number | string[] | undefined'
+        default: '-'
+        description: 'The value of the checkbox.'
+
+      - name: 'preventScrollOnKeyDown'
+        type: 'BooleanOrCallback | undefined'
+        default: 'false'
+        description: 'Deprecated: Use CSS scroll-margin instead.'
+
+  - library_name: 'MenuItemCheck'
+    standard_role: 'check'
+    description: 'Renders the checkmark icon inside MenuItemCheckbox or MenuItemRadio.'
+    is_essential: false
+    props:
+      - name: 'checked'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Determines if the checkmark should be rendered.'
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+  - library_name: 'MenuItemRadio'
+    standard_role: 'item'
+    description: 'A menu item that functions as a radio button.'
+    is_essential: false
+    props:
+      - name: 'name'
+        type: 'string'
+        default: '-'
+        description: 'The name of the field in the values state.'
+
+      - name: 'value'
+        type: 'string | number'
+        default: '-'
+        description: 'The value of the radio button.'
+
+      - name: 'accessibleWhenDisabled'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Indicates whether the element should be focusable even when it is disabled.'
+
+      - name: 'autoFocus'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Automatically focuses the element upon mounting.'
+
+      - name: 'blurOnHoverEnd'
+        type: 'BooleanOrCallback | undefined'
+        default: '-'
+        description: 'Determines if the composite item should lose focus when the mouse leaves.'
+
+      - name: 'checked'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'The controlled checked state of the element.'
+
+      - name: 'clickOnEnter'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'If set to true, pressing the enter key while this element is focused will trigger a click.'
+
+      - name: 'clickOnSpace'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'If set to true, pressing and releasing the space key while this element is focused will trigger a click.'
+
+      - name: 'defaultChecked'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'The default checked state of the element.'
+
+      - name: 'disabled'
+        type: 'boolean | undefined'
+        default: 'false'
+        description: 'Determines if the element is disabled.'
+
+      - name: 'focusable'
+        type: 'boolean | undefined'
+        default: 'true'
+        description: 'Determines if Focusable features should be active on non-native focusable elements.'
+
+      - name: 'focusOnHover'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines if the composite item should be focused when hovered over.'
+
+      - name: 'getItem'
+        type: '((props: CollectionStoreItem) => CollectionStoreItem) | undefined'
+        default: '-'
+        description: 'A memoized function that returns props to be passed with the item during its registration in the store.'
+
+      - name: 'hideOnClick'
+        type: 'BooleanOrCallback | undefined'
+        default: 'false'
+        description: 'Determines if the menu should hide when this item is clicked.'
+
+      - name: 'id'
+        type: 'string | undefined'
+        default: '-'
+        description: 'The unique ID of the item.'
+
+      - name: 'moveOnKeyPress'
+        type: 'BooleanOrCallback | undefined'
+        default: 'true'
+        description: 'Determines if pressing arrow keys while this item is in focus should move focus to a different item.'
+
+      - name: 'onChange'
+        type: 'ChangeEventHandler | undefined'
+        default: '-'
+        description: 'Callback function that is called when the radio button state changes.'
+
+      - name: 'onFocusVisible'
+        type: '(event: SyntheticEvent) => void'
+        default: '-'
+        description: 'Custom event handler invoked when the element gains focus through keyboard interaction.'
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'rowId'
+        type: 'string | undefined'
+        default: '-'
+        description: 'The id that will be used to group items in the same row.'
+
+      - name: 'shouldRegisterItem'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'Determines if the item should be registered as part of the collection.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
+
+      - name: 'tabbable'
+        type: 'boolean | undefined'
+        default: '-'
+        description: 'When the tabbable prop is set to true, the roving tabindex method is partially disabled for this element.'
+
+      - name: 'preventScrollOnKeyDown'
+        type: 'BooleanOrCallback | undefined'
+        default: 'false'
+        description: 'Deprecated: Use CSS scroll-margin instead.'
+
+  - library_name: 'MenuSeparator'
+    standard_role: 'separator'
+    description: 'Visually separates menu items.'
+    is_essential: false
+    props:
+      - name: 'orientation'
+        type: '"horizontal" | "vertical" | undefined'
+        default: '-'
+        description: 'The orientation of the separator.'
+
+      - name: 'render'
+        type: 'RenderProp | ReactElement'
+        default: '-'
+        description: 'Allows the component to be rendered as a different HTML element or React component.'
+
+      - name: 'store'
+        type: 'MenuStore | undefined'
+        default: '-'
+        description: 'Object returned by the useMenuStore hook.'
