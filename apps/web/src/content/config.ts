@@ -48,7 +48,7 @@ const componentList = defineCollection({
     description: z.string(),
     status: z.enum(['stable', 'soon']).default('stable').optional(),
     category: z.string().optional(),
-    tags: z.array(z.string()).optional(),
+    keywords: z.array(z.string()).optional(),
     updatedAt: z.string().optional(),
     sections: z.array(z.string()).optional(),
   }),
