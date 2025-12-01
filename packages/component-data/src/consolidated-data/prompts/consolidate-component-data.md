@@ -97,11 +97,22 @@ The `standard_role` field is a **guide to help you identify and compare similar 
 
 **Validation**: Use the **anatomy description** and **code block position** to confirm components truly serve the same function before assigning the same `standard_role`.
 
-### 5. Prop Consolidation Rules
+### 5. General Purpose Anatomy (The 80/20 Rule)
+
+**Exclude specialized or niche components** from the consolidated anatomy, even if they appear in multiple systems.
+
+- **Focus on the Core**: Only include components that are used in **80-90% of standard implementations**.
+- **Exclude Specialized Variants**: Do not include inner components that are specific to advanced or niche use cases unless they are absolutely essential.
+  - **Example (Menu)**: Include `MenuItem`, `MenuSeparator`, `MenuLabel`.
+  - **Exclude (Menu)**: `MenuCheckboxItem`, `MenuRadioGroup`, `MenuArrow`.
+- **Goal**: Create a clean, general-purpose definition that developers can extend. Do not bloat the anatomy with every possible feature.
+
+### 6. Prop Consolidation Rules
 
 - **Type Normalization**: If multiple systems have the same prop with slightly different type definitions, choose the most comprehensive or common one
-- **Default Values**: Use the most common default value. If there's a tie, prefer the value from high-quality systems (Radix, shadcn,React Aria)
+- **Default Values**: Use the most common default value. If there's a tie, prefer the value from high-quality systems (Radix, shadcn, React Aria)
 - **Descriptions**: Write a clear, concise description that captures the essence from multiple systems. Prioritize descriptions from well-documented systems
+- **Exclude Niche Props**: Apply the same 80/20 rule to props. If a prop is only for a specialized variant (that we excluded), exclude the prop too.
 
 ## Consolidation Process (Step-by-Step)
 
@@ -119,7 +130,8 @@ The `standard_role` field is a **guide to help you identify and compare similar 
 2. For each role, count how many systems include it
 3. Mark roles as `essential: true` if they appear in 7+ systems
 4. Mark roles as `essential: false` if they appear in 3-6 systems
-5. Exclude roles that appear in fewer than 3 systems (unless valuable)
+5. **Filter Specialized Components**: Remove any roles that are considered niche or specialized (e.g., checkbox items, submenus) per the "General Purpose Anatomy" rule.
+6. Exclude roles that appear in fewer than 3 systems (unless valuable and core)
 
 ### Phase 3: Props Consolidation
 
