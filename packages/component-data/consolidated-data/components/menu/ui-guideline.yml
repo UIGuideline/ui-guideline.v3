@@ -1,0 +1,161 @@
+name: 'Menu'
+description: 'A menu displays a list of actions or options that a user can choose.'
+code: |
+  <Menu>
+    <MenuTrigger>Open Menu</MenuTrigger>
+    <MenuContent>
+      <MenuLabel>My Account</MenuLabel>
+      <MenuSeparator />
+      <MenuItem>Profile</MenuItem>
+      <MenuItem>Billing</MenuItem>
+      <MenuItem>Settings</MenuItem>
+      <MenuSeparator />
+      <MenuItemCheckbox checked>Show Status</MenuItemCheckbox>
+      <MenuRadioGroup value="snooze">
+        <MenuItemRadio value="snooze">Snooze</MenuItemRadio>
+        <MenuItemRadio value="mute">Mute</MenuItemRadio>
+      </MenuRadioGroup>
+    </MenuContent>
+  </Menu>
+anatomy:
+  - library_name: 'Menu'
+    standard_role: 'root'
+    description: 'The root component that manages the open state of the menu.'
+    is_essential: true
+    props:
+      - name: 'open'
+        type: 'boolean'
+        default: 'false'
+        description: 'The controlled open state of the menu.'
+      - name: 'defaultOpen'
+        type: 'boolean'
+        default: 'false'
+        description: 'The default open state when initially rendered. Use when you do not need to control the open state.'
+      - name: 'onOpenChange'
+        type: '(open: boolean) => void'
+        default: '-'
+        description: 'Event handler called when the open state of the menu changes.'
+      - name: 'modal'
+        type: 'boolean'
+        default: 'true'
+        description: 'The modality of the menu. When set to true, interaction with outside elements will be disabled and only menu content will be visible to screen readers.'
+
+  - library_name: 'MenuTrigger'
+    standard_role: 'trigger'
+    description: 'The button that toggles the menu.'
+    is_essential: true
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'disabled'
+        type: 'boolean'
+        default: 'false'
+        description: 'When true, prevents the user from interacting with the item.'
+
+  - library_name: 'MenuContent'
+    standard_role: 'content'
+    description: 'The component that pops out when the menu is open.'
+    is_essential: true
+    props:
+      - name: 'align'
+        type: '"start" | "center" | "end"'
+        default: '"center"'
+        description: 'The preferred alignment against the trigger. May change when collisions occur.'
+      - name: 'side'
+        type: '"top" | "right" | "bottom" | "left"'
+        default: '"bottom"'
+        description: 'The preferred side of the trigger to render against when open. Will be reversed when collisions occur and avoidCollisions is enabled.'
+      - name: 'sideOffset'
+        type: 'number'
+        default: '0'
+        description: 'The distance in pixels from the trigger.'
+      - name: 'loop'
+        type: 'boolean'
+        default: 'false'
+        description: 'When true, keyboard navigation will loop from last item to first, and vice versa.'
+
+  - library_name: 'MenuItem'
+    standard_role: 'item'
+    description: 'The component that contains the menu items.'
+    is_essential: true
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      - name: 'disabled'
+        type: 'boolean'
+        default: 'false'
+        description: 'When true, prevents the user from interacting with the item.'
+      - name: 'onSelect'
+        type: '(event: Event) => void'
+        default: '-'
+        description: 'Event handler called when the user selects an item (via mouse or keyboard).'
+
+  - library_name: 'MenuSeparator'
+    standard_role: 'separator'
+    description: 'Used to visually separate items in the menu.'
+    is_essential: false
+    props:
+      - name: 'orientation'
+        type: '"horizontal" | "vertical"'
+        default: '"horizontal"'
+        description: 'The orientation of the separator.'
+
+  - library_name: 'MenuLabel'
+    standard_role: 'label'
+    description: "Used to render a label. It won't be focusable using arrow keys."
+    is_essential: false
+    props:
+      - name: 'asChild'
+        type: 'boolean'
+        default: 'false'
+        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+
+  - library_name: 'MenuItemCheckbox'
+    standard_role: 'checkbox'
+    description: 'An item that can be controlled and rendered like a checkbox.'
+    is_essential: false
+    props:
+      - name: 'checked'
+        type: 'boolean | "indeterminate"'
+        default: 'false'
+        description: 'The controlled checked state of the item.'
+      - name: 'onCheckedChange'
+        type: '(checked: boolean) => void'
+        default: '-'
+        description: 'Event handler called when the checked state changes.'
+      - name: 'disabled'
+        type: 'boolean'
+        default: 'false'
+        description: 'When true, prevents the user from interacting with the item.'
+
+  - library_name: 'MenuRadioGroup'
+    standard_role: 'group'
+    description: 'Used to group multiple MenuItemRadio items.'
+    is_essential: false
+    props:
+      - name: 'value'
+        type: 'string'
+        default: '-'
+        description: 'The value of the selected item in the group.'
+      - name: 'onValueChange'
+        type: '(value: string) => void'
+        default: '-'
+        description: 'Event handler called when the value changes.'
+
+  - library_name: 'MenuItemRadio'
+    standard_role: 'radio'
+    description: 'An item that can be controlled and rendered like a radio.'
+    is_essential: false
+    props:
+      - name: 'value'
+        type: 'string'
+        default: '-'
+        description: 'The unique value of the item.'
+      - name: 'disabled'
+        type: 'boolean'
+        default: 'false'
+        description: 'When true, prevents the user from interacting with the item.'
