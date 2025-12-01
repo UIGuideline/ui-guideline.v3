@@ -99,7 +99,7 @@ The `standard_role` field is a **guide to help you identify and compare similar 
 
 ### 5. General Purpose Anatomy (The 80/20 Rule)
 
-**Exclude specialized or niche components** from the consolidated anatomy, even if they appear in multiple systems.
+**Exclude specialized or niche components** from the consolidated anatomy, even if they appear in multiple systems. Use `essential: false` to consider not including them in the consolidated anatomy.
 
 - **Focus on the Core**: Only include components that are used in **80-90% of standard implementations**.
 - **Exclude Specialized Variants**: Do not include inner components that are specific to advanced or niche use cases unless they are absolutely essential.
