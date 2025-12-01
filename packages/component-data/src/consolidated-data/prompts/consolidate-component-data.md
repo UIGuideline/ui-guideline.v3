@@ -120,8 +120,7 @@ The `standard_role` field is a **guide to help you identify and compare similar 
 2. For each role, count how many systems include it
 3. Mark roles as `essential: true` if they appear in 7+ systems
 4. Mark roles as `essential: false` if they appear in 3-6 systems
-5. **Filter Specialized Components**: Remove any roles that are considered niche or specialized (e.g., checkbox items, submenus) per the "General Purpose Anatomy" rule.
-6. Exclude roles that appear in fewer than 3 systems (unless valuable and core)
+5. Exclude roles that appear in fewer than 3 systems (unless valuable and core)
 
 ### Phase 3: Props Consolidation
 
