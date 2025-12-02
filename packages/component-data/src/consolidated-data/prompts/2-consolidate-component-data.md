@@ -276,5 +276,5 @@ Create the consolidated file at: `packages/component-data/src/consolidated-data/
 
 ---
 
-**Best model**: Gemini Pro 3 (High)  
-**Platform**: Google Antigravity
+**Best model**: Claude Opus 4.5 (Thinking)
+**Platform**: Claude.ai
