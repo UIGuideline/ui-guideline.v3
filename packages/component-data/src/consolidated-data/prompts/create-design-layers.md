@@ -96,15 +96,36 @@ If a component has only ONE variant (usually "Default"), remove the variant laye
   children: ...
 ```
 
-### 4. Props Exclusion
+### 4. Props Filtering by Context
 
-**DO NOT represent these in design layers:**
+When transforming to design layers, **filter props by their `context` field**:
 
-- Event handlers (`onSelect`, `onOpenChange`, `onEscapeKeyDown`)
-- State management (`open`, `defaultOpen`, `checked`, `value`)
-- Render props (`asChild`, `forceMount`)
-- Positioning logic (`side`, `sideOffset`, `align`, `alignOffset`)
-- Interaction flags (`disabled`, `loop`)
+**Exclude from design layers**:
+
+- Props with `context: code`
+
+**Include in design layer descriptions**:
+
+- Props with `context: both` (mention how they affect visual design)
+- Props with `context: design` (primary design properties)
+
+**Example**:
+
+```yaml
+# ui-guideline.yml
+props:
+  - name: 'asChild'
+    type: 'boolean'
+    context: 'code' # ❌ Exclude from design layers
+
+  - name: 'disabled'
+    type: 'boolean'
+    context: 'both' # ✅ Include in description: "Represents disabled state visually"
+
+  - name: 'side'
+    type: '"top" | "right" | "bottom" | "left"'
+    context: 'both' # ✅ Creates design variants for MenuContent
+```
 
 **Instead:** Mention them in the `description` field to inform designers/LLMs how they work in code.
 

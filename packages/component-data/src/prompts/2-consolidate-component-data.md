@@ -104,6 +104,37 @@ The `standard_role` field is a **guide to help you identify and compare similar 
 - **Descriptions**: Write a clear, concise description (BUT self-explained), that captures the essence from multiple systems. Prioritize descriptions from well-documented systems.
 - **Exclude Niche Props**: Apply the same 80/20 rule to props. If a prop is only for a specialized variant (that we excluded), exclude the prop too.
 
+### 6. Prop Context Classification
+
+For each prop, assign a `context` field indicating its relevance:
+
+**`code` - Code/Development Only**:
+
+- Event handlers (e.g., `onSelect`, `onOpenChange`)
+- Render props (e.g., `asChild`, `forceMount`)
+- Programmatic state without visual representation (e.g., `defaultOpen`, `value`)
+- Keyboard navigation (e.g., `loop`, `textValue`)
+
+**`design` - Design Only**:
+
+- Pure visual variants (e.g., color themes, size variants defined only in design)
+- Design tokens with no code equivalent
+- Visual-only properties that don't exist in component APIs
+
+**`both` - Shared Context**:
+
+- Visual states with programmatic control (e.g., `disabled`, `checked`)
+- Layout/positioning properties (e.g., `side`, `align`, `orientation`)
+- Size/spacing properties (e.g., `width`, `height`, `sideOffset`)
+- Direction/localization (e.g., `dir`)
+
+**Decision tree**:
+
+1. Does it handle events or callbacks? → `code`
+2. Is it a render prop or composition utility? → `code`
+3. Is it purely visual with no API? → `design`
+4. Does it affect both visual appearance AND code behavior? → `both`
+
 ## Consolidation Process (Step-by-Step)
 
 ### Phase 1: Initial Analysis
