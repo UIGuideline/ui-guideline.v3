@@ -10,11 +10,20 @@ Extract props from `ui-guideline.yml` and create a `props.yml` file for web cont
 
 ## Task
 
-For each component in the `anatomy` section:
+Iterate through EVERY SINGLE item in the `anatomy` list. Do not skip any.
 
 1. Take `library_name` as `component` name
 2. Copy `description`
 3. Copy all props
+
+## Field Parsing Rules
+
+1. **`type` Field**:
+   - If the type string contains the pipe character `|` (indicating a union type), you MUST parse it into an array of strings.
+   - Remove any surrounding quotes from the values.
+   - **Example**: `' "a" | "b" '` -> `['a', 'b']`
+   - **Example**: `' "start" | "end" '` -> `['start', 'end']`
+   - If it is NOT a union type, keep it as a string.
 
 ## Output Structure
 
@@ -23,7 +32,12 @@ For each component in the `anatomy` section:
   description: Component description
   props:
     - name: 'propName'
-      type: 'type'
+      type: ['value1', 'value2']
+      default: 'value'
+      description: 'Description'
+
+  - name: 'propName2'
+      type: ['value1', 'value2']
       default: 'value'
       description: 'Description'
 ```
@@ -56,13 +70,19 @@ For each component in the `anatomy` section:
       type: 'boolean'
       default: 'false'
       description: 'Whether the trigger is disabled.'
+
+    - name: 'variant'
+      type: ['solid', 'outline']
+      default: 'solid'
+      description: 'The visual style of the trigger.'
 ```
 
 ## Non-Negotiable Acceptance Criteria
 
-1. Extract ALL components from `anatomy`
-2. Keep prop order as-is
-3. Copy field names exactly: `name`, `type`, `default`, `description`
+1. Extract ALL components from `anatomy`. If the input has 15 components, the output MUST have 15 components.
+2. ZERO DATA LOSS: Do not summarize, do not truncate, do not use "...". Output the full list.
+3. Keep prop order as-is
+4. Copy field names exactly: `name`, `type`, `default`, `description`
 
 ## Input Data
 
