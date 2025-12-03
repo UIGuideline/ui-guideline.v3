@@ -1,5 +1,5 @@
 name: 'Menu'
-description: 'A menu displays a list of actions or options that a user can choose.'
+description: 'This component presents a list of options that take immediate action or navigate the user outside of the current context. It can be thought of as a collection of links or buttons.'
 code: |
   <Menu>
     <MenuTrigger>
