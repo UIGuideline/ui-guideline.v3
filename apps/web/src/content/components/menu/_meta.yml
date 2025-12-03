@@ -1,7 +1,7 @@
 title: Menu
 slug: menu
-description: 'The Menu component provides [brief description of functionality]. This component is commonly used for [use cases].'
-status: soon
+description: 'This component presents a list of options that take immediate action or navigate the user outside of the current context. It can be thought of as a collection of links or buttons.'
+status: stable
 category: 'navigation'
 keywords:
   - 'Dropdowns'
@@ -37,3 +37,4 @@ keywords:
   - 'Action List'
   - 'Action Menu'
   - 'Menu Dropdown'
+sections: ['overview', 'anatomy', 'props', 'kpis', 'systems', 'figmaKits', 'accessibility']
