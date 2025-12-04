@@ -21,3 +21,8 @@ Paso 4:
 - 4-extract-props-from-consolidated-data.md
   Pasandole el slug del componente, este extraera todas las props del componente padre y
   de sus hijos, y creara un archivo props.yml
+
+Paso 5:
+
+- 5-extract-figma-props.md
+  Pasandole el slug del componente, este extraera las props relevantes para diseño (context: 'both' o 'figma') del archivo ui-guideline.yml y generara un archivo figma-props.yml traducido al lenguaje de Figma (Variantes, Booleanos, etc.).
