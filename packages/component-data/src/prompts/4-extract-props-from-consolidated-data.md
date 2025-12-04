@@ -6,7 +6,7 @@ After consolidating component data into `ui-guideline.yml`, we need to extract t
 
 ## Your Objective
 
-Extract props from `ui-guideline.yml` and create a `props.yml` file for web content.
+Extract props from `ui-guideline.yml` and create a `code-props.yml` file for web content.
 
 ## Task
 
@@ -83,6 +83,7 @@ Iterate through EVERY SINGLE item in the `anatomy` list. Do not skip any.
 2. ZERO DATA LOSS: Do not summarize, do not truncate, do not use "...". Output the full list.
 3. Keep prop order as-is
 4. Copy field names exactly: `name`, `type`, `default`, `description`
+5. Add a space between each prop
 
 ## Input Data
 
@@ -92,7 +93,7 @@ Iterate through EVERY SINGLE item in the `anatomy` list. Do not skip any.
 
 ## Output
 
-Create the props file at: `apps/web/src/content/components/[component-name]/props.yml`
+Create the props file at: `apps/web/src/content/components/[component-name]/code-props.yml`
 
 ---
 
