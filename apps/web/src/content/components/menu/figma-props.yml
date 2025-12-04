@@ -1,0 +1,152 @@
+- component: Menu
+  props:
+    - name: 'Modal'
+      type: 'boolean'
+      usage: 'implementation'
+      defaultValue: 'True'
+      description: 'Whether the menu should be modal. When true, interaction with outside elements is disabled and only menu content is visible to screen readers.'
+      codeProp: 'modal'
+
+    - name: 'Direction'
+      type: 'variant'
+      usage: 'implementation'
+      values: ['ltr', 'rtl']
+      defaultValue: 'ltr'
+      description: 'The reading direction of the menu.'
+      codeProp: 'dir'
+
+- component: MenuTrigger
+  props:
+    - name: 'Disabled'
+      type: 'boolean'
+      usage: 'implementation'
+      defaultValue: 'False'
+      description: 'Whether the trigger is disabled.'
+      codeProp: 'disabled'
+
+- component: MenuContent
+  props:
+    - name: 'Side'
+      type: 'variant'
+      usage: 'implementation'
+      values: ['top', 'right', 'bottom', 'left']
+      defaultValue: 'bottom'
+      description: 'The preferred side of the trigger to render the menu against.'
+      codeProp: 'side'
+
+    - name: 'Side Offset'
+      type: 'text'
+      usage: 'documentation'
+      defaultValue: '0'
+      description: 'The distance in pixels from the trigger.'
+      codeProp: 'sideOffset'
+
+    - name: 'Align'
+      type: 'variant'
+      usage: 'implementation'
+      values: ['start', 'center', 'end']
+      defaultValue: 'start'
+      description: 'The preferred alignment against the trigger.'
+      codeProp: 'align'
+
+    - name: 'Align Offset'
+      type: 'text'
+      usage: 'documentation'
+      defaultValue: '0'
+      description: 'An offset in pixels from the start or end alignment options.'
+      codeProp: 'alignOffset'
+
+- component: MenuItem
+  props:
+    - name: 'Disabled'
+      type: 'boolean'
+      usage: 'implementation'
+      defaultValue: 'False'
+      description: 'Whether the menu item is disabled.'
+      codeProp: 'disabled'
+
+- component: MenuSeparator
+  props:
+    - name: 'Orientation'
+      type: 'variant'
+      usage: 'implementation'
+      values: ['horizontal', 'vertical']
+      defaultValue: 'horizontal'
+      description: 'The orientation of the separator.'
+      codeProp: 'orientation'
+
+- component: MenuArrow
+  props:
+    - name: 'Width'
+      type: 'text'
+      usage: 'documentation'
+      defaultValue: '10'
+      description: 'The width of the arrow in pixels.'
+      codeProp: 'width'
+
+    - name: 'Height'
+      type: 'text'
+      usage: 'documentation'
+      defaultValue: '5'
+      description: 'The height of the arrow in pixels.'
+      codeProp: 'height'
+
+- component: MenuCheckboxItem
+  props:
+    - name: 'Checked'
+      type: 'variant'
+      usage: 'implementation'
+      values: ['false', 'true', 'indeterminate']
+      defaultValue: 'false'
+      description: 'The controlled checked state of the checkbox item.'
+      codeProp: 'checked'
+
+    - name: 'Disabled'
+      type: 'boolean'
+      usage: 'implementation'
+      defaultValue: 'False'
+      description: 'Whether the checkbox item is disabled.'
+      codeProp: 'disabled'
+
+- component: MenuRadioGroup
+  props:
+    - name: 'Value'
+      type: 'text'
+      usage: 'documentation'
+      defaultValue: '-'
+      description: 'The value of the selected radio item.'
+      codeProp: 'value'
+
+- component: MenuRadioItem
+  props:
+    - name: 'Disabled'
+      type: 'boolean'
+      usage: 'implementation'
+      defaultValue: 'False'
+      description: 'Whether the radio item is disabled.'
+      codeProp: 'disabled'
+
+- component: MenuSubTrigger
+  props:
+    - name: 'Disabled'
+      type: 'boolean'
+      usage: 'implementation'
+      defaultValue: 'False'
+      description: 'Whether the submenu trigger is disabled.'
+      codeProp: 'disabled'
+
+- component: MenuSubContent
+  props:
+    - name: 'Side Offset'
+      type: 'text'
+      usage: 'documentation'
+      defaultValue: '0'
+      description: 'The distance in pixels from the trigger.'
+      codeProp: 'sideOffset'
+
+    - name: 'Align Offset'
+      type: 'text'
+      usage: 'documentation'
+      defaultValue: '0'
+      description: 'An offset in pixels from the alignment options.'
+      codeProp: 'alignOffset'
