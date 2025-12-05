@@ -1,0 +1,11 @@
+baseAnatomy:
+  darkImageUrl: '/components/menu/anatomy/base-anatomy/dark.png'
+  darkImageUrl2x: '/components/menu/anatomy/base-anatomy/dark@2x.png'
+
+codeAnatomy:
+  darkImageUrl: '/components/menu/anatomy/code-anatomy/dark.png'
+  darkImageUrl2x: '/components/menu/anatomy/code-anatomy/dark@2x.png'
+
+designAnatomy:
+  darkImageUrl: '/components/menu/anatomy/design-anatomy/dark.png'
+  darkImageUrl2x: '/components/menu/anatomy/design-anatomy/dark@2x.png'
