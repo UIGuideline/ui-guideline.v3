@@ -35,11 +35,13 @@ Iterate through EVERY SINGLE item in the `anatomy` list. Do not skip any.
       type: ['value1', 'value2']
       default: 'value'
       description: 'Description'
+      required: false/true
 
   - name: 'propName2'
       type: ['value1', 'value2']
       default: 'value'
       description: 'Description'
+      required: false/true
 ```
 
 ## Reference Example
@@ -52,11 +54,13 @@ Iterate through EVERY SINGLE item in the `anatomy` list. Do not skip any.
       type: 'boolean'
       default: 'false'
       description: 'The controlled open state of the menu.'
+      required: false
 
     - name: 'onOpenChange'
       type: '(open: boolean) => void'
       default: '-'
       description: 'Event handler called when the open state of the menu changes.'
+      required: false
 
 - component: MenuTrigger
   description: The button that toggles the menu.
@@ -65,16 +69,19 @@ Iterate through EVERY SINGLE item in the `anatomy` list. Do not skip any.
       type: 'boolean'
       default: 'false'
       description: 'Change the default rendered element for the one passed as a child.'
+      required: false
 
     - name: 'disabled'
       type: 'boolean'
       default: 'false'
       description: 'Whether the trigger is disabled.'
+      required: false
 
     - name: 'variant'
       type: ['solid', 'outline']
       default: 'solid'
       description: 'The visual style of the trigger.'
+      required: false
 ```
 
 ## Non-Negotiable Acceptance Criteria
