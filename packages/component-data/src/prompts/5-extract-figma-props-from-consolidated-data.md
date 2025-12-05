@@ -137,7 +137,7 @@ These are the ONLY valid property types you can use. Do not create custom types 
       usage: 'implementation'
       defaultValue: 'False'
       description: 'Toggles the disabled state of the button.'
-      required: 'False'
+      required: false
       codeProp: 'disabled'
 
     - name: 'Size'
@@ -146,7 +146,7 @@ These are the ONLY valid property types you can use. Do not create custom types 
       values: ['Small', 'Medium', 'Large']
       defaultValue: 'Medium'
       description: 'Controls the size of the button.'
-      required: 'False'
+      required: false
       codeProp: 'size'
 
     - name: 'Label'
@@ -154,7 +154,7 @@ These are the ONLY valid property types you can use. Do not create custom types 
       usage: 'documentation'
       defaultValue: '-'
       description: 'The text content of the button.'
-      required: 'False'
+      required: false
       codeProp: 'label'
 ```
 

@@ -279,7 +279,7 @@ anatomy:
         default: '-'
         description: 'The value of the selected radio item.'
         required: true
-        context: 'both'
+        context: 'code'
 
       - name: 'onValueChange'
         type: '(value: string) => void'
