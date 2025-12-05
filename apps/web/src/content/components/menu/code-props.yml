@@ -26,7 +26,7 @@
       default: '"ltr"'
       description: 'The reading direction of the menu.'
 
-- component: MenuTrigger
+- component: Menu.Trigger
   description: The button that toggles the menu. The menu content will position itself against the trigger.
   props:
     - name: 'asChild'
@@ -39,7 +39,7 @@
       default: 'false'
       description: 'Whether the trigger is disabled.'
 
-- component: MenuContent
+- component: Menu.Content
   description: The component that pops out when the menu is open. Contains all menu items.
   props:
     - name: 'asChild'
@@ -87,7 +87,7 @@
       default: '-'
       description: 'Event handler called when focus moves to the trigger after closing.'
 
-- component: MenuItem
+- component: Menu.Item
   description: An individual selectable item within the menu.
   props:
     - name: 'asChild'
@@ -115,7 +115,7 @@
       default: '-'
       description: 'The unique value of the menu item.'
 
-- component: MenuGroup
+- component: Menu.Group
   description: Used to group multiple related menu items together.
   props:
     - name: 'asChild'
@@ -123,7 +123,7 @@
       default: 'false'
       description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
 
-- component: MenuLabel
+- component: Menu.Label
   description: A non-focusable label used to name a group of menu items.
   props:
     - name: 'asChild'
@@ -131,7 +131,7 @@
       default: 'false'
       description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
 
-- component: MenuSeparator
+- component: Menu.Separator
   description: A visual separator used to divide menu items.
   props:
     - name: 'asChild'
@@ -144,7 +144,7 @@
       default: '"horizontal"'
       description: 'The orientation of the separator.'
 
-- component: MenuArrow
+- component: Menu.Arrow
   description: An optional arrow element to render alongside the menu. Helps visually link the trigger with the menu content.
   props:
     - name: 'asChild'
@@ -162,7 +162,7 @@
       default: '5'
       description: 'The height of the arrow in pixels.'
 
-- component: MenuCheckboxItem
+- component: Menu.CheckboxItem
   description: A menu item that can be controlled and rendered like a checkbox.
   props:
     - name: 'asChild'
@@ -190,7 +190,7 @@
       default: '-'
       description: 'Optional text used for typeahead purposes.'
 
-- component: MenuRadioGroup
+- component: Menu.RadioGroup
   description: Used to group multiple radio items together.
   props:
     - name: 'asChild'
@@ -208,7 +208,7 @@
       default: '-'
       description: 'Event handler called when the selected value changes.'
 
-- component: MenuRadioItem
+- component: Menu.RadioItem
   description: A menu item that can be controlled and rendered like a radio button within a group.
   props:
     - name: 'asChild'
@@ -231,7 +231,7 @@
       default: '-'
       description: 'Optional text used for typeahead purposes.'
 
-- component: MenuItemIndicator
+- component: Menu.ItemIndicator
   description: Renders when the parent checkbox or radio item is checked. Can be used to display a checkmark icon.
   props:
     - name: 'asChild'
@@ -244,7 +244,7 @@
       default: 'false'
       description: 'Used to force mounting when more control is needed. Useful for controlling animation.'
 
-- component: MenuSub
+- component: Menu.Sub
   description: Contains all the parts of a submenu.
   props:
     - name: 'open'
@@ -262,7 +262,7 @@
       default: '-'
       description: 'Event handler called when the open state of the submenu changes.'
 
-- component: MenuSubTrigger
+- component: Menu.SubTrigger
   description: A menu item that opens a submenu. Must be rendered inside MenuSub.
   props:
     - name: 'asChild'
@@ -280,7 +280,7 @@
       default: '-'
       description: 'Optional text used for typeahead purposes.'
 
-- component: MenuSubContent
+- component: Menu.SubContent
   description: The component that pops out when a submenu is open. Must be rendered inside MenuSub.
   props:
     - name: 'asChild'

@@ -15,7 +15,7 @@
       description: 'The reading direction of the menu.'
       codeProp: 'dir'
 
-- component: MenuTrigger
+- component: Menu.Trigger
   props:
     - name: 'Disabled'
       type: 'boolean'
@@ -24,7 +24,7 @@
       description: 'Whether the trigger is disabled.'
       codeProp: 'disabled'
 
-- component: MenuContent
+- component: Menu.Content
   props:
     - name: 'Side'
       type: 'variant'
@@ -56,7 +56,7 @@
       description: 'An offset in pixels from the start or end alignment options.'
       codeProp: 'alignOffset'
 
-- component: MenuItem
+- component: Menu.Item
   props:
     - name: 'Disabled'
       type: 'boolean'
@@ -65,7 +65,7 @@
       description: 'Whether the menu item is disabled.'
       codeProp: 'disabled'
 
-- component: MenuSeparator
+- component: Menu.Separator
   props:
     - name: 'Orientation'
       type: 'variant'
@@ -75,7 +75,7 @@
       description: 'The orientation of the separator.'
       codeProp: 'orientation'
 
-- component: MenuArrow
+- component: Menu.Arrow
   props:
     - name: 'Width'
       type: 'text'
@@ -91,7 +91,7 @@
       description: 'The height of the arrow in pixels.'
       codeProp: 'height'
 
-- component: MenuCheckboxItem
+- component: Menu.CheckboxItem
   props:
     - name: 'Checked'
       type: 'variant'
@@ -108,7 +108,7 @@
       description: 'Whether the checkbox item is disabled.'
       codeProp: 'disabled'
 
-- component: MenuRadioGroup
+- component: Menu.RadioGroup
   props:
     - name: 'Value'
       type: 'text'
@@ -117,7 +117,7 @@
       description: 'The value of the selected radio item.'
       codeProp: 'value'
 
-- component: MenuRadioItem
+- component: Menu.RadioItem
   props:
     - name: 'Disabled'
       type: 'boolean'
@@ -126,7 +126,7 @@
       description: 'Whether the radio item is disabled.'
       codeProp: 'disabled'
 
-- component: MenuSubTrigger
+- component: Menu.SubTrigger
   props:
     - name: 'Disabled'
       type: 'boolean'
@@ -135,7 +135,7 @@
       description: 'Whether the submenu trigger is disabled.'
       codeProp: 'disabled'
 
-- component: MenuSubContent
+- component: Menu.SubContent
   props:
     - name: 'Side Offset'
       type: 'text'
