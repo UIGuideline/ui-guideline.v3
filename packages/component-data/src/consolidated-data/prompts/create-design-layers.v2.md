@@ -2,9 +2,9 @@
 
 ## Context
 
-The goal of this project is to aggregate, standardize, and compare the wisdom of the top 10 UI libraries (like Radix UI, Ark UI, Chakra UI, etc.). After extracting raw data from each library, we need to consolidate this information into a single, unified component definition that represents the "standard" or "best practice" across all systems.
+The goal of this project is to aggregate, standardize, and compare the wisdom of the top 10 UI libraries (like Radix UI, Base UI, shadcn/ui, etc.). After extracting raw data from each library, we need to consolidate this information into a single, unified component definition that represents the "standard" or "best practice" across all systems.
 
-This project aims to bridge the gap between code-based component specifications and visual design implementation in Figma. After consolidating component data into a unified `ui-guideline.yml`, we need to translate this technical specification into a `design-layers.yml` file that designers can use as a blueprint for building components in Figma.
+This task aims to bridge the gap between code-based component specifications and visual design implementation in Figma. After consolidating component data into a unified `ui-guideline.yml`, we need to translate this technical specification into a `design-layers.yml` file that designers can use as a blueprint for building components in Figma.
 
 The `design-layers.yml` represents the exact layer hierarchy a designer would see in Figma's left sidebar: frames, auto-layouts, components, variants, instances, text layers, and vectors.
 

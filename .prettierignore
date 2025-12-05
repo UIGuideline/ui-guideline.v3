@@ -14,3 +14,6 @@ coverage/
 
 # Code anatomy snippets (documentation only, not meant to be formatted)
 apps/web/src/content/components/**/code-anatomy/**
+
+# Prompt files (must maintain exact formatting as written)
+packages/component-data/src/prompts/**
