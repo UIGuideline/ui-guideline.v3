@@ -100,7 +100,6 @@ The `standard_role` field is a **guide to help you identify and compare similar 
 
 - **Type Normalization**: If multiple systems have the same prop with slightly different type definitions, choose the most comprehensive or common one.
 - **Default Values**: Use the most common default value. If there's a tie, prefer the value from high-quality systems (Radix UI, shadcn, React Aria, Base UI).
-- **Required Props**: Prop tables often include a `required` field. If not, look for an `asterisk` ('*') next to the prop name to identify required props.
 - **Descriptions**: Write a clear, concise description (BUT self-explained), that captures the essence from multiple systems. Prioritize descriptions from well-documented systems.
 - **Exclude Niche Props**: Apply the same 80/20 rule to props. If a prop is only for a specialized variant (that we excluded), exclude the prop too.
 

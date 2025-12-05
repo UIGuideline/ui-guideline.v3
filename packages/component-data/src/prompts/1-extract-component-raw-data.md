@@ -29,6 +29,10 @@ Identify every sub-component (part) of the anatomy.
     - This is your "absolute truth" field. In Ark UI for example, the component that opens the menu is called `Menu.Trigger`. You assign it `standard_role: trigger`. In Mantine UI, that same component is called `Menu.Target`. You will also assign it `standard_role: trigger`. Result: When you analyze all the Reference UI Libraries, you will filter by `standard_role: trigger` and see that 8 libraries call it "Trigger" and 2 call it "Target". Bingo!
 - **is_essential**: Set to true if the component is required for the basic functionality. Set to false if it is optional (like a separator or icon).
 
+## Props Mapping Rules
+- **required**: Prop tables often include a `required` field. If not, look for an `asterisk` ('*') next to the prop name to identify required props.
+
+
 ## YAML Schema Structure
 
 ```yaml
@@ -59,12 +63,14 @@ anatomy:
       - name: "propName"
         type: "propType"
         default: "value" or "-"
+        required: true/false
         description: "Exact description from docs."
 
     props:
       - name: "propName"
         type: "propType"
         default: "value" or "-"
+        required: true/false
         description: "Exact description from docs."
 
   - library_name: "ExactName.FromLibrary"
@@ -75,6 +81,7 @@ anatomy:
       - name: "propName"
         type: "propType"
         default: "value" or "-"
+        required: true/false
         description: "Exact description from docs."
 ```
 
@@ -103,11 +110,13 @@ anatomy:
       - name: 'closeOnSelect'
         type: 'boolean'
         default: 'true'
+        required: true
         description: 'Whether the menu should close when an item is selected.'
 
       - name: 'dir'
         type: "'ltr' | 'rtl'"
         default: '-'
+        required: false
         description: "The document's text/writing direction."
 ```
 
