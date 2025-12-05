@@ -2,7 +2,7 @@
 
 ## Context
 
-The goal of this project is to aggregate, standardize, and compare the wisdom of the top 10 UI libraries (like Radix UI, Ark UI, Chakra UI, etc.). After extracting raw data from each library, we need to consolidate this information into a single, unified component definition that represents the "standard" or "best practice" across all systems.
+The goal of this project is to aggregate, standardize, and compare the wisdom of the top 10 UI libraries (like Radix UI, Base UI, shadcn/ui, Chakra UI, etc.). After extracting raw data from each library, we need to consolidate this information into a single, unified component definition that represents the "standard" or "best practice" across all systems.
 
 ## Your Objective
 
@@ -35,12 +35,11 @@ This rule applies to **all naming decisions** across the component:
 This criterion is **only applied when there's ambiguity or a tie** in prop inclusion:
 
 - **Respect Majority First**: If 6+ systems (out of 10) have a prop, **include it**. If only 2-3 systems have a prop, **exclude it**.
-
 - **Tiebreaker Situations**: When approximately **half of the systems** have a prop and half don't (e.g., 4/10 vs 6/10, or 5/10 vs 5/10), ask yourself:
   - Is this prop valuable for designers or developers?
   - Does it enhance accessibility, customization, or functionality?
   - Is it well-documented and descriptive?
-  - Does it appear in high-quality systems (Radix, React Aria, Ark)?
+  - Does it appear in high-quality systems (Radix, React Aria, Base UI)?
 - **Decision Rule**:
   - If the answer is **YES** → Include the prop (even if it's 4/10 or 5/10)
   - If the answer is **NO** → Exclude the prop
@@ -101,6 +100,7 @@ The `standard_role` field is a **guide to help you identify and compare similar 
 
 - **Type Normalization**: If multiple systems have the same prop with slightly different type definitions, choose the most comprehensive or common one.
 - **Default Values**: Use the most common default value. If there's a tie, prefer the value from high-quality systems (Radix UI, shadcn, React Aria, Base UI).
+- **Required Props**: Prop tables often include a `required` field. If not, look for an `asterisk` ('*') next to the prop name to identify required props.
 - **Descriptions**: Write a clear, concise description (BUT self-explained), that captures the essence from multiple systems. Prioritize descriptions from well-documented systems.
 - **Exclude Niche Props**: Apply the same 80/20 rule to props. If a prop is only for a specialized variant (that we excluded), exclude the prop too.
 
@@ -213,11 +213,13 @@ anatomy:
       - name: 'open'
         type: 'boolean'
         default: 'false'
+        required: true
         description: 'Whether the component is open.'
 
       - name: 'onOpenChange'
         type: '(open: boolean) => void'
         default: '-'
+        required: true
         description: 'Event handler called when the open state changes.'
 
   - library_name: 'ComponentTrigger'
@@ -228,6 +230,7 @@ anatomy:
       - name: 'asChild'
         type: 'boolean'
         default: 'false'
+        required: false
         description: 'Change the default rendered element for the one passed as a child.'
 
   - library_name: 'ComponentContent'
@@ -238,6 +241,7 @@ anatomy:
       - name: 'align'
         type: '"start" | "center" | "end"'
         default: '"center"'
+        required: false
         description: 'The alignment of the content.'
 ```
 
@@ -272,16 +276,19 @@ anatomy:
       - name: 'open'
         type: 'boolean'
         default: 'false'
+        required: true
         description: 'The controlled open state of the menu.'
 
       - name: 'defaultOpen'
         type: 'boolean'
         default: 'false'
+        required: false
         description: 'The default open state when initially rendered.'
 
       - name: 'onOpenChange'
         type: '(open: boolean) => void'
         default: '-'
+        required: false
         description: 'Event handler called when the open state changes.'
 
   - library_name: 'MenuTrigger'
@@ -292,6 +299,7 @@ anatomy:
       - name: 'asChild'
         type: 'boolean'
         default: 'false'
+        required: false
         description: 'Change the default rendered element for the one passed as a child.'
 ```
 
