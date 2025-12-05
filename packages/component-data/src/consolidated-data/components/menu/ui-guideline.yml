@@ -24,24 +24,27 @@ anatomy:
   - library_name: 'Menu'
     standard_role: 'root'
     description: 'The root component that manages the open state and context of the menu.'
-    is_essential: true
+    is_essential: false
     props:
       - name: 'open'
         type: 'boolean'
         default: 'false'
         description: 'The controlled open state of the menu.'
+        required: false
         context: 'code'
 
       - name: 'defaultOpen'
         type: 'boolean'
         default: 'false'
         description: 'The default open state when initially rendered. Use when you do not need to control the open state.'
+        required: false
         context: 'code'
 
       - name: 'onOpenChange'
         type: '(open: boolean) => void'
         default: '-'
         description: 'Event handler called when the open state of the menu changes.'
+        required: false
         context: 'code'
 
   - library_name: 'MenuTrigger'
@@ -53,12 +56,14 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
       - name: 'disabled'
         type: 'boolean'
         default: 'false'
         description: 'Whether the trigger is disabled.'
+        required: false
         context: 'both'
 
   - library_name: 'MenuContent'
@@ -70,54 +75,56 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
       - name: 'loop'
         type: 'boolean'
         default: 'false'
         description: 'When true, keyboard navigation will loop from the last item to the first, and vice versa.'
-        context: 'code'
+        required: false
+        context: 'both'
 
       - name: 'side'
         type: '"top" | "right" | "bottom" | "left"'
         default: '"bottom"'
         description: 'The preferred side of the trigger to render the menu against.'
+        required: false
         context: 'both'
 
       - name: 'sideOffset'
         type: 'number'
         default: '0'
         description: 'The distance in pixels from the trigger.'
+        required: false
         context: 'both'
 
       - name: 'align'
         type: '"start" | "center" | "end"'
         default: '"start"'
         description: 'The preferred alignment against the trigger.'
+        required: false
         context: 'both'
 
       - name: 'alignOffset'
         type: 'number'
         default: '0'
         description: 'An offset in pixels from the start or end alignment options.'
+        required: false
         context: 'both'
-
-      - name: 'onEscapeKeyDown'
-        type: '(event: KeyboardEvent) => void'
-        default: '-'
-        description: 'Event handler called when the escape key is pressed.'
-        context: 'code'
 
       - name: 'onInteractOutside'
         type: '(event: Event) => void'
         default: '-'
         description: 'Event handler called when an interaction occurs outside the menu.'
+        required: false
         context: 'code'
 
       - name: 'onCloseAutoFocus'
         type: '(event: Event) => void'
         default: '-'
         description: 'Event handler called when focus moves to the trigger after closing.'
+        required: false
         context: 'code'
 
   - library_name: 'MenuItem'
@@ -129,30 +136,28 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
       - name: 'disabled'
         type: 'boolean'
         default: 'false'
         description: 'Whether the menu item is disabled.'
+        required: false
         context: 'both'
 
       - name: 'onSelect'
         type: '(event: Event) => void'
         default: '-'
         description: 'Event handler called when the user selects an item via mouse or keyboard.'
-        context: 'code'
-
-      - name: 'textValue'
-        type: 'string'
-        default: '-'
-        description: 'Optional text used for typeahead purposes. By default, typeahead uses the text content of the item.'
+        required: false
         context: 'code'
 
       - name: 'value'
         type: 'string'
         default: '-'
         description: 'The unique value of the menu item.'
+        required: true
         context: 'code'
 
   - library_name: 'MenuGroup'
@@ -164,6 +169,7 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
   - library_name: 'MenuLabel'
@@ -175,6 +181,7 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
   - library_name: 'MenuSeparator'
@@ -186,12 +193,14 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
       - name: 'orientation'
         type: '"horizontal" | "vertical"'
         default: '"horizontal"'
         description: 'The orientation of the separator.'
+        required: false
         context: 'both'
 
   - library_name: 'MenuArrow'
@@ -203,18 +212,21 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
       - name: 'width'
         type: 'number'
         default: '10'
         description: 'The width of the arrow in pixels.'
+        required: false
         context: 'both'
 
       - name: 'height'
         type: 'number'
         default: '5'
         description: 'The height of the arrow in pixels.'
+        required: false
         context: 'both'
 
   - library_name: 'MenuCheckboxItem'
@@ -226,31 +238,29 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
       - name: 'checked'
         type: "boolean | 'indeterminate'"
         default: 'false'
         description: 'The controlled checked state of the checkbox item.'
+        required: false
         context: 'both'
 
       - name: 'onCheckedChange'
         type: "(checked: boolean | 'indeterminate') => void"
         default: '-'
         description: 'Event handler called when the checked state changes.'
+        required: false
         context: 'code'
 
       - name: 'disabled'
         type: 'boolean'
         default: 'false'
         description: 'Whether the checkbox item is disabled.'
+        required: false
         context: 'both'
-
-      - name: 'textValue'
-        type: 'string'
-        default: '-'
-        description: 'Optional text used for typeahead purposes.'
-        context: 'code'
 
   - library_name: 'MenuRadioGroup'
     standard_role: 'radio-group'
@@ -261,12 +271,14 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
       - name: 'value'
         type: 'string'
         default: '-'
         description: 'The value of the selected radio item.'
+        required: true
         context: 'both'
 
       - name: 'onValueChange'
@@ -284,42 +296,22 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
       - name: 'value'
         type: 'string'
         default: '-'
         description: 'The value of the radio item.'
+        required: true
         context: 'code'
 
       - name: 'disabled'
         type: 'boolean'
         default: 'false'
         description: 'Whether the radio item is disabled.'
+        required: false
         context: 'both'
-
-      - name: 'textValue'
-        type: 'string'
-        default: '-'
-        description: 'Optional text used for typeahead purposes.'
-        context: 'code'
-
-  - library_name: 'MenuItemIndicator'
-    standard_role: 'item-indicator'
-    description: 'Renders when the parent checkbox or radio item is checked. Can be used to display a checkmark icon.'
-    is_essential: false
-    props:
-      - name: 'asChild'
-        type: 'boolean'
-        default: 'false'
-        description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
-        context: 'code'
-
-      - name: 'forceMount'
-        type: 'boolean'
-        default: 'false'
-        description: 'Used to force mounting when more control is needed. Useful for controlling animation.'
-        context: 'code'
 
   - library_name: 'MenuSub'
     standard_role: 'sub-menu'
@@ -330,18 +322,21 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'The controlled open state of the submenu.'
+        required: false
         context: 'code'
 
       - name: 'defaultOpen'
         type: 'boolean'
         default: 'false'
         description: 'The default open state when initially rendered.'
+        required: false
         context: 'code'
 
       - name: 'onOpenChange'
         type: '(open: boolean) => void'
         default: '-'
         description: 'Event handler called when the open state of the submenu changes.'
+        required: false
         context: 'code'
 
   - library_name: 'MenuSubTrigger'
@@ -353,19 +348,15 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
       - name: 'disabled'
         type: 'boolean'
         default: 'false'
         description: 'Whether the submenu trigger is disabled.'
+        required: false
         context: 'both'
-
-      - name: 'textValue'
-        type: 'string'
-        default: '-'
-        description: 'Optional text used for typeahead purposes.'
-        context: 'code'
 
   - library_name: 'MenuSubContent'
     standard_role: 'sub-content'
@@ -376,22 +367,26 @@ anatomy:
         type: 'boolean'
         default: 'false'
         description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+        required: false
         context: 'code'
 
       - name: 'loop'
         type: 'boolean'
         default: 'false'
         description: 'When true, keyboard navigation will loop from the last item to the first.'
+        required: false
         context: 'code'
 
       - name: 'sideOffset'
         type: 'number'
         default: '0'
         description: 'The distance in pixels from the trigger.'
+        required: false
         context: 'both'
 
       - name: 'alignOffset'
         type: 'number'
         default: '0'
         description: 'An offset in pixels from the alignment options.'
+        required: false
         context: 'both'
