@@ -16,16 +16,6 @@
       default: '-'
       description: 'Event handler called when the open state of the menu changes.'
 
-    - name: 'modal'
-      type: 'boolean'
-      default: 'true'
-      description: 'Whether the menu should be modal. When true, interaction with outside elements is disabled and only menu content is visible to screen readers.'
-
-    - name: 'dir'
-      type: ['ltr', 'rtl']
-      default: '"ltr"'
-      description: 'The reading direction of the menu.'
-
 - component: Menu.Trigger
   description: The button that toggles the menu. The menu content will position itself against the trigger.
   props:
