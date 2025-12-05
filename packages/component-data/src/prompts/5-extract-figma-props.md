@@ -90,6 +90,7 @@ These are the ONLY valid property types you can use. Do not create custom types 
       values: ['Option1', 'Option2'] # Required for variant type
       defaultValue: 'Default Value'
       description: 'Description for the designer.'
+      required: false/true
       codeProp: 'originalCodePropName' # Reference to the code prop
 ```
 
@@ -110,13 +111,19 @@ These are the ONLY valid property types you can use. Do not create custom types 
 - name: 'disabled'
   type: 'boolean'
   default: 'false'
+  required: false
   context: 'both'
+
 - name: 'size'
   type: '"sm" | "md" | "lg"'
   default: '"md"'
+  required: false
   context: 'both'
+
 - name: 'label'
   type: 'string'
+  default: '-'
+  required: false
   context: 'both'
 ```
 
@@ -130,6 +137,7 @@ These are the ONLY valid property types you can use. Do not create custom types 
       usage: 'implementation'
       defaultValue: 'False'
       description: 'Toggles the disabled state of the button.'
+      required: 'False'
       codeProp: 'disabled'
 
     - name: 'Size'
@@ -138,13 +146,15 @@ These are the ONLY valid property types you can use. Do not create custom types 
       values: ['Small', 'Medium', 'Large']
       defaultValue: 'Medium'
       description: 'Controls the size of the button.'
+      required: 'False'
       codeProp: 'size'
 
     - name: 'Label'
       type: 'text'
       usage: 'documentation'
-      defaultValue: 'Button'
+      defaultValue: '-'
       description: 'The text content of the button.'
+      required: 'False'
       codeProp: 'label'
 ```
 
