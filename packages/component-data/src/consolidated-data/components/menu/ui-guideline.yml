@@ -2,22 +2,22 @@ name: 'Menu'
 description: 'This component presents a list of options that take immediate action or navigate the user outside of the current context. It can be thought of as a collection of links or buttons.'
 code: |
   <Menu>
-    <MenuTrigger>
+    <Menu.Trigger>
       <Button>Open Menu</Button>
-    </MenuTrigger>
-    <MenuContent>
-      <MenuGroup>
-        <MenuLabel>My Account</MenuLabel>
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>Settings</MenuItem>
-      </MenuGroup>
-      <MenuSeparator />
-      <MenuGroup>
-        <MenuLabel>Actions</MenuLabel>
-        <MenuItem>New File</MenuItem>
-        <MenuItem>Export</MenuItem>
-      </MenuGroup>
-    </MenuContent>
+    </Menu.Trigger>
+    <Menu.Content>
+      <Menu.Group>
+        <Menu.Label>My Account</Menu.Label>
+        <Menu.Item>Profile</Menu.Item>
+        <Menu.Item>Settings</Menu.Item>
+      </Menu.Group>
+      <Menu.Separator />
+      <Menu.Group>
+        <Menu.Label>Actions</Menu.Label>
+        <Menu.Item>New File</Menu.Item>
+        <Menu.Item>Export</Menu.Item>
+      </Menu.Group>
+    </Menu.Content>
   </Menu>
 
 anatomy:
@@ -47,7 +47,7 @@ anatomy:
         required: false
         context: 'code'
 
-  - library_name: 'MenuTrigger'
+  - library_name: 'Menu.Trigger'
     standard_role: 'trigger'
     description: 'The button that toggles the menu. The menu content will position itself against the trigger.'
     is_essential: true
@@ -66,7 +66,7 @@ anatomy:
         required: false
         context: 'both'
 
-  - library_name: 'MenuContent'
+  - library_name: 'Menu.Content'
     standard_role: 'content'
     description: 'The component that pops out when the menu is open. Contains all menu items.'
     is_essential: true
@@ -127,7 +127,7 @@ anatomy:
         required: false
         context: 'code'
 
-  - library_name: 'MenuItem'
+  - library_name: 'Menu.Item'
     standard_role: 'item'
     description: 'An individual selectable item within the menu.'
     is_essential: true
@@ -160,7 +160,7 @@ anatomy:
         required: true
         context: 'code'
 
-  - library_name: 'MenuGroup'
+  - library_name: 'Menu.Group'
     standard_role: 'group'
     description: 'Used to group multiple related menu items together.'
     is_essential: false
@@ -172,7 +172,7 @@ anatomy:
         required: false
         context: 'code'
 
-  - library_name: 'MenuLabel'
+  - library_name: 'Menu.Label'
     standard_role: 'label'
     description: 'A non-focusable label used to name a group of menu items.'
     is_essential: false
@@ -184,7 +184,7 @@ anatomy:
         required: false
         context: 'code'
 
-  - library_name: 'MenuSeparator'
+  - library_name: 'Menu.Separator'
     standard_role: 'separator'
     description: 'A visual separator used to divide menu items.'
     is_essential: false
@@ -203,7 +203,7 @@ anatomy:
         required: false
         context: 'both'
 
-  - library_name: 'MenuArrow'
+  - library_name: 'Menu.Arrow'
     standard_role: 'arrow'
     description: 'An optional arrow element to render alongside the menu. Helps visually link the trigger with the menu content.'
     is_essential: false
@@ -229,7 +229,7 @@ anatomy:
         required: false
         context: 'both'
 
-  - library_name: 'MenuCheckboxItem'
+  - library_name: 'Menu.CheckboxItem'
     standard_role: 'checkbox-item'
     description: 'A menu item that can be controlled and rendered like a checkbox.'
     is_essential: false
@@ -262,7 +262,7 @@ anatomy:
         required: false
         context: 'both'
 
-  - library_name: 'MenuRadioGroup'
+  - library_name: 'Menu.RadioGroup'
     standard_role: 'radio-group'
     description: 'Used to group multiple radio items together.'
     is_essential: false
@@ -287,7 +287,7 @@ anatomy:
         description: 'Event handler called when the selected value changes.'
         context: 'code'
 
-  - library_name: 'MenuRadioItem'
+  - library_name: 'Menu.RadioItem'
     standard_role: 'radio-item'
     description: 'A menu item that can be controlled and rendered like a radio button within a group.'
     is_essential: false
@@ -313,7 +313,7 @@ anatomy:
         required: false
         context: 'both'
 
-  - library_name: 'MenuSub'
+  - library_name: 'Menu.Sub'
     standard_role: 'sub-menu'
     description: 'Contains all the parts of a submenu.'
     is_essential: false
@@ -339,7 +339,7 @@ anatomy:
         required: false
         context: 'code'
 
-  - library_name: 'MenuSubTrigger'
+  - library_name: 'Menu.SubTrigger'
     standard_role: 'sub-trigger'
     description: 'A menu item that opens a submenu. Must be rendered inside MenuSub.'
     is_essential: false
@@ -358,7 +358,7 @@ anatomy:
         required: false
         context: 'both'
 
-  - library_name: 'MenuSubContent'
+  - library_name: 'Menu.SubContent'
     standard_role: 'sub-content'
     description: 'The component that pops out when a submenu is open. Must be rendered inside MenuSub.'
     is_essential: false

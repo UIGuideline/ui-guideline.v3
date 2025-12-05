@@ -1,0 +1,1065 @@
+name: 'Menu'
+description: 'A menu displays a list of actions or options that a user can choose.'
+
+layers:
+  # ============================================
+  # BUILDING BLOCKS (leaf components)
+  # Define smallest reusable pieces first
+  # ============================================
+
+  # --------------------------------------------
+  # MenuItemIndicator
+  # Used inside checkbox/radio items to show checked state
+  # --------------------------------------------
+  - type: 'component'
+    name: 'MenuItemIndicator'
+    description: 'Renders when the parent checkbox or radio item is checked. Can be used to display a checkmark icon.'
+    children:
+      - type: 'frame'
+        name: 'Container'
+        description: 'Fixed-size container for the indicator icon'
+        children:
+          - type: 'vector'
+            name: 'CheckIcon'
+            description: 'Checkmark or dot icon indicating selected state'
+
+  # --------------------------------------------
+  # MenuLabel
+  # Non-interactive heading for groups
+  # --------------------------------------------
+  - type: 'component'
+    name: 'MenuLabel'
+    description: 'A non-focusable label used to name a group of menu items.'
+    children:
+      - type: 'autoLayout'
+        name: 'Container'
+        direction: 'horizontal'
+        children:
+          - type: 'text'
+            name: 'Label'
+            description: 'Group heading text'
+
+  # --------------------------------------------
+  # MenuSeparator
+  # Visual divider with orientation variants
+  # --------------------------------------------
+  - type: 'componentSet'
+    name: 'MenuSeparator'
+    description: 'A visual separator used to divide menu items.'
+    children:
+      - type: 'component'
+        name: 'Orientation=Horizontal'
+        children:
+          - type: 'frame'
+            name: 'Line'
+            description: 'Horizontal divider line'
+
+      - type: 'component'
+        name: 'Orientation=Vertical'
+        children:
+          - type: 'frame'
+            name: 'Line'
+            description: 'Vertical divider line'
+
+  # --------------------------------------------
+  # MenuArrow
+  # Optional decorative arrow pointing to trigger
+  # --------------------------------------------
+  - type: 'component'
+    name: 'MenuArrow'
+    description: 'An optional arrow element to render alongside the menu. Helps visually link the trigger with the menu content.'
+    children:
+      - type: 'vector'
+        name: 'Arrow'
+        description: 'Triangle shape pointing toward trigger'
+
+  # --------------------------------------------
+  # MenuItem
+  # Interactive item with state variants
+  # --------------------------------------------
+  - type: 'componentSet'
+    name: 'MenuItem'
+    description: 'An individual selectable item within the menu.'
+    children:
+      - type: 'component'
+        name: 'State=Default'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'instance'
+                name: 'StartIcon'
+                description: 'Optional leading icon'
+                optional: true
+
+              - type: 'text'
+                name: 'Label'
+                description: 'Menu item text'
+
+              - type: 'instance'
+                name: 'EndIcon'
+                description: 'Optional trailing icon'
+                optional: true
+
+              - type: 'text'
+                name: 'Shortcut'
+                description: 'Optional keyboard shortcut hint'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Hover'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'instance'
+                name: 'StartIcon'
+                optional: true
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'instance'
+                name: 'EndIcon'
+                optional: true
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Focused'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'instance'
+                name: 'StartIcon'
+                optional: true
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'instance'
+                name: 'EndIcon'
+                optional: true
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Disabled'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'instance'
+                name: 'StartIcon'
+                optional: true
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'instance'
+                name: 'EndIcon'
+                optional: true
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+  # --------------------------------------------
+  # MenuCheckboxItem
+  # Checkbox item with checked and state variants
+  # --------------------------------------------
+  - type: 'componentSet'
+    name: 'MenuCheckboxItem'
+    description: 'A menu item that can be controlled and rendered like a checkbox.'
+    children:
+      # Checked=False variants
+      - type: 'component'
+        name: 'State=Default, Checked=False'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                description: 'Reserved space for checkbox indicator'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+                    visible: false
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Hover, Checked=False'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+                    visible: false
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Focused, Checked=False'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+                    visible: false
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Disabled, Checked=False'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+                    visible: false
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      # Checked=True variants
+      - type: 'component'
+        name: 'State=Default, Checked=True'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Hover, Checked=True'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Focused, Checked=True'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Disabled, Checked=True'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      # Checked=Indeterminate variants
+      - type: 'component'
+        name: 'State=Default, Checked=Indeterminate'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+                    description: 'Shows indeterminate/minus icon'
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Hover, Checked=Indeterminate'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Focused, Checked=Indeterminate'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+      - type: 'component'
+        name: 'State=Disabled, Checked=Indeterminate'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'text'
+                name: 'Shortcut'
+                optional: true
+
+  # --------------------------------------------
+  # MenuRadioItem
+  # Radio item with selected and state variants
+  # --------------------------------------------
+  - type: 'componentSet'
+    name: 'MenuRadioItem'
+    description: 'A menu item that can be controlled and rendered like a radio button within a group.'
+    children:
+      # Selected=False variants
+      - type: 'component'
+        name: 'State=Default, Selected=False'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                description: 'Reserved space for radio indicator'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+                    visible: false
+
+              - type: 'text'
+                name: 'Label'
+
+      - type: 'component'
+        name: 'State=Hover, Selected=False'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+                    visible: false
+
+              - type: 'text'
+                name: 'Label'
+
+      - type: 'component'
+        name: 'State=Focused, Selected=False'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+                    visible: false
+
+              - type: 'text'
+                name: 'Label'
+
+      - type: 'component'
+        name: 'State=Disabled, Selected=False'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+                    visible: false
+
+              - type: 'text'
+                name: 'Label'
+
+      # Selected=True variants
+      - type: 'component'
+        name: 'State=Default, Selected=True'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+      - type: 'component'
+        name: 'State=Hover, Selected=True'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+      - type: 'component'
+        name: 'State=Focused, Selected=True'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+      - type: 'component'
+        name: 'State=Disabled, Selected=True'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'frame'
+                name: 'IndicatorSlot'
+                children:
+                  - type: 'instance'
+                    name: 'MenuItemIndicator'
+
+              - type: 'text'
+                name: 'Label'
+
+  # --------------------------------------------
+  # MenuSubTrigger
+  # Submenu trigger with arrow indicator
+  # --------------------------------------------
+  - type: 'componentSet'
+    name: 'MenuSubTrigger'
+    description: 'A menu item that opens a submenu. Must be rendered inside MenuSub.'
+    children:
+      - type: 'component'
+        name: 'State=Default'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'instance'
+                name: 'StartIcon'
+                optional: true
+
+              - type: 'text'
+                name: 'Label'
+                description: 'Submenu trigger text'
+
+              - type: 'vector'
+                name: 'ChevronIcon'
+                description: 'Arrow indicating submenu direction'
+
+      - type: 'component'
+        name: 'State=Hover'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'instance'
+                name: 'StartIcon'
+                optional: true
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'vector'
+                name: 'ChevronIcon'
+
+      - type: 'component'
+        name: 'State=Focused'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'instance'
+                name: 'StartIcon'
+                optional: true
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'vector'
+                name: 'ChevronIcon'
+
+      - type: 'component'
+        name: 'State=Disabled'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'horizontal'
+            children:
+              - type: 'instance'
+                name: 'StartIcon'
+                optional: true
+
+              - type: 'text'
+                name: 'Label'
+
+              - type: 'vector'
+                name: 'ChevronIcon'
+
+  # ============================================
+  # CONTAINER COMPONENTS
+  # These contain instances of building blocks
+  # ============================================
+
+  # --------------------------------------------
+  # MenuGroup
+  # Groups related items with optional label
+  # Hierarchy: MenuGroup > MenuLabel + MenuItem(s)
+  # --------------------------------------------
+  - type: 'component'
+    name: 'MenuGroup'
+    description: 'Used to group multiple related menu items together.'
+    children:
+      - type: 'autoLayout'
+        name: 'Container'
+        direction: 'vertical'
+        description: 'Vertical stack containing optional label and items'
+        children:
+          - type: 'instance'
+            name: 'MenuLabel'
+            description: 'Optional group heading'
+            optional: true
+
+          - type: 'instance'
+            name: 'MenuItem'
+            description: 'First menu item in group'
+
+          - type: 'instance'
+            name: 'MenuItem'
+            description: 'Additional menu items'
+
+  # --------------------------------------------
+  # MenuRadioGroup
+  # Groups radio items for single selection
+  # --------------------------------------------
+  - type: 'component'
+    name: 'MenuRadioGroup'
+    description: 'Used to group multiple radio items together.'
+    children:
+      - type: 'autoLayout'
+        name: 'Container'
+        direction: 'vertical'
+        description: 'Vertical stack of radio items'
+        children:
+          - type: 'instance'
+            name: 'MenuLabel'
+            description: 'Optional group heading'
+            optional: true
+
+          - type: 'instance'
+            name: 'MenuRadioItem'
+
+          - type: 'instance'
+            name: 'MenuRadioItem'
+
+          - type: 'instance'
+            name: 'MenuRadioItem'
+
+  # --------------------------------------------
+  # MenuSubContent
+  # Submenu content panel
+  # --------------------------------------------
+  - type: 'component'
+    name: 'MenuSubContent'
+    description: 'The component that pops out when a submenu is open. Must be rendered inside MenuSub.'
+    children:
+      - type: 'autoLayout'
+        name: 'Container'
+        direction: 'vertical'
+        description: 'Vertical stack of submenu items'
+        children:
+          - type: 'instance'
+            name: 'MenuItem'
+
+          - type: 'instance'
+            name: 'MenuItem'
+
+          - type: 'instance'
+            name: 'MenuSeparator'
+            optional: true
+
+          - type: 'instance'
+            name: 'MenuItem'
+
+  # --------------------------------------------
+  # MenuSub
+  # Submenu wrapper containing trigger and content
+  # --------------------------------------------
+  - type: 'component'
+    name: 'MenuSub'
+    description: 'Contains all the parts of a submenu.'
+    children:
+      - type: 'autoLayout'
+        name: 'Container'
+        direction: 'horizontal'
+        description: 'Horizontal layout showing trigger with adjacent submenu'
+        children:
+          - type: 'instance'
+            name: 'MenuSubTrigger'
+
+          - type: 'instance'
+            name: 'MenuSubContent'
+
+  # --------------------------------------------
+  # MenuContent
+  # Main menu popover panel with side/align variants
+  # Hierarchy: MenuContent > MenuGroup(s) + MenuSeparator(s)
+  # --------------------------------------------
+  - type: 'componentSet'
+    name: 'MenuContent'
+    description: 'The component that pops out when the menu is open. Contains all menu items.'
+    children:
+      # Side=Bottom (default), all alignments
+      - type: 'component'
+        name: 'Side=Bottom, Align=Start'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            description: 'Vertical stack containing groups and separators'
+            children:
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+      - type: 'component'
+        name: 'Side=Bottom, Align=Center'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+      - type: 'component'
+        name: 'Side=Bottom, Align=End'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+      # Side=Top, all alignments
+      - type: 'component'
+        name: 'Side=Top, Align=Start'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+      - type: 'component'
+        name: 'Side=Top, Align=Center'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+      - type: 'component'
+        name: 'Side=Top, Align=End'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+      # Side=Right, all alignments
+      - type: 'component'
+        name: 'Side=Right, Align=Start'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+      - type: 'component'
+        name: 'Side=Right, Align=Center'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+      - type: 'component'
+        name: 'Side=Right, Align=End'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+      # Side=Left, all alignments
+      - type: 'component'
+        name: 'Side=Left, Align=Start'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+      - type: 'component'
+        name: 'Side=Left, Align=Center'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+      - type: 'component'
+        name: 'Side=Left, Align=End'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            direction: 'vertical'
+            children:
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuSeparator'
+
+              - type: 'instance'
+                name: 'MenuGroup'
+
+              - type: 'instance'
+                name: 'MenuArrow'
+                optional: true
+
+  # --------------------------------------------
+  # MenuTrigger
+  # Button wrapper that toggles the menu
+  # Hierarchy: MenuTrigger > Button
+  # --------------------------------------------
+  - type: 'componentSet'
+    name: 'MenuTrigger'
+    description: 'The button that toggles the menu. The menu content will position itself against the trigger.'
+    children:
+      - type: 'component'
+        name: 'State=Default'
+        children:
+          - type: 'instance'
+            name: 'Button'
+            description: 'Trigger button instance'
+
+      - type: 'component'
+        name: 'State=Hover'
+        children:
+          - type: 'instance'
+            name: 'Button'
+
+      - type: 'component'
+        name: 'State=Focused'
+        children:
+          - type: 'instance'
+            name: 'Button'
+
+      - type: 'component'
+        name: 'State=Disabled'
+        children:
+          - type: 'instance'
+            name: 'Button'
+
+  # --------------------------------------------
+  # Menu (Root)
+  # Complete assembled menu showing trigger and content
+  # This is primarily for documentation/demo purposes
+  # Hierarchy: Menu > MenuTrigger + MenuContent
+  # --------------------------------------------
+  - type: 'component'
+    name: 'Menu'
+    description: 'The root component that manages the open state and context of the menu. Use for documentation and demos.'
+    children:
+      - type: 'autoLayout'
+        name: 'Container'
+        direction: 'vertical'
+        description: 'Shows trigger with menu content positioned below'
+        children:
+          - type: 'instance'
+            name: 'MenuTrigger'
+
+          - type: 'instance'
+            name: 'MenuContent'
