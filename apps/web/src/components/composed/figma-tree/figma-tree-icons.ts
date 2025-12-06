@@ -34,9 +34,9 @@ export const FIGMA_TREE_ICONS: Record<string, IconCatalog> = {
   component: IconCatalog.figmaComponent,
   instance: IconCatalog.figmaInstance,
   variant: IconCatalog.figmaVariant,
+  autoLayout: IconCatalog.figmaAutoLayout,
   frame: IconCatalog.figmaFrame,
   group: IconCatalog.figmaGroup,
-  autoLayout: IconCatalog.figmaAutoLayout,
   text: IconCatalog.figmaText,
 };
 

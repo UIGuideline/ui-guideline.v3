@@ -110,7 +110,7 @@ const codeAnatomy = defineCollection({
  * Uses recursive schema for nested layer structure
  */
 const baseLayerSchema = z.object({
-  type: z.string(),
+  figmaType: z.string(),
   name: z.string(),
   description: z.string().optional(),
   defaultOpen: z.boolean().optional(),
