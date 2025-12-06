@@ -101,3 +101,62 @@ parts:
     optional: true
     description: Optional icon displayed after the label.
 ```
+
+# Figma vs. Code: The Translation Layer (2025 Edition)
+
+This document serves as a translation layer between Designers (Figma Layers Panel) and Developers (Codebase/DOM). It maps visual concepts to their technical implementations.
+
+---
+
+## 1. UI Elements (The DOM)
+
+**Where to look:** Left Sidebar (Layers Panel).  
+**Goal:** Understanding how Figma layers translate to HTML structure.
+
+### Icon (Visual) → Definitions
+
+| Icon          | Figma Element          | Designer Definition                                                                                                         | Developer Analogy (HTML/CSS)      |
+| ------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| **# (Hash)**  | **Frame**              | The main container. It has dimensions, styling (fill, stroke), and can clip content. Used for screens, cards, and wrappers. | `<div>`, `<section>`, `<article>` |
+| **II or =**   | **Auto Layout**        | A Frame with "Smart Layout" active. It automatically handles spacing, padding, and alignment of children.                   | `display: flex`                   |
+| **↵ (Arrow)** | **Auto Layout (Wrap)** | An Auto Layout frame that pushes items to a new line.                                                                       | `flex-wrap: wrap`                 |
+| **[ : ]**     | **Group**              | A folder used only for grouping; no layout.                                                                                 | Fragment (`<>`) or none           |
+| **❖**         | **Main Component**     | The master definition of a reusable UI element.                                                                             | Component definition              |
+| **◇**         | **Instance**           | A copy of a component.                                                                                                      | `<Button size="large" />`         |
+| **T**         | **Text**               | A text layer.                                                                                                               | `<h1>`, `<p>`, `<span>`           |
+| **☿**         | **Vector / Union**     | Custom shapes or icons.                                                                                                     | `<svg>`, `<path>`                 |
+| **◲**         | **Section**            | Canvas organization area.                                                                                                   | Folder / Route                    |
+| **[ ]**       | **Absolute Position**  | Ignores layout flow.                                                                                                        | `position: absolute`              |
+
+---
+
+## 2. Component Properties (The API)
+
+**Where to look:** Right Sidebar (Properties Panel).  
+**Goal:** Defining the “Props” (Arguments) of a component.
+
+### Property Types
+
+| Property Type     | Visual Control  | Functionality               | Code Equivalent                               |
+| ----------------- | --------------- | --------------------------- | --------------------------------------------- |
+| **Boolean**       | Toggle Switch   | Show/hide layers            | `{showIcon && <Icon />}`                      |
+| **Text**          | Input Field     | Edit text                   | `<Card title="Dashboard" />`                  |
+| **Instance Swap** | Dropdown        | Swap nested components      | `<Button icon={<DownloadIcon />} />`          |
+| **Variant**       | Dropdown / Tabs | Style/size states           | `type="primary"`                              |
+| **Nested Props**  | Nested List     | Expose child props          | `<Card buttonProps={{ isDisabled: true }} />` |
+| **Slot**          | Purple Region   | Placeholder for any content | `<Modal>{children}</Modal>`                   |
+
+---
+
+## 🚨 Important "Missing" Types in Figma
+
+- **Numbers:** Figma cannot create numeric props.
+- **Functions:** Cannot pass `onClick` or code functions.
+
+---
+
+## 💡 Quick Vocabulary
+
+- **“Expose this property”** = Make this a prop in code.
+- **“Detach Instance”** = Hardcode / Eject.
+- **“Variable”** = Design Token (`var(--color-primary)`).
