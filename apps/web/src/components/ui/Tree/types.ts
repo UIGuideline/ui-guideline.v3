@@ -3,7 +3,7 @@ export interface TreeNodeData {
    * Type of the element (e.g., "component", "text", "frame").
    * This value is used to determine which icon to display.
    */
-  type: string;
+  figmaType: string;
 
   /**
    * Display name of the node.
