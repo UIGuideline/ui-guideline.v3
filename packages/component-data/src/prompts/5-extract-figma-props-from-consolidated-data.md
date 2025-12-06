@@ -16,7 +16,7 @@ There are TWO distinct taxonomies in Figma. Do NOT confuse them:
 
 ### Table 1: Figma Elements (UI Elements) - The Layers Panel
 
-These are the visual nodes/layers in the Figma canvas. Use this table to determine the **component's `type`** field.
+These are the visual nodes/layers in the Figma canvas. Use this table to determine the **component's `figmaType`** field.
 
 | Type | Figma Element | Description | Code Equivalent |
 |------|---------------|-------------|-----------------|
@@ -30,7 +30,7 @@ These are the visual nodes/layers in the Figma canvas. Use this table to determi
 
 ### Table 2: Figma Component Properties (Props) - The Properties Panel
 
-These are the configurable properties exposed to designers. Use this table to determine each **prop's `type`** field.
+These are the configurable properties exposed to designers. Use this table to determine each **prop's `figmaType`** field.
 
 | Type | Description | Code Equivalent |
 |------|-------------|-----------------|
@@ -72,7 +72,7 @@ For each prop, using **Table 2 (Figma Component Properties)**, determine the cor
 | `string` or `number` | `text` |
 | `ReactNode` | `instanceSwap` |
 | `children` | `slot` |
-| Callbacks, Offsets, or none of the above props (`onClick`, `onSubmit`, `sideOffset`, `alignOffset`) | `documentationOnly` |
+| Callbacks, Offsets, and code-only props that designers should know about but cannot implement in Figma (`onClick`, `onSubmit`, `sideOffset`, `alignOffset`) | `documentationOnly` |
 
 ### Step 4: Format Output
 Create a YAML entry for each prop following the Output Structure.
@@ -83,25 +83,26 @@ Create a YAML entry for each prop following the Output Structure.
 
 ```yaml
 - component: ComponentName
-  type: 'instance' | 'component' | 'frame' | 'autoLayout' | 'group' | 'text' | 'vector'  # From Table 1
+  figmaType: 'instance' | 'component' | 'frame' | 'autoLayout' | 'group' | 'text' | 'vector'  # From Table 1
   props:
-    - name: 'Figma Property Name'  # Title Case (e.g., "Show Icon", "Size")
-      type: 'variant' | 'boolean' | 'text' | 'instanceSwap' | 'slot' | 'documentationOnly'  # From Table 2
-      values: ['Option1', 'Option2']  # Required ONLY for variant type
-      defaultValue: 'Default Value'
+    - name: 'originalPropName'  # Keep original camelCase name from code
+      type: 'string' | 'number' | 'boolean' | ['option1', 'option2', 'option3']  # The natural code type
+      figmaType: 'variant' | 'boolean' | 'text' | 'instanceSwap' | 'slot' | 'documentationOnly'  # From Table 2
+      default: 'Default Value'
       description: 'Description for the designer.'
       required: false
-      codeProp: 'originalCodePropName'  # Reference to the code prop
 ```
 
 ---
 
 ## Translation Guidelines
 
-- **Naming**: Use Title Case for property names ("Left Icon" not "leftIcon")
-- **Defaults**: Humanize values (`true` → `True`, `"sm"` → `"Small"`)
-- **Values**: For `variant` types, list ALL possible options with Title Case
-- **documentationOnly**: Use for callbacks, handlers, and code-only props that designers should know about but cannot implement
+- **Naming**: Keep original prop name in camelCase (e.g., `sideOffset`, `leftIcon`)
+- **Type**: Copy the natural code type exactly from the source (`number`, `string`, `boolean`, `ReactNode`, etc.)
+- **FigmaType**: Map the code type to the appropriate Figma field type
+- **Defaults**: Keep default values as-is from source
+- **Description**: Copy the description from the source
+- **Required**: Copy the required flag from the source
 
 ---
 
@@ -117,7 +118,7 @@ Create a YAML entry for each prop following the Output Structure.
   context: 'both'
 
 - name: 'size'
-  type: '"sm" | "md" | "lg"'
+  type: ["sm", "md", "lg"]
   default: '"md"'
   required: false
   context: 'both'
@@ -145,43 +146,42 @@ Create a YAML entry for each prop following the Output Structure.
 
 ```yaml
 - component: Button
-  type: 'component'
+  figmaType: 'component'
   props:
-    - name: 'Disabled'
+    - name: 'disabled'
       type: 'boolean'
-      defaultValue: 'False'
+      figmaType: 'boolean'
+      default: 'false'
       description: 'Toggles the disabled state of the button.'
       required: false
-      codeProp: 'disabled'
 
-    - name: 'Size'
-      type: 'variant'
-      values: ['Small', 'Medium', 'Large']
-      defaultValue: 'Medium'
+    - name: 'size'
+      type: ["sm", "md", "lg"]
+      figmaType: 'variant'
+      default: 'md'
       description: 'Controls the size of the button.'
       required: false
-      codeProp: 'size'
 
-    - name: 'Label'
-      type: 'text'
-      defaultValue: '-'
+    - name: 'label'
+      type: 'string'
+      figmaType: 'text'
+      default: '-'
       description: 'The text content of the button.'
       required: false
-      codeProp: 'label'
 
-    - name: 'Left Icon'
-      type: 'instanceSwap'
-      defaultValue: '-'
+    - name: 'leftIcon'
+      type: 'ReactNode'
+      figmaType: 'instanceSwap'
+      default: '-'
       description: 'Slot for the left icon component.'
       required: false
-      codeProp: 'leftIcon'
 
-    - name: 'On Click'
-      type: 'documentationOnly'
-      defaultValue: '-'
+    - name: 'onClick'
+      type: '() => void'
+      figmaType: 'documentationOnly'
+      default: '-'
       description: 'Handler called when the button is clicked.'
       required: false
-      codeProp: 'onClick'
 ```
 
 ---
@@ -190,11 +190,11 @@ Create a YAML entry for each prop following the Output Structure.
 
 1. Only include props with `context: 'both'` or `context: 'figma'`.
 2. Use the exact Output Structure provided.
-3. Transform prop names to Title Case (human readable).
-4. Component `type` MUST come from **Table 1** (Figma Elements).
-5. Prop `type` MUST come from **Table 2** (Figma Component Properties).
-6. Include `values` array for ALL `variant` types.
-7. Use `documentationOnly` for callbacks and handlers (onClick, onSubmit, etc.).
+3. Keep original prop names in camelCase.
+4. Include both `type` (code type) and `figmaType` (Figma field type) for each prop.
+5. Component `figmaType` MUST come from **Table 1** (Figma Elements).
+6. Prop `figmaType` MUST come from **Table 2** (Figma Component Properties).
+7. Use `documentationOnly` for callbacks, offsets, and code-only props that designers should know about but cannot implement in Figma.
 
 ---
 
