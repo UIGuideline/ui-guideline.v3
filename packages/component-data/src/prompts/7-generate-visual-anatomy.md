@@ -49,3 +49,8 @@ You will receive the data in this format:
 
 ### Props Table (Context)
 [The YAML or Markdown table of props]
+
+---
+
+**Best model**: Gemini 3 Pro + Nano Banana
+**Platform**: gemini.google.com

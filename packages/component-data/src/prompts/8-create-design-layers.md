@@ -88,3 +88,8 @@ layers:
 ## Output
 
 Save the result to `apps/web/src/content/components/[component]/design-layers.yml`.
+
+---
+
+**Best model**: Gemini 3 Pro
+**Platform**: Google Gravity
