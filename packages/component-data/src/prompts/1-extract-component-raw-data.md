@@ -2,7 +2,7 @@
 
 ## Context
 
-The goal of this project is to aggregate, standardize, and compare the wisdom of the top 10 UI libraries (like Radix UI, Ark UI, Chakra UI, etc.). We analyze components based on the "Composition Components" methodology to extract their anatomy and props.
+The goal of this project is to aggregate, standardize, and compare the wisdom of the top 10 UI libraries (like Radix UI, Base UI, shadncn/ui, Chakra UI, etc.). We analyze components based on the "Composition Components" methodology to extract their anatomy and props.
 
 ## Your Objective
 

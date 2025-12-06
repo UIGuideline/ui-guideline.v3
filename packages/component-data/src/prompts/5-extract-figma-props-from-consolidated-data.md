@@ -8,100 +8,102 @@ We need to provide designers with a "Props Table" that speaks their language (Fi
 
 Extract properties from `ui-guideline.yml` that are relevant to design (where `context` is 'both' or 'figma') and translate them into Figma terminology.
 
+---
+
+## ⚠️ IMPORTANT: Figma Taxonomy
+
+There are TWO distinct taxonomies in Figma. Do NOT confuse them:
+
+### Table 1: Figma Elements (UI Elements) - The Layers Panel
+
+These are the visual nodes/layers in the Figma canvas. Use this table to determine the **component's `type`** field.
+
+| Type | Figma Element | Description | Code Equivalent |
+|------|---------------|-------------|-----------------|
+| `frame` | Frame | Main container with dimensions, styling, and can clip content | `<div>`, `<section>` |
+| `autoLayout` | Auto Layout | Frame with smart layout (spacing, padding, alignment) | `display: flex` |
+| `group` | Group | Folder to move items together, no styling | Fragment `<>`, avoid in code |
+| `component` | Main Component | Master definition of a reusable UI element | `export const Button = ()` |
+| `instance` | Instance | A copy of a component, inherits from Main Component | `<Button size="lg" />` |
+| `text` | Text | Text layer | `<h1>`, `<p>`, `<span>` |
+| `vector` | Vector/Union | Custom icons or shapes | `<svg>`, `<path>` |
+
+### Table 2: Figma Component Properties (Props) - The Properties Panel
+
+These are the configurable properties exposed to designers. Use this table to determine each **prop's `type`** field.
+
+| Type | Description | Code Equivalent |
+|------|-------------|-----------------|
+| `boolean` | Shows/hides a layer (on/off toggle) | `{showIcon && <Icon />}` or `isDisabled={true}` |
+| `text` | Free-form text content or numeric values | `label="Enviar"` or `width={24}` |
+| `instanceSwap` | Swap a nested component for another from the library | `icon={<DownloadIcon />}` |
+| `variant` | Distinct visual states or styles (enums) | `variant="primary"` or `size="lg"` |
+| `slot` | Placeholder area for children content | `<Modal>{customContent}</Modal>` or `<div>{children}</div>` |
+| `documentationOnly` | Props that exist only in documentation (callbacks, handlers, offsets, etc.) | `onClick` or `sideOffset` |
+
+### 🚨 Limitations
+
+- **Numbers**: Figma has no native "Number Property". Use `text` as workaround.
+
+---
+
 ## Task
 
 For each component in the `anatomy` section:
 
-1. **Filter**: Select only props where `context` is `'both'` or `'figma'`. Ignore `'code'` only props.
-2. **Translate**: Map the code property to a Figma property type and name.
-   - **Boolean** (`true/false`) -> **boolean** (e.g., "Show Icon")
-   - **Enum** (`'sm' | 'md'`) -> **variant** (e.g., Size=Small, Medium).
-   - **String** -> **text** (e.g., Label Text).
-   - **Slot/Node** -> **instance** (e.g., Icon Instance).
-3. **Format**: Create a YAML entry for each prop.
+### Step 1: Filter
+Select only props where `context` is `'both'` or `'figma'`. Ignore `'code'` only props.
 
-## Figma Property Types Reference
+### Step 2: Determine Component Type
+Using **Table 1 (Figma Elements)**, determine what type of Figma element this component represents:
+- Is it the main component? → `component`
+- Could it be a reusable component? → `instance`
+- Is it a container? → `frame` or `autoLayout` 
+- Is it text content? → `text`
+- Is it a shape? → `vector`
 
-These are the ONLY valid property types you can use. Do not create custom types or deviate from this list:
+### Step 3: Map Each Prop Type
+For each prop, using **Table 2 (Figma Component Properties)**, determine the correct type:
 
-### `variant`
+| If Code Is... | Then Figma Prop Type Is... |
+|-------------|---------------------------|
+| `boolean` (simple true/false toggle) | `boolean` |
+| Enum/Union (`'sm' \| 'md' \| 'lg'`) | `variant` (include `values` array) |
+| `string` or `number` | `text` |
+| `ReactNode` | `instanceSwap` |
+| `children` | `slot` |
+| Callbacks, Offsets, or none of the above props (`onClick`, `onSubmit`, `sideOffset`, `alignOffset`) | `documentationOnly` |
 
-**When to use**: For properties with 2+ predefined options that change the visual appearance or structure.
-**Examples**:
+### Step 4: Format Output
+Create a YAML entry for each prop following the Output Structure.
 
-- Size (Small, Medium, Large)
-- Orientation (Horizontal, Vertical)
-- Side (Top, Right, Bottom, Left)
-- Alignment (Start, Center, End)
-- State options that need multiple values (Checked, Unchecked, Indeterminate)
-
-**Why**: Variants in Figma allow designers to swap between different versions of a component visually in the properties panel.
-
-### `boolean`
-
-**When to use**: For simple on/off toggles that control visibility or state.
-**Examples**:
-
-- Disabled (True/False)
-- Show Icon (True/False)
-- Has Label (True/False)
-
-**Why**: Boolean properties in Figma appear as toggle switches, making them intuitive for binary states.
-
-### `text`
-
-**When to use**: For properties that accept free-form text input OR numeric values that designers should specify.
-**Examples**:
-
-- Label content
-- Placeholder text
-- Width/Height values (e.g., '10', '24')
-- Offset values (e.g., '0', '8')
-
-**Why**: Text properties allow designers to input custom content or values. Use this for numeric properties like spacing/sizing that aren't predefined variants.
-
-### `instance`
-
-**When to use**: For slots that accept swappable component instances.
-**Examples**:
-
-- Left Icon (swap different icon components)
-- Avatar (swap different avatar variants)
-- Custom content slot
-
-**Why**: Instance Swap properties let designers replace one component with another from the library, maintaining the slot structure.
-
-## Property Type Selection Rules
-
-1. **Enum with 2+ options** → `variant` (ALWAYS include `values` array)
-2. **Simple true/false** → `boolean`
-3. **Strings or numbers** → `text`
-4. **Component slots** → `instance`
-5. **If unsure between variant and boolean**: Choose `boolean` for simple toggles, `variant` if you need more than 2 states or if the states have semantic meaning beyond on/off.
+---
 
 ## Output Structure
 
 ```yaml
 - component: ComponentName
+  type: 'instance' | 'component' | 'frame' | 'autoLayout' | 'group' | 'text' | 'vector'  # From Table 1
   props:
-    - name: 'Figma Property Name' # e.g., "State", "Show Icon", "Label"
-      type: 'variant' | 'boolean' | 'text' | 'instance'
-      usage: 'implementation' | 'documentation'
-      values: ['Option1', 'Option2'] # Required for variant type
+    - name: 'Figma Property Name'  # Title Case (e.g., "Show Icon", "Size")
+      type: 'variant' | 'boolean' | 'text' | 'instanceSwap' | 'slot' | 'documentationOnly'  # From Table 2
+      values: ['Option1', 'Option2']  # Required ONLY for variant type
       defaultValue: 'Default Value'
       description: 'Description for the designer.'
-      required: false/true
-      codeProp: 'originalCodePropName' # Reference to the code prop
+      required: false
+      codeProp: 'originalCodePropName'  # Reference to the code prop
 ```
+
+---
 
 ## Translation Guidelines
 
-- **States**: If a prop represents a state (like `disabled`, `checked`, `error`), it should be a standalone boolean.
-  - _Example_: `disabled` -> Name: "Disabled", Type: "boolean"
-- **Naming**: Use Title Case for Figma property names (e.g., "Left Icon" instead of "leftIcon").
-- **Defaults**: Ensure the default value matches the Figma type (e.g., `true` -> `True`, `"sm"` -> `"Small"` if renamed).
-- **Usage**: Set to 'implementation' if it requires Figma setup (variants, booleans), or 'documentation' if it's informational only.
-- **Values**: For variant types, list all possible options in lowercase matching FIGMA_TREE_ICONS naming.
+- **Naming**: Use Title Case for property names ("Left Icon" not "leftIcon")
+- **Defaults**: Humanize values (`true` → `True`, `"sm"` → `"Small"`)
+- **Values**: For `variant` types, list ALL possible options with Title Case
+- **documentationOnly**: Use for callbacks, handlers, and code-only props that designers should know about but cannot implement
+
+---
 
 ## Reference Example
 
@@ -125,16 +127,28 @@ These are the ONLY valid property types you can use. Do not create custom types 
   default: '-'
   required: false
   context: 'both'
+
+- name: 'leftIcon'
+  type: 'ReactNode'
+  default: '-'
+  required: false
+  context: 'both'
+
+- name: 'onClick'
+  type: '() => void'
+  default: '-'
+  required: false
+  context: 'both'
 ```
 
 **Output (Figma)**:
 
 ```yaml
 - component: Button
+  type: 'component'
   props:
     - name: 'Disabled'
       type: 'boolean'
-      usage: 'implementation'
       defaultValue: 'False'
       description: 'Toggles the disabled state of the button.'
       required: false
@@ -142,7 +156,6 @@ These are the ONLY valid property types you can use. Do not create custom types 
 
     - name: 'Size'
       type: 'variant'
-      usage: 'implementation'
       values: ['Small', 'Medium', 'Large']
       defaultValue: 'Medium'
       description: 'Controls the size of the button.'
@@ -151,21 +164,39 @@ These are the ONLY valid property types you can use. Do not create custom types 
 
     - name: 'Label'
       type: 'text'
-      usage: 'documentation'
       defaultValue: '-'
       description: 'The text content of the button.'
       required: false
       codeProp: 'label'
+
+    - name: 'Left Icon'
+      type: 'instanceSwap'
+      defaultValue: '-'
+      description: 'Slot for the left icon component.'
+      required: false
+      codeProp: 'leftIcon'
+
+    - name: 'On Click'
+      type: 'documentationOnly'
+      defaultValue: '-'
+      description: 'Handler called when the button is clicked.'
+      required: false
+      codeProp: 'onClick'
 ```
+
+---
 
 ## Non-Negotiable Acceptance Criteria
 
-1. Only include props with `context: 'both'` or `context: 'design'`.
+1. Only include props with `context: 'both'` or `context: 'figma'`.
 2. Use the exact Output Structure provided.
 3. Transform prop names to Title Case (human readable).
-4. Map types correctly to Figma concepts using lowercase: variant, boolean, text, instance.
-5. Set usage to 'implementation' or 'documentation' (lowercase).
-6. Include values array for all variant types.
+4. Component `type` MUST come from **Table 1** (Figma Elements).
+5. Prop `type` MUST come from **Table 2** (Figma Component Properties).
+6. Include `values` array for ALL `variant` types.
+7. Use `documentationOnly` for callbacks and handlers (onClick, onSubmit, etc.).
+
+---
 
 ## Input Data
 
