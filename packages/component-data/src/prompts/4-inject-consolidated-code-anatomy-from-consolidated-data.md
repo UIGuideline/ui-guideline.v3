@@ -94,3 +94,8 @@ File: `apps/web/src/content/components/menu/code-anatomy.yml`
 **Component Name**: [INSERT COMPONENT NAME]
 **Consolidated Data**: `packages/component-data/src/consolidated-data/components/[component-name]/ui-guideline.yml`
 **Target File**: `apps/web/src/content/components/[component-name]/code-anatomy.yml`
+
+---
+
+**Best model**: Gemini 3 Pro
+**Platform**: Google Gravity
