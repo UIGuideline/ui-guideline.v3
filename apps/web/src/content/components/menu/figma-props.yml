@@ -1,149 +1,150 @@
+- component: Menu
+  figmaType: 'component'
+  props: []
+
 - component: Menu.Trigger
+  figmaType: 'instance'
   props:
-    - name: 'Disabled'
+    - name: 'disabled'
       type: 'boolean'
-      usage: 'implementation'
-      defaultValue: 'False'
+      figmaType: 'boolean'
+      default: 'false'
       description: 'Whether the trigger is disabled.'
       required: false
-      codeProp: 'disabled'
 
 - component: Menu.Content
+  figmaType: 'autoLayout'
   props:
-    - name: 'Loop'
+    - name: 'loop'
       type: 'boolean'
-      usage: 'documentation'
-      defaultValue: 'False'
+      figmaType: 'boolean'
+      default: 'false'
       description: 'When true, keyboard navigation will loop from the last item to the first, and vice versa.'
       required: false
-      codeProp: 'loop'
 
-    - name: 'Side'
-      type: 'variant'
-      usage: 'implementation'
-      values: ['Top', 'Right', 'Bottom', 'Left']
-      defaultValue: 'Bottom'
+    - name: 'side'
+      type: ['top', 'right', 'bottom', 'left']
+      figmaType: 'variant'
+      default: 'bottom'
       description: 'The preferred side of the trigger to render the menu against.'
       required: false
-      codeProp: 'side'
 
-    - name: 'Side Offset'
-      type: 'text'
-      usage: 'documentation'
-      defaultValue: '0'
+    - name: 'sideOffset'
+      type: 'number'
+      figmaType: 'documentationOnly'
+      default: '0'
       description: 'The distance in pixels from the trigger.'
       required: false
-      codeProp: 'sideOffset'
 
-    - name: 'Align'
-      type: 'variant'
-      usage: 'implementation'
-      values: ['Start', 'Center', 'End']
-      defaultValue: 'Start'
+    - name: 'align'
+      type: ['start', 'center', 'end']
+      figmaType: 'variant'
+      default: 'start'
       description: 'The preferred alignment against the trigger.'
       required: false
-      codeProp: 'align'
 
-    - name: 'Align Offset'
-      type: 'text'
-      usage: 'documentation'
-      defaultValue: '0'
+    - name: 'alignOffset'
+      type: 'number'
+      figmaType: 'documentationOnly'
+      default: '0'
       description: 'An offset in pixels from the start or end alignment options.'
       required: false
-      codeProp: 'alignOffset'
 
 - component: Menu.Item
+  figmaType: 'instance'
   props:
-    - name: 'Disabled'
+    - name: 'disabled'
       type: 'boolean'
-      usage: 'implementation'
-      defaultValue: 'False'
+      figmaType: 'boolean'
+      default: 'false'
       description: 'Whether the menu item is disabled.'
       required: false
-      codeProp: 'disabled'
+
+- component: Menu.Group
+  figmaType: 'autoLayout'
+  props: []
+
+- component: Menu.Label
+  figmaType: 'text'
+  props: []
 
 - component: Menu.Separator
+  figmaType: 'frame'
   props:
-    - name: 'Orientation'
-      type: 'variant'
-      usage: 'implementation'
-      values: ['Horizontal', 'Vertical']
-      defaultValue: 'Horizontal'
+    - name: 'orientation'
+      type: ['horizontal', 'vertical']
+      figmaType: 'variant'
+      default: 'horizontal'
       description: 'The orientation of the separator.'
       required: false
-      codeProp: 'orientation'
 
 - component: Menu.Arrow
+  figmaType: 'vector'
   props:
-    - name: 'Width'
-      type: 'text'
-      usage: 'implementation'
-      defaultValue: '10'
+    - name: 'width'
+      type: 'number'
+      figmaType: 'text'
+      default: '10'
       description: 'The width of the arrow in pixels.'
       required: false
-      codeProp: 'width'
 
-    - name: 'Height'
-      type: 'text'
-      usage: 'implementation'
-      defaultValue: '5'
+    - name: 'height'
+      type: 'number'
+      figmaType: 'text'
+      default: '5'
       description: 'The height of the arrow in pixels.'
       required: false
-      codeProp: 'height'
 
 - component: Menu.CheckboxItem
+  figmaType: 'instance'
   props:
-    - name: 'Checked'
-      type: 'variant'
-      usage: 'implementation'
-      values: ['True', 'False', 'Indeterminate']
-      defaultValue: 'False'
+    - name: 'checked'
+      type: "boolean | 'indeterminate'"
+      figmaType: 'variant'
+      default: 'false'
       description: 'The controlled checked state of the checkbox item.'
       required: false
-      codeProp: 'checked'
 
-    - name: 'Disabled'
+    - name: 'disabled'
       type: 'boolean'
-      usage: 'implementation'
-      defaultValue: 'False'
+      figmaType: 'boolean'
+      default: 'false'
       description: 'Whether the checkbox item is disabled.'
       required: false
-      codeProp: 'disabled'
 
 - component: Menu.RadioItem
+  figmaType: 'instance'
   props:
-    - name: 'Disabled'
+    - name: 'disabled'
       type: 'boolean'
-      usage: 'implementation'
-      defaultValue: 'False'
+      figmaType: 'boolean'
+      default: 'false'
       description: 'Whether the radio item is disabled.'
       required: false
-      codeProp: 'disabled'
 
 - component: Menu.SubTrigger
+  figmaType: 'instance'
   props:
-    - name: 'Disabled'
+    - name: 'disabled'
       type: 'boolean'
-      usage: 'implementation'
-      defaultValue: 'False'
+      figmaType: 'boolean'
+      default: 'false'
       description: 'Whether the submenu trigger is disabled.'
       required: false
-      codeProp: 'disabled'
 
 - component: Menu.SubContent
+  figmaType: 'autoLayout'
   props:
-    - name: 'Side Offset'
-      type: 'text'
-      usage: 'documentation'
-      defaultValue: '0'
+    - name: 'sideOffset'
+      type: 'number'
+      figmaType: 'documentationOnly'
+      default: '0'
       description: 'The distance in pixels from the trigger.'
       required: false
-      codeProp: 'sideOffset'
 
-    - name: 'Align Offset'
-      type: 'text'
-      usage: 'documentation'
-      defaultValue: '0'
+    - name: 'alignOffset'
+      type: 'number'
+      figmaType: 'documentationOnly'
+      default: '0'
       description: 'An offset in pixels from the alignment options.'
       required: false
-      codeProp: 'alignOffset'
