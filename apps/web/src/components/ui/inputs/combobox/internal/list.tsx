@@ -3,7 +3,7 @@ import { Command } from '../../../command';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const list = tv({
-  base: 'max-h-50 overflow-y-auto overflow-x-hidden p-2',
+  base: 'max-h-80 overflow-y-auto overflow-x-hidden p-2',
 });
 
 export interface ListProps extends ComponentProps<typeof Command.List>, VariantProps<typeof list> {

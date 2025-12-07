@@ -5,18 +5,24 @@ import type { VariantProps } from 'tailwind-variants';
 import { tv } from 'tailwind-variants';
 
 const avatar = tv({
-  base: ['relative flex shrink-0 overflow-hidden rounded-full'],
+  base: ['relative flex shrink-0 overflow-hidden'],
   variants: {
     size: {
+      [AvatarSize.xxs]: 'size-4',
       [AvatarSize.xs]: 'size-6',
       [AvatarSize.sm]: 'size-8',
       [AvatarSize.base]: 'size-10',
       [AvatarSize.lg]: 'size-12',
       [AvatarSize.xl]: 'size-14',
     },
+    isRounded: {
+      true: 'rounded-full',
+      false: 'rounded',
+    },
   },
   defaultVariants: {
     size: AvatarSize.base,
+    isRounded: true,
   },
 });
 
@@ -25,6 +31,11 @@ export interface AvatarProps extends RadixAvatarProps, VariantProps<typeof avata
    * The size of the avatar.
    */
   size: AvatarSize;
+
+  /**
+   * Whether the avatar should be rounded.
+   */
+  isRounded?: boolean;
 }
 
 /**
@@ -33,8 +44,8 @@ export interface AvatarProps extends RadixAvatarProps, VariantProps<typeof avata
  *
  * @see https://www.uiguideline.com/components/avatar
  */
-export const Avatar = (props: AvatarProps) => {
-  const classes = avatar({ className: props.className, size: props.size });
+export const Avatar = ({ size = AvatarSize.base, isRounded = true, className, ...props }: AvatarProps) => {
+  const classes = avatar({ className, size, isRounded });
   return <Root data-slot="avatar" className={classes} {...props} />;
 };
 
