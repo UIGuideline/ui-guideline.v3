@@ -1,5 +1,5 @@
 import React from 'react';
-import { Popover, type PopoverProps } from '../popover';
+import { Popover, type PopoverProps } from '../../popover';
 import { Content, Empty, Item, List, Loading, Search, Trigger } from './internal';
 
 export interface ComboboxProps extends PopoverProps {

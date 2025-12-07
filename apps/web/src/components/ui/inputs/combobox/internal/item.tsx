@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from 'react';
-import { Command } from '../../command';
+import { Command } from '../../../command';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const item = tv({
