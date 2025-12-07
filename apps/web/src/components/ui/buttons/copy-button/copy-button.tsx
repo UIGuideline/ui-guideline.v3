@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, ButtonSize, ButtonVariant, type ButtonProps } from '../buttons/button';
+import { Button, ButtonSize, ButtonVariant, type ButtonProps } from '../';
 import { useCopy } from './hooks/use-copy';
 import { CopyMode, CopyStatus } from './types';
 import { CheckIcon, CopyIcon, XIcon } from 'lucide-react';
