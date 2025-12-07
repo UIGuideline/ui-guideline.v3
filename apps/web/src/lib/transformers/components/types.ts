@@ -1,8 +1,4 @@
-/**
- * Types for component transformers
- *
- * These types represent enriched data about systems that include a specific component.
- */
+import type { SystemSlug } from '@common';
 
 /**
  * Reference to a system that includes a component
@@ -15,7 +11,7 @@ export interface SystemReference {
   /**
    * System slug (e.g., 'shadcn', 'radixui', 'mantine')
    */
-  slug: string;
+  slug: SystemSlug;
 
   /**
    * Display name of the system (e.g., 'shadcn/ui', 'Radix UI', 'Mantine')
