@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Avatar, AvatarSize, Button, ButtonSize, ButtonVariant, Combobox } from '@ui';
-import { CheckIcon, ChevronsUpDownIcon, ExternalLinkIcon } from 'lucide-react';
+import { CheckIcon, ExternalLinkIcon } from 'lucide-react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 /**
@@ -74,20 +74,21 @@ export const SourceCodeSelector = ({
 }: SourceCodeSelectorProps) => {
   const [open, setOpen] = useState(false);
 
+  const triggerValue = activeSystem ? (
+    <span className="flex items-center gap-2">
+      <Avatar size={AvatarSize.xxs} isRounded={false}>
+        <Avatar.Image src={getSystemLogo(activeSystem)} alt={getSystemLabel(activeSystem)} />
+      </Avatar>
+      <span className="font-medium">{getSystemLabel(activeSystem)}</span>
+    </span>
+  ) : undefined;
+
   return (
     <div className={selector({ className })}>
       <Combobox open={open} onOpenChange={setOpen}>
-        <Combobox.Trigger className="w-[200px] justify-between">
-          <div className="flex items-center gap-2">
-            <Avatar size={AvatarSize.xs}>
-              <Avatar.Image src={getSystemLogo(activeSystem)} alt={getSystemLabel(activeSystem)} />
-            </Avatar>
-            <span className="text-sm">{getSystemLabel(activeSystem)}</span>
-          </div>
-          <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Combobox.Trigger>
+        <Combobox.Trigger className="w-[200px] justify-between" value={triggerValue} />
         <Combobox.Content className="w-[200px] p-0">
-          <Combobox.List>
+          <Combobox.List className="max-h-60">
             <Combobox.Empty>No system found.</Combobox.Empty>
             {availableSystems.map((system) => (
               <Combobox.Item
@@ -98,11 +99,11 @@ export const SourceCodeSelector = ({
                   setOpen(false);
                 }}
               >
-                <div className="flex items-center gap-2 flex-1">
-                  <Avatar size={AvatarSize.xs}>
+                <div className="flex items-center gap-3 flex-1">
+                  <Avatar size={AvatarSize.xxs}>
                     <Avatar.Image src={getSystemLogo(system.slug)} alt={getSystemLabel(system.slug)} />
                   </Avatar>
-                  <span>{getSystemLabel(system.slug)}</span>
+                  <span className="font-medium">{getSystemLabel(system.slug)}</span>
                 </div>
                 {activeSystem === system.slug && <CheckIcon className="h-4 w-4" />}
               </Combobox.Item>
