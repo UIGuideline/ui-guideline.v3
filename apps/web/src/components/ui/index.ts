@@ -5,6 +5,7 @@ export * from './code-block';
 export * from './component-card/component-card';
 export * from './copy-button/copy-button';
 export * from './icon/icon';
+export * from './inputs';
 export * from './logo/logo';
 export * from './navbar/navbar';
 export * from './navigation';

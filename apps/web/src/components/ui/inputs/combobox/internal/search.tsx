@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 import { forwardRef } from 'react';
-import { Command } from '../../command';
+import { Command } from '../../../command';
 import { Search as SearchIcon } from 'lucide-react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
