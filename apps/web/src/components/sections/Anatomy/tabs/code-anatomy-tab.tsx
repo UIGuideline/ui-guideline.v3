@@ -1,41 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AnatomyImageContainer } from './shared';
+import { SourceCodeSelector } from '@composed';
 import type { AnatomyData, CodeAnatomyData } from '@content';
 import type { SystemReference } from '@lib';
 import type { BundledLanguage } from '@ui';
-import {
-  BrandLogo,
-  BrandLogoCatalog,
-  BrandLogoSize,
-  Button,
-  ButtonSize,
-  ButtonVariant,
-  CodeBlock,
-  Tabs,
-  TriggerSize,
-} from '@ui';
-import { ExternalLinkIcon } from 'lucide-react';
+import { CodeBlock } from '@ui';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const container = tv({
   base: 'flex flex-col',
 });
-
-// Library configuration for tabs
-const LIBRARY_CONFIG = {
-  shadcn: {
-    label: 'shadcn',
-    logo: BrandLogoCatalog.shadcn,
-  },
-  'radix-ui': {
-    label: 'Radix UI',
-    logo: BrandLogoCatalog.radixui,
-  },
-  'base-ui': {
-    label: 'Base UI',
-    logo: BrandLogoCatalog.baseui,
-  },
-} as const;
 
 interface CodeAnatomyTabProps extends VariantProps<typeof container> {
   /**
@@ -71,14 +45,11 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy, systemsForCompone
     container: container({ className }),
   };
 
-  // Get available libraries from codeAnatomy array
-  const availableLibraries = useMemo(
-    () => (codeAnatomy ?? []).filter((item) => item.slug in LIBRARY_CONFIG && item.code),
-    [codeAnatomy],
-  );
+  // Get available systems from codeAnatomy array
+  const availableSystems = useMemo(() => (codeAnatomy ?? []).filter((item) => item.code), [codeAnatomy]);
 
   // If no code anatomy data is available, don't render the code section
-  if (availableLibraries.length === 0) {
+  if (availableSystems.length === 0) {
     return (
       <div className={classes.container}>
         <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="code anatomy" />
@@ -86,84 +57,63 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy, systemsForCompone
     );
   }
 
-  // Use first available library as default
-  const defaultLibrary = availableLibraries[0]?.slug ?? 'shadcn';
+  // Default to 'ui-guideline' (gold standard) if available, otherwise first system
+  // We know availableSystems has at least one item because we checked length above
+  const defaultSystem =
+    availableSystems.find((item) => item.slug === 'ui-guideline')?.slug ?? availableSystems[0]!.slug;
 
-  const [activeLibrary, setActiveLibrary] = useState(defaultLibrary);
+  const [activeSystem, setActiveSystem] = useState(defaultSystem);
 
   useEffect(() => {
-    if (!availableLibraries.some((item) => item.slug === activeLibrary)) {
-      setActiveLibrary(defaultLibrary);
+    if (!availableSystems.some((item) => item.slug === activeSystem)) {
+      setActiveSystem(defaultSystem);
     }
-  }, [activeLibrary, availableLibraries, defaultLibrary]);
+  }, [activeSystem, availableSystems, defaultSystem]);
 
-  const activeLibrarySourceUrl = useMemo(
-    () => systemsForComponent?.find((sys) => sys.slug === activeLibrary)?.docUrl,
-    [activeLibrary, systemsForComponent],
+  const activeSystemData = useMemo(
+    () => availableSystems.find((item) => item.slug === activeSystem),
+    [activeSystem, availableSystems],
+  );
+
+  const activeSystemSourceUrl = useMemo(
+    () => systemsForComponent?.find((sys) => sys.slug === activeSystem)?.docUrl,
+    [activeSystem, systemsForComponent],
   );
 
   return (
     <div className={classes.container}>
       <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="code anatomy" />
-      <div className="flex bg-accent border border-border rounded-b-lg overflow-hidden flex-col gap-3">
-        <Tabs value={activeLibrary} onValueChange={setActiveLibrary}>
-          <Tabs.List className="flex items-center gap-2 border-b border-border p-2">
-            {availableLibraries.map((item) => {
-              const config = LIBRARY_CONFIG[item.slug as keyof typeof LIBRARY_CONFIG];
-              if (!config) return null;
+      <div className="flex bg-accent border border-border rounded-b-lg overflow-hidden flex-col">
+        <SourceCodeSelector
+          activeSystem={activeSystem}
+          availableSystems={availableSystems}
+          onSystemChange={setActiveSystem}
+          activeSystemSourceUrl={activeSystemSourceUrl}
+        />
 
-              return (
-                <Tabs.PillTrigger
-                  key={item.slug}
-                  value={item.slug}
-                  size={TriggerSize.xs}
-                  className="data-[state=active]:bg-white/10"
-                >
-                  <BrandLogo name={config.logo} size={BrandLogoSize.xs} />
-                  <span>{config.label}</span>
-                </Tabs.PillTrigger>
-              );
-            })}
-            {activeLibrarySourceUrl ? (
-              <Button asChild size={ButtonSize.sm} variant={ButtonVariant.outline} className="ml-auto">
-                <a href={activeLibrarySourceUrl} target="_blank" rel="noreferrer">
-                  Doc reference
-                  <ExternalLinkIcon />
-                </a>
-              </Button>
-            ) : null}
-          </Tabs.List>
-          {availableLibraries.map((item) => {
-            const trimmedCode = item.code.trimEnd();
-
-            return (
-              <Tabs.Content key={item.slug} value={item.slug}>
-                <CodeBlock
-                  className="bg-accent"
-                  data={[
-                    {
-                      language: 'tsx',
-                      filename: `${item.slug}.tsx`,
-                      code: trimmedCode,
-                    },
-                  ]}
-                  defaultValue="tsx"
-                >
-                  <CodeBlock.Body>
-                    {(codeItem) => (
-                      <CodeBlock.Item className="relative" key={codeItem.language} value={codeItem.language}>
-                        <CodeBlock.CopyButton className="absolute top-3 right-3 z-20" />
-                        <CodeBlock.Content language={codeItem.language as BundledLanguage}>
-                          {codeItem.code}
-                        </CodeBlock.Content>
-                      </CodeBlock.Item>
-                    )}
-                  </CodeBlock.Body>
-                </CodeBlock>
-              </Tabs.Content>
-            );
-          })}
-        </Tabs>
+        {/* Code Block */}
+        {activeSystemData && (
+          <CodeBlock
+            className="bg-accent"
+            data={[
+              {
+                language: 'tsx',
+                filename: `${activeSystemData.slug}.tsx`,
+                code: activeSystemData.code.trimEnd(),
+              },
+            ]}
+            defaultValue="tsx"
+          >
+            <CodeBlock.Body>
+              {(codeItem) => (
+                <CodeBlock.Item className="relative" key={codeItem.language} value={codeItem.language}>
+                  <CodeBlock.CopyButton className="absolute top-3 right-3 z-20" />
+                  <CodeBlock.Content language={codeItem.language as BundledLanguage}>{codeItem.code}</CodeBlock.Content>
+                </CodeBlock.Item>
+              )}
+            </CodeBlock.Body>
+          </CodeBlock>
+        )}
       </div>
     </div>
   );
