@@ -5,8 +5,8 @@ import { tv } from 'tailwind-variants';
 
 const trigger = tv({
   base: [
-    'border border-gray-700/60',
-    'hover:border-gray-700/20 hover:bg-gray-800',
+    'border border-input',
+    'hover:bg-secondary/80',
     'font-normal leading-normal',
     'flex items-center justify-between p-2',
     'appearance-none outline-none truncate',
@@ -14,8 +14,8 @@ const trigger = tv({
   ],
   variants: {
     hasValue: {
-      true: 'text-white',
-      false: 'text-gray-300',
+      true: 'text-secondary-foreground',
+      false: 'text-zinc-300',
     },
     isRounded: {
       true: 'rounded-full',
@@ -30,7 +30,7 @@ const trigger = tv({
 });
 
 const icon = tv({
-  base: 'text-white ml-auto',
+  base: 'text-secondary-foreground ml-auto',
   variants: {
     size: {
       base: 'size-4',

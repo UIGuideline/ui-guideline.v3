@@ -8,7 +8,7 @@ const item = tv({
     'rounded py-2 px-3',
     'relative cursor-default',
     'text-sm select-none outline-none',
-    'data-[selected=true]:bg-gray-700 data-[selected=true]:text-white',
+    'data-[selected=true]:bg-secondary/80 data-[selected=true]:text-white',
     'data-[disabled=true]:opacity-50 data-[disabled=true]:pointer-events-none',
     '[&_svg]:pointer-events-none [&_svg]:shrink-0',
   ],

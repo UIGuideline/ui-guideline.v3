@@ -6,7 +6,7 @@ import { Popover } from '../../../overlays/popover';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const content = tv({
-  base: ['overflow-hidden z-50', 'bg-gray-800 border border-gray-700/40'],
+  base: ['overflow-hidden z-50', 'bg-background border border-border'],
 });
 
 export interface ContentProps extends PopoverContentProps, VariantProps<typeof content> {
