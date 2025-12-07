@@ -89,6 +89,9 @@ export const SourceCodeSelector = ({ value, items, onSystemChange, className }: 
       {value?.sourceUrl && (
         <Button asChild size={ButtonSize.sm} variant={ButtonVariant.outline} className="ml-auto">
           <a href={value.sourceUrl} target="_blank" rel="noreferrer">
+            <Avatar size={AvatarSize.xxs}>
+              <Avatar.Image src={getSystemLogo(value.slug)} alt={getSystemLabel(value.slug)} />
+            </Avatar>
             Doc reference
             <ExternalLinkIcon />
           </a>
