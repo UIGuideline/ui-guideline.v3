@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactElement } from 'react';
 import { cloneElement, useContext, useState } from 'react';
-import type { ButtonProps } from '../../button/button';
+import type { ButtonProps } from '../../buttons/button/button';
 import { CodeBlockContext } from '../code-block';
 import { Button, ButtonSize, ButtonVariant } from '@ui';
 import { CheckIcon, CopyIcon } from 'lucide-react';
