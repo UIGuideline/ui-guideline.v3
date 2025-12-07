@@ -115,7 +115,7 @@
       </DropdownMenu>
     </Dropdown>
 
-- slug: mantine-ui
+- slug: mantine
   code: |
     <Menu>
       <Menu.Target>
