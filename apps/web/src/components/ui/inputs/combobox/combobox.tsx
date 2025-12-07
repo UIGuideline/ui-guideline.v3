@@ -1,6 +1,6 @@
 import React from 'react';
 import { Popover, type PopoverProps } from '../../overlays/popover';
-import { Content, Empty, Item, List, Loading, Search, Trigger } from './internal';
+import { Content, Empty, Item, List, Loading, Search, Separator, Trigger } from './internal';
 
 export interface ComboboxProps extends PopoverProps {
   children: React.ReactNode;
@@ -22,6 +22,7 @@ Combobox.Item = Item;
 Combobox.List = List;
 Combobox.Loading = Loading;
 Combobox.Search = Search;
+Combobox.Separator = Separator;
 Combobox.Trigger = Trigger;
 
 Combobox.displayName = 'Combobox';
