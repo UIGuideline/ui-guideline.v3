@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AnatomyImageContainer } from './shared';
+import { SystemSlug } from '@common';
 import { SourceCodeSelector } from '@composed';
 import type { AnatomyData, CodeAnatomyData } from '@content';
 import type { SystemReference } from '@lib';
@@ -46,7 +47,14 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy, systemsForCompone
   };
 
   // Get available systems from codeAnatomy array
-  const availableSystems = useMemo(() => (codeAnatomy ?? []).filter((item) => item.code), [codeAnatomy]);
+  const availableSystems = useMemo(
+    () =>
+      (codeAnatomy ?? [])
+        .filter((item) => item.code)
+        .map((item) => ({ ...item, slug: item.slug as SystemSlug }))
+        .filter((item) => Object.values(SystemSlug).includes(item.slug)),
+    [codeAnatomy],
+  );
 
   // If no code anatomy data is available, don't render the code section
   if (availableSystems.length === 0) {
@@ -60,24 +68,25 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy, systemsForCompone
   // Default to 'ui-guideline' (gold standard) if available, otherwise first system
   // We know availableSystems has at least one item because we checked length above
   const defaultSystem =
-    availableSystems.find((item) => item.slug === 'ui-guideline')?.slug ?? availableSystems[0]!.slug;
+    availableSystems.find((item) => item.slug === SystemSlug.uiGuideline)?.slug ?? availableSystems[0]!.slug;
 
-  const [activeSystem, setActiveSystem] = useState(defaultSystem);
+  const [activeSystem, setActiveSystem] = useState<{ slug: SystemSlug; sourceUrl: string }>({
+    slug: defaultSystem,
+    sourceUrl: systemsForComponent?.find((sys) => sys.slug === defaultSystem)?.docUrl ?? '',
+  });
 
   useEffect(() => {
-    if (!availableSystems.some((item) => item.slug === activeSystem)) {
-      setActiveSystem(defaultSystem);
+    if (!availableSystems.some((item) => item.slug === activeSystem.slug)) {
+      setActiveSystem({
+        slug: defaultSystem,
+        sourceUrl: systemsForComponent?.find((sys) => sys.slug === defaultSystem)?.docUrl ?? '',
+      });
     }
-  }, [activeSystem, availableSystems, defaultSystem]);
+  }, [activeSystem, availableSystems, defaultSystem, systemsForComponent]);
 
   const activeSystemData = useMemo(
-    () => availableSystems.find((item) => item.slug === activeSystem),
+    () => availableSystems.find((item) => item.slug === activeSystem.slug),
     [activeSystem, availableSystems],
-  );
-
-  const activeSystemSourceUrl = useMemo(
-    () => systemsForComponent?.find((sys) => sys.slug === activeSystem)?.docUrl,
-    [activeSystem, systemsForComponent],
   );
 
   return (
@@ -85,10 +94,15 @@ export const CodeAnatomyTab = ({ className, data, codeAnatomy, systemsForCompone
       <AnatomyImageContainer darkImageUrl={darkImageUrl} darkImageUrl2x={darkImageUrl2x} alt="code anatomy" />
       <div className="flex bg-accent border border-border rounded-b-lg overflow-hidden flex-col">
         <SourceCodeSelector
-          activeSystem={activeSystem}
-          availableSystems={availableSystems}
-          onSystemChange={setActiveSystem}
-          activeSystemSourceUrl={activeSystemSourceUrl}
+          value={activeSystem}
+          items={availableSystems.map((sys) => ({
+            slug: sys.slug,
+            sourceUrl: systemsForComponent?.find((item) => item.slug === sys.slug)?.docUrl ?? '',
+          }))}
+          onSystemChange={(slug) => {
+            const sourceUrl = systemsForComponent?.find((sys) => sys.slug === slug)?.docUrl ?? '';
+            setActiveSystem({ slug, sourceUrl });
+          }}
         />
 
         {/* Code Block */}

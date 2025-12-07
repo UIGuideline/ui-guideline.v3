@@ -1,4 +1,5 @@
 import type { SystemReference } from './types';
+import { SystemSlug } from '@common';
 import type { SystemComponent } from '@content';
 import type { CollectionEntry } from 'astro:content';
 
@@ -37,8 +38,13 @@ export function getSystemsForComponent(
 
     if (componentInSystem) {
       // Extract system slug from the entry id (format: "systemSlug/components")
-      const systemSlug = systemComponentEntry.id.split('/')[0];
-      if (!systemSlug) continue;
+      const rawSystemSlug = systemComponentEntry.id.split('/')[0];
+      if (!rawSystemSlug) continue;
+
+      // Ensure the slug is a valid SystemSlug
+      if (!Object.values(SystemSlug).includes(rawSystemSlug as SystemSlug)) continue;
+
+      const systemSlug = rawSystemSlug as SystemSlug;
 
       const systemName = systemMap.get(systemSlug);
       if (!systemName) continue;
