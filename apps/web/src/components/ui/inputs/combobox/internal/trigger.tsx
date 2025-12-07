@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { Popover } from '../../../popover';
+import { Popover } from '../../../overlays/popover';
 import { ChevronDownIcon } from 'lucide-react';
 import { tv } from 'tailwind-variants';
 

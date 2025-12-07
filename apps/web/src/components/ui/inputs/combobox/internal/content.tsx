@@ -1,8 +1,8 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { forwardRef } from 'react';
 import { Command } from '../../../command';
-import type { ContentProps as PopoverContentProps } from '../../../popover';
-import { Popover } from '../../../popover';
+import type { ContentProps as PopoverContentProps } from '../../../overlays/popover';
+import { Popover } from '../../../overlays/popover';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const content = tv({
