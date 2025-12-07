@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { SYSTEM_LABELS, SYSTEM_LOGOS, type SystemSlug } from '@common';
+import { useMemo, useState } from 'react';
+import { SYSTEM_LABELS, SYSTEM_LOGOS, SystemSlug } from '@common';
 import { Avatar, AvatarSize, Button, ButtonSize, ButtonVariant, Combobox } from '@ui';
 import { CheckIcon, ExternalLinkIcon } from 'lucide-react';
 import { tv, type VariantProps } from 'tailwind-variants';
@@ -55,6 +55,10 @@ export const SourceCodeSelector = ({ value, items, onSystemChange, className }: 
     setOpen(false);
   };
 
+  // Separate UI Guideline from other systems
+  const uiGuidelineItem = useMemo(() => items.find((item) => item.slug === SystemSlug.uiGuideline), [items]);
+  const otherItems = useMemo(() => items.filter((item) => item.slug !== SystemSlug.uiGuideline), [items]);
+
   const triggerValue = value ? (
     <span className="flex items-center gap-2">
       <Avatar size={AvatarSize.xxs} isRounded={false}>
@@ -64,6 +68,18 @@ export const SourceCodeSelector = ({ value, items, onSystemChange, className }: 
     </span>
   ) : undefined;
 
+  const renderItem = (item: { slug: SystemSlug; sourceUrl: string }) => (
+    <Combobox.Item key={item.slug} value={item.slug} onSelect={() => handleOnSelect(item.slug)}>
+      <div className="flex items-center gap-3 flex-1">
+        <Avatar size={AvatarSize.xxs}>
+          <Avatar.Image src={getSystemLogo(item.slug)} alt={getSystemLabel(item.slug)} />
+        </Avatar>
+        <span className="font-medium">{getSystemLabel(item.slug)}</span>
+      </div>
+      {value?.slug === item.slug && <CheckIcon className="h-4 w-4" />}
+    </Combobox.Item>
+  );
+
   return (
     <div className={selector({ className })}>
       <Combobox open={open} onOpenChange={setOpen}>
@@ -71,17 +87,9 @@ export const SourceCodeSelector = ({ value, items, onSystemChange, className }: 
         <Combobox.Content className="w-[200px] p-0">
           <Combobox.List className="max-h-60">
             <Combobox.Empty>No system found.</Combobox.Empty>
-            {items.map((item) => (
-              <Combobox.Item key={item.slug} value={item.slug} onSelect={() => handleOnSelect(item.slug)}>
-                <div className="flex items-center gap-3 flex-1">
-                  <Avatar size={AvatarSize.xxs}>
-                    <Avatar.Image src={getSystemLogo(item.slug)} alt={getSystemLabel(item.slug)} />
-                  </Avatar>
-                  <span className="font-medium">{getSystemLabel(item.slug)}</span>
-                </div>
-                {value?.slug === item.slug && <CheckIcon className="h-4 w-4" />}
-              </Combobox.Item>
-            ))}
+            {uiGuidelineItem && renderItem(uiGuidelineItem)}
+            {uiGuidelineItem && otherItems.length > 0 && <Combobox.Separator />}
+            {otherItems.map(renderItem)}
           </Combobox.List>
         </Combobox.Content>
       </Combobox>
