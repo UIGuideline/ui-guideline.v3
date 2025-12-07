@@ -1,3 +1,3 @@
 components:
-  - slug: 'test'
-    docUrl: 'https://ui.shadcn.com/'
+  - slug: 'menu'
+    docUrl: 'https://ui.shadcn.com/docs/components/dropdown-menu'
