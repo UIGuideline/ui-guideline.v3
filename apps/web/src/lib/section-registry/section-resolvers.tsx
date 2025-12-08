@@ -1,7 +1,7 @@
 import { loadContent, loadContentRaw } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';
 import { SectionKey } from './types';
-import type { AnatomyData, CodeAnatomyData, DesignLayersData, OverviewData, PropsData } from '@content';
+import type { AnatomyData, CodeAnatomyData, CodePropsData, DesignLayersData, OverviewData } from '@content';
 import { Overview } from '@sections';
 
 /**
@@ -44,7 +44,7 @@ export const anatomy: SectionModule = async ({ slug }) => {
  * Props Table Section
  *------------------------------------*/
 export const props: SectionModule = async ({ slug }) => {
-  const data = await loadContent<PropsData>(slug, 'props.yml');
+  const data = await loadContent<CodePropsData>(slug, 'code-props.yml');
   if (!data?.length) return null;
 
   return {
