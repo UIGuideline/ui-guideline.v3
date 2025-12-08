@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { TreeNodeData } from './types';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { tv } from 'tailwind-variants';
@@ -75,13 +75,39 @@ export interface TreeNodeProps {
    * Optional function to render an icon based on the node.
    */
   renderIcon?: (node: TreeNodeData) => React.ReactNode;
+
+  /**
+   * Optional function to render child nodes.
+   * If provided, this will be used instead of the default TreeNode for children.
+   * This allows wrapper components to maintain their behavior for nested nodes.
+   */
+  renderChild?: (node: TreeNodeData, level: number) => React.ReactNode;
+
+  /**
+   * Callback fired when mouse enters the node.
+   */
+  onMouseEnter?: () => void;
+
+  /**
+   * Callback fired when mouse leaves the node.
+   */
+  onMouseLeave?: () => void;
 }
 
 /**
  * Generic TreeNode component that renders a single node in the tree.
  * Handles both folder nodes (with children) and file nodes (without children).
  */
-export const TreeNode = ({ className, node, level = 0, icon, renderIcon }: TreeNodeProps) => {
+export const TreeNode = ({
+  className,
+  node,
+  level = 0,
+  icon,
+  renderIcon,
+  renderChild,
+  onMouseEnter,
+  onMouseLeave,
+}: TreeNodeProps) => {
   const hasChildren = node.children && node.children.length > 0;
   const [isOpen, setIsOpen] = useState(true);
 
@@ -115,10 +141,11 @@ export const TreeNode = ({ className, node, level = 0, icon, renderIcon }: TreeN
         className={classes.row}
         onClick={handleToggle}
         onKeyDown={handleKeyDown}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         role={hasChildren ? 'button' : undefined}
         aria-expanded={hasChildren ? isOpen : undefined}
         tabIndex={hasChildren ? 0 : undefined}
-        title={node.description}
       >
         {/* Chevron for folders (collapsible nodes) */}
         <div className={classes.chevronIcon}>
@@ -144,15 +171,19 @@ export const TreeNode = ({ className, node, level = 0, icon, renderIcon }: TreeN
       {hasChildren && (
         <div className={classes.children}>
           <div className={classes.childrenList}>
-            {node.children!.map((child, index) => (
-              <TreeNode
-                key={`${child.name}-${index}`}
-                node={child}
-                level={level + 1}
-                icon={icon}
-                renderIcon={renderIcon}
-              />
-            ))}
+            {node.children!.map((child, index) =>
+              renderChild ? (
+                <React.Fragment key={`${child.name}-${index}`}>{renderChild(child, level + 1)}</React.Fragment>
+              ) : (
+                <TreeNode
+                  key={`${child.name}-${index}`}
+                  node={child}
+                  level={level + 1}
+                  icon={icon}
+                  renderIcon={renderIcon}
+                />
+              ),
+            )}
           </div>
         </div>
       )}
