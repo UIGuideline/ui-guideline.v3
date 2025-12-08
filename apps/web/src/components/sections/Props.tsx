@@ -76,7 +76,7 @@ export const Props = ({ data = [] }: PropsSectionProps) => {
           <div key={index} className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
               <h3 className="text-xl font-semibold text-foreground">{item.component}</h3>
-              <p className="text-gray-500 dark:text-gray-400">{item.description}</p>
+              <p className="text-muted-foreground">{item.description}</p>
             </div>
             <div className="flex overflow-scroll border border-gray-800 rounded-lg">{renderView(item.props)}</div>
           </div>
