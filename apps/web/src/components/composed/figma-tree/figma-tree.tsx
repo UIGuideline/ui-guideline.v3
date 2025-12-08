@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import { FigmaTreeNode, FloatingBox } from './internal';
 import type { TreeNodeData } from '@ui';
 import { Tree } from '@ui';
@@ -46,7 +46,29 @@ interface FigmaTreeProviderProps {
  * Provider component that manages the hovered node state for the Figma tree.
  */
 const FigmaTreeProvider = ({ children }: FigmaTreeProviderProps) => {
-  const [hoveredNode, setHoveredNode] = useState<TreeNodeData | null>(null);
+  const [hoveredNode, setHoveredNodeState] = useState<TreeNodeData | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Clear timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  const setHoveredNode = (node: TreeNodeData | null) => {
+    if (node) {
+      // If entering a node, clear any pending exit timer and update immediately
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      setHoveredNodeState(node);
+    } else {
+      // If leaving a node, delay the exit to prevent flickering
+      timeoutRef.current = setTimeout(() => setHoveredNodeState(null), 200);
+    }
+  };
 
   return <FigmaTreeContext.Provider value={{ hoveredNode, setHoveredNode }}>{children}</FigmaTreeContext.Provider>;
 };
