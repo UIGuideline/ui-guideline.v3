@@ -1,42 +1,54 @@
 import { ToggleGroup, ToggleGroupSelection } from '@ui';
 import { Menu, Rows3, Table } from 'lucide-react';
+import { tv } from 'tailwind-variants';
 
-export const ViewMode = {
-  list: 'list',
-  expanded: 'expanded',
-  table: 'table',
-} as const;
-export type ViewModeType = (typeof ViewMode)[keyof typeof ViewMode];
+const container = tv({
+  base: 'shrink-0',
+});
 
 interface PropsViewToggleProps {
   /**
+   * The class name to apply to the toggle group.
+   */
+  className?: string;
+
+  /**
    * The current view mode.
    */
-  value: ViewModeType;
+  value: 'list' | 'expanded' | 'table';
 
   /**
    * Callback when the view mode changes.
    */
-  onValueChange: (value: ViewModeType) => void;
+  onValueChange: (value: 'list' | 'expanded' | 'table') => void;
 }
 
-export const PropsViewToggle = ({ value, onValueChange }: PropsViewToggleProps) => {
-  const handleViewChange = (newValue: string) => {
+export const PropsViewToggle = ({ className, value, onValueChange }: PropsViewToggleProps) => {
+  const classes = {
+    container: container({ className }),
+  };
+
+  const handleViewChange = (newValue: 'list' | 'expanded' | 'table') => {
     if (!newValue) return;
-    onValueChange(newValue as ViewModeType);
+    onValueChange(newValue);
   };
 
   return (
-    <ToggleGroup type={ToggleGroupSelection.single} className="shrink-0" value={value} onValueChange={handleViewChange}>
-      <ToggleGroup.Item value={ViewMode.list} aria-label="List view">
+    <ToggleGroup
+      type={ToggleGroupSelection.single}
+      className={classes.container}
+      value={value}
+      onValueChange={handleViewChange}
+    >
+      <ToggleGroup.Item value="list" aria-label="List view">
         <Menu className="size-4" />
       </ToggleGroup.Item>
 
-      <ToggleGroup.Item value={ViewMode.expanded} aria-label="Expanded view">
+      <ToggleGroup.Item value="expanded" aria-label="Expanded view">
         <Rows3 className="size-4" />
       </ToggleGroup.Item>
 
-      <ToggleGroup.Item value={ViewMode.table} aria-label="Table view">
+      <ToggleGroup.Item value="table" aria-label="Table view">
         <Table className="size-4" />
       </ToggleGroup.Item>
     </ToggleGroup>
