@@ -157,6 +157,29 @@ const codeProps = defineCollection({
   ),
 });
 
+/**
+ * Component Details - Figma Props
+ */
+const figmaProps = defineCollection({
+  type: 'data',
+  schema: z.array(
+    z.object({
+      component: z.string(),
+      figmaType: z.string(),
+      props: z.array(
+        z.object({
+          name: z.string(),
+          type: z.union([z.string(), z.array(z.string())]),
+          figmaType: z.string(),
+          default: z.string().optional(),
+          description: z.string(),
+          required: z.boolean().optional(),
+        }),
+      ),
+    }),
+  ),
+});
+
 /**********************************************************
  * SYSTEMS SECTIONS
  **********************************************************/
@@ -226,6 +249,7 @@ export const collections = {
   componentList,
   overview,
   codeProps,
+  figmaProps,
   anatomy,
   codeAnatomy,
   designLayers,
