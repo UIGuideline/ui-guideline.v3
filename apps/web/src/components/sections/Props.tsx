@@ -44,7 +44,7 @@ export const Props = ({ data = [] }: PropsSectionProps) => {
 
   return (
     <section className="flex flex-col mb-4">
-      <div className="flex items-center gap-2 mt-10 mb-4">
+      <div className="flex items-center gap-2 mt-10 mb-6">
         <h2
           id="props"
           className="scroll-mt-18 group text-foreground hover:text-foreground/90 text-2xl font-bold text-balance inline-flex items-center gap-2"
@@ -71,9 +71,9 @@ export const Props = ({ data = [] }: PropsSectionProps) => {
         </ToggleGroup>
       </div>
 
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-20">
         {data.map((item, index) => (
-          <div key={index} className="flex flex-col gap-4">
+          <div key={index} className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
               <h3 className="text-xl font-semibold text-foreground">{item.component}</h3>
               <p className="text-gray-500 dark:text-gray-400">{item.description}</p>
