@@ -1,15 +1,6 @@
 import { useState } from 'react';
-import { PropsList, PropsTable } from '@composed';
+import { PropsList, PropsTable, PropsViewToggle, ViewMode, type ViewModeType } from '@composed';
 import type { CodePropsData } from '@content';
-import { ToggleGroup, ToggleGroupSelection } from '@ui';
-import { Menu, Rows3, Table } from 'lucide-react';
-
-const ViewMode = {
-  list: 'list',
-  expanded: 'expanded',
-  table: 'table',
-} as const;
-type ViewModeType = (typeof ViewMode)[keyof typeof ViewMode];
 
 export interface PropsSectionProps {
   /**
@@ -18,16 +9,8 @@ export interface PropsSectionProps {
   data: CodePropsData;
 }
 
-export const Props = ({ data = [] }: PropsSectionProps) => {
+const ComponentPropsBlock = ({ item }: { item: CodePropsData[number] }) => {
   const [viewMode, setViewMode] = useState<ViewModeType>(ViewMode.table);
-
-  const handleViewChange = (value: string) => {
-    if (!value) {
-      setViewMode((prev) => prev);
-      return;
-    }
-    setViewMode(value as ViewModeType);
-  };
 
   const renderView = (props: CodePropsData[number]['props']) => {
     switch (viewMode) {
@@ -40,6 +23,21 @@ export const Props = ({ data = [] }: PropsSectionProps) => {
     }
   };
 
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <h3 className="text-xl font-semibold text-foreground">{item.component}</h3>
+        <div className="flex items-start justify-between gap-4">
+          <p className="text-muted-foreground w-full max-w-[70%]">{item.description}</p>
+          <PropsViewToggle value={viewMode} onValueChange={setViewMode} />
+        </div>
+      </div>
+      <div className="flex overflow-scroll border border-gray-800 rounded-lg">{renderView(item.props)}</div>
+    </div>
+  );
+};
+
+export const Props = ({ data = [] }: PropsSectionProps) => {
   if (!data?.length) return null;
 
   return (
@@ -51,35 +49,11 @@ export const Props = ({ data = [] }: PropsSectionProps) => {
         >
           Props
         </h2>
-        <ToggleGroup
-          type={ToggleGroupSelection.single}
-          className="ml-auto"
-          defaultValue={ViewMode.table}
-          onValueChange={handleViewChange}
-        >
-          <ToggleGroup.Item value={ViewMode.list} aria-label="List view">
-            <Menu className="size-4" />
-          </ToggleGroup.Item>
-
-          <ToggleGroup.Item value={ViewMode.expanded} aria-label="Expanded view">
-            <Rows3 className="size-4" />
-          </ToggleGroup.Item>
-
-          <ToggleGroup.Item value={ViewMode.table} aria-label="Table view">
-            <Table className="size-4" />
-          </ToggleGroup.Item>
-        </ToggleGroup>
       </div>
 
       <div className="flex flex-col gap-20">
         {data.map((item, index) => (
-          <div key={index} className="flex flex-col gap-6">
-            <div className="flex flex-col gap-2">
-              <h3 className="text-xl font-semibold text-foreground">{item.component}</h3>
-              <p className="text-muted-foreground">{item.description}</p>
-            </div>
-            <div className="flex overflow-scroll border border-gray-800 rounded-lg">{renderView(item.props)}</div>
-          </div>
+          <ComponentPropsBlock key={index} item={item} />
         ))}
       </div>
     </section>
