@@ -5,6 +5,7 @@ export * from './design-layers/design-layers';
 export * from './figma-tree';
 export * from './props-list/props-list';
 export * from './props-table';
+export * from './props-view-toggle';
 export * from './source-code-selector/source-code-selector';
 export * from './system-avatar';
 export * from './system-overview';
