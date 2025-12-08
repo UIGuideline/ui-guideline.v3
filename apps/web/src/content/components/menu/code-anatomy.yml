@@ -2,20 +2,17 @@
   code: |
     <Menu>
       <Menu.Trigger>
-        <Button>Open Menu</Button>
+        <Button>Account</Button>
       </Menu.Trigger>
       <Menu.Content>
         <Menu.Group>
           <Menu.Label>My Account</Menu.Label>
-          <Menu.Item>Profile</Menu.Item>
+          <Menu.Item>View profile</Menu.Item>
           <Menu.Item>Settings</Menu.Item>
+          <Menu.Item>Keyboard shortcuts</Menu.Item>
         </Menu.Group>
         <Menu.Separator />
-        <Menu.Group>
-          <Menu.Label>Actions</Menu.Label>
-          <Menu.Item>New File</Menu.Item>
-          <Menu.Item>Export</Menu.Item>
-        </Menu.Group>
+        <Menu.Item>Log out</Menu.Item>
       </Menu.Content>
     </Menu>
 
