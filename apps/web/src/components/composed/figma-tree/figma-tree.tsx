@@ -56,7 +56,7 @@ const FigmaTreeProvider = ({ children }: FigmaTreeProviderProps) => {
  * ----------------------------------------------------------------------------------------------- */
 
 const wrapper = tv({
-  base: 'relative min-h-52',
+  base: 'relative min-h-80',
 });
 
 const container = tv({

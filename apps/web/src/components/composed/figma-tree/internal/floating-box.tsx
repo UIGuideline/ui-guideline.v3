@@ -12,7 +12,7 @@ const container = tv({
     'border border-border rounded-lg',
     'p-4',
     'shadow-xl',
-    'transition-all duration-200',
+    'transition-all duration-300',
     'flex flex-col gap-4',
   ],
   variants: {
@@ -21,10 +21,6 @@ const container = tv({
       false: 'opacity-0 -translate-y-2 pointer-events-none',
     },
   },
-});
-
-const section = tv({
-  base: 'flex flex-col gap-2',
 });
 
 const header = tv({
@@ -36,19 +32,23 @@ const icon = tv({
 });
 
 const title = tv({
-  base: 'text-sm font-medium text-[#d1a8ff]',
+  base: 'text-sm font-semibold',
 });
 
 const description = tv({
-  base: 'text-xs text-muted-foreground leading-relaxed',
+  base: 'text-sm text-muted-foreground',
 });
 
 const divider = tv({
   base: 'h-px w-full bg-border/50',
 });
 
-const eduLabel = tv({
-  base: 'text-[10px] uppercase tracking-wider font-semibold text-primary/80',
+const eduTitle = tv({
+  base: 'text-sm font-medium text-[#d1a8ff]',
+});
+
+const eduDescription = tv({
+  base: 'text-xs text-muted-foreground leading-relaxed',
 });
 
 const link = tv({
@@ -72,13 +72,13 @@ export const FloatingBox = () => {
 
   const classes = {
     container: container({ visible: !!hoveredNode?.description }),
-    section: section(),
     header: header(),
     icon: icon(),
     title: title(),
     description: description(),
     divider: divider(),
-    eduLabel: eduLabel(),
+    eduTitle: eduTitle(),
+    eduDescription: eduDescription(),
     link: link(),
   };
 
@@ -87,15 +87,8 @@ export const FloatingBox = () => {
       {hoveredNode && (
         <>
           {/* Specific Node Info */}
-          <div className={classes.section}>
-            <div className={classes.header}>
-              {IconComponent && (
-                <div className={classes.icon}>
-                  <Icon icon={IconComponent} className="size-4" />
-                </div>
-              )}
-              <span className={classes.title}>{hoveredNode.name}</span>
-            </div>
+          <div className="flex flex-col gap-1">
+            <span className={classes.title}>{hoveredNode.name}</span>
             <p className={classes.description}>{hoveredNode.description}</p>
           </div>
 
@@ -103,9 +96,16 @@ export const FloatingBox = () => {
           {nodeData && (
             <>
               <div className={classes.divider} />
-              <div className={classes.section}>
-                <span className={classes.eduLabel}>About {nodeData.label}</span>
-                <p className={classes.description}>{nodeData.description}</p>
+              <div className="flex flex-col gap-1">
+                <div className={classes.header}>
+                  {IconComponent && (
+                    <div className={classes.icon}>
+                      <Icon icon={IconComponent} className="size-4" />
+                    </div>
+                  )}
+                  <span className={classes.eduTitle}>{nodeData.label}</span>
+                </div>
+                <p className={classes.eduDescription}>{nodeData.description}</p>
                 <a href={nodeData.docsUrl} target="_blank" rel="noopener noreferrer" className={classes.link}>
                   <span>Learn more in Figma</span>
                   <ExternalLink size={10} />
