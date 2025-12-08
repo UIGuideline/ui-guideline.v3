@@ -24,12 +24,12 @@ interface AnatomyProps {
   /**
    * The data for the anatomy.
    */
-  data: AnatomyData;
+  anatomyData?: AnatomyData;
 
   /**
    * Optional design layers data for the Design Anatomy tab.
    */
-  designLayers?: DesignLayersData;
+  designLayersData?: DesignLayersData;
 
   /**
    * Raw YAML content for design layers.
@@ -39,7 +39,7 @@ interface AnatomyProps {
   /**
    * Optional code anatomy data for dynamic code examples.
    */
-  codeAnatomy?: CodeAnatomyData;
+  codeAnatomyData?: CodeAnatomyData;
 
   /**
    * Systems that include this component (used for external doc URLs).
@@ -52,10 +52,10 @@ interface AnatomyProps {
  */
 export const Anatomy = ({
   className,
-  data,
-  designLayers,
+  anatomyData,
+  designLayersData,
   designLayersRaw,
-  codeAnatomy,
+  codeAnatomyData,
   systemsForComponent,
 }: AnatomyProps) => {
   const classes = {
@@ -82,13 +82,17 @@ export const Anatomy = ({
             <Tabs.Trigger value={AnatomyTab.design}>Design Anatomy</Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value={AnatomyTab.base}>
-            <BaseAnatomyTab data={data} />
+            <BaseAnatomyTab data={anatomyData} />
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.code}>
-            <CodeAnatomyTab data={data} codeAnatomy={codeAnatomy} systemsForComponent={systemsForComponent} />
+            <CodeAnatomyTab
+              data={anatomyData}
+              codeAnatomy={codeAnatomyData}
+              systemsForComponent={systemsForComponent}
+            />
           </Tabs.Content>
           <Tabs.Content value={AnatomyTab.design}>
-            <DesignAnatomyTab data={data} designLayers={designLayers} designLayersRaw={designLayersRaw} />
+            <DesignAnatomyTab data={anatomyData} designLayers={designLayersData} designLayersRaw={designLayersRaw} />
           </Tabs.Content>
         </Tabs>
       </div>

@@ -33,10 +33,12 @@ export type ComponentFactory = (props?: Record<string, unknown>) => unknown;
 export type ClientSectionMetadata = {
   isClient: true;
   type: SectionKey.anatomy | SectionKey.props;
-  data: unknown;
-  designLayers?: unknown;
+  anatomyData?: unknown;
+  designLayersData?: unknown;
   designLayersRaw?: unknown;
-  codeAnatomy?: unknown;
+  codeAnatomyData?: unknown;
+  codePropsData?: unknown;
+  figmaPropsData?: unknown;
 };
 
 /**

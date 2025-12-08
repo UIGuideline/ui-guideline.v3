@@ -1,4 +1,4 @@
-import { FigmaTree } from '../figma-tree';
+import { FigmaTree } from './figma-tree';
 import type { BundledLanguage, TreeNodeData } from '@ui';
 import { BrandLogo, BrandLogoCatalog, BrandLogoSize, CodeBlock, Tabs, TriggerSize } from '@ui';
 import { tv } from 'tailwind-variants';

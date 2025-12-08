@@ -2,13 +2,6 @@ import { useState } from 'react';
 import { PropsList, PropsTable, PropsViewToggle } from '@composed';
 import type { CodePropsData } from '@content';
 
-export interface PropsSectionProps {
-  /**
-   * The data for the props table
-   */
-  data: CodePropsData;
-}
-
 const ComponentPropsBlock = ({ item }: { item: CodePropsData[number] }) => {
   const [viewMode, setViewMode] = useState<'list' | 'expanded' | 'table'>('table');
 
@@ -25,7 +18,7 @@ const ComponentPropsBlock = ({ item }: { item: CodePropsData[number] }) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex gap-2 ">
+      <div className="flex gap-2">
         <div className="flex flex-col gap-1">
           <h3 className="text-xl font-semibold text-foreground">{item.component}</h3>
           <p className="text-muted-foreground w-full">{item.description}</p>
@@ -37,25 +30,12 @@ const ComponentPropsBlock = ({ item }: { item: CodePropsData[number] }) => {
   );
 };
 
-export const Props = ({ data = [] }: PropsSectionProps) => {
-  if (!data?.length) return null;
-
+export const CodePropsTab = ({ data }: { data: CodePropsData }) => {
   return (
-    <section className="flex flex-col mb-4">
-      <div className="flex items-center gap-2 mt-10 mb-6">
-        <h2
-          id="props"
-          className="scroll-mt-18 group text-foreground hover:text-foreground/90 text-2xl font-bold text-balance inline-flex items-center gap-2"
-        >
-          Props
-        </h2>
-      </div>
-
-      <div className="flex flex-col gap-20">
-        {data.map((item, index) => (
-          <ComponentPropsBlock key={index} item={item} />
-        ))}
-      </div>
-    </section>
+    <div className="flex flex-col gap-20">
+      {data.map((item, index) => (
+        <ComponentPropsBlock key={index} item={item} />
+      ))}
+    </div>
   );
 };

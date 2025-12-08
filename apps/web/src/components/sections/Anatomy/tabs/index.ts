@@ -1,3 +1,3 @@
-export { BaseAnatomyTab } from './base-anatomy-tab';
-export { CodeAnatomyTab } from './code-anatomy-tab';
-export { DesignAnatomyTab } from './design-anatomy-tab';
+export * from './base-anatomy-tab';
+export * from './code-anatomy-tab';
+export * from './design-anatomy-tab';
