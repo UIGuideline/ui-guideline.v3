@@ -1,37 +1,72 @@
-import type { AnatomyData, CodeAnatomyData, DesignLayersData, PropsData } from '@content';
+import type { AnatomyData, CodeAnatomyData, CodePropsData, DesignLayersData, FigmaPropsData } from '@content';
 import { SectionKey, type SystemReference } from '@lib';
 import { Anatomy, Props } from '@sections';
 
 type ClientSectionProps = {
+  /**
+   * The type of section to render.
+   */
   type: SectionKey.anatomy | SectionKey.props;
-  data: AnatomyData | PropsData;
-  designLayers?: DesignLayersData;
+
+  /**
+   * The data for the props table
+   */
+  codePropsData?: CodePropsData;
+
+  /**
+   * The data for the design props table (from Figma)
+   */
+  figmaPropsData?: FigmaPropsData;
+
+  /**
+   * The data for the anatomy section
+   */
+  anatomyData?: AnatomyData;
+
+  /**
+   * The design layers data
+   */
+  designLayersData?: DesignLayersData;
+
+  /**
+   * The raw design layers data
+   */
   designLayersRaw?: string;
-  codeAnatomy?: CodeAnatomyData;
+
+  /**
+   * The code anatomy data
+   */
+  codeAnatomyData?: CodeAnatomyData;
+
+  /**
+   * The systems for the component
+   */
   systemsForComponent?: SystemReference[];
 };
 
 export const ClientSectionWrapper = ({
   type,
-  data,
-  designLayers,
+  anatomyData,
+  codePropsData,
+  figmaPropsData,
+  designLayersData,
   designLayersRaw,
-  codeAnatomy,
+  codeAnatomyData,
   systemsForComponent,
 }: ClientSectionProps) => {
-  if (type === SectionKey.anatomy && designLayers && designLayersRaw) {
+  if (type === SectionKey.anatomy && designLayersData && designLayersRaw) {
     return (
       <Anatomy
-        data={data as AnatomyData}
-        designLayers={designLayers}
+        anatomyData={anatomyData}
+        designLayersData={designLayersData}
         designLayersRaw={designLayersRaw}
-        codeAnatomy={codeAnatomy}
+        codeAnatomyData={codeAnatomyData}
         systemsForComponent={systemsForComponent}
       />
     );
   }
   if (type === SectionKey.props) {
-    return <Props data={data as PropsData} />;
+    return <Props codePropsData={codePropsData} figmaPropsData={figmaPropsData} />;
   }
   return null;
 };

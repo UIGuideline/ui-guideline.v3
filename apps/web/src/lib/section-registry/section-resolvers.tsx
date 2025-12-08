@@ -1,7 +1,14 @@
 import { loadContent, loadContentRaw } from './content-loader';
 import type { ComponentFactory, SectionModule } from './types';
 import { SectionKey } from './types';
-import type { AnatomyData, CodeAnatomyData, CodePropsData, DesignLayersData, OverviewData } from '@content';
+import type {
+  AnatomyData,
+  CodeAnatomyData,
+  CodePropsData,
+  DesignLayersData,
+  FigmaPropsData,
+  OverviewData,
+} from '@content';
 import { Overview } from '@sections';
 
 /**
@@ -33,10 +40,10 @@ export const anatomy: SectionModule = async ({ slug }) => {
   return {
     isClient: true,
     type: SectionKey.anatomy,
-    data,
-    designLayers,
+    anatomyData: data,
+    designLayersData: designLayers,
     designLayersRaw,
-    codeAnatomy,
+    codeAnatomyData: codeAnatomy,
   };
 };
 
@@ -45,11 +52,14 @@ export const anatomy: SectionModule = async ({ slug }) => {
  *------------------------------------*/
 export const props: SectionModule = async ({ slug }) => {
   const data = await loadContent<CodePropsData>(slug, 'code-props.yml');
-  if (!data?.length) return null;
+  const figmaProps = await loadContent<FigmaPropsData>(slug, 'figma-props.yml');
+
+  if (!data || !figmaProps) return null;
 
   return {
     isClient: true,
     type: SectionKey.props,
-    data,
+    codePropsData: data,
+    figmaPropsData: figmaProps,
   };
 };

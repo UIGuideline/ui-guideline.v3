@@ -51,10 +51,12 @@ const tocItems = generateTOCFromSections(sections);
 					<section class="scroll-mt-20">
 						<ClientSectionWrapper
 							type={Section.type}
-							data={Section.data as any}
-							designLayers={Section.designLayers as any}
+							anatomyData={Section.anatomyData as any}
+							designLayersData={Section.designLayersData as any}
 							designLayersRaw={Section.designLayersRaw as any}
-							codeAnatomy={Section.codeAnatomy as any}
+							codeAnatomyData={Section.codeAnatomyData as any}
+							codePropsData={Section.codePropsData as any}
+							figmaPropsData={Section.figmaPropsData as any}
 							systemsForComponent={systemsForComponent}
 							client:load
 						/>
