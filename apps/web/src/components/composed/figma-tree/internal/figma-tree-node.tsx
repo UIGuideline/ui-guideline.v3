@@ -1,5 +1,5 @@
+import { getFigmaIconForType } from '../figma-node-catalog';
 import { useFigmaTree } from '../figma-tree';
-import { getFigmaIconForType } from '../figma-tree-icons';
 import type { TreeNodeData } from '@ui';
 import { Icon, TreeNode, type TreeNodeProps } from '@ui';
 

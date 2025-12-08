@@ -1,5 +1,5 @@
+import { getFigmaIconForType, getFigmaNodeDataForType } from '../figma-node-catalog';
 import { useFigmaTree } from '../figma-tree';
-import { getFigmaIconForType, getFigmaNodeDataForType } from '../figma-tree-icons';
 import { Icon } from '@ui';
 import { ExternalLink } from 'lucide-react';
 import { tv } from 'tailwind-variants';
