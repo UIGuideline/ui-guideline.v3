@@ -23,7 +23,7 @@ layers:
                 name: 'Item'
                 description: 'Interactive row component. Auto Layout (Horizontal). Sizing: Width=Fill container. States: Default, Hover, Focus. Supports text and icon slots.'
 
-          - figmaType: 'frame'
+          - figmaType: 'instance'
             name: 'Separator'
             description: 'Visual divider line. Sizing: Height=1px (horizontal), Width=Fill container. Styling: Stroke or Thin Rectangle fill.'
 
