@@ -66,7 +66,7 @@ const link = tv({
  * Must be used within a FigmaTreeProvider context.
  */
 export const FloatingBox = () => {
-  const { hoveredNode } = useFigmaTree();
+  const { hoveredNode, setHoveredNode } = useFigmaTree();
   const IconComponent = hoveredNode ? getFigmaIconForType(hoveredNode.figmaType) : null;
   const nodeData = hoveredNode ? getFigmaNodeDataForType(hoveredNode.figmaType) : null;
 
@@ -82,8 +82,14 @@ export const FloatingBox = () => {
     link: link(),
   };
 
+  const handleMouseEnter = () => {
+    if (hoveredNode) setHoveredNode(hoveredNode);
+  };
+
+  const handleMouseLeave = () => setHoveredNode(null);
+
   return (
-    <div className={classes.container}>
+    <div className={classes.container} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {hoveredNode && (
         <>
           {/* Specific Node Info */}
