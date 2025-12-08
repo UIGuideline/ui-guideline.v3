@@ -12,7 +12,7 @@
 #
 # To add new types:
 # 1. Use the new type here in the YAML
-# 2. Add the corresponding icon mapping in apps/web/src/components/composed/figma-tree/figma-tree-icons.ts
+# 2. Add the corresponding icon mapping in apps/web/src/components/composed/figma-tree/figma-node-catalog.ts
 # 3. That's it! The component will automatically render with the new icon
 
 layers:
