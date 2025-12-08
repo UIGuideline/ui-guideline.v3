@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { PropsData } from '@content';
+import type { CodePropsData } from '@content';
 import { ChevronDown, X } from 'lucide-react';
 import { tv } from 'tailwind-variants';
 
@@ -90,7 +90,7 @@ const exampleTag = tv({
   base: ['bg-gray-200/50 dark:bg-gray-800/40 px-1 text-xs text-neutral-50'],
 });
 
-type PropItem = PropsData[number];
+type PropItem = CodePropsData[number]['props'][number];
 
 export interface PropsItemProps {
   /**
@@ -117,25 +117,6 @@ const formatValue = (value: string | string[] | undefined, separator = ' | '): s
     return value.join(separator);
   }
   return value ?? '';
-};
-
-/**
- * Render examples as code tags
- */
-const renderExamples = (examples: string | string[] | undefined, tagClassName: string) => {
-  if (!examples || examples === '' || (Array.isArray(examples) && examples.length === 0)) {
-    return null;
-  }
-
-  if (Array.isArray(examples)) {
-    return examples.map((example, index) => (
-      <code key={index} className={tagClassName}>
-        {example}
-      </code>
-    ));
-  }
-
-  return <code className={tagClassName}>{examples}</code>;
 };
 
 /**
@@ -169,13 +150,13 @@ export const PropsItem = ({ className, property, defaultExpanded = false }: Prop
 
   // Using || instead of ?? to treat empty strings as falsy
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const defaultValue = property?.defaultValue || '-';
+  const defaultValue = property?.default || '-';
 
   return (
     <div role="button" tabIndex={0} onKeyDown={handleClick} className={classes.container} onClick={handleClick}>
       <div className={classes.nameContainer}>
         <code className={classes.name}>{property?.name}</code>
-        {property?.isRequired &&
+        {property?.required &&
           (isExpanded ? (
             <span className="text-xs font-medium leading-normal text-rose-600">REQUIRED</span>
           ) : (
@@ -195,7 +176,7 @@ export const PropsItem = ({ className, property, defaultExpanded = false }: Prop
           {/* TYPE */}
           <div className="flex items-center gap-2">
             <div className="text-sm text-neutral-50 font-semibold">Type:</div>
-            <code className={classes.tag(TagVariant.accent)}>{formatValue(property?.value)}</code>
+            <code className={classes.tag(TagVariant.accent)}>{formatValue(property?.type)}</code>
           </div>
 
           {/* DEFAULT VALUE */}
@@ -203,14 +184,6 @@ export const PropsItem = ({ className, property, defaultExpanded = false }: Prop
             <div className="text-sm text-neutral-50 font-semibold">Default:</div>
             <code className={classes.tag(TagVariant.default)}>{defaultValue}</code>
           </div>
-
-          {/* EXAMPLE VALUES */}
-          {property?.exampleValue && (
-            <div className="flex items-center gap-2">
-              <div className="text-sm text-neutral-50 font-semibold">Examples:</div>
-              <div className="flex items-center gap-3">{renderExamples(property.exampleValue, classes.exampleTag)}</div>
-            </div>
-          )}
         </div>
       )}
     </div>

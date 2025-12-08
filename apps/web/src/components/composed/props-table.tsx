@@ -1,4 +1,4 @@
-import type { PropsData } from '@content';
+import type { CodePropsData } from '@content';
 import { Table } from '@ui';
 import { tv } from 'tailwind-variants';
 
@@ -35,7 +35,7 @@ export interface PropsTableProps {
   /**
    * The data for the props table.
    */
-  data?: PropsData;
+  data?: CodePropsData[number]['props'];
 }
 
 /**
@@ -73,10 +73,10 @@ export const PropsTable = ({ className, data = [] }: PropsTableProps) => {
       </Table.Header>
       <Table.Body>
         {data.map((prop, index) => {
-          const formattedValue = formatValue(prop.value);
+          const formattedValue = formatValue(prop.type);
           // Using || instead of ?? to treat empty strings as falsy
           // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-          const defaultValue = prop.defaultValue || '-';
+          const defaultValue = prop.default || '-';
 
           return (
             <Table.Row key={index} className="border-t border-gray-200 dark:border-gray-800 h-11">

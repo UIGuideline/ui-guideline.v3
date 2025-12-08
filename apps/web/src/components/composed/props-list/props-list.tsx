@@ -1,5 +1,5 @@
 import { PropsItem } from './props-item/props-item';
-import type { PropsData } from '@lib';
+import type { CodePropsData } from '@content';
 import { tv } from 'tailwind-variants';
 
 const container = tv({
@@ -15,7 +15,7 @@ export interface PropsListProps {
   /**
    * The data for the props list.
    */
-  data?: PropsData;
+  data?: CodePropsData[number]['props'];
 
   /**
    * Whether the properties are expanded or not.

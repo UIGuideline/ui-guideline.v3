@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { PropsList, PropsTable } from '@composed';
-import type { PropsData } from '@content';
+import type { CodePropsData } from '@content';
 import { ToggleGroup, ToggleGroupSelection } from '@ui';
 import { Menu, Rows3, Table } from 'lucide-react';
 
@@ -15,7 +15,7 @@ export interface PropsSectionProps {
   /**
    * The data for the props table
    */
-  data: PropsData;
+  data: CodePropsData;
 }
 
 export const Props = ({ data = [] }: PropsSectionProps) => {
@@ -29,16 +29,18 @@ export const Props = ({ data = [] }: PropsSectionProps) => {
     setViewMode(value as ViewModeType);
   };
 
-  const renderView = () => {
+  const renderView = (props: CodePropsData[number]['props']) => {
     switch (viewMode) {
       case ViewMode.table:
-        return <PropsTable data={data} className="overflow-x-auto" />;
+        return <PropsTable data={props} className="overflow-x-auto" />;
       case ViewMode.expanded:
-        return <PropsList data={data} areExpanded className="w-full" />;
+        return <PropsList data={props} areExpanded className="w-full" />;
       case ViewMode.list:
-        return <PropsList data={data} className="w-full" />;
+        return <PropsList data={props} className="w-full" />;
     }
   };
+
+  if (!data?.length) return null;
 
   return (
     <section className="flex flex-col mb-4">
@@ -69,7 +71,17 @@ export const Props = ({ data = [] }: PropsSectionProps) => {
         </ToggleGroup>
       </div>
 
-      <div className="flex overflow-scroll border border-gray-800 rounded-lg">{renderView()}</div>
+      <div className="flex flex-col gap-10">
+        {data.map((item, index) => (
+          <div key={index} className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <h3 className="text-xl font-semibold text-foreground">{item.component}</h3>
+              <p className="text-gray-500 dark:text-gray-400">{item.description}</p>
+            </div>
+            <div className="flex overflow-scroll border border-gray-800 rounded-lg">{renderView(item.props)}</div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 };

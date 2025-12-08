@@ -136,19 +136,23 @@ export type DesignLayers = {
 };
 
 /**
- * Component Details - Props
+ * Component Details - Code Props
  */
-const props = defineCollection({
+const codeProps = defineCollection({
   type: 'data',
   schema: z.array(
     z.object({
-      name: z.string(),
+      component: z.string(),
       description: z.string(),
-      value: z.union([z.string(), z.array(z.string())]),
-      defaultValue: z.string().optional(),
-      exampleValue: z.union([z.string(), z.array(z.string())]).optional(),
-      isRequired: z.boolean().optional(),
-      usedBy: z.array(z.string()).optional(),
+      props: z.array(
+        z.object({
+          name: z.string(),
+          type: z.union([z.string(), z.array(z.string())]),
+          default: z.string().optional(),
+          description: z.string(),
+          required: z.boolean().optional(),
+        }),
+      ),
     }),
   ),
 });
@@ -221,7 +225,7 @@ export type SystemComponent = z.infer<typeof systemComponentSchema>;
 export const collections = {
   componentList,
   overview,
-  props,
+  codeProps,
   anatomy,
   codeAnatomy,
   designLayers,
