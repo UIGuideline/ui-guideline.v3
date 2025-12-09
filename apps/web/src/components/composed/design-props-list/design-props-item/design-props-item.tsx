@@ -11,11 +11,11 @@ const TagVariant = {
 type TagVariantType = (typeof TagVariant)[keyof typeof TagVariant];
 
 const container = tv({
-  base: ['relative', 'flex', 'border-b', 'border-gray-200', 'dark:border-gray-900'],
+  base: ['relative', 'flex', 'border-b', 'border-border'],
   variants: {
     isExpanded: {
       true: 'flex-col gap-2 cursor-default p-5',
-      false: 'content-between items-center justify-between hover:bg-gray-200/60 hover:dark:bg-gray-900/50 p-3 pl-5',
+      false: 'content-between items-center justify-between hover:bg-muted/30 p-3 pl-5',
     },
   },
 });
@@ -34,8 +34,8 @@ const name = tv({
   base: ['text-sm'],
   variants: {
     isExpanded: {
-      true: 'text-blue-600 dark:text-blue-400',
-      false: 'text-neutral-50',
+      true: 'text-primary-400',
+      false: 'text-foreground',
     },
   },
 });
@@ -51,11 +51,11 @@ const descriptionContainer = tv({
 });
 
 const description = tv({
-  base: [],
+  base: ['text-sm'],
   variants: {
     isExpanded: {
-      true: 'text-gray-800 dark:text-gray-400',
-      false: 'select-none text-sm text-gray-500 truncate',
+      true: 'text-foreground',
+      false: 'select-none truncate text-muted-foreground',
     },
   },
 });
@@ -158,7 +158,7 @@ export const DesignPropsItem = ({ className, property, defaultExpanded = false }
         <code className={classes.name}>{property?.name}</code>
         {property?.required &&
           (isExpanded ? (
-            <span className="text-xs font-medium leading-normal text-rose-600">REQUIRED</span>
+            <span className="text-xs font-medium leading-normal text-rose-600">required</span>
           ) : (
             <span className="text-rose-600">*</span>
           ))}
