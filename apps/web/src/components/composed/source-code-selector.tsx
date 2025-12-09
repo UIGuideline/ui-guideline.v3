@@ -85,7 +85,7 @@ export const SourceCodeSelector = ({ value, items, onSystemChange, className }: 
       <Combobox open={open} onOpenChange={setOpen}>
         <Combobox.Trigger className="w-[200px] justify-between" value={triggerValue} />
         <Combobox.Content className="w-[200px] p-0">
-          <Combobox.List className="max-h-60">
+          <Combobox.List className="max-h-56">
             <Combobox.Empty>No system found.</Combobox.Empty>
             {uiGuidelineItem && renderItem(uiGuidelineItem)}
             {uiGuidelineItem && otherItems.length > 0 && <Combobox.Separator />}

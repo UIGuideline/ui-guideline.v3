@@ -1,5 +1,5 @@
-import { ToggleGroup, ToggleGroupSelection } from '@ui';
-import { Menu, Rows3, Table } from 'lucide-react';
+import { ToggleGroup } from '@ui';
+import { MenuIcon, Rows3Icon, TableIcon } from 'lucide-react';
 import { tv } from 'tailwind-variants';
 
 const container = tv({
@@ -34,22 +34,17 @@ export const PropsViewToggle = ({ className, value, onValueChange }: PropsViewTo
   };
 
   return (
-    <ToggleGroup
-      type={ToggleGroupSelection.single}
-      className={classes.container}
-      value={value}
-      onValueChange={handleViewChange}
-    >
+    <ToggleGroup type="single" size="sm" className={classes.container} value={value} onValueChange={handleViewChange}>
       <ToggleGroup.Item value="list" aria-label="List view">
-        <Menu className="size-4" />
+        <MenuIcon />
       </ToggleGroup.Item>
 
       <ToggleGroup.Item value="expanded" aria-label="Expanded view">
-        <Rows3 className="size-4" />
+        <Rows3Icon />
       </ToggleGroup.Item>
 
       <ToggleGroup.Item value="table" aria-label="Table view">
-        <Table className="size-4" />
+        <TableIcon />
       </ToggleGroup.Item>
     </ToggleGroup>
   );

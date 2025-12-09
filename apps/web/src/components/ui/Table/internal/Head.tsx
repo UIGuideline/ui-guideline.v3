@@ -4,7 +4,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 const thead = tv({
   base: [
     'h-10 px-2 cursor-default',
-    'font-bold dark:text-gray-50 text-left align-middle',
+    'font-bold text-foreground text-left align-middle',
     '[&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
   ],
 });

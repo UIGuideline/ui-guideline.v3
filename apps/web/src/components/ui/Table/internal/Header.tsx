@@ -2,7 +2,7 @@ import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const theader = tv({
-  base: ['[&_tr]:border-b [&_tr]:border-gray-800'],
+  base: ['[&_tr]:border-b [&_tr]:border-border'],
 });
 
 export interface THeaderProps extends React.HTMLAttributes<HTMLTableSectionElement>, VariantProps<typeof theader> {}

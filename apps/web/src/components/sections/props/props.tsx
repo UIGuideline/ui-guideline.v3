@@ -51,14 +51,14 @@ export const Props = ({ className, codePropsData = [], figmaPropsData = [] }: Pr
       </h2>
       <div aria-label="Props" className={classes.container}>
         <Tabs className="w-full px-4 pt-1 pb-4" defaultValue={activeTab} onValueChange={handleTabChange}>
-          <Tabs.List>
+          <Tabs.List className="border-b border-border">
             <Tabs.Trigger value={PropsTab.code}>Code Props</Tabs.Trigger>
             <Tabs.Trigger value={PropsTab.design}>Design Props</Tabs.Trigger>
           </Tabs.List>
-          <Tabs.Content value={PropsTab.code}>
+          <Tabs.Content value={PropsTab.code} className="mt-10">
             <CodePropsTab data={codePropsData} />
           </Tabs.Content>
-          <Tabs.Content value={PropsTab.design}>
+          <Tabs.Content value={PropsTab.design} className="mt-10">
             <DesignPropsTab data={figmaPropsData} />
           </Tabs.Content>
         </Tabs>
