@@ -1,8 +1,10 @@
 - component: Menu
+  description: 'The root component that manages the open state and context of the menu.'
   figmaType: 'component'
   props: []
 
 - component: Menu.Trigger
+  description: 'The button that toggles the menu. The menu content will position itself against the trigger.'
   figmaType: 'instance'
   props:
     - name: 'disabled'
@@ -13,6 +15,7 @@
       required: false
 
 - component: Menu.Content
+  description: 'The component that pops out when the menu is open. Contains all menu items.'
   figmaType: 'autoLayout'
   props:
     - name: 'loop'
@@ -51,6 +54,7 @@
       required: false
 
 - component: Menu.Item
+  description: 'An individual selectable item within the menu.'
   figmaType: 'instance'
   props:
     - name: 'disabled'
@@ -61,14 +65,17 @@
       required: false
 
 - component: Menu.Group
+  description: 'Used to group multiple related menu items together.'
   figmaType: 'autoLayout'
   props: []
 
 - component: Menu.Label
+  description: 'A non-focusable label used to name a group of menu items.'
   figmaType: 'text'
   props: []
 
 - component: Menu.Separator
+  description: 'A visual separator used to divide menu items.'
   figmaType: 'frame'
   props:
     - name: 'orientation'
@@ -79,6 +86,7 @@
       required: false
 
 - component: Menu.Arrow
+  description: 'An optional arrow element to render alongside the menu. Helps visually link the trigger with the menu content.'
   figmaType: 'vector'
   props:
     - name: 'width'
@@ -96,6 +104,7 @@
       required: false
 
 - component: Menu.CheckboxItem
+  description: 'A menu item that can be controlled and rendered like a checkbox.'
   figmaType: 'instance'
   props:
     - name: 'checked'
@@ -112,7 +121,13 @@
       description: 'Whether the checkbox item is disabled.'
       required: false
 
+- component: Menu.RadioGroup
+  description: 'Used to group multiple radio items together.'
+  figmaType: 'autoLayout'
+  props: []
+
 - component: Menu.RadioItem
+  description: 'A menu item that can be controlled and rendered like a radio button within a group.'
   figmaType: 'instance'
   props:
     - name: 'disabled'
@@ -122,7 +137,13 @@
       description: 'Whether the radio item is disabled.'
       required: false
 
+- component: Menu.Sub
+  description: 'Contains all the parts of a submenu.'
+  figmaType: 'autoLayout'
+  props: []
+
 - component: Menu.SubTrigger
+  description: 'A menu item that opens a submenu. Must be rendered inside MenuSub.'
   figmaType: 'instance'
   props:
     - name: 'disabled'
@@ -133,6 +154,7 @@
       required: false
 
 - component: Menu.SubContent
+  description: 'The component that pops out when a submenu is open. Must be rendered inside MenuSub.'
   figmaType: 'autoLayout'
   props:
     - name: 'sideOffset'

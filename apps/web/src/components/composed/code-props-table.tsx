@@ -64,7 +64,7 @@ export const CodePropsTable = ({ className, data = [] }: CodePropsTableProps) =>
   return (
     <Table className={classes.table}>
       <Table.Header>
-        <Table.Row className="text-left bg-muted/50 hover:bg-muted/50">
+        <Table.Row className="text-left bg-muted/50">
           <Table.Head className="min-w-52 py-2 pl-6 pr-4">Prop</Table.Head>
           <Table.Head className="min-w-52 px-4 py-2">Type</Table.Head>
           <Table.Head className="px-4 py-2">Default</Table.Head>

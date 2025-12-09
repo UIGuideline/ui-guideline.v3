@@ -83,13 +83,14 @@ Create a YAML entry for each prop following the Output Structure.
 
 ```yaml
 - component: ComponentName
+  description: 'Description'
   figmaType: 'instance' | 'component' | 'frame' | 'autoLayout' | 'group' | 'text' | 'vector'  # From Table 1
   props:
     - name: 'originalPropName'  # Keep original camelCase name from code
       type: 'string' | 'number' | 'boolean' | ['option1', 'option2', 'option3']  # The natural code type
       figmaType: 'variant' | 'boolean' | 'text' | 'instanceSwap' | 'slot' | 'documentationOnly'  # From Table 2
       default: 'Default Value'
-      description: 'Description for the designer.'
+      description: 'Description'
       required: false
 ```
 
@@ -146,6 +147,7 @@ Create a YAML entry for each prop following the Output Structure.
 
 ```yaml
 - component: Button
+  description: 'A button component that can be used to trigger actions or navigate to different pages.'
   figmaType: 'component'
   props:
     - name: 'disabled'

@@ -165,6 +165,7 @@ const figmaProps = defineCollection({
   schema: z.array(
     z.object({
       component: z.string(),
+      description: z.string(),
       figmaType: z.string(),
       props: z.array(
         z.object({
