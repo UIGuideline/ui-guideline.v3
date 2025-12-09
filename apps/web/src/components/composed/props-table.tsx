@@ -81,7 +81,10 @@ export const PropsTable = ({ className, data = [] }: PropsTableProps) => {
           return (
             <Table.Row key={index} className="border-t border-border h-11 hover:bg-background">
               <Table.Cell className="min-w-52 py-2 pl-6 pr-4 text-foreground">
-                <code className="text-primary-200">{prop.name}</code>
+                <code className="text-primary-200">
+                  {prop.name}
+                  {prop.required && <span className="text-rose-600">*</span>}
+                </code>
               </Table.Cell>
               <Table.Cell className="min-w-52 p-4 text-foreground max-w-xs">
                 <code className={classes.tag(TagVariant.accent)}>{formattedValue}</code>
