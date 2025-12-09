@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { PropsList, PropsTable, PropsViewToggle } from '@composed';
+import { CodePropsList, CodePropsTable, PropsViewToggle } from '@composed';
 import type { CodePropsData } from '@content';
 
 const ComponentPropsBlock = ({ item }: { item: CodePropsData[number] }) => {
@@ -8,11 +8,11 @@ const ComponentPropsBlock = ({ item }: { item: CodePropsData[number] }) => {
   const renderView = (props: CodePropsData[number]['props']) => {
     switch (viewMode) {
       case 'table':
-        return <PropsTable data={props} className="overflow-x-auto" />;
+        return <CodePropsTable data={props} className="overflow-x-auto" />;
       case 'expanded':
-        return <PropsList data={props} areExpanded className="w-full" />;
+        return <CodePropsList data={props} areExpanded className="w-full" />;
       case 'list':
-        return <PropsList data={props} className="w-full" />;
+        return <CodePropsList data={props} className="w-full" />;
     }
   };
 

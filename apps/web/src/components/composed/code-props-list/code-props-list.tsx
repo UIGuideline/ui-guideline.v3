@@ -6,7 +6,7 @@ const container = tv({
   base: ['flex', 'flex-col'],
 });
 
-export interface PropsListProps {
+export interface CodePropsListProps {
   /**
    * The CSS class to apply to the component.
    */
@@ -26,7 +26,7 @@ export interface PropsListProps {
 /**
  * This component is used to render a list of properties.
  */
-export const PropsList = ({ className, data = [], areExpanded = false }: PropsListProps) => {
+export const CodePropsList = ({ className, data = [], areExpanded = false }: CodePropsListProps) => {
   const classes = container({ className });
 
   if (!data?.length) return null;
