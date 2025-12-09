@@ -13,7 +13,7 @@ const table = tv({
 });
 
 const tag = tv({
-  base: ['px-1.5', 'py-0.5', 'text-sm', 'text-slate-600', 'dark:text-slate-300'],
+  base: ['px-1.5', 'py-0.5', 'text-sm', 'text-slate-300'],
   variants: {
     variant: {
       [TagVariant.accent]:
@@ -64,9 +64,9 @@ export const DesignPropsTable = ({ className, data = [] }: DesignPropsTableProps
   return (
     <Table className={classes.table}>
       <Table.Header>
-        <Table.Row className="bg-gray-200/40 text-left dark:bg-gray-900/50 hover:bg-gray-900/50">
+        <Table.Row className="text-left bg-muted/50">
           <Table.Head className="min-w-52 py-2 pl-6 pr-4">Prop</Table.Head>
-          <Table.Head className="min-w-64 px-4 py-2">Type</Table.Head>
+          <Table.Head className="min-w-52 px-4 py-2">Type</Table.Head>
           <Table.Head className="min-w-32 px-4 py-2">Figma Type</Table.Head>
           <Table.Head className="px-4 py-2">Default</Table.Head>
           <Table.Head className="min-w-80 px-4 py-2">Description</Table.Head>
@@ -80,20 +80,20 @@ export const DesignPropsTable = ({ className, data = [] }: DesignPropsTableProps
           const defaultValue = prop.default || '-';
 
           return (
-            <Table.Row key={index} className="border-t border-gray-200 dark:border-gray-800 h-11">
-              <Table.Cell className="min-w-52 py-2 pl-6 pr-4 text-gray-700 dark:text-gray-50">
-                <code className="text-gray-700 dark:text-gray-50">{prop.name}</code>
+            <Table.Row key={index} className="border-t border-border h-11 hover:bg-background">
+              <Table.Cell className="min-w-52 py-2 pl-6 pr-4 text-foreground">
+                <code className="text-primary-200">{prop.name}</code>
               </Table.Cell>
-              <Table.Cell className="min-w-72 p-4 text-gray-500 dark:text-gray-300 max-w-xs">
+              <Table.Cell className="min-w-52 p-4 text-foreground max-w-xs">
                 <code className={classes.tag(TagVariant.accent)}>{formattedValue}</code>
               </Table.Cell>
-              <Table.Cell className="min-w-32 p-4 text-gray-500 dark:text-gray-300">
+              <Table.Cell className="min-w-32 p-4">
                 <code className={classes.tag(TagVariant.default)}>{prop.figmaType}</code>
               </Table.Cell>
               <Table.Cell className="p-4">
                 <code className={classes.tag(TagVariant.default)}>{defaultValue}</code>
               </Table.Cell>
-              <Table.Cell className="min-w-80 p-4 text-gray-400 dark:text-gray-400">{prop.description}</Table.Cell>
+              <Table.Cell className="min-w-80 p-4 text-foreground">{prop.description}</Table.Cell>
             </Table.Row>
           );
         })}
