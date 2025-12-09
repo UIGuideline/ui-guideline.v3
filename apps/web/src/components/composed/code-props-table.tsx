@@ -26,7 +26,7 @@ const tag = tv({
   },
 });
 
-export interface PropsTableProps {
+export interface CodePropsTableProps {
   /**
    * The CSS class to apply to the component.
    */
@@ -49,9 +49,9 @@ const formatValue = (value: string | string[]): string => {
 };
 
 /**
- * This component is used to display the properties of a component.
+ * This component is used to display the Code properties of a component.
  */
-export const PropsTable = ({ className, data = [] }: PropsTableProps) => {
+export const CodePropsTable = ({ className, data = [] }: CodePropsTableProps) => {
   const classes = {
     table: table({ className }),
     tag: (variant: TagVariantType) => tag({ variant }),
