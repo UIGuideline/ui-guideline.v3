@@ -2,13 +2,19 @@ import { useState } from 'react';
 import { DesignPropsList, DesignPropsTable, PropsViewToggle } from '@composed';
 import type { FigmaPropsData } from '@content';
 
-// We need to act as if we are passing CodeProps to PropsTable/List
-// Since the structure is compatible (FigmaProps has all fields CodeProps has + figmaType)
-// we can cast or just pass it if the types allow.
-// Ideally PropsTable should accept a generic or the union.
+const EmptyDesignPropsBlock = () => {
+  return (
+    <div className="flex items-center justify-center gap-3 border border-border p-4 rounded-lg h-20">
+      <p className="text-primary-200/40 text-xs max-w-xs text-center leading-relaxed">
+        This component does not have any design prop that are should be included in your Figma file.
+      </p>
+    </div>
+  );
+};
 
 const ComponentDesignPropsBlock = ({ item }: { item: FigmaPropsData[number] }) => {
   const [viewMode, setViewMode] = useState<'list' | 'expanded' | 'table'>('table');
+  const hasProps = item.props.length > 0;
 
   const renderView = (props: FigmaPropsData[number]['props']) => {
     switch (viewMode) {
@@ -28,9 +34,9 @@ const ComponentDesignPropsBlock = ({ item }: { item: FigmaPropsData[number] }) =
           <h3 className="text-xl font-semibold text-foreground">{item.component}</h3>
           <p className="text-muted-foreground text-sm w-full">{item.description}</p>
         </div>
-        <PropsViewToggle value={viewMode} onValueChange={setViewMode} className="ml-auto self-end" />
+        {hasProps && <PropsViewToggle value={viewMode} onValueChange={setViewMode} className="ml-auto self-end" />}
       </div>
-      <div className="flex overflow-scroll">{renderView(item.props)}</div>
+      {hasProps ? <div className="flex overflow-scroll">{renderView(item.props)}</div> : <EmptyDesignPropsBlock />}
     </div>
   );
 };
@@ -40,7 +46,9 @@ export const DesignPropsTab = ({ data }: { data: FigmaPropsData }) => {
 
   return (
     <div className="flex flex-col gap-16">
-      {data.map((item, index) => item.props.length > 0 && <ComponentDesignPropsBlock key={index} item={item} />)}
+      {data.map((item, index) => (
+        <ComponentDesignPropsBlock key={index} item={item} />
+      ))}
     </div>
   );
 };
