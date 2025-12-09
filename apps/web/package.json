@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "pnpm with-env astro dev",
     "build": "pnpm with-env astro build",
+    "build:vercel": "astro build",
     "lint": "eslint .",
     "preview": "pnpm with-env astro preview",
     "astro": "pnpm with-env astro",
