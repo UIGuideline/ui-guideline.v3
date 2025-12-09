@@ -41,12 +41,7 @@ export interface DesignPropsTableProps {
 /**
  * Format value that can be string or array of strings
  */
-const formatValue = (value: string | string[]): string => {
-  if (Array.isArray(value)) {
-    return value.join(' | ');
-  }
-  return value;
-};
+const formatValue = (value: string | string[]): string => (Array.isArray(value) ? value.join(' | ') : value);
 
 /**
  * This component is used to display the design properties of a component.
@@ -57,9 +52,7 @@ export const DesignPropsTable = ({ className, data = [] }: DesignPropsTableProps
     tag: (variant: TagVariantType) => tag({ variant }),
   };
 
-  if (!data.length) {
-    return null;
-  }
+  if (!data.length) return null;
 
   return (
     <Table className={classes.table}>

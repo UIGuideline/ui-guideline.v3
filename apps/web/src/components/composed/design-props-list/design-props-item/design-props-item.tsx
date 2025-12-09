@@ -112,12 +112,8 @@ export interface DesignPropsItemProps {
 /**
  * Format value that can be string or array of strings
  */
-const formatValue = (value: string | string[] | undefined, separator = ' | '): string => {
-  if (Array.isArray(value)) {
-    return value.join(separator);
-  }
-  return value ?? '';
-};
+const formatValue = (value: string | string[] | undefined, separator = ' | '): string =>
+  Array.isArray(value) ? value.join(separator) : (value ?? '');
 
 /**
  * This component is used to render an item of the design properties list.
