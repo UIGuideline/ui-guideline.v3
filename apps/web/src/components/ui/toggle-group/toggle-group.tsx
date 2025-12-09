@@ -1,14 +1,12 @@
 import * as React from 'react';
 import type { item as itemClasses } from './internal';
 import { Item } from './internal';
-import type { ToggleGroupSelection } from './types';
-import { ItemSize } from './types';
 import type { ToggleGroupSingleProps } from '@radix-ui/react-toggle-group';
 import { Root } from '@radix-ui/react-toggle-group';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 export const ToggleGroupContext = React.createContext<VariantProps<typeof itemClasses>>({
-  size: ItemSize.base,
+  size: 'base',
 });
 
 export type ToggleGroupProps = Omit<ToggleGroupSingleProps, 'type'> &
@@ -16,7 +14,7 @@ export type ToggleGroupProps = Omit<ToggleGroupSingleProps, 'type'> &
     /**
      * The type of toggle group.
      */
-    type: ToggleGroupSelection;
+    type: 'single' | 'multiple';
 
     /**
      * Whether the segmented control should be full width.
@@ -31,12 +29,12 @@ export type ToggleGroupComponent = React.ForwardRefExoticComponent<
 };
 
 const toggleGroup = tv({
-  base: ['flex items-center', 'bg-white/5 rounded-md'],
+  base: ['flex items-center', 'bg-muted rounded-md'],
   variants: {
     size: {
-      [ItemSize.sm]: 'p-1 gap-1 h-7',
-      [ItemSize.base]: 'p-1 gap-1 h-9',
-      [ItemSize.lg]: 'p-1.5 gap-1.5 h-12',
+      sm: 'p-1 gap-1 h-7',
+      base: 'p-1 gap-1 h-9',
+      lg: 'p-1.5 gap-1.5 h-12',
     },
     isFullWidth: {
       true: 'w-full',
@@ -45,7 +43,7 @@ const toggleGroup = tv({
 });
 
 export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(
-  ({ className, type, size = ItemSize.base, children, isFullWidth = false, ...props }, ref) => {
+  ({ className, type, size = 'base', children, isFullWidth = false, ...props }, ref) => {
     const classes = toggleGroup({ className, size, isFullWidth });
 
     return (

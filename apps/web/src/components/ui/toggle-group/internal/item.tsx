@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import * as React from 'react';
 import { ToggleGroupContext } from '../toggle-group';
-import { ItemSize } from '../types';
 import { Item as RadixItem } from '@radix-ui/react-toggle-group';
 import { tv, type VariantProps } from 'tailwind-variants';
 
@@ -15,19 +14,19 @@ export const item = tv({
     'cursor-pointer select-none',
     'disabled:pointer-events-none disabled:opacity-50',
     '[&_svg]:pointer-events-none [&_svg]:shrink-0',
-    'text-gray-200',
-    'data-[state=on]:bg-white data-[state=on]:text-black',
-    'hover:bg-white/10',
+    'text-zinc-500',
+    'data-[state=on]:bg-white/10 data-[state=on]:text-foreground',
+    'hover:bg-white/5 hover:text-foreground',
   ],
   variants: {
     size: {
-      [ItemSize.sm]: 'p-1 text-xs font-bold h-5 [&_svg]:size-3',
-      [ItemSize.base]: 'p-1.5 text-sm font-bold h-7 [&_svg]:size-4',
-      [ItemSize.lg]: 'p-2.5 text-base font-bold h-9 [&_svg]:size-4',
+      sm: 'p-1 text-xs font-bold h-5 [&_svg]:size-3',
+      base: 'p-1.5 text-sm font-bold h-7 [&_svg]:size-4',
+      lg: 'p-2.5 text-base font-bold h-9 [&_svg]:size-4',
     },
   },
   defaultVariants: {
-    size: ItemSize.base,
+    size: 'base',
   },
 });
 
@@ -47,7 +46,7 @@ export type ItemProps = React.ComponentPropsWithoutRef<typeof RadixItem> &
 /**
  * `Item` represents the item within the `SegmentedControl`.
  */
-export const Item = ({ className, size: sizeProp = ItemSize.base, children, ...props }: ItemProps) => {
+export const Item = ({ className, size: sizeProp = 'base', children, ...props }: ItemProps) => {
   const context = React.useContext(ToggleGroupContext);
   const classes = item({
     size: context.size ?? sizeProp,

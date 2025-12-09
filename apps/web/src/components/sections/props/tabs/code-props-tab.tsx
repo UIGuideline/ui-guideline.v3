@@ -17,22 +17,22 @@ const ComponentPropsBlock = ({ item }: { item: CodePropsData[number] }) => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       <div className="flex gap-2">
         <div className="flex flex-col gap-1">
           <h3 className="text-xl font-semibold text-foreground">{item.component}</h3>
-          <p className="text-muted-foreground w-full">{item.description}</p>
+          <p className="text-muted-foreground text-sm w-full">{item.description}</p>
         </div>
         <PropsViewToggle value={viewMode} onValueChange={setViewMode} className="ml-auto self-end" />
       </div>
-      <div className="flex overflow-scroll border border-gray-800 rounded-lg">{renderView(item.props)}</div>
+      <div className="flex overflow-scroll">{renderView(item.props)}</div>
     </div>
   );
 };
 
 export const CodePropsTab = ({ data }: { data: CodePropsData }) => {
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-16">
       {data.map((item, index) => (
         <ComponentPropsBlock key={index} item={item} />
       ))}
