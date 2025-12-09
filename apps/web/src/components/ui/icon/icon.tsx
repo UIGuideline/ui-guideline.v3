@@ -8,7 +8,7 @@ const root = tv({
 
 export interface IconProps extends BaseIconProps, VariantProps<typeof root> {
   /**
-   * Set the icon from the IconCatalog.
+   * Set the icon from the IconCatalog
    */
   icon: IconCatalog;
 }
