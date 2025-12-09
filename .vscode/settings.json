@@ -21,6 +21,13 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  // Disable organize imports for MDX files to preserve manual imports
+  "[mdx]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "never"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "files.associations": {
     "*.svg": "html"
   },
@@ -45,5 +52,6 @@
   // Prisma Settings
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
-  }
+  },
+  "git.ignoreLimitWarning": true
 }

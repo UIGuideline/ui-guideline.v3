@@ -1,0 +1,63 @@
+---
+import { SystemOverview } from '@composed';
+import { DocsLayout } from '@layouts';
+import { toComponentCard } from '@lib';
+import { ComponentCard } from '@ui';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+	const systems = await getCollection('systemList');
+	return systems.map((system) => ({
+		params: { slug: system.data.slug },
+		props: { system },
+	}));
+}
+
+const { system } = Astro.props;
+const entry = system;
+if (!entry) throw new Error(`System not found`);
+
+// Load data from collections
+const systemComponentsEntry = await getEntry('systemComponents', `${entry.data.slug}/components`);
+const allComponents = await getCollection('componentList');
+
+// Transform data using transformer
+const componentsInfo = toComponentCard(systemComponentsEntry?.data?.components ?? [], allComponents);
+---
+
+<DocsLayout
+	title={`${entry.data.name} | UI Guideline`}
+	description={`${entry.data.description}`}
+	currentSlug={entry.data.slug}
+	section="systems"
+>
+	<div class="flex flex-col gap-8 mt-14">
+		<SystemOverview
+			client:load
+			slug={entry.data.slug}
+			name={entry.data.name}
+			description={entry.data.description}
+			contributors={entry.data.contributors}
+		/>
+
+		<!-- System Components -->
+		<section class="flex flex-col gap-3">
+			<h1 id="components" class="text-xl font-bold m-0">Components</h1>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{
+					componentsInfo.map((component) => (
+						<ComponentCard
+							client:load
+							title={component.title}
+							slug={component.slug}
+							thumbnailData={component.thumbnailData}
+							externalUrl={component.docUrl}
+							externalLabel={`View in ${entry.data.name}`}
+							status={component.status}
+						/>
+					))
+				}
+			</div>
+		</section>
+	</div>
+</DocsLayout>

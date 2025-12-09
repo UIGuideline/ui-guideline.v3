@@ -1,0 +1,28 @@
+layers:
+  - type: 'component'
+    name: 'Button'
+    description: 'Main component container for the button with all its variants'
+    children:
+      - type: 'variant'
+        name: 'Primary'
+        description: 'Primary button variant'
+        children:
+          - type: 'autoLayout'
+            name: 'Container'
+            description: 'Auto-layout frame that arranges label and icon horizontally'
+            children:
+              - type: 'instance'
+                name: 'StartIcon'
+                description: 'Icon component instance from the icon library'
+
+              - type: 'text'
+                name: 'Label'
+                description: 'Text layer displaying the button label'
+
+          - type: 'frame'
+            name: 'hasIcon'
+            description: 'Boolean property to toggle icon visibility'
+
+          - type: 'group'
+            name: 'isDisabled'
+            description: 'Boolean property to toggle disabled state'

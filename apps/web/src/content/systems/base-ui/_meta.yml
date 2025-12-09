@@ -1,0 +1,20 @@
+slug: base-ui
+name: Base UI
+contributors:
+  featured:
+    - name: Colm Tuite
+      avatarUrl: https://pbs.twimg.com/profile_images/1907688428398850048/zAuYRr83_400x400.jpg
+      siteUrl: https://x.com/colmtuite
+    - name: Michał Dudak
+      avatarUrl: https://avatars.githubusercontent.com/u/4696105
+      siteUrl: https://github.com/michaldudak
+    - name: James Nelson
+      avatarUrl: https://avatars.githubusercontent.com/u/22450188
+      siteUrl: https://github.com/atomiks
+  totalCount: 66
+description: An open-source React component library for building accessible user interfaces. From the creators of Radix, Material UI, and Floating UI.
+websiteUrl: https://base-ui.com/
+repositoryUrl: https://github.com/mui/base-ui
+figmaUrl: https://www.figma.com/community/file/1553396461135994278/base-ui-v0-1-community
+quantityOfComponents: 35
+popularity: low

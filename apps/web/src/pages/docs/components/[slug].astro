@@ -1,0 +1,75 @@
+---
+import { ClientSectionWrapper } from '@composed';
+import { DocsLayout } from '@layouts';
+import { generateTOCFromSections, getSystemsForComponent, renderSections, SectionKey } from '@lib';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const componentList = await getCollection('componentList');
+	// Only generate routes for stable components (exclude "soon")
+	const stableComponents = componentList.filter((component) => component.data.status !== 'soon');
+	return stableComponents.map((component) => ({
+		params: { slug: component.data.slug },
+		props: { component },
+	}));
+}
+
+const { component } = Astro.props;
+const entry = component;
+if (!entry) throw new Error(`Component not found`);
+
+const sections = (entry.data.sections ?? []) as SectionKey[];
+const rendered = await renderSections(sections, {
+	slug: entry.data.slug,
+	basePath: '',
+	title: entry.data.title,
+});
+
+// Load systems that include this component (for Code Anatomy URLs, future Systems section, etc.)
+const allSystems = await getCollection('systemList');
+const allSystemComponents = await getCollection('systemComponents');
+const systemsForComponent = getSystemsForComponent(entry.data.slug, allSystems, allSystemComponents);
+
+// Generate TOC from sections
+const tocItems = generateTOCFromSections(sections);
+---
+
+<DocsLayout
+	title={`${entry.data.title} | UI Guideline`}
+	description={`${entry.data.title} component documentation from leading design systems.`}
+	currentSlug={entry.data.slug}
+	toc={tocItems}
+	section="components"
+>
+	{
+		rendered.map((Section) => {
+			if (!Section) return null;
+
+			// Client section (island with hydration)
+			if (typeof Section === 'object' && 'isClient' in Section) {
+				return (
+					<section class="scroll-mt-20">
+						<ClientSectionWrapper
+							type={Section.type}
+							anatomyData={Section.anatomyData as any}
+							designLayersData={Section.designLayersData as any}
+							designLayersRaw={Section.designLayersRaw as any}
+							codeAnatomyData={Section.codeAnatomyData as any}
+							codePropsData={Section.codePropsData as any}
+							figmaPropsData={Section.figmaPropsData as any}
+							systemsForComponent={systemsForComponent}
+							client:load
+						/>
+					</section>
+				);
+			}
+
+			// Server-rendered section
+			return (
+				<section class="scroll-mt-20">
+					<Section />
+				</section>
+			);
+		})
+	}
+</DocsLayout>

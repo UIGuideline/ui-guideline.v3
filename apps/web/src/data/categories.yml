@@ -1,0 +1,39 @@
+- slug: 'data-display'
+  name: 'Data Display'
+  description: 'Components for displaying data in a visual and organized way.'
+
+- slug: 'overlays'
+  name: 'Overlays'
+  description: 'Components that appear above the main content, such as modals and tooltips.'
+
+- slug: 'controls'
+  name: 'Controls'
+  description: 'Interactive control components for user input and selection.'
+
+- slug: 'inputs'
+  name: 'Inputs'
+  description: 'Input components for collecting user data and text entry.'
+
+- slug: 'atomic-elements'
+  name: 'Atomic Elements'
+  description: 'Basic building block components for UI composition.'
+
+- slug: 'notifications'
+  name: 'Notifications'
+  description: 'Components for displaying alerts, messages, and notifications.'
+
+- slug: 'states'
+  name: 'States'
+  description: 'Components for representing different application states.'
+
+- slug: 'buttons'
+  name: 'Buttons'
+  description: 'Button components for triggering actions and interactions.'
+
+- slug: 'loaders'
+  name: 'Loaders'
+  description: 'Loading indicators and progress components.'
+
+- slug: 'navigation'
+  name: 'Navigation'
+  description: 'Components for navigating through the application.'

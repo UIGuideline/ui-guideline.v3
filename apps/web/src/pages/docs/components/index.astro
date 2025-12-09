@@ -1,0 +1,62 @@
+---
+import { getComponentThumbnailUrl } from '@common';
+import { DocsLayout } from '@layouts';
+import { ComponentCard } from '@ui';
+import { getCollection } from 'astro:content';
+
+// Get all components for the grid
+const allComponents = await getCollection('componentList');
+
+// Sort: stable first, then soon, alphabetically within each
+const sortedComponents = allComponents.sort((a, b) => {
+	const statusA = a.data.status || 'stable';
+	const statusB = b.data.status || 'stable';
+
+	// First sort by status
+	if (statusA !== statusB) return statusA === 'stable' ? -1 : 1;
+
+	// Then alphabetically
+	return a.data.title.localeCompare(b.data.title);
+});
+
+// Map components data for rendering
+const componentList = sortedComponents.map((component) => ({
+	title: component.data.title,
+	slug: component.data.slug,
+	thumbnailData: getComponentThumbnailUrl(component.data.slug),
+	status: component.data.status || 'stable',
+}));
+---
+
+<DocsLayout
+	title="Components - UI Guideline v3"
+	description="Browse our comprehensive library of UI components"
+	section="components"
+>
+	<div class="space-y-8">
+		<!-- Header -->
+		<div class="flex flex-col">
+			<h1 class="mt-14 mb-4 text-3xl font-bold text-balance">Components</h1>
+
+			<div class="text-lg text-muted-foreground max-w-2xl mb-4 -mt-2">
+				We have compiled all the wisdom and best practices from the top Design Systems and UI libraries in one place. We
+				are working on adding more components.
+			</div>
+		</div>
+
+		<!-- Components Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{
+				componentList.map((component) => (
+					<ComponentCard
+						client:load
+						title={component.title}
+						slug={component.slug}
+						thumbnailData={component.thumbnailData}
+						status={component.status}
+					/>
+				))
+			}
+		</div>
+	</div>
+</DocsLayout>

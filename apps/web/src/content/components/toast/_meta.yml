@@ -1,0 +1,6 @@
+title: Toast
+slug: toast
+description: 'The Toast component provides [brief description of functionality]. This component is commonly used for [use cases].'
+status: soon
+category: 'notifications'
+tags: ['toast', 'notification', 'snackbar']

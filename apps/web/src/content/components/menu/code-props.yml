@@ -1,0 +1,299 @@
+- component: Menu
+  description: 'The root component that manages the open state and context of the menu.'
+  props:
+    - name: 'open'
+      type: 'boolean'
+      default: 'false'
+      description: 'The controlled open state of the menu.'
+      required: false
+
+    - name: 'defaultOpen'
+      type: 'boolean'
+      default: 'false'
+      description: 'The default open state when initially rendered. Use when you do not need to control the open state.'
+      required: false
+
+    - name: 'onOpenChange'
+      type: '(open: boolean) => void'
+      default: '-'
+      description: 'Event handler called when the open state of the menu changes.'
+      required: false
+
+- component: Menu.Trigger
+  description: 'The button that toggles the menu. The menu content will position itself against the trigger.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+    - name: 'disabled'
+      type: 'boolean'
+      default: 'false'
+      description: 'Whether the trigger is disabled.'
+      required: false
+
+- component: Menu.Content
+  description: 'The component that pops out when the menu is open. Contains all menu items.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+    - name: 'loop'
+      type: 'boolean'
+      default: 'false'
+      description: 'When true, keyboard navigation will loop from the last item to the first, and vice versa.'
+      required: false
+
+    - name: 'side'
+      type: ['top', 'right', 'bottom', 'left']
+      default: '"bottom"'
+      description: 'The preferred side of the trigger to render the menu against.'
+      required: false
+
+    - name: 'sideOffset'
+      type: 'number'
+      default: '0'
+      description: 'The distance in pixels from the trigger.'
+      required: false
+
+    - name: 'align'
+      type: ['start', 'center', 'end']
+      default: '"start"'
+      description: 'The preferred alignment against the trigger.'
+      required: false
+
+    - name: 'alignOffset'
+      type: 'number'
+      default: '0'
+      description: 'An offset in pixels from the start or end alignment options.'
+      required: false
+
+    - name: 'onInteractOutside'
+      type: '(event: Event) => void'
+      default: '-'
+      description: 'Event handler called when an interaction occurs outside the menu.'
+      required: false
+
+    - name: 'onCloseAutoFocus'
+      type: '(event: Event) => void'
+      default: '-'
+      description: 'Event handler called when focus moves to the trigger after closing.'
+      required: false
+
+- component: Menu.Item
+  description: 'An individual selectable item within the menu.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+    - name: 'disabled'
+      type: 'boolean'
+      default: 'false'
+      description: 'Whether the menu item is disabled.'
+      required: false
+
+    - name: 'onSelect'
+      type: '(event: Event) => void'
+      default: '-'
+      description: 'Event handler called when the user selects an item via mouse or keyboard.'
+      required: false
+
+    - name: 'value'
+      type: 'string'
+      default: '-'
+      description: 'The unique value of the menu item.'
+      required: true
+
+- component: Menu.Group
+  description: 'Used to group multiple related menu items together.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+- component: Menu.Label
+  description: 'A non-focusable label used to name a group of menu items.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+- component: Menu.Separator
+  description: 'A visual separator used to divide menu items.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+    - name: 'orientation'
+      type: ['horizontal', 'vertical']
+      default: '"horizontal"'
+      description: 'The orientation of the separator.'
+      required: false
+
+- component: Menu.Arrow
+  description: 'An optional arrow element to render alongside the menu. Helps visually link the trigger with the menu content.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+    - name: 'width'
+      type: 'number'
+      default: '10'
+      description: 'The width of the arrow in pixels.'
+      required: false
+
+    - name: 'height'
+      type: 'number'
+      default: '5'
+      description: 'The height of the arrow in pixels.'
+      required: false
+
+- component: Menu.CheckboxItem
+  description: 'A menu item that can be controlled and rendered like a checkbox.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+    - name: 'checked'
+      type: ['boolean', 'indeterminate']
+      default: 'false'
+      description: 'The controlled checked state of the checkbox item.'
+      required: false
+
+    - name: 'onCheckedChange'
+      type: "(checked: boolean | 'indeterminate') => void"
+      default: '-'
+      description: 'Event handler called when the checked state changes.'
+      required: false
+
+    - name: 'disabled'
+      type: 'boolean'
+      default: 'false'
+      description: 'Whether the checkbox item is disabled.'
+      required: false
+
+- component: Menu.RadioGroup
+  description: 'Used to group multiple radio items together.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+    - name: 'value'
+      type: 'string'
+      default: '-'
+      description: 'The value of the selected radio item.'
+      required: true
+
+    - name: 'onValueChange'
+      type: '(value: string) => void'
+      default: '-'
+      description: 'Event handler called when the selected value changes.'
+      required: false
+
+- component: Menu.RadioItem
+  description: 'A menu item that can be controlled and rendered like a radio button within a group.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+    - name: 'value'
+      type: 'string'
+      default: '-'
+      description: 'The value of the radio item.'
+      required: true
+
+    - name: 'disabled'
+      type: 'boolean'
+      default: 'false'
+      description: 'Whether the radio item is disabled.'
+      required: false
+
+- component: Menu.Sub
+  description: 'Contains all the parts of a submenu.'
+  props:
+    - name: 'open'
+      type: 'boolean'
+      default: 'false'
+      description: 'The controlled open state of the submenu.'
+      required: false
+
+    - name: 'defaultOpen'
+      type: 'boolean'
+      default: 'false'
+      description: 'The default open state when initially rendered.'
+      required: false
+
+    - name: 'onOpenChange'
+      type: '(open: boolean) => void'
+      default: '-'
+      description: 'Event handler called when the open state of the submenu changes.'
+      required: false
+
+- component: Menu.SubTrigger
+  description: 'A menu item that opens a submenu. Must be rendered inside MenuSub.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+    - name: 'disabled'
+      type: 'boolean'
+      default: 'false'
+      description: 'Whether the submenu trigger is disabled.'
+      required: false
+
+- component: Menu.SubContent
+  description: 'The component that pops out when a submenu is open. Must be rendered inside MenuSub.'
+  props:
+    - name: 'asChild'
+      type: 'boolean'
+      default: 'false'
+      description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
+      required: false
+
+    - name: 'loop'
+      type: 'boolean'
+      default: 'false'
+      description: 'When true, keyboard navigation will loop from the last item to the first.'
+      required: false
+
+    - name: 'sideOffset'
+      type: 'number'
+      default: '0'
+      description: 'The distance in pixels from the trigger.'
+      required: false
+
+    - name: 'alignOffset'
+      type: 'number'
+      default: '0'
+      description: 'An offset in pixels from the alignment options.'
+      required: false

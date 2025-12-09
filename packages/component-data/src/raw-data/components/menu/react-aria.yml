@@ -1,0 +1,671 @@
+meta:
+  library_name: 'React Aria'
+  website_url: 'https://react-spectrum.adobe.com/react-aria'
+  component_url: 'https://react-spectrum.adobe.com/react-aria/Menu.html'
+  last_updated: '2025-11-29'
+
+component:
+  name: 'Menu'
+  type: 'Dropdown'
+
+code: |
+  <MenuTrigger>
+    <Button />
+    <Popover>
+      <Menu>
+        <MenuItem>
+          <Text slot="label" />
+          <Text slot="description" />
+          <Keyboard />
+          <SelectionIndicator />
+        </MenuItem>
+        <Separator />
+        <MenuSection>
+          <Header />
+          <MenuItem />
+        </MenuSection>
+      </Menu>
+    </Popover>
+  </MenuTrigger>
+
+anatomy:
+  - library_name: 'MenuTrigger'
+    standard_role: 'root'
+    description: 'Wraps a trigger element and a popover containing a menu.'
+    is_essential: true
+    props:
+      - name: 'children'
+        type: 'ReactNode'
+        default: '-'
+        description: '-'
+
+      - name: 'trigger'
+        type: 'MenuTriggerType'
+        default: 'press'
+        description: 'How the menu is triggered.'
+
+      - name: 'isOpen'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the overlay is open by default (controlled).'
+
+      - name: 'defaultOpen'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the overlay is open by default (uncontrolled).'
+
+  - library_name: 'SubmenuTrigger'
+    standard_role: 'trigger'
+    description: 'The contents of the SubmenuTrigger. The first child should be an Item (the trigger) and the second child should be the Popover (for the submenu).'
+    is_essential: false
+    props:
+      - name: 'children'
+        type: 'ReactElement[]'
+        default: '-'
+        description: 'The contents of the SubmenuTrigger. The first child should be an Item (the trigger) and the second child should be the Popover (for the submenu).'
+
+      - name: 'delay'
+        type: 'number'
+        default: '200'
+        description: 'The delay time in milliseconds for the submenu to appear after hovering over the trigger.'
+
+  - library_name: 'Button'
+    standard_role: 'trigger'
+    description: 'A <Button> accepts its contents as children. Other props such as onPress and isDisabled will be set by the MenuTrigger.'
+    is_essential: true
+    props:
+      - name: 'isPending'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the button is in a pending state. This disables press and hover events while retaining focusability, and announces the pending state to screen readers.'
+
+      - name: 'isDisabled'
+        type: 'boolean'
+        default: '-'
+        description: ''
+
+      - name: 'autoFocus'
+        type: 'boolean'
+        default: '-'
+        description: ''
+
+      - name: 'type'
+        type: "'button' | 'submit' | 'reset'"
+        default: "'button'"
+        description: ''
+
+      - name: 'form'
+        type: 'string'
+        default: '-'
+        description: 'The <form> element to associate the button with. The value of this attribute must be the id of a <form> in the same document. See MDN.'
+
+      - name: 'formAction'
+        type: 'string'
+        default: '-'
+        description: "The URL that processes the information submitted by the button. Overrides the action attribute of the button's form owner."
+
+      - name: 'formEncType'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'formMethod'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'formNoValidate'
+        type: 'boolean'
+        default: '-'
+        description: ''
+
+      - name: 'formTarget'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'name'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'value'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'children'
+        type: 'ChildrenOrFunction<ButtonRenderProps>'
+        default: '-'
+        description: ''
+
+      - name: 'className'
+        type: 'ClassNameOrFunction<ButtonRenderProps>'
+        default: '-'
+        description: ''
+
+      - name: 'style'
+        type: 'StyleOrFunction<ButtonRenderProps>'
+        default: '-'
+        description: ''
+
+      - name: 'onPress'
+        type: '(e: PressEvent) => void'
+        default: '-'
+        description: ''
+
+      - name: 'onPressStart'
+        type: '(e: PressEvent) => void'
+        default: '-'
+        description: ''
+
+      - name: 'onPressEnd'
+        type: '(e: PressEvent) => void'
+        default: '-'
+        description: 'Handler that is called when a press interaction ends, either over the target or when the pointer leaves the target.'
+
+      - name: 'onPressChange'
+        type: '(isPressed: boolean) => void'
+        default: '-'
+        description: ''
+
+      - name: 'onPressUp'
+        type: '(e: PressEvent) => void'
+        default: '-'
+        description: 'Handler that is called when a press is released over the target, regardless of whether it started on the target or not.'
+
+      - name: 'onClick'
+        type: '(e: MouseEvent<FocusableElement>) => void'
+        default: '-'
+        description: 'Not recommended – use onPress instead. onClick is an alias for onPress provided for compatibility with other libraries. onPress provides additional event details for non-mouse interactions.'
+
+      - name: 'onFocus'
+        type: '(e: FocusEvent<Target>) => void'
+        default: '-'
+        description: ''
+
+      - name: 'onBlur'
+        type: '(e: FocusEvent<Target>) => void'
+        default: '-'
+        description: ''
+
+      - name: 'onFocusChange'
+        type: '(isFocused: boolean) => void'
+        default: '-'
+        description: ''
+
+      - name: 'onKeyDown'
+        type: '(e: KeyboardEvent) => void'
+        default: '-'
+        description: ''
+
+      - name: 'onKeyUp'
+        type: '(e: KeyboardEvent) => void'
+        default: '-'
+        description: ''
+
+      - name: 'onHoverStart'
+        type: '(e: HoverEvent) => void'
+        default: '-'
+        description: ''
+
+      - name: 'onHoverEnd'
+        type: '(e: HoverEvent) => void'
+        default: '-'
+        description: ''
+
+      - name: 'onHoverChange'
+        type: '(isHovering: boolean) => void'
+        default: '-'
+        description: ''
+
+      - name: 'slot'
+        type: 'string | null'
+        default: '-'
+        description: 'A slot name for the component. Slots allow the component to receive props from a parent component. An explicit null value indicates that the local props completely override all props received from a parent.'
+
+      - name: 'id'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'excludeFromTabOrder'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether to exclude the element from the sequential tab order. If true, the element will not be focusable via the keyboard by tabbing. This should be avoided except in rare scenarios where an alternative means of accessing the element or its functionality via the keyboard is available.'
+
+      - name: 'preventFocusOnPress'
+        type: 'boolean'
+        default: '-'
+        description: "Whether to prevent focus from moving to the button when pressing it.\nCaution, this can make the button inaccessible and should only be used when alternative keyboard interaction is provided, such as ComboBox's MenuTrigger or a NumberField's increment/decrement control."
+
+      - name: 'aria-disabled'
+        type: "boolean | 'true' | 'false'"
+        default: '-'
+        description: ''
+
+      - name: 'aria-expanded'
+        type: "boolean | 'true' | 'false'"
+        default: '-'
+        description: ''
+
+      - name: 'aria-haspopup'
+        type: "boolean | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog' | 'true' | 'false'"
+        default: '-'
+        description: ''
+
+      - name: 'aria-controls'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-pressed'
+        type: "boolean | 'true' | 'false' | 'mixed'"
+        default: '-'
+        description: ''
+
+      - name: 'aria-current'
+        type: "boolean | 'true' | 'false' | 'page' | 'step' | 'location' | 'date' | 'time'"
+        default: '-'
+        description: ''
+
+      - name: 'aria-label'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-labelledby'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-describedby'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-details'
+        type: 'string'
+        default: '-'
+        description: ''
+
+  - library_name: 'Popover'
+    standard_role: 'positioner'
+    description: 'A <Popover> is a container to hold the <Menu>. By default, it has a placement of bottom start within a <MenuTrigger>, but this and other positioning properties may be customized.'
+    is_essential: true
+    props:
+      - name: 'trigger'
+        type: 'string'
+        default: '-'
+        description: 'The name of the component that triggered the popover. This is reflected on the element as the data-trigger attribute, and can be used to provide specific styles for the popover depending on which element triggered it.'
+
+      - name: 'triggerRef'
+        type: 'RefObject<Element | null>'
+        default: '-'
+        description: 'The ref for the element which the popover positions itself with respect to.\nWhen used within a trigger component such as DialogTrigger, MenuTrigger, Select, etc., this is set automatically. It is only required when used standalone.'
+
+      - name: 'isEntering'
+        type: 'boolean'
+        default: '-'
+        description: ''
+
+      - name: 'isExiting'
+        type: 'boolean'
+        default: '-'
+        description: ''
+
+      - name: 'offset'
+        type: 'number'
+        default: '8'
+        description: 'The additional offset applied along the main axis between the element and its anchor element.'
+
+      - name: 'placement'
+        type: 'Placement'
+        default: "'bottom'"
+        description: ''
+
+      - name: 'containerPadding'
+        type: 'number'
+        default: '12'
+        description: 'The placement padding that should be applied between the element and its surrounding container.'
+
+      - name: 'crossOffset'
+        type: 'number'
+        default: '0'
+        description: 'The additional offset applied along the cross axis between the element and its anchor element.'
+
+      - name: 'shouldFlip'
+        type: 'boolean'
+        default: 'true'
+        description: 'Whether the element should flip its orientation (e.g. top to bottom or left to right) when there is insufficient room for it to render completely.'
+
+      - name: 'arrowRef'
+        type: 'RefObject<Element | null>'
+        default: '-'
+        description: ''
+
+      - name: 'isNonModal'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the popover is non-modal, i.e. elements outside the popover may be interacted with by assistive technologies.\nMost popovers should not use this option as it may negatively impact the screen reader experience. Only use with components such as combobox, which are designed to handle this situation carefully.'
+
+      - name: 'isKeyboardDismissDisabled'
+        type: 'boolean'
+        default: 'false'
+        description: 'Whether pressing the escape key to close the popover should be disabled.\nMost popovers should not use this option. When set to true, an alternative way to close the popover with a keyboard must be provided.'
+
+      - name: 'shouldCloseOnInteractOutside'
+        type: '(element: Element) => boolean'
+        default: '-'
+        description: 'When user interacts with the argument element outside of the popover ref, return true if onClose should be called. This gives you a chance to filter out interaction with elements that should not dismiss the popover. By default, onClose will always be called on interaction outside the popover ref.'
+
+      - name: 'boundaryElement'
+        type: 'Element'
+        default: 'document.body'
+        description: ''
+
+      - name: 'scrollRef'
+        type: 'RefObject<Element | null>'
+        default: '-'
+        description: ''
+
+      - name: 'shouldUpdatePosition'
+        type: 'boolean'
+        default: 'true'
+        description: ''
+
+      - name: 'arrowBoundaryOffset'
+        type: 'number'
+        default: '0'
+        description: ''
+
+      - name: 'isOpen'
+        type: 'boolean'
+        default: '-'
+        description: ''
+
+      - name: 'defaultOpen'
+        type: 'boolean'
+        default: '-'
+        description: ''
+
+      - name: 'children'
+        type: 'ChildrenOrFunction<PopoverRenderProps>'
+        default: '-'
+        description: ''
+
+      - name: 'className'
+        type: 'ClassNameOrFunction<PopoverRenderProps>'
+        default: '-'
+        description: ''
+
+      - name: 'style'
+        type: 'StyleOrFunction<PopoverRenderProps>'
+        default: '-'
+        description: ''
+
+      - name: 'onOpenChange'
+        type: '(isOpen: boolean) => void'
+        default: '-'
+        description: ''
+
+      - name: 'slot'
+        type: 'string | null'
+        default: '-'
+        description: 'A slot name for the component. Slots allow the component to receive props from a parent component. An explicit null value indicates that the local props completely override all props received from a parent.'
+
+      - name: 'maxHeight'
+        type: 'number'
+        default: '-'
+        description: 'The maxHeight specified for the overlay element. By default, it will take all space up to the current viewport height.'
+
+      - name: 'aria-label'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-labelledby'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-describedby'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-details'
+        type: 'string'
+        default: '-'
+        description: ''
+
+  - library_name: 'Menu'
+    standard_role: 'content'
+    description: 'A menu displays a list of actions or options that a user can choose.'
+    is_essential: true
+    props:
+      - name: 'renderEmptyState'
+        type: '() => ReactNode'
+        default: '-'
+        description: 'Provides content to display when there are no items in the list.'
+
+      - name: 'escapeKeyBehavior'
+        type: "'clearSelection' | 'none'"
+        default: 'clearSelection'
+        description: "Whether pressing the escape key should clear selection in the menu or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually."
+
+      - name: 'autoFocus'
+        type: 'boolean | FocusStrategy'
+        default: '-'
+        description: 'Where the focus should be set.'
+
+      - name: 'shouldFocusWrap'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether keyboard navigation is circular.'
+
+      - name: 'items'
+        type: 'Iterable<T>'
+        default: '-'
+        description: 'Item objects in the collection.'
+
+      - name: 'disabledKeys'
+        type: 'Iterable<Key>'
+        default: '-'
+        description: 'The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with.'
+
+      - name: 'selectionMode'
+        type: 'SelectionMode'
+        default: '-'
+        description: 'The type of selection that is allowed in the collection.'
+
+      - name: 'disallowEmptySelection'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the collection allows empty selection.'
+
+      - name: 'selectedKeys'
+        type: "'all' | Iterable<Key>"
+        default: '-'
+        description: 'The currently selected keys in the collection (controlled).'
+
+      - name: 'defaultSelectedKeys'
+        type: "'all' | Iterable<Key>"
+        default: '-'
+        description: 'The initial selected keys in the collection (uncontrolled).'
+
+      - name: 'children'
+        type: 'ReactNode | (item: object) =>'
+        default: '-'
+        description: 'The contents of the collection.'
+
+  - library_name: 'MenuItem'
+    standard_role: 'item'
+    description: 'A <MenuItem> defines a single item within a <Menu>. If the children are not plain text, then the textValue prop must also be set to a plain text representation, which will be used for autocomplete in the Menu.'
+    is_essential: true
+    props:
+      - name: 'id'
+        type: 'Key'
+        default: '-'
+        description: 'The unique id of the item.'
+
+      - name: 'value'
+        type: 'object'
+        default: '-'
+        description: 'The object value that this item represents. When using dynamic collections, this is set automatically.'
+
+      - name: 'textValue'
+        type: 'string'
+        default: '-'
+        description: "A string representation of the item's contents, used for features like typeahead."
+
+      - name: 'isDisabled'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the item is disabled.'
+
+      - name: 'children'
+        type: 'ChildrenOrFunction<MenuItemRenderProps>'
+        default: '-'
+        description: 'The children of the component. A function may be provided to alter the children based on component state.'
+
+      - name: 'className'
+        type: 'ClassNameOrFunction<MenuItemRenderProps>'
+        default: '-'
+        description: 'The CSS className for the element. A function may be provided to compute the class based on component state.'
+
+      - name: 'style'
+        type: 'StyleOrFunction<MenuItemRenderProps>'
+        default: '-'
+        description: 'The inline style for the element. A function may be provided to compute the style based on component state.'
+
+      - name: 'href'
+        type: 'Href'
+        default: '-'
+        description: 'A URL to link to. See MDN.'
+
+  - library_name: 'MenuSection'
+    standard_role: 'section'
+    description: 'A <MenuSection> defines the child items for a section within a <Menu>. It may also contain an optional <Header> element. If there is no header, then an aria‑label must be provided to identify the section to assistive technologies.'
+    is_essential: false
+    props:
+      - name: 'id'
+        type: 'Key'
+        default: '-'
+        description: 'The unique id of the section.'
+
+      - name: 'value'
+        type: 'object'
+        default: '-'
+        description: 'The object value that this section represents. When using dynamic collections, this is set automatically.'
+
+      - name: 'children'
+        type: 'ReactNode | (item: object) => ReactElement'
+        default: '-'
+        description: 'Static child items or a function to render children.'
+
+      - name: 'dependencies'
+        type: 'ReadonlyArray<any>'
+        default: '-'
+        description: 'Values that should invalidate the item cache when using dynamic collections.'
+
+      - name: 'items'
+        type: 'Iterable<object>'
+        default: '-'
+        description: 'Item objects in the section.'
+
+      - name: 'className'
+        type: 'string'
+        default: '-'
+        description: 'The CSS className for the element.'
+
+      - name: 'style'
+        type: 'CSSProperties'
+        default: '-'
+        description: 'The inline style for the element.'
+
+      - name: 'selectionMode'
+        type: 'SelectionMode'
+        default: '-'
+        description: 'The type of selection that is allowed in the collection.'
+
+      - name: 'disallowEmptySelection'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the collection allows empty selection.'
+
+      - name: 'selectedKeys'
+        type: "'all' | Iterable<Key>"
+        default: '-'
+        description: 'The currently selected keys in the collection (controlled).'
+
+      - name: 'defaultSelectedKeys'
+        type: "'all' | Iterable<Key>"
+        default: '-'
+        description: 'The initial selected keys in the collection (uncontrolled).'
+
+      - name: 'disabledKeys'
+        type: 'Iterable<Key>'
+        default: '-'
+        description: 'The currently disabled keys in the collection (controlled).'
+
+  - library_name: 'Header'
+    standard_role: 'header'
+    description: 'Provides a header for a menu section.'
+    is_essential: false
+    props: []
+
+  - library_name: 'Separator'
+    standard_role: 'separator'
+    description: 'A <Separator> can be placed between menu items.'
+    is_essential: false
+    props:
+      - name: 'orientation'
+        type: 'Orientation'
+        default: "'horizontal'"
+        description: ''
+
+      - name: 'elementType'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'className'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'style'
+        type: 'CSSProperties'
+        default: '-'
+        description: ''
+
+      - name: 'slot'
+        type: 'string | null'
+        default: '-'
+        description: 'A slot name for the component. Slots allow the component to receive props from a parent component. An explicit null value indicates that the local props completely override all props received from a parent.'
+
+      - name: 'id'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-label'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-labelledby'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-describedby'
+        type: 'string'
+        default: '-'
+        description: ''
+
+      - name: 'aria-details'
+        type: 'string'
+        default: '-'
+        description: ''

@@ -1,0 +1,14 @@
+slug: shadcn
+name: shadcn/ui
+contributors:
+  featured:
+    - name: shadcn
+      avatarUrl: https://avatars.githubusercontent.com/u/124599
+      siteUrl: https://github.com/shadcn
+  totalCount: 390
+description: A beautifully designed set of components that you can customize and extend. Open source to copy and paste.
+websiteUrl: https://ui.shadcn.com/
+repositoryUrl: https://github.com/shadcn/ui
+figmaUrl: https://www.figma.com/community/file/1203061493325953101/shadcn-ui-design-system
+quantityOfComponents: 45
+popularity: high

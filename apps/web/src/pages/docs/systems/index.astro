@@ -1,0 +1,55 @@
+---
+import { getSystemThumbnailUrl } from '@common';
+import { DocsLayout } from '@layouts';
+import { SystemCard } from '@ui';
+import { getCollection } from 'astro:content';
+
+// Get all systems for the grid
+const allSystems = await getCollection('systemList');
+const sortedSystems = allSystems.sort((a, b) => a.data.name.localeCompare(b.data.name));
+
+// Map systems data for rendering
+const systemList = sortedSystems.map((system) => ({
+	name: system.data.name,
+	slug: system.data.slug,
+	thumbnailUrl: getSystemThumbnailUrl(system.data.slug),
+	quantityOfComponents: system.data.quantityOfComponents,
+	popularity: system.data.popularity,
+	contributors: system.data.contributors,
+}));
+---
+
+<DocsLayout
+	title="Systems - UI Guideline v3"
+	description="Browse our comprehensive library of design systems and UI libraries"
+	section="systems"
+>
+	<div class="space-y-8">
+		<!-- Header -->
+		<div class="flex flex-col">
+			<h1 class="mt-14 mb-4 text-3xl font-bold text-balance">Design Systems & UI Libraries</h1>
+
+			<div class="text-lg text-muted-foreground max-w-2xl mb-4 -mt-2">
+				Explore Design Systems and UI Libraries from leading companies and open-source projects. Compare implementations
+				across different systems.
+			</div>
+		</div>
+
+		<!-- Systems Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{
+				systemList.map((system) => (
+					<SystemCard
+						client:load
+						name={system.name}
+						slug={system.slug}
+						thumbnailUrl={system.thumbnailUrl}
+						quantityOfComponents={system.quantityOfComponents}
+						popularity={system.popularity}
+						contributors={system.contributors}
+					/>
+				))
+			}
+		</div>
+	</div>
+</DocsLayout>

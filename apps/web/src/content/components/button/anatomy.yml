@@ -1,19 +1,13 @@
-mobile:
-  lightImageUrl: '/images/components/calendar/anatomy/mobile/light.png'
-  lightImageUrl2x: '/images/components/calendar/anatomy/mobile/light@2x.png'
-  darkImageUrl: '/images/components/calendar/anatomy/mobile/dark.png'
-  darkImageUrl2x: '/images/components/calendar/anatomy/mobile/dark@2x.png'
+baseAnatomy:
+  darkImageUrl: '/components/button/anatomy/base-anatomy/dark.png'
+  darkImageUrl2x: '/components/button/anatomy/base-anatomy/dark@2x.png'
 
-tablet:
-  lightImageUrl: '/images/components/calendar/anatomy/tablet/light.png'
-  lightImageUrl2x: '/images/components/calendar/anatomy/tablet/light@2x.png'
-  darkImageUrl: '/images/components/calendar/anatomy/tablet/dark.png'
-  darkImageUrl2x: '/images/components/calendar/anatomy/tablet/dark@2x.png'
+codeAnatomy:
+  darkImageUrl: '/components/button/anatomy/code-anatomy/dark.png'
+  darkImageUrl2x: '/components/button/anatomy/code-anatomy/dark@2x.png'
 
-desktop:
-  lightImageUrl: '/images/components/calendar/anatomy/desktop/light.png'
-  lightImageUrl2x: '/images/components/calendar/anatomy/desktop/light@2x.png'
-  darkImageUrl: '/images/components/calendar/anatomy/desktop/dark.png'
-  darkImageUrl2x: '/images/components/calendar/anatomy/desktop/dark@2x.png'
+designAnatomy:
+  darkImageUrl: '/components/button/anatomy/design-anatomy/dark.png'
+  darkImageUrl2x: '/components/button/anatomy/design-anatomy/dark@2x.png'
 
 proposedBy: ['ant-design', 'blueprint', 'polaris']

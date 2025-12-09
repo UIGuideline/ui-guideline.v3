@@ -1,0 +1,36 @@
+layers:
+  - figmaType: 'component'
+    name: 'Menu'
+    description: 'Root container. Typically a Component Set or Frame that groups the Trigger and the floating Content for interaction states.'
+    children:
+      - figmaType: 'instance'
+        name: 'Trigger'
+        description: 'Interactive wrapper slot. Auto Layout (Hug contents). Contains the actionable element (e.g., Button) that toggles the menu.'
+
+      - figmaType: 'autoLayout'
+        name: 'Content'
+        description: 'Overlay panel surface. Auto Layout (Vertical). Styling: Background fill, drop shadow, rounded corners. Positioning: Absolute/Floating relative to Trigger.'
+        children:
+          - figmaType: 'autoLayout'
+            name: 'Group'
+            description: 'Section container. Auto Layout (Vertical). Sizing: Width=Fill container, Height=Hug contents. Handles internal spacing between items.'
+            children:
+              - figmaType: 'text'
+                name: 'Label'
+                description: 'Section header text. Typography: Caption/Label style. Sizing: Hug contents. Visual hierarchy: Secondary/Muted.'
+
+              - figmaType: 'instance'
+                name: 'Item'
+                description: 'Interactive row component. Auto Layout (Horizontal). Sizing: Width=Fill container. States: Default, Hover, Focus. Supports text and icon slots.'
+
+          - figmaType: 'instance'
+            name: 'Separator'
+            description: 'Visual divider line. Sizing: Height=1px (horizontal), Width=Fill container. Styling: Stroke or Thin Rectangle fill.'
+
+          - figmaType: 'instance'
+            name: 'Item'
+            description: 'Interactive row component. Auto Layout (Horizontal). Sizing: Width=Fill container. States: Default, Hover, Focus. Supports text and icon slots.'
+
+          - figmaType: 'vector'
+            name: 'Arrow'
+            description: 'Decorative pointer shape (SVG/Vector). Positioning: Absolute constraints on Content edge. Styling: Matches Content background color.'

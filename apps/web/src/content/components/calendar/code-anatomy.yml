@@ -1,0 +1,81 @@
+- slug: shadcn
+  code: |
+    <Calendar>
+      <CalendarHeader>
+        <CalendarTitle />
+        <CalendarNav>
+          <CalendarPrevButton />
+          <CalendarNextButton />
+        </CalendarNav>
+      </CalendarHeader>
+      <CalendarGrid>
+        <CalendarGridHead>
+          <CalendarGridRow>
+            <CalendarHeadCell />
+          </CalendarGridRow>
+        </CalendarGridHead>
+        <CalendarGridBody>
+          <CalendarGridRow>
+            <CalendarCell>
+              <CalendarCellTrigger />
+            </CalendarCell>
+          </CalendarGridRow>
+        </CalendarGridBody>
+      </CalendarGrid>
+    </Calendar>
+
+- slug: radix-ui
+  code: |
+    <Calendar.Root>
+      <Calendar.Header>
+        <Calendar.Title />
+        <Calendar.PrevButton />
+        <Calendar.NextButton />
+      </Calendar.Header>
+      <Calendar.Grid>
+        <Calendar.GridHead>
+          <Calendar.GridRow>
+            <Calendar.HeadCell />
+          </Calendar.GridRow>
+        </Calendar.GridHead>
+        <Calendar.GridBody>
+          <Calendar.GridRow>
+            <Calendar.Cell>
+              <Calendar.Day />
+            </Calendar.Cell>
+          </Calendar.GridRow>
+        </Calendar.GridBody>
+      </Calendar.Grid>
+    </Calendar.Root>
+
+- slug: base-ui
+  code: |
+    <Calendar
+      header={
+        <CalendarHeader
+          title={<CalendarTitle />}
+          prevButton={<CalendarPrevButton />}
+          nextButton={<CalendarNextButton />}
+        />
+      }
+      grid={
+        <CalendarGrid
+          head={
+            <CalendarGridHead>
+              <CalendarGridRow>
+                <CalendarHeadCell />
+              </CalendarGridRow>
+            </CalendarGridHead>
+          }
+          body={
+            <CalendarGridBody>
+              <CalendarGridRow>
+                <CalendarCell>
+                  <CalendarDay />
+                </CalendarCell>
+              </CalendarGridRow>
+            </CalendarGridBody>
+          }
+        />
+      }
+    />

@@ -1,0 +1,273 @@
+---
+import { ROUTES } from '@common';
+import { ComponentDetailTOC } from '@composed';
+import { BaseLayout } from '@layouts';
+import { loadData, type TOCItem } from '@lib';
+import { Navbar, SideBar, SideNav, Tag } from '@ui';
+import { getCollection } from 'astro:content';
+
+export interface Props {
+	/**
+	 * The title of the page for SEO
+	 */
+	title: string;
+
+	/**
+	 * The description of the page for SEO
+	 */
+	description?: string;
+
+	/**
+	 * The current item slug for active state in sidebar
+	 */
+	currentSlug?: string;
+
+	/**
+	 * Optional Table of Contents items
+	 * If provided, will show TOC sidebar on the right
+	 */
+	toc?: TOCItem[];
+
+	/**
+	 * The section type to determine which sidebar items to show initially
+	 */
+	section: 'components' | 'systems';
+}
+
+const { title, description, currentSlug, toc, section } = Astro.props;
+
+// ============================================================
+// LOAD DATA FOR SIDEBAR (CONDITIONAL LOADING)
+// ============================================================
+
+// Overview docs
+const componentsOverviewDocs = section === 'components' ? await getCollection('componentsOverview') : [];
+const systemsOverviewDocs = section === 'systems' ? await getCollection('systemsOverview') : [];
+
+// Components data
+const componentList = section === 'components' ? await getCollection('componentList') : [];
+const categories = section === 'components' ? ((await loadData('categories.yml')) ?? []) : [];
+
+const categoryMap = new Map(categories.map((cat) => [cat.slug, cat.name]));
+
+const getCategoryName = (slug: string): string => {
+	return categoryMap.get(slug) || slug.charAt(0).toUpperCase() + slug.slice(1);
+};
+
+const componentsByCategory = componentList.reduce(
+	(acc, component) => {
+		const category = component.data.category || 'uncategorized';
+		if (!acc[category]) acc[category] = [];
+		acc[category]!.push(component);
+		return acc;
+	},
+	{} as Record<string, typeof componentList>,
+);
+
+const sortedCategories = Object.keys(componentsByCategory).sort((a, b) => {
+	if (a === 'uncategorized') return 1;
+	if (b === 'uncategorized') return -1;
+	return a.localeCompare(b);
+});
+
+sortedCategories.forEach((category) => {
+	const components = componentsByCategory[category];
+	if (components) {
+		components.sort((a, b) => a.data.title.localeCompare(b.data.title));
+	}
+});
+
+// Systems data
+const systemList = section === 'systems' ? await getCollection('systemList') : [];
+const sortedSystems = systemList.slice().sort((a, b) => a.data.name.localeCompare(b.data.name));
+
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={description}>
+	<!-- Top Navigation -->
+	<header class="sticky top-0 w-full border-b border-border z-40">
+		<Navbar
+			client:load
+			className="@md:max-w-[1350px] mx-auto border-x border-border backdrop-blur-sm bg-background/90"
+			currentPath={currentPath}
+		/>
+	</header>
+
+	<div class="flex flex-col min-h-screen @md:max-w-[1350px] mx-auto border-dashed-wide">
+		<div class="flex flex-1 relative">
+			<!-- ========================================== -->
+			<!-- Left Sidebar - Navigation (Fixed Width)   -->
+			<!-- ========================================== -->
+			<div class="hidden lg:block w-64 flex-shrink-0">
+				<SideBar>
+					<SideNav>
+						<!-- ============================================ -->
+						<!-- OVERVIEW Section (COMPONENTS)                -->
+						<!-- ============================================ -->
+						{
+							section === 'components' && (
+								<>
+									<div id="nav-components-overview">
+										<SideNav.Section>
+											<SideNav.Heading className="mb-4">Overview</SideNav.Heading>
+											<SideNav.List>
+												{componentsOverviewDocs
+													.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+													.map((doc) => (
+														<SideNav.Item level={1} isActive={currentSlug === doc.id}>
+															<SideNav.Link
+																level={1}
+																href={`/docs/components/overview/${doc.id}`}
+																isActive={currentSlug === doc.id}
+															>
+																{doc.data.sidebarLabel ?? doc.data.title}
+															</SideNav.Link>
+														</SideNav.Item>
+													))}
+											</SideNav.List>
+										</SideNav.Section>
+									</div>
+
+									{/* ============================================ */}
+									{/* COMPONENTS Section (Persisted)               */}
+									{/* ============================================ */}
+									<div id="nav-components" class="mb-14">
+										<SideNav.Section>
+											<SideNav.Heading>Components</SideNav.Heading>
+											<SideNav.List>
+												{sortedCategories.map((categorySlug) => {
+													const componentsInCategory = componentsByCategory[categorySlug];
+													if (!componentsInCategory) return null;
+
+													const categoryPath = `${ROUTES.COMPONENTS}/category/${categorySlug}`;
+													const isCategoryActive = Astro.url.pathname === categoryPath;
+
+													return (
+														<>
+															{/* Category Header */}
+															<SideNav.Item level={0}>
+																<SideNav.Link level={0} href={categoryPath} isActive={isCategoryActive}>
+																	{getCategoryName(categorySlug)}
+																</SideNav.Link>
+															</SideNav.Item>
+
+															{/* Components in Category */}
+															{componentsInCategory.map((component) => {
+																const isComingSoon = component.data.status === 'soon';
+																return (
+																	<SideNav.Item
+																		level={1}
+																		isActive={currentSlug === component.data.slug}
+																		isDisabled={isComingSoon}
+																	>
+																		{isComingSoon ? (
+																			<span class="flex items-center gap-2 text-sm text-muted-foreground/50 font-medium select-none">
+																				{component.data.title}
+																				<Tag variant="outline" size="sm" isRound className="opacity-50">
+																					Soon
+																				</Tag>
+																			</span>
+																		) : (
+																			<SideNav.Link
+																				level={1}
+																				href={`${ROUTES.COMPONENTS}/${component.data.slug}`}
+																				isActive={currentSlug === component.data.slug}
+																			>
+																				{component.data.title}
+																			</SideNav.Link>
+																		)}
+																	</SideNav.Item>
+																);
+															})}
+														</>
+													);
+												})}
+											</SideNav.List>
+										</SideNav.Section>
+									</div>
+								</>
+							)
+						}
+
+						<!-- ============================================ -->
+						<!-- SYSTEMS Section (Persisted)                  -->
+						<!-- ============================================ -->
+						{
+							section === 'systems' && (
+								<div id="nav-systems">
+									{/* ============================================ */}
+									{/* OVERVIEW Section (SYSTEMS)                   */}
+									{/* ============================================ */}
+									<SideNav.Section>
+										<SideNav.Heading className="mb-4">Overview</SideNav.Heading>
+										<SideNav.List>
+											{systemsOverviewDocs
+												.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+												.map((doc) => (
+													<SideNav.Item level={1} isActive={currentSlug === doc.id}>
+														<SideNav.Link
+															level={1}
+															href={`/docs/systems/overview/${doc.id}`}
+															isActive={currentSlug === doc.id}
+														>
+															{doc.data.sidebarLabel ?? doc.data.title}
+														</SideNav.Link>
+													</SideNav.Item>
+												))}
+										</SideNav.List>
+									</SideNav.Section>
+
+									<div class="h-8" />
+
+									<SideNav.Section>
+										<SideNav.Heading>TOP 10 Systems</SideNav.Heading>
+										<SideNav.List className="mt-2">
+											{sortedSystems.map((system) => (
+												<SideNav.Item level={1} isActive={currentSlug === system.data.slug}>
+													<SideNav.Link
+														level={1}
+														href={`${ROUTES.SYSTEMS}/${system.data.slug}`}
+														isActive={currentSlug === system.data.slug}
+													>
+														{system.data.name}
+													</SideNav.Link>
+												</SideNav.Item>
+											))}
+										</SideNav.List>
+									</SideNav.Section>
+								</div>
+							)
+						}
+					</SideNav>
+				</SideBar>
+			</div>
+
+			<!-- ========================================== -->
+			<!-- Main Content Area (Flexible)              -->
+			<!-- ========================================== -->
+			<main id="main-content" class="flex-1 min-w-0 px-12 pb-8 lg:pb-12" role="main">
+				<slot />
+			</main>
+
+			<!-- ========================================== -->
+			<!-- Right Sidebar - Table of Contents          -->
+			<!-- Only shown if toc prop is provided         -->
+			<!-- ========================================== -->
+			{
+				toc && toc.length > 0 && (
+					<div class="hidden xl:block w-60 flex-shrink-0">
+						<aside
+							class="sticky top-12 right-0 h-fit max-h-[calc(100dvh-var(--spacing)*14.25)] overflow-y-auto p-6"
+							aria-label="Table of contents"
+						>
+							<ComponentDetailTOC client:load items={toc} />
+						</aside>
+					</div>
+				)
+			}
+		</div>
+	</div>
+
+	<!-- Client-side script to handle sidebar visibility -->
+</BaseLayout>

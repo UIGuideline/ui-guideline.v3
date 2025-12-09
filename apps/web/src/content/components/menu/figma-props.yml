@@ -1,0 +1,172 @@
+- component: Menu
+  description: 'The root component that manages the open state and context of the menu.'
+  figmaType: 'component'
+  props: []
+
+- component: Menu.Trigger
+  description: 'The button that toggles the menu. The menu content will position itself against the trigger.'
+  figmaType: 'instance'
+  props:
+    - name: 'disabled'
+      type: 'boolean'
+      figmaType: 'boolean'
+      default: 'false'
+      description: 'Whether the trigger is disabled.'
+      required: false
+
+- component: Menu.Content
+  description: 'The component that pops out when the menu is open. Contains all menu items.'
+  figmaType: 'autoLayout'
+  props:
+    - name: 'loop'
+      type: 'boolean'
+      figmaType: 'boolean'
+      default: 'false'
+      description: 'When true, keyboard navigation will loop from the last item to the first, and vice versa.'
+      required: false
+
+    - name: 'side'
+      type: ['top', 'right', 'bottom', 'left']
+      figmaType: 'variant'
+      default: 'bottom'
+      description: 'The preferred side of the trigger to render the menu against.'
+      required: false
+
+    - name: 'sideOffset'
+      type: 'number'
+      figmaType: 'documentationOnly'
+      default: '0'
+      description: 'The distance in pixels from the trigger.'
+      required: false
+
+    - name: 'align'
+      type: ['start', 'center', 'end']
+      figmaType: 'variant'
+      default: 'start'
+      description: 'The preferred alignment against the trigger.'
+      required: false
+
+    - name: 'alignOffset'
+      type: 'number'
+      figmaType: 'documentationOnly'
+      default: '0'
+      description: 'An offset in pixels from the start or end alignment options.'
+      required: false
+
+- component: Menu.Item
+  description: 'An individual selectable item within the menu.'
+  figmaType: 'instance'
+  props:
+    - name: 'disabled'
+      type: 'boolean'
+      figmaType: 'boolean'
+      default: 'false'
+      description: 'Whether the menu item is disabled.'
+      required: false
+
+- component: Menu.Group
+  description: 'Used to group multiple related menu items together.'
+  figmaType: 'autoLayout'
+  props: []
+
+- component: Menu.Label
+  description: 'A non-focusable label used to name a group of menu items.'
+  figmaType: 'text'
+  props: []
+
+- component: Menu.Separator
+  description: 'A visual separator used to divide menu items.'
+  figmaType: 'frame'
+  props:
+    - name: 'orientation'
+      type: ['horizontal', 'vertical']
+      figmaType: 'variant'
+      default: 'horizontal'
+      description: 'The orientation of the separator.'
+      required: false
+
+- component: Menu.Arrow
+  description: 'An optional arrow element to render alongside the menu. Helps visually link the trigger with the menu content.'
+  figmaType: 'vector'
+  props:
+    - name: 'width'
+      type: 'number'
+      figmaType: 'text'
+      default: '10'
+      description: 'The width of the arrow in pixels.'
+      required: false
+
+    - name: 'height'
+      type: 'number'
+      figmaType: 'text'
+      default: '5'
+      description: 'The height of the arrow in pixels.'
+      required: false
+
+- component: Menu.CheckboxItem
+  description: 'A menu item that can be controlled and rendered like a checkbox.'
+  figmaType: 'instance'
+  props:
+    - name: 'checked'
+      type: "boolean | 'indeterminate'"
+      figmaType: 'variant'
+      default: 'false'
+      description: 'The controlled checked state of the checkbox item.'
+      required: false
+
+    - name: 'disabled'
+      type: 'boolean'
+      figmaType: 'boolean'
+      default: 'false'
+      description: 'Whether the checkbox item is disabled.'
+      required: false
+
+- component: Menu.RadioGroup
+  description: 'Used to group multiple radio items together.'
+  figmaType: 'autoLayout'
+  props: []
+
+- component: Menu.RadioItem
+  description: 'A menu item that can be controlled and rendered like a radio button within a group.'
+  figmaType: 'instance'
+  props:
+    - name: 'disabled'
+      type: 'boolean'
+      figmaType: 'boolean'
+      default: 'false'
+      description: 'Whether the radio item is disabled.'
+      required: false
+
+- component: Menu.Sub
+  description: 'Contains all the parts of a submenu.'
+  figmaType: 'autoLayout'
+  props: []
+
+- component: Menu.SubTrigger
+  description: 'A menu item that opens a submenu. Must be rendered inside MenuSub.'
+  figmaType: 'instance'
+  props:
+    - name: 'disabled'
+      type: 'boolean'
+      figmaType: 'boolean'
+      default: 'false'
+      description: 'Whether the submenu trigger is disabled.'
+      required: false
+
+- component: Menu.SubContent
+  description: 'The component that pops out when a submenu is open. Must be rendered inside MenuSub.'
+  figmaType: 'autoLayout'
+  props:
+    - name: 'sideOffset'
+      type: 'number'
+      figmaType: 'documentationOnly'
+      default: '0'
+      description: 'The distance in pixels from the trigger.'
+      required: false
+
+    - name: 'alignOffset'
+      type: 'number'
+      figmaType: 'documentationOnly'
+      default: '0'
+      description: 'An offset in pixels from the alignment options.'
+      required: false

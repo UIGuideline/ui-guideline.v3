@@ -1,0 +1,3 @@
+components:
+  - slug: 'menu'
+    docUrl: 'https://mui.com/material-ui/react-menu/'

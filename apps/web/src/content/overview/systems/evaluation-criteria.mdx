@@ -1,0 +1,185 @@
+---
+title: 'Why these Systems? · UI Guideline'
+description: 'The criteria used to select the top Design Systems.'
+sidebarLabel: 'Why these Systems?'
+order: 2
+---
+
+import { Subtitle } from '@docs';
+
+# Why these Systems?
+
+<Subtitle>The criteria used to select the top 10 Design Systems and UI Libraries.</Subtitle>
+
+The Design Systems / UI Libraries landscape has evolved considerably. In **2025**, the best Systems aren't necessarily the most popular, but those that offer **real flexibility, guaranteed accessibility, and creative control without sacrificing user experience**.
+
+Our research identifies systems that **bridge the gap between design and development** through unified patterns. Today, this consistency serves a dual purpose: aligning human teams and providing **precise, structured context for Large Language Models (LLMs)**. We are evolving beyond a reference Wiki into a **contextual infrastructure**, ensuring that designers, developers, and AI models all operate with the same high-fidelity definitions.
+
+---
+
+# The Evolution: From Monolithic to Composable
+
+For years, Design Systems treated components as **"Black Boxes"**.
+In code, this meant rigid components where you couldn't change the internal structure. In Design, it felt like using a component where you couldn't detach or modify the layers. If you wanted to customize something, like moving an icon or changing a layout, you were limited to a set of pre-defined "switches" `(props/variants)` that the system creators decided to expose.
+
+This led to rigid systems where Designers and Developers **felt constrained** by complex configurations just to make small visual changes.
+
+**The shift to Composition** breaks these boxes open.
+
+Modern libraries like **Radix UI**, **Shadcn/UI**, and **Base UI** don't give you a sealed block; they give you the **building blocks**. You don't just get a "Dropdown"; you get its independent parts: a `Trigger`, a `Content`, an `Item`.
+
+- **For Designers:** It mirrors how you think in **Figma**, grouping layers and frames to build a UI.
+- **For Developers:** It means assembling components with clean, readable code instead of hacking rigid libraries.
+
+It is the freedom to build exactly what you designed, without fighting the System.
+
+---
+
+# The 5 Evaluation Criteria
+
+To select the [Top 10](/docs/systems), we established **5 rigorous criteria** that ensure a Design System / UI Library is scalable, accessible, and adaptable.
+
+## 1. Component Coverage
+
+**What do we evaluate?** <br />
+That the System offers more than **20-25 basic and advanced components**.
+
+**Why does it matter?** <br />
+UI Guideline is the synthesis of the top Design Systems and UI Libraries. To identify which patterns, nomenclatures, and conventions are consistently repeated in the best systems, we need to analyze the broadest possible coverage of components. Only by comparing many components across multiple systems can we extract **collective wisdom**: which props most use, which anatomies are standard, which practices have proven to work best. A comprehensive catalog allows us to make that comparison.
+
+## 2. Composition Architecture
+
+**What do we evaluate?** <br />
+That components can be decomposed into independent parts that work together.
+
+**Why does it matter?** <br />
+_Composition_ allows building complex components from simpler, reusable, and individually controllable pieces. When comparing systems, we need to identify **how they structure their components internally**: which parts are consistent, what names they use, and how they relate to each other. This information is crucial for defining standard patterns in UI Guideline.
+
+**What are Composition Components?**
+
+A "composable" component isn't a monolithic piece, but a set of parts you can assemble. Each part has a specific responsibility and can be styled or configured independently.
+
+**Code example:**
+
+```jsx
+<DropdownMenu.Root>
+  <DropdownMenu.Trigger>Open menu</DropdownMenu.Trigger>
+  <DropdownMenu.Content>
+    <DropdownMenu.Item>Option 1</DropdownMenu.Item>
+    <DropdownMenu.Item>Option 2</DropdownMenu.Item>
+    <DropdownMenu.Separator />
+    <DropdownMenu.Item>Delete</DropdownMenu.Item>
+  </DropdownMenu.Content>
+</DropdownMenu.Root>
+```
+
+**Design example (Figma - Design Layers):**
+
+```
+🗂 DropdownMenu
+  ├─ 🔘 Trigger (the button that opens the menu)
+  └─ 📄 Content (the panel that unfolds)
+      ├─ 📝 Item (Option 1)
+      ├─ 📝 Item (Option 2)
+      ├─ ─── Separator
+      └─ 📝 Item (Delete)
+```
+
+Just as in Figma you organize components into layers with clear names, Composition Components work the same way. Each "layer" has a specific name (Root, Trigger, Content, Item) and can be modified without affecting the others.
+
+## 3. Defined Anatomy
+
+**What do we evaluate?** <br />
+That the system clearly documents all internal parts of each component.
+
+**Why does it matter?** <br />
+At UI Guideline, we believe in **Anatomy First**.
+
+> The construction and definition of a UI Component should originate from its Anatomy.
+
+We seek systems that clearly define the Anatomy of their components because **Anatomy is the bridge that aligns Design and Development**.
+
+- **In Code:** Anatomy is the composition of internal components and parts.
+- **In Design (Figma):** Anatomy is the composition of layers, frames, and internal components.
+
+When a system has a well-defined Anatomy, it creates a **Unified Language**. It allows Designers and Developers to speak the same language, referring to the same parts by the same names, effectively shortening the gap between both worlds.
+
+**Example: Anatomy of a Slider**
+
+**In Code (Composition):**
+
+```
+Slider.Root       → Main container
+Slider.Label      → Control label
+Slider.Track      → The horizontal line
+Slider.Range      → The "filled" portion of the track
+Slider.Thumb      → The draggable control
+```
+
+**In Design (Figma Layers):**
+
+```
+🗂 Slider.Root (Main component)
+  ├─ 📝 Slider.Label (Text)
+  └─ 🗂 Slider.Track (Frame)
+      ├─ ▭ Slider.Range (Frame)
+      └─ ⚪ Slider.Thumb (Frame)
+```
+
+## 4. Granular Props
+
+**What do we evaluate?** <br />
+That each component exposes clear and specific properties to control its behavior and appearance.
+
+**Why does it matter?** <br />
+Props (properties) are the **configuration language** of a component. When comparing systems, we analyze which props they consistently use, how they name them, and what values they accept. This allows us to identify standard conventions:
+
+- Do they use `variant` or `appearance`?
+- Is size called `size` or `scale`?
+- Are values `sm/md/lg` or `small/medium/large`?
+
+Identifying these patterns allows us to recommend the most adopted and consistent conventions.
+
+**What are Granular Props?**
+
+They are properties that allow configuring specific aspects of the component independently and predictably.
+
+**Code example:**
+
+```jsx
+<Button
+  variant="primary" // Visual style: primary, secondary, ghost
+  size="md" // Size: sm, md, lg
+  disabled={false} // State: enabled or disabled
+  fullWidth={true} // Behavior: full width
+>
+  Confirm
+</Button>
+```
+
+**Design example (Figma - Props):**
+
+```
+🗂 Button Component
+  Properties:
+  ├─ Variant: primary
+  ├─ Size: md
+  ├─ State: default (or disabled: false)
+  └─ Full Width: true
+```
+
+Just as in Figma you define properties in your component to create variants (`primary/secondary`, `sm/md/lg`), components in code work exactly the same way. Each prop is a "control knob" that modifies a specific aspect.
+
+## 5. Active Maintenance
+
+**What do we evaluate?**  
+That the system has regular updates (at least one every 6 months).
+
+**Why does it matter?**  
+This industry is evolving rapidly, especially with the accelerated adoption of artificial intelligence, LLMs, and new technologies like Model Context Protocol (MCP). A Design System / UI Library that doesn't update regularly falls behind in many aspects, and we cannot trust its proposals in the medium/long term.
+
+For UI Guideline, it makes no sense to analyze systems whose last release was more than a year ago. If a system hasn't released updates in 2024 or 2025, it means it's not capturing the most recent innovations or adapting to the new needs of the ecosystem. **Only active systems reflect current best practices**, which is precisely what we seek to synthesize.
+
+---
+
+_Research conducted by UI Guideline - 2025_

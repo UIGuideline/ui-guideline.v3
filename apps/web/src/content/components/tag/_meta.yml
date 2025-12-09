@@ -1,0 +1,6 @@
+title: Tag
+slug: tag
+description: 'The Tag component provides [brief description of functionality]. This component is commonly used for [use cases].'
+status: soon
+category: 'atomic-elements'
+tags: ['tag', 'chip', 'label']

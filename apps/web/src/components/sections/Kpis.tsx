@@ -1,4 +1,4 @@
-import type { KpisData } from '../../lib/types/content';
+import type { KpisData } from '@content';
 
 export interface KpisProps {
   /**

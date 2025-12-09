@@ -5,10 +5,9 @@ import superjson from 'superjson';
 
 export const trpc = createTRPCReact<AppRouter>();
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:4000/api/trpc';
 
 export const trpcClient = trpc.createClient({
-  transformer: superjson,
   links: [
     loggerLink({
       enabled: (opts) =>
@@ -16,6 +15,7 @@ export const trpcClient = trpc.createClient({
     }),
     httpBatchLink({
       url: apiUrl,
+      transformer: superjson,
     }),
   ],
 });

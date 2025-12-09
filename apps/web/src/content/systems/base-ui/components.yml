@@ -1,0 +1,5 @@
+components:
+  - slug: 'button'
+    docUrl: 'https://base-ui.com/react/components/button'
+  - slug: 'menu'
+    docUrl: 'https://base-ui.com/react/components/menu'

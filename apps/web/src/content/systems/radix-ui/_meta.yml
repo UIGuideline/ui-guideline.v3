@@ -1,0 +1,14 @@
+slug: radix-ui
+name: Radix UI
+contributors:
+  featured:
+    - name: WorkOS Team
+      avatarUrl: https://avatars.githubusercontent.com/u/47638084?s=200
+      siteUrl: https://workos.com
+  totalCount: 90
+description: Low-level UI components without styling, centered on accessibility and customization. Maintained by WorkOS.
+websiteUrl: https://www.radix-ui.com/
+repositoryUrl: https://github.com/radix-ui/primitives
+figmaUrl: https://www.figma.com/community/file/1280428825266545105
+quantityOfComponents: 32
+popularity: high

@@ -1,0 +1,14 @@
+slug: mui
+name: Material UI
+contributors:
+  featured:
+    - name: Olivier Tassinari
+      avatarUrl: https://avatars.githubusercontent.com/u/3165635
+      siteUrl: https://github.com/oliviertassinari
+  totalCount: 3062
+description: MUI offers a comprehensive suite of free UI tools to help you ship new features faster.
+websiteUrl: https://mui.com/
+repositoryUrl: https://github.com/mui/material-ui
+figmaUrl: https://www.figma.com/community/file/912837788133317724
+quantityOfComponents: 100
+popularity: high

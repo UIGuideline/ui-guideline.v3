@@ -1,0 +1,20 @@
+- slug: shadcn
+  code: |
+    <Button>
+      <PlusIcon /> Add product
+    </Button>
+
+- slug: radix-ui
+  code: |
+    <Button.Root>
+      <Button.Icon>
+        <PlusIcon />
+      </Button.Icon>
+      <Button.Label>Add product</Button.Label>
+    </Button.Root>
+
+- slug: base-ui
+  code: |
+    <Button startEnhancer={<PlusIcon />}>
+      Add product
+    </Button>

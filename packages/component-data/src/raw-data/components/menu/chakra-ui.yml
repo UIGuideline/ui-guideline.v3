@@ -1,0 +1,265 @@
+meta:
+  library_name: 'Chakra UI'
+  website_url: 'https://chakra-ui.com/docs/components/menu'
+  component_url: 'https://chakra-ui.com/docs/components/menu'
+  last_updated: '2025-11-29'
+
+component:
+  name: 'Menu'
+  type: 'Overlay'
+
+code: |
+  <Menu.Root>
+    <Menu.Trigger />
+    <Menu.Positioner>
+      <Menu.Content>
+        <Menu.Item />
+        <Menu.ItemGroup>
+          <Menu.Item />
+        </Menu.ItemGroup>
+        <Menu.Separator />
+        <Menu.Arrow />
+        <Menu.CheckboxItem>
+          <Menu.ItemIndicator />
+        </Menu.CheckboxItem>
+        <Menu.RadioItemGroup>
+          <Menu.RadioItem>
+            <Menu.ItemIndicator />
+          </Menu.RadioItem>
+        </Menu.RadioItemGroup>
+      </Menu.Content>
+    </Menu.Positioner>
+  </Menu.Root>
+
+anatomy:
+  - library_name: 'Menu.Root'
+    standard_role: 'root'
+    description: 'Used to create an accessible dropdown menu'
+    is_essential: true
+    props:
+      - name: 'closeOnSelect'
+        type: 'boolean'
+        default: 'true'
+        description: 'Whether to close the menu when an option is selected'
+      - name: 'composite'
+        type: 'boolean'
+        default: 'true'
+        description: 'Whether the menu is a composed with other composite widgets like a combobox or tabs'
+      - name: 'lazyMount'
+        type: 'boolean'
+        default: 'false'
+        description: 'Whether to enable lazy mounting'
+      - name: 'loopFocus'
+        type: 'boolean'
+        default: 'false'
+        description: 'Whether to loop the keyboard navigation.'
+      - name: 'skipAnimationOnMount'
+        type: 'boolean'
+        default: 'false'
+        description: 'Whether to allow the initial presence animation.'
+      - name: 'typeahead'
+        type: 'boolean'
+        default: 'true'
+        description: 'Whether the pressing printable characters should trigger typeahead navigation'
+      - name: 'unmountOnExit'
+        type: 'boolean'
+        default: 'false'
+        description: 'Whether to unmount on exit.'
+      - name: 'colorPalette'
+        type: "'gray' | 'red' | 'orange' | 'yellow' | 'green' | 'teal' | 'blue' | 'cyan' | 'purple' | 'pink'"
+        default: 'gray'
+        description: 'The color palette of the component'
+      - name: 'variant'
+        type: "'subtle' | 'solid'"
+        default: 'subtle'
+        description: 'The variant of the component'
+      - name: 'size'
+        type: "'sm' | 'md'"
+        default: 'md'
+        description: 'The size of the component'
+      - name: 'as'
+        type: 'React.ElementType'
+        default: '-'
+        description: 'The underlying element to render.'
+      - name: 'asChild'
+        type: 'boolean'
+        default: '-'
+        description: 'Use the provided child element as the default rendered element, combining their props and behavior.'
+      - name: 'unstyled'
+        type: 'boolean'
+        default: '-'
+        description: "Whether to remove the component's style."
+      - name: 'anchorPoint'
+        type: 'Point'
+        default: '-'
+        description: 'The positioning point for the menu. Can be set by the context menu trigger or the button trigger.'
+      - name: 'aria-label'
+        type: 'string'
+        default: '-'
+        description: 'The accessibility label for the menu'
+      - name: 'defaultHighlightedValue'
+        type: 'string'
+        default: '-'
+        description: "The initial highlighted value of the menu item when rendered. Use when you don't need to control the highlighted value of the menu item."
+      - name: 'defaultOpen'
+        type: 'boolean'
+        default: '-'
+        description: "The initial open state of the menu when rendered. Use when you don't need to control the open state of the menu."
+      - name: 'highlightedValue'
+        type: 'string'
+        default: '-'
+        description: 'The controlled highlighted value of the menu item.'
+      - name: 'id'
+        type: 'string'
+        default: '-'
+        description: 'The unique identifier of the machine.'
+      - name: 'ids'
+        type: 'Partial<{ trigger: string contextTrigger: string content: string groupLabel: (id: string) => string group: (id: string) => string positioner: string arrow: string }>'
+        default: '-'
+        description: 'The ids of the elements in the menu. Useful for composition.'
+      - name: 'immediate'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether to synchronize the present change immediately or defer it to the next frame'
+      - name: 'navigate'
+        type: '(details: NavigateDetails) => void'
+        default: '-'
+        description: "Function to navigate to the selected item if it's an anchor element"
+      - name: 'onEscapeKeyDown'
+        type: '(event: KeyboardEvent) => void'
+        default: '-'
+        description: 'Function called when the escape key is pressed'
+      - name: 'onExitComplete'
+        type: 'VoidFunction'
+        default: '-'
+        description: 'Function called when the animation ends in the closed state'
+      - name: 'onFocusOutside'
+        type: '(event: FocusOutsideEvent) => void'
+        default: '-'
+        description: 'Function called when the focus is moved outside the component'
+      - name: 'onHighlightChange'
+        type: '(details: HighlightChangeDetails) => void'
+        default: '-'
+        description: 'Function called when the highlighted menu item changes.'
+      - name: 'onInteractOutside'
+        type: '(event: InteractOutsideEvent) => void'
+        default: '-'
+        description: 'Function called when an interaction happens outside the component'
+      - name: 'onOpenChange'
+        type: '(details: OpenChangeDetails) => void'
+        default: '-'
+        description: 'Function called when the menu opens or closes'
+      - name: 'onPointerDownOutside'
+        type: '(event: PointerDownOutsideEvent) => void'
+        default: '-'
+        description: 'Function called when the pointer is pressed down outside the component'
+      - name: 'onSelect'
+        type: '(details: SelectionDetails) => void'
+        default: '-'
+        description: 'Function called when a menu item is selected.'
+      - name: 'open'
+        type: 'boolean'
+        default: '-'
+        description: 'The controlled open state of the menu'
+      - name: 'positioning'
+        type: 'PositioningOptions'
+        default: '-'
+        description: 'The options used to dynamically position the menu'
+      - name: 'present'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the node is present (controlled by the user)'
+
+  - library_name: 'Menu.Trigger'
+    standard_role: 'trigger'
+    description: '-'
+    is_essential: true
+    props: []
+
+  - library_name: 'Menu.Positioner'
+    standard_role: 'positioner'
+    description: '-'
+    is_essential: true
+    props: []
+
+  - library_name: 'Menu.Content'
+    standard_role: 'content'
+    description: '-'
+    is_essential: true
+    props: []
+
+  - library_name: 'Menu.Item'
+    standard_role: 'item'
+    description: '-'
+    is_essential: true
+    props:
+      - name: 'value'
+        type: 'string'
+        default: '-'
+        description: 'The unique value of the menu item option.'
+      - name: 'as'
+        type: 'React.ElementType'
+        default: '-'
+        description: 'The underlying element to render.'
+      - name: 'asChild'
+        type: 'boolean'
+        default: '-'
+        description: 'Use the provided child element as the default rendered element, combining their props and behavior.'
+      - name: 'closeOnSelect'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the menu should be closed when the option is selected.'
+      - name: 'disabled'
+        type: 'boolean'
+        default: '-'
+        description: 'Whether the menu item is disabled'
+      - name: 'onSelect'
+        type: 'VoidFunction'
+        default: '-'
+        description: 'The function to call when the item is selected'
+      - name: 'valueText'
+        type: 'string'
+        default: '-'
+        description: 'The textual value of the option. Used in typeahead navigation of the menu. If not provided, the text content of the menu item will be used.'
+
+  - library_name: 'Menu.ItemGroup'
+    standard_role: 'group'
+    description: '-'
+    is_essential: false
+    props: []
+
+  - library_name: 'Menu.Separator'
+    standard_role: 'separator'
+    description: '-'
+    is_essential: false
+    props: []
+
+  - library_name: 'Menu.Arrow'
+    standard_role: 'arrow'
+    description: '-'
+    is_essential: false
+    props: []
+
+  - library_name: 'Menu.CheckboxItem'
+    standard_role: 'item-checkbox'
+    description: '-'
+    is_essential: false
+    props: []
+
+  - library_name: 'Menu.ItemIndicator'
+    standard_role: 'indicator'
+    description: '-'
+    is_essential: false
+    props: []
+
+  - library_name: 'Menu.RadioItemGroup'
+    standard_role: 'radio-group'
+    description: '-'
+    is_essential: false
+    props: []
+
+  - library_name: 'Menu.RadioItem'
+    standard_role: 'item-radio'
+    description: '-'
+    is_essential: false
+    props: []

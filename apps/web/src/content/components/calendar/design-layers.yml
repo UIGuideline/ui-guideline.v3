@@ -1,0 +1,50 @@
+# Design Layers for Button Component
+# This file describes the Figma layer structure for the Button component
+#
+# Available element types:
+# - component: Main Component
+# - instance: Component Instance
+# - variant: Component Variant
+# - frame: Frame container
+# - group: Group of elements
+# - autoLayout: Auto-layout frame
+# - text: Text layer
+#
+# To add new types:
+# 1. Use the new type here in the YAML
+# 2. Add the corresponding icon mapping in apps/web/src/components/composed/figma-tree/figma-node-catalog.ts
+# 3. That's it! The component will automatically render with the new icon
+
+layers:
+  # Root component - Main Button component
+  - type: 'component'
+    name: 'Button'
+    description: 'Main component container for the button with all its variants'
+    children:
+      - type: 'variant'
+        name: 'Primary'
+        description: 'Primary button variant'
+        children:
+          # Auto-layout container for button content
+          - type: 'autoLayout'
+            name: 'Container'
+            description: 'Auto-layout frame that arranges label and icon horizontally'
+            children:
+              # Icon instance (optional, controlled by hasIcon boolean)
+              - type: 'instance'
+                name: 'StartIcon'
+                description: 'Icon component instance from the icon library'
+
+              # Button label text
+              - type: 'text'
+                name: 'Label'
+                description: 'Text layer displaying the button label'
+
+          # Boolean properties
+          - type: 'frame'
+            name: 'hasIcon'
+            description: 'Boolean property to toggle icon visibility'
+
+          - type: 'group'
+            name: 'isDisabled'
+            description: 'Boolean property to toggle disabled state'
