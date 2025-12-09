@@ -1,13 +1,7 @@
 {
-  "buildCommand": "pnpm build",
+  "buildCommand": "pnpm turbo run build:vercel",
   "outputDirectory": "apps/web/dist",
   "installCommand": "pnpm install",
   "devCommand": "pnpm dev",
-  "framework": null,
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "framework": null
 }
