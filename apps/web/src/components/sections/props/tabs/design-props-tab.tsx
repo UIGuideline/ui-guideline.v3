@@ -39,9 +39,7 @@ export const DesignPropsTab = ({ data }: { data: FigmaPropsData }) => {
 
   return (
     <div className="flex flex-col gap-20">
-      {data.map((item, index) => (
-        <ComponentDesignPropsBlock key={index} item={item} />
-      ))}
+      {data.map((item, index) => item.props.length > 0 && <ComponentDesignPropsBlock key={index} item={item} />)}
     </div>
   );
 };

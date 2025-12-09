@@ -2,7 +2,7 @@ import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const tcaption = tv({
-  base: ['mt-4 text-sm text-neutral-300'],
+  base: ['mt-4 text-sm text-muted-foreground'],
 });
 
 export interface TCaptionProps extends React.HTMLAttributes<HTMLTableCaptionElement>, VariantProps<typeof tcaption> {}

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const tbody = tv({
-  base: ['[&_tr:last-child]:border-0'],
+  base: [''],
 });
 
 export interface TBodyProps extends React.HTMLAttributes<HTMLTableSectionElement>, VariantProps<typeof tbody> {}
