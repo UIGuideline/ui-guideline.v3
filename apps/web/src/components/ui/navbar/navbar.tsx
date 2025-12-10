@@ -33,7 +33,7 @@ export const Navbar = ({ className, currentPath }: NavbarProps) => {
 
   return (
     <nav className={classes.nav}>
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-7">
         <Logo variant={LogoVariant.light} size={LogoSize.sm} appearance={LogoAppearance.complete} />
         <div className="flex items-center gap-2">
           <Button size={ButtonSize.sm} variant={isComponentsActive ? ButtonVariant.secondary : ButtonVariant.ghost}>
