@@ -9,5 +9,17 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/docs/components",
+      "permanent": true
+    },
+    {
+      "source": "/docs",
+      "destination": "/docs/components",
+      "permanent": true
+    }
   ]
 }
