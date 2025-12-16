@@ -114,7 +114,7 @@ export const Logo = ({ className, arialLabel = 'Logo', variant, size, appearance
   return (
     <div className={rootClasses} aria-label={arialLabel} {...props}>
       {svgs[appearance ?? LogoAppearance.complete]}
-      <span className="text-base font-semibold text-primary-400">v3</span>
+      <span className="text-base font-semibold text-primary-400">v3.alpha</span>
     </div>
   );
 };
