@@ -118,3 +118,14 @@ export const SYSTEM_LOGOS: Record<SystemSlug, string> = {
   [SystemSlug.reactAria]: '/assets/systems/thumbnails/contained/react-aria.svg',
   [SystemSlug.shadcn]: '/assets/systems/thumbnails/contained/shadcn.svg',
 };
+
+/**
+ * External Links
+ * Centralized external link definitions
+ */
+export const EXTERNAL_LINKS = {
+  /**
+   * GitHub repository URL
+   */
+  GITHUB_REPO: 'https://github.com/UIGuideline/ui-guideline.v3',
+} as const;

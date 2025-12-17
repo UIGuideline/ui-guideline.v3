@@ -1,7 +1,7 @@
 import { Logo, LogoAppearance, LogoSize, LogoVariant } from '../logo/logo';
-import { ROUTES } from '@common';
+import { EXTERNAL_LINKS, ROUTES } from '@common';
 import { FeedbackFish } from '@feedback-fish/react';
-import { Button, ButtonSize, ButtonVariant } from '@ui';
+import { BrandLogo, BrandLogoCatalog, BrandLogoSize, Button, ButtonSize, ButtonVariant } from '@ui';
 import { tv } from 'tailwind-variants';
 
 const nav = tv({
@@ -45,11 +45,20 @@ export const Navbar = ({ className, currentPath }: NavbarProps) => {
         </div>
       </div>
 
-      <FeedbackFish projectId="d26ca82e52b010">
-        <Button size={ButtonSize.sm} variant={ButtonVariant.outline}>
-          Feedback
+      <div className="flex items-center gap-2">
+        <Button size={ButtonSize.sm} variant={ButtonVariant.ghost} asChild>
+          <a href={EXTERNAL_LINKS.GITHUB_REPO} target="_blank" rel="noopener noreferrer" className="gap-2">
+            <BrandLogo name={BrandLogoCatalog.github} size={BrandLogoSize.sm} />
+            GitHub
+          </a>
         </Button>
-      </FeedbackFish>
+
+        <FeedbackFish projectId="d26ca82e52b010">
+          <Button size={ButtonSize.sm} variant={ButtonVariant.outline}>
+            Feedback
+          </Button>
+        </FeedbackFish>
+      </div>
     </nav>
   );
 };
